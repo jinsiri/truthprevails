@@ -1,12 +1,12 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @font-face {
-  font-family: 'NeoDunggeunmo';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'NeoDunggeunmo';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
-
+/*
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -48,8 +48,16 @@ a {
   html {
     color-scheme: dark;
   }
-}
+}*/
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'NeoDunggeunmo', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button {
+	font-family: 'NeoDunggeunmo', sans-serif;
 }
