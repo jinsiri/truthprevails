@@ -6,6 +6,26 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+:root {
+	--background: #e9f9f8;
+	--foreground: #171717;
+	font-family: 'NeoDunggeunmo', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #0a0a0a;
+		--foreground: #ededed;
+	}
+}
+
+main {
+	padding-bottom: 2.5rem;
+	background-color: var(--background);
+	color: var(--foreground);
+}
+
 /*
 :root {
   --background: #ffffff;
@@ -60,4 +80,53 @@ p,
 a,
 button {
 	font-family: 'NeoDunggeunmo', sans-serif;
+}
+
+.game-box {
+	position: relative;
+	margin: 1.75rem auto 2rem;
+	background: url('/images/bookroom.png') no-repeat center center/cover;
+	overflow: hidden;
+}
+
+.game-box .text-hello {
+	position: absolute;
+	top: 8%;
+	right: 20%;
+	padding: 1rem 1.75rem;
+	background-color: #fff;
+	font-size: 1.75rem;
+	color: #333;
+	border: 10px solid #333;
+	border-radius: 10px;
+	transform: scale(.7);
+	opacity: 0;
+	transition: all .3s;
+}
+
+.game-box img {
+	transition: transform .3s ease-in;
+}
+
+.game-box img:hover {
+	transform: scale(1.1, 1.1);
+}
+
+.game-box img:hover + p {
+	transform: scale(1);
+	opacity: 1;
+}
+
+@keyframes hello {
+	0% {transform: scale(1.2, 1.2) rotateZ(10deg)}
+	50% {transform: scale(1.2, 1.2) rotateZ(-10deg)}
+	100% {transform: scale(1.2, 1.2) rotateZ(10deg)}
+}
+
+.btn-start {
+	padding: .625rem 2.5rem;
+	border-radius: 40px;
+	background-color: #00008b;
+	color: #fff;
+	transition: background-color .3s;
 }
