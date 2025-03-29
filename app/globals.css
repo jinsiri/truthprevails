@@ -70,16 +70,29 @@ a {
   }
 }*/
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-button {
-	font-family: 'NeoDunggeunmo', sans-serif;
+footer {
+	color: #666;
+}
+
+.underline-spacing {
+	position: relative;
+}
+
+.underline-spacing:after {
+	content: '';
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 0;
+	height: 1px;
+	background-color: var(--foreground);
+	opacity: 0;
+	transition: width 0.3s;
+}
+
+.underline-spacing:hover:after {
+	width: 100%;
+	opacity: 1;
 }
 
 .game-box {
@@ -99,13 +112,13 @@ button {
 	color: #333;
 	border: 10px solid #333;
 	border-radius: 10px;
-	transform: scale(.7);
+	transform: scale(0.7);
 	opacity: 0;
-	transition: all .3s;
+	transition: all 0.3s;
 }
 
 .game-box img {
-	transition: transform .3s ease-in;
+	transition: transform 0.3s ease-in;
 }
 
 .game-box img:hover {
@@ -118,15 +131,21 @@ button {
 }
 
 @keyframes hello {
-	0% {transform: scale(1.2, 1.2) rotateZ(10deg)}
-	50% {transform: scale(1.2, 1.2) rotateZ(-10deg)}
-	100% {transform: scale(1.2, 1.2) rotateZ(10deg)}
+	0% {
+		transform: scale(1.2, 1.2) rotateZ(10deg);
+	}
+	50% {
+		transform: scale(1.2, 1.2) rotateZ(-10deg);
+	}
+	100% {
+		transform: scale(1.2, 1.2) rotateZ(10deg);
+	}
 }
 
 .btn-start {
-	padding: .625rem 2.5rem;
+	padding: 0.625rem 2rem;
 	border-radius: 40px;
 	background-color: #00008b;
 	color: #fff;
-	transition: background-color .3s;
+	transition: background-color 0.3s;
 }
