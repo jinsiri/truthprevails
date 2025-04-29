@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
 	output: isProd ? 'export' : undefined,
 	basePath: prefix,
 	assetPrefix: prefix,
+	images: {
+		path: prefix
+	}
 };
 
 export default nextConfig;
