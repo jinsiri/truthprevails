@@ -8,7 +8,8 @@ export default function Home() {
 				<br /> 오신 것을 환영합니다.
 			</h1>
 			<div className={'game-box flex items-end justify-center'} style={{ height: '380px', width: '90%', maxWidth: '700px' }}>
-				<Image src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/jinsil2.png`} alt={'jinsil'} width={300} height={300} />
+				<Image src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/jinsil2.png`} alt={'jinsil'} width={300} height={300} />
+				<Image src={`/images/jinsil2.png`} alt={'jinsil'} width={300} height={300} />
 				<p className={'text-hello'}>안녕하세요!😀</p>
 			</div>
 			<div>
@@ -19,32 +20,7 @@ export default function Home() {
 				<a className={'underline-spacing block text-sm md:text-base'} href='#' target='_blank' rel='noopener noreferrer'>
 					&gt; 아니오, 서류로 다운로드 받겠습니다.
 				</a>
-				{/*          <a
-              className={styles.primary}
-              href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-          >
-            <Image
-                className={styles.logo}
-                src="/vercel.svg"
-                alt="Vercel logomark"
-                width={20}
-                height={20}
-            />
-            게임 시작하기 →
-          </a>*/}
 			</div>
-			{/*        <div>
-          <a
-              href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-              target="_blank"
-              download
-              rel="noopener noreferrer"
-          >
-            시간이 없어요! <strong>서류만 다운로드하기</strong>
-          </a>
-        </div>*/}
 			<footer className={'fixed bottom-0 py-3 text-sm'}>© 2025. Jinsil Kwon all rights reserved.</footer>
 		</main>
 	);
