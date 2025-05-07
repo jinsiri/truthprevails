@@ -1,0 +1,151 @@
+@import 'tailwindcss';
+
+@font-face {
+	font-family: 'NeoDunggeunmo';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+:root {
+	--background: #e9f9f8;
+	--foreground: #171717;
+	font-family: 'NeoDunggeunmo', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #0a0a0a;
+		--foreground: #ededed;
+	}
+}
+
+main {
+	padding-bottom: 2.5rem;
+	background-color: var(--background);
+	color: var(--foreground);
+}
+
+/*
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}*/
+
+footer {
+	color: #666;
+}
+
+.underline-spacing {
+	position: relative;
+}
+
+.underline-spacing:after {
+	content: '';
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 0;
+	height: 1px;
+	background-color: var(--foreground);
+	opacity: 0;
+	transition: width 0.3s;
+}
+
+.underline-spacing:hover:after {
+	width: 100%;
+	opacity: 1;
+}
+
+.game-box {
+	position: relative;
+	margin: 1.75rem auto 2rem;
+	background: url('/images/bookroom.png') no-repeat center center/cover;
+	overflow: hidden;
+}
+
+.game-box .text-hello {
+	position: absolute;
+	top: 8%;
+	right: 20%;
+	padding: 1rem 1.75rem;
+	background-color: #fff;
+	font-size: 1.75rem;
+	color: #333;
+	border: 10px solid #333;
+	border-radius: 10px;
+	transform: scale(0.7);
+	opacity: 0;
+	transition: all 0.3s;
+}
+
+.game-box img {
+	transition: transform 0.3s ease-in;
+}
+
+.game-box img:hover {
+	transform: scale(1.1, 1.1);
+}
+
+.game-box img:hover + p {
+	transform: scale(1);
+	opacity: 1;
+}
+
+@keyframes hello {
+	0% {
+		transform: scale(1.2, 1.2) rotateZ(10deg);
+	}
+	50% {
+		transform: scale(1.2, 1.2) rotateZ(-10deg);
+	}
+	100% {
+		transform: scale(1.2, 1.2) rotateZ(10deg);
+	}
+}
+
+.btn-start {
+	padding: 0.625rem 2rem;
+	border-radius: 40px;
+	background-color: #00008b;
+	color: #fff;
+	transition: background-color 0.3s;
+}
