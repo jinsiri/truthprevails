@@ -1,0 +1,24 @@
+import { GlobalNavigation } from '@/components/GlobalNavigation';
+
+export default function ClassicMain() {
+  return (
+    <main className={'classic w-full font-sans'}>
+      <GlobalNavigation />
+      <section className={'flex h-screen items-center justify-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500'}>
+        <div className={'text-right'}>
+          <h1 className={'relative text-[200px] leading-[0.7] font-black'}>
+            <span className={'absolute top-10 left-5 h-50 w-50 rounded-full bg-amber-300 opacity-90'}></span>
+            <span className={'relative z-2'}>
+              JINSIL
+              <br />
+              KWON
+            </span>
+          </h1>
+          <h2 className={'text-[40px] leading-[0.9] font-thin'}>
+            makes <strong className={'font-regular'}>User-driven &amp; Code-crafted</strong> Program
+          </h2>
+        </div>
+      </section>
+    </main>
+  );
+}
