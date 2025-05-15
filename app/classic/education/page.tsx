@@ -1,3 +1,3 @@
 export default function ClassicEducation() {
-  return <section>교육</section>;
+  return <section className={'h-screen bg-pink-300'}>교육</section>;
 }

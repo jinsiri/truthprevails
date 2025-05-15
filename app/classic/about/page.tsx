@@ -1,3 +1,3 @@
 export default function ClassicAbout() {
-  return <section>어바웃</section>;
+  return <section className={'h-screen bg-indigo-300'}>어바웃</section>;
 }
