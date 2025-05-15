@@ -1,9 +1,6 @@
-import { GlobalNavigation } from '@/components/GlobalNavigation';
-
 export default function ClassicMain() {
   return (
-    <main className={'classic w-full font-sans'}>
-      <GlobalNavigation />
+    <>
       <section className={'flex h-screen items-center justify-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500'}>
         <div className={'text-right'}>
           <h1 className={'relative text-[200px] leading-[0.7] font-black'}>
@@ -19,6 +16,6 @@ export default function ClassicMain() {
           </h2>
         </div>
       </section>
-    </main>
+    </>
   );
 }

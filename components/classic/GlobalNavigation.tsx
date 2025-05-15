@@ -6,6 +6,9 @@ export function GlobalNavigation() {
     <nav className={'fixed top-5 left-1/2 flex w-full -translate-x-1/2 justify-between px-8 text-xl'}>
       <ul className={'flex gap-8'}>
         <li>
+          <Link href={'/classic'}>Home</Link>
+        </li>
+        <li>
           <Link href={'/classic/about'}>About</Link>
         </li>
         <li>

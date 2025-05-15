@@ -258,3 +258,7 @@ footer {
     transform: scale(1.2, 1.2) rotateZ(10deg);
   }
 }
+
+.classic > section:first-of-type {
+  padding-top: 5rem;
+}
