@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import { IconTransfer } from '@tabler/icons-react';
+
 export default function ClassicMain() {
   return (
     <>
@@ -16,6 +19,11 @@ export default function ClassicMain() {
           </h2>
         </div>
       </section>
+
+      <Link href={'/'} className={'fixed bottom-8 left-8 flex items-center gap-1 text-xl font-light'}>
+        <IconTransfer stroke={2} />
+        Change mode
+      </Link>
     </>
   );
 }
