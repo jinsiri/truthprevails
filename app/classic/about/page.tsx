@@ -1,3 +1,3 @@
 export default function ClassicAbout() {
-  return <section>클래식</section>;
+  return <section>어바웃</section>;
 }
