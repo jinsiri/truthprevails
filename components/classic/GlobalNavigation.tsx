@@ -9,8 +9,8 @@ export function GlobalNavigation() {
   const navItems = [
     { href: '/classic', label: 'Home' },
     { href: '/classic/about', label: 'About' },
-    { href: '/classic/career', label: 'Career' },
     { href: '/classic/skills', label: 'Skills' },
+    { href: '/classic/career', label: 'Career' },
     { href: '/classic/education', label: 'Education' },
     { href: '/classic/contact', label: 'Contact' },
   ];
