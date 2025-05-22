@@ -1,4 +1,4 @@
-import { SiReact, SiJavascript, SiTypescript, SiNodeDotJs, SiHtml5, SiCss3, SiSpring, SiSpringboot, SiNextdotjs, SiPostgresql } from 'react-icons/si';
+import { SiReact, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiSpring, SiSpringboot, SiNextdotjs, SiPostgresql } from 'react-icons/si';
 import Image from 'next/image';
 import { BsFiletypeScss } from 'react-icons/bs';
 import { FaDocker, FaGit, FaGithub, FaJava, FaLinux } from 'react-icons/fa';
