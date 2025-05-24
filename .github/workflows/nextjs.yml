@@ -77,6 +77,8 @@ jobs:
 #        env:
 #          NEXT_PUBLIC_BASE_PATH: /truthprevails
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+      - name: Create CNAME file
+        run: echo "truthprevails.me" > ./out/CNAME
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
