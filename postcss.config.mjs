@@ -5,7 +5,8 @@ const config = {
       {
         url: ({ url }) => {
           if (url.startsWith('/images')) {
-            const basePath = process.env.NODE_ENV === 'production' ? '/truthprevails' : '';
+            const basePath = '';
+            // process.env.NODE_ENV === 'production' ? '/truthprevails' : ''
             return basePath + url;
           }
           return url;
