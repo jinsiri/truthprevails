@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 const traits = [
@@ -14,11 +17,13 @@ const traits = [
 
 export default function ClassicAbout() {
   return (
-    <section className={'bg-indigo-300 lg:h-screen'}>
-      <h2 className={'text-4xl font-black uppercase md:text-5xl lg:text-7xl'}>_About</h2>
-      <div className={'mt-10 items-center lg:flex'}>
-        <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/about.png`} alt={"It's me, jinsil!"} width={550} height={550} />
-        <ul className={'w-full py-10 pl-20 text-2xl font-medium'}>
+    <section className='bg-indigo-300 lg:h-screen'>
+      <h2 className='text-4xl font-black uppercase md:text-5xl lg:text-7xl'>_About</h2>
+      <div className='mt-10 items-center lg:flex'>
+        <motion.div className='flex-shrink-0' initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 1, ease: 'easeOut' }}>
+          <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/about.png`} alt={"It's me, jinsil!"} width={550} height={550} />
+        </motion.div>
+        <ul className='w-full py-10 pl-10 text-base font-medium md:text-xl lg:pl-20 xl:text-2xl'>
           {traits.map((text, index) => (
             <li key={index} className='list-disc gap-2'>
               {text}
