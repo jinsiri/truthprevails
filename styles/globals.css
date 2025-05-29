@@ -226,7 +226,7 @@ footer {
 .game-box {
   position: relative;
   margin: 1.75rem auto 2rem;
-  background: url('/images/bookroom.png') no-repeat center center/cover;
+  background: url('/images/bookroom.webp') no-repeat center center/cover;
   overflow: hidden;
 }
 

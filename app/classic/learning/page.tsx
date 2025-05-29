@@ -67,8 +67,8 @@ export default function ClassicLearning() {
 
         <Image
           className={'right-10 -bottom-28 -mt-30 max-w-1/2 lg:absolute lg:mt-0 lg:w-1/3 xl:w-1/4'}
-          src={`/images/edu.png`}
-          alt={"It's me, jinsil!"}
+          src={`/images/edu.webp`}
+          alt={'educated list'}
           width={450}
           height={450}
           priority

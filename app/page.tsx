@@ -9,7 +9,7 @@ export default function Home() {
         <br /> 오신 것을 환영합니다.
       </h1>
       <div className={'game-box flex items-end justify-center'} style={{ height: '380px', width: '90%', maxWidth: '700px' }}>
-        <Image src={`/images/jinsil2.png`} alt={'jinsil'} width={300} height={300} priority />
+        <Image src={`/images/jinsil2.webp`} alt={'jinsil'} width={300} height={300} priority />
         <p className={'text-hello'}>안녕하세요!😀</p>
       </div>
       <div>
