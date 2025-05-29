@@ -71,6 +71,7 @@ export default function ClassicLearning() {
           alt={"It's me, jinsil!"}
           width={450}
           height={450}
+          priority
         />
       </div>
 

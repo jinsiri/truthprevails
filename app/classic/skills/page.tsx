@@ -39,7 +39,7 @@ export default function ClassicSkills() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1, ease: 'easeOut' }}
       >
-        <Image src={`/images/skill.png`} alt={'my skills'} width={650} height={650} />
+        <Image src={`/images/skill.png`} alt={'my skills'} width={650} height={650} priority />
       </motion.div>
 
       <div className={'relative z-10 mt-10 space-y-8 pl-4 text-4xl md:text-5xl lg:text-7xl xl:pl-8'}>

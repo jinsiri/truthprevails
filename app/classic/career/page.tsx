@@ -140,6 +140,7 @@ export default function ClassicCareer() {
           alt={'My career step'}
           width={700}
           height={700}
+          priority
         />
       </motion.div>
     </section>

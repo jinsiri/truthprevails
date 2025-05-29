@@ -22,7 +22,7 @@ export default function ClassicContact() {
       </div>
       <div className={'top-40 right-0 hidden h-3/4 flex-col items-center rounded-tl-xl bg-purple-100 px-10 pt-14 text-center md:absolute md:flex'}>
         <div className={'flex h-[300px] w-[300px] items-center justify-center bg-amber-400'}>
-          <Image src={`/images/contact_qr.png`} alt={'developer.js.corn@gmail.com'} width={250} height={250} />
+          <Image src={`/images/contact_qr.png`} alt={'developer.js.corn@gmail.com'} width={250} height={250} priority />
         </div>
 
         <p className={'mt-6 text-xl font-medium'}>
