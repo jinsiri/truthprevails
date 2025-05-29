@@ -174,8 +174,12 @@ footer {
   color: #666;
 }
 
+.table-default-wrap {
+  @apply overflow-x-auto
+}
+
 .table-default {
-  @apply w-full table-auto border-collapse text-sm text-left text-gray-600 rtl:text-right dark:text-gray-400;
+  @apply w-[500px] sm:w-full table-auto border-collapse text-sm text-left text-gray-600 rtl:text-right dark:text-gray-400;
 }
 
 .table-default thead {
@@ -190,8 +194,12 @@ footer {
   @apply p-3 font-semibold border-b;
 }
 
+.table-default th:first-of-type {
+  @apply sticky left-0 bg-gray-50;
+}
+
 .table-default td {
-  @apply p-3 border-b;
+  @apply p-3 border-b break-keep;
 }
 
 .underline-spacing {

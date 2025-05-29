@@ -21,7 +21,7 @@ export default function ClassicAbout() {
       <h2 className='text-4xl font-black uppercase md:text-5xl lg:text-7xl'>_About</h2>
       <div className='mt-10 items-center lg:flex'>
         <motion.div className='flex-shrink-0' initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 1, ease: 'easeOut' }}>
-          <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/about.png`} alt={"It's me, jinsil!"} width={550} height={550} />
+          <Image src={`/images/about.png`} alt={"It's me, jinsil!"} width={550} height={550} />
         </motion.div>
         <ul className='w-full py-10 pl-10 text-base font-medium md:text-xl lg:pl-20 xl:text-2xl'>
           {traits.map((text, index) => (

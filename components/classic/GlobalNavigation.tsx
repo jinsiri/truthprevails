@@ -11,7 +11,7 @@ export function GlobalNavigation() {
     { href: '/classic/about', label: 'About' },
     { href: '/classic/skills', label: 'Skills' },
     { href: '/classic/career', label: 'Career' },
-    { href: '/classic/education', label: 'Education' },
+    { href: '/classic/learning', label: 'Learning' },
     { href: '/classic/contact', label: 'Contact' },
   ];
 

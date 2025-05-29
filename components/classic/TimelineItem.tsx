@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { JSX } from 'react';
 
 interface TimelineItemProps {
@@ -19,11 +20,11 @@ export function TimelineItem({ color = 'blue', date, title, description }: Timel
   const dotColor = colorMap[color];
 
   return (
-    <div className='relative mb-10 pl-6'>
-      <div className={`absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-white dark:border-gray-900 ${dotColor}`}></div>
-      <time className='md:text-md text-sm text-gray-500 lg:text-lg xl:text-xl dark:text-gray-400'>{date}</time>
-      <h3 className='text-lg font-semibold text-gray-900 md:text-xl lg:text-2xl dark:text-white'>{title}</h3>
-      <p className='text-basic lg:text-md text-gray-600 md:text-sm xl:text-lg dark:text-gray-300'>{description}</p>
-    </div>
+    <motion.div className='relative mb-10 pr-6'>
+      <div className={`absolute -right-1.5 mt-1.5 h-3 w-3 rounded-full xl:mt-2.5 ${dotColor}`}></div>
+      <time className='md:text-md text-sm text-gray-500 md:text-lg xl:text-xl dark:text-gray-400'>{date}</time>
+      <h3 className='text-lg font-semibold text-gray-900 md:text-2xl xl:text-3xl dark:text-white'>{title}</h3>
+      <p className='text-basic md:text-md font-regular text-gray-600 xl:text-xl dark:text-gray-300'>{description}</p>
+    </motion.div>
   );
 }
