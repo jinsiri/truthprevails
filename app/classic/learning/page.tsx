@@ -76,7 +76,7 @@ export default function ClassicLearning() {
       </div>
 
       <motion.div
-        className={'pb-10 pl-6 lg:pb-0 lg:pl-10'}
+        className={'pb-10 pl-6 lg:absolute lg:bottom-0 lg:left-0 lg:pl-10'}
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{
