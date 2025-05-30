@@ -57,7 +57,7 @@ export default function ClassicSkills() {
           initial={{ opacity: 0, x: -10, y: 20 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 0.5 }}
-          className='flex items-center space-x-2'
+          className='mb-10 flex items-center space-x-2'
         >
           <GrCertificate />
           <p className='md:text-md text-sm lg:text-xl'>

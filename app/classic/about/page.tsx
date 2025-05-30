@@ -23,9 +23,9 @@ export default function ClassicAbout() {
         <motion.div className='flex-shrink-0' initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 1, ease: 'easeOut' }}>
           <Image src={`/images/about.webp`} alt={"It's me, jinsil!"} width={550} height={550} priority />
         </motion.div>
-        <ul className='w-full py-10 pl-10 text-base font-medium md:text-xl lg:pl-20 xl:text-2xl'>
+        <ul className='w-full py-10 pr-6 pl-10 text-base font-medium md:text-xl lg:pl-20 xl:text-2xl'>
           {traits.map((text, index) => (
-            <li key={index} className='list-disc gap-2'>
+            <li key={index} className='list-disc gap-2 break-keep'>
               {text}
             </li>
           ))}
