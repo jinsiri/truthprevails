@@ -36,7 +36,7 @@ export default function MobileNav() {
 
   return (
     <motion.nav
-      className={`fixed z-100 overflow-hidden ${isOpen ? 'top-0 bottom-0 left-0 w-[300px]' : 'top-[18px] left-[15px] h-[50px] w-[50px] rounded-full'}`}
+      className={`fixed z-100 overflow-hidden lg:hidden ${isOpen ? 'top-0 bottom-0 left-0 w-[300px]' : 'top-[18px] left-[15px] h-[50px] w-[50px] rounded-full'}`}
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
       custom='100%'
