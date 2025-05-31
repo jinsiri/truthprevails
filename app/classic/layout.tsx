@@ -1,4 +1,5 @@
-import { GlobalNavigation } from '@/components/classic/GlobalNavigation';
+import DesktopNav from '@/components/classic/gnb/DesktopNav';
+import MobileNav from '@/components/classic/gnb/MobileNav';
 
 export default function ClassicLayout({
   children,
@@ -7,7 +8,8 @@ export default function ClassicLayout({
 }>) {
   return (
     <main className={'classic w-full font-sans'}>
-      <GlobalNavigation />
+      <DesktopNav />
+      <MobileNav />
       {children}
     </main>
   );
