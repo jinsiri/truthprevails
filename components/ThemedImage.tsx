@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 interface ThemedImageProps {
-  className: string;
+  className?: string;
   lightSrc: string;
   darkSrc: string;
   alt: string;
