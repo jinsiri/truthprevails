@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import ThemedImage from '@/components/ThemedImage';
 
 export default function ClassicContact() {
   return (
@@ -27,7 +28,7 @@ export default function ClassicContact() {
         animate={{ opacity: 1, x: 0, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Image src={`/images/search.png`} alt={'How to contact jinsil'} width={650} height={650} priority />
+        <ThemedImage lightSrc={`/images/search.png`} darkSrc={'/images/search_w.webp'} alt={'How to contact jinsil'} width={650} height={650} priority />
       </motion.div>
 
       <motion.div

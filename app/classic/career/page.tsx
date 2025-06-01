@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Fragment, useState } from 'react';
+import ThemedImage from '@/components/ThemedImage';
 
 const tabTitles = ['SysOne (시스원)', '프리랜서', 'Mir9'];
 const experiences = [
@@ -134,9 +135,10 @@ export default function ClassicCareer() {
           )}
         </ul>
 
-        <Image
+        <ThemedImage
           className={'bottom-0 mt-10 inline-block lg:absolute lg:left-0 lg:mt-0 lg:w-1/2 lg:-scale-x-100 xl:w-1/3'}
-          src={`/images/career.webp`}
+          lightSrc={`/images/career.webp`}
+          darkSrc={`/images/career_w.webp`}
           alt={'My career step'}
           width={700}
           height={700}

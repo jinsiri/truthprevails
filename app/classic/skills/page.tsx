@@ -6,6 +6,7 @@ import { BsFiletypeScss } from 'react-icons/bs';
 import { FaDocker, FaGit, FaGithub, FaJava, FaLinux } from 'react-icons/fa';
 import { GrCertificate } from 'react-icons/gr';
 import { motion } from 'framer-motion';
+import ThemedImage from '@/components/ThemedImage';
 
 const AnimatedIconList = ({ icons, startDelay = 0 }: { icons: React.ElementType[]; startDelay?: number }) => (
   <ul className='flex flex-wrap gap-2'>
@@ -39,7 +40,7 @@ export default function ClassicSkills() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1, ease: 'easeOut' }}
       >
-        <Image src={`/images/skill.webp`} alt={'my skills'} width={650} height={650} priority />
+        <ThemedImage lightSrc={`/images/skill.webp`} darkSrc={'/images/skill_w.webp'} alt={'my skills'} width={650} height={650} priority />
       </motion.div>
 
       <div className={'relative z-10 mt-10 space-y-8 pl-4 text-4xl md:text-5xl lg:text-7xl xl:pl-8'}>

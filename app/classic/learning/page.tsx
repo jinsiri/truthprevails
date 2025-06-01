@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { TimelineItem } from '@/components/classic/TimelineItem';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import ThemedImage from '@/components/ThemedImage';
 
 interface TimelineEntry {
   date: string;
@@ -65,9 +66,10 @@ export default function ClassicLearning() {
           </div>
         </div>
 
-        <Image
+        <ThemedImage
           className={'right-10 -bottom-28 -mt-30 max-w-1/2 lg:absolute lg:mt-0 lg:w-1/3 xl:w-1/4'}
-          src={`/images/edu.webp`}
+          lightSrc={`/images/edu.webp`}
+          darkSrc={`/images/edu_w.webp`}
           alt={'educated list'}
           width={450}
           height={450}
