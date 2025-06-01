@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 const tabTitles = ['SysOne (시스원)', '프리랜서', 'Mir9'];
 const experiences = [
@@ -73,6 +73,15 @@ const experiences = [
 
 export default function ClassicCareer() {
   const [activeTab, setActiveTab] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10); // 10px 이상 스크롤 시 true
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <section className={'relative flex min-h-screen w-full flex-col items-end bg-sky-300'}>
@@ -81,10 +90,12 @@ export default function ClassicCareer() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className='w-full pt-20 text-right lg:w-1/2 xl:w-2/3 xl:pt-30'
+        className='relative w-full pt-20 text-right lg:w-1/2 xl:w-2/3 xl:pt-30'
       >
-        <div className='relative z-10 w-full border-b border-gray-200 text-center text-sm font-medium text-gray-500 md:text-lg xl:text-lg dark:border-gray-700 dark:text-gray-400'>
-          <ul className='-mb-px flex w-full flex-wrap'>
+        <div
+          className={`z-10 w-full border-b border-gray-200 text-center text-sm font-medium text-gray-500 md:text-lg xl:text-lg dark:border-gray-700 dark:text-gray-400 ${scrolled ? 'sticky top-20' : 'relative'}`}
+        >
+          <ul className={`-mb-px flex w-full flex-wrap ${scrolled ? 'bg-sky-100 shadow-md' : 'bg-transparent'}`}>
             {tabTitles.map((title, index) => (
               <li className='me-2' key={index}>
                 <button
