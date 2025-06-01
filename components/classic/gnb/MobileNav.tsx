@@ -28,7 +28,7 @@ export default function MobileNav() {
   useEffect(() => {
     if (isOpen) toggleOpen();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, isOpen]);
+  }, [pathname]);
 
   return (
     <motion.nav
