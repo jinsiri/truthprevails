@@ -1,9 +1,11 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
+import { motion, SVGMotionProps } from 'framer-motion';
 
-const Path = (props: any) => <motion.path fill='transparent' strokeWidth='3' stroke='hsl(0, 0%, 100%)' strokeLinecap='round' {...props} />;
+const Path = (props: SVGMotionProps<SVGPathElement>) => (
+  <motion.path fill='transparent' strokeWidth='3' stroke='hsl(0, 0%, 100%)' strokeLinecap='round' {...props} />
+);
 
 export const MenuToggle = ({ toggle }: { toggle: () => void }) => (
   <button
