@@ -16,7 +16,7 @@ const variants = {
     y: 50,
     opacity: 0,
     transition: {
-      y: { stiffness: 1000 },
+      duration: 0,
     },
   },
 };
