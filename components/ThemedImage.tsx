@@ -49,6 +49,7 @@ export default function ThemedImage({ className = '', lightSrc, darkSrc, alt, wi
       alt={alt}
       width={width}
       height={height}
+      placeholder={'blur'}
       priority={priority}
     />
   );
