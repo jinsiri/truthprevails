@@ -9,7 +9,7 @@ export default function ClassicContact() {
     <section className={'relative min-h-screen bg-purple-200 px-6 pb-[50vw] md:pb-0 lg:px-0 xl:h-screen xl:overflow-hidden'}>
       <h2 className={'text-center text-2xl font-black uppercase md:text-5xl lg:text-7xl'}>Contact</h2>
       <div
-        className={'my-10 items-center px-6 text-base font-medium md:my-20 md:px-10 md:text-2xl lg:flex lg:h-3/4 lg:text-3xl xl:my-0 xl:px-[25%] xl:text-4xl'}
+        className={'my-10 items-center px-4 text-base font-medium md:my-20 md:px-10 md:text-2xl lg:flex lg:h-3/4 lg:text-3xl xl:my-0 xl:px-[25%] xl:text-4xl'}
       >
         <ul className={'w-full space-y-2 rounded-xl border-4 bg-gray-50/50 p-4 md:space-y-6 md:p-10'}>
           <li className={'items-center gap-1 md:flex md:gap-2'}>
