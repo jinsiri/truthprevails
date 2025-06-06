@@ -37,7 +37,7 @@ export default function ClassicLearning() {
   return (
     <section
       className={
-        'relative min-h-screen bg-radial from-pink-600 via-pink-400 to-pink-300 [background-size:200%] [background-position:left_bottom] lg:overflow-hidden'
+        'relative min-h-screen bg-radial from-pink-600 via-pink-400 to-pink-300 [background-size:200%] [background-position:left_bottom] lg:overflow-hidden dark:from-rose-300 dark:via-rose-400 dark:to-rose-600'
       }
     >
       <h2 className={'text-right text-4xl font-black uppercase md:text-5xl lg:text-7xl'}>Learning_</h2>
