@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import ThemeToggleButton from '@/components/ThemeToggleButton';
 import { usePathname } from 'next/navigation';
 import { navItems } from '@/constants/navItems';
 
@@ -16,15 +15,13 @@ export default function DesktopNav() {
 
           return (
             <li key={item.href}>
-              <Link href={item.href} className={`transition-color duration-300 ${isActive ? 'text-amber-900' : 'text-black hover:text-amber-900'}`}>
+              <Link href={item.href} className={`transition-color duration-300 ${isActive ? 'text-amber-900' : 'text-gray-900 hover:text-amber-900'}`}>
                 {item.label}
               </Link>
             </li>
           );
         })}
       </ul>
-
-      <ThemeToggleButton />
     </nav>
   );
 }

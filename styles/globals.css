@@ -8,24 +8,24 @@
 }
 
 
-/*@custom-variant dark (&:is(.dark *));*/
+@custom-variant dark (&:is(.dark *));
 
 
 :root {
   --background: #fff;
   --foreground: #171717;
 
-  --color-amber-50: #fffdf3;
-  --color-amber-100: #fff7c2;
-  --color-amber-200: #ffe871;
-  --color-amber-300: #fcb92d;
-  --color-amber-400: #fccc2e;
-  --color-amber-500: #eaaa00;
-  --color-amber-600: #c18700;
-  --color-amber-700: #9a6c00;
-  --color-amber-800: #805a00;
-  --color-amber-900: #6b4c00;
-  --color-amber-950: #412e00;
+  --color-amber-50:  #ffedd4;
+  --color-amber-100: #ffe2b8;
+  --color-amber-200: #ffc66e;
+  --color-amber-300: #fca636;
+  --color-amber-400: #f28a1d;
+  --color-amber-500: #f28a1d;
+  --color-amber-600: #b6590b;
+  --color-amber-700: #944708;
+  --color-amber-800: #773805;
+  --color-amber-900: #5c2b03;
+  --color-amber-950: #361902;
 
   /* sky */
   --color-sky-50: #f8fcff;
@@ -96,18 +96,17 @@
   --background: #0a0a0a;
   --foreground: #fff;
 
-  --color-amber-50: #412e00;
-  --color-amber-100: #6b4c00;
-  --color-amber-200: #805a00;
-  --color-amber-300: #9a6c00;
-  --color-amber-400: #c18700;
-  --color-amber-500: #eaaa00;
-  --color-amber-600: #fccc2e;
-  --color-amber-700: #fcb92d;
-  --color-amber-800: #ffe871;
-  --color-amber-900: #fff7c2;
-  --color-amber-950: #fffdf3;
-
+  --color-amber-50:  #3b1f10;
+  --color-amber-100: #4a260f;
+  --color-amber-200: #5b2e0e;
+  --color-amber-300: #703a0d;
+  --color-amber-400: #86460c;
+  --color-amber-500: #f28a1d;
+  --color-amber-600: #bb631d;
+  --color-amber-700: #d9762c;
+  --color-amber-800: #f2963b;
+  --color-amber-900: #ffc66e;
+  --color-amber-950: #ffedd4;
 
   --color-sky-50: #133d66;
   --color-sky-100: #1e5a8d;
@@ -137,13 +136,13 @@
   --color-rose-600: #ffb3d2;
   --color-rose-700: #ffe0ed;
 
-  --color-pink-100: #c84287;
-  --color-pink-200: #e46ba7;
-  --color-pink-300: #f296c0;
-  --color-pink-400: #fbbad4;
-  --color-pink-500: #ffc1db;
-  --color-pink-600: #ffd3e5;
-  --color-pink-700: #ffeaf3;
+  --color-pink-100: #f8d9e5;
+  --color-pink-200: #f2b4cd;
+  --color-pink-300: #ec8cb2;
+  --color-pink-400: #e56a9a;
+  --color-pink-500: #d84a85;
+  --color-pink-600: #b9326a;
+  --color-pink-700: #931f4f;
 
   --color-purple-100: #5f2496;
   --color-purple-200: #8434cc;

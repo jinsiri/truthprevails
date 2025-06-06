@@ -22,9 +22,9 @@ export function TimelineItem({ color = 'blue', date, title, description }: Timel
   return (
     <motion.div className='relative mb-10 pr-6'>
       <div className={`absolute -right-1.5 mt-1.5 h-3 w-3 rounded-full xl:mt-2.5 ${dotColor}`}></div>
-      <time className='md:text-md text-sm text-gray-500 md:text-lg xl:text-xl dark:text-gray-400'>{date}</time>
-      <h3 className='text-lg font-semibold text-gray-900 md:text-2xl xl:text-3xl dark:text-white'>{title}</h3>
-      <p className='text-basic md:text-md font-regular text-gray-600 xl:text-xl dark:text-gray-300'>{description}</p>
+      <time className='md:text-md text-sm text-gray-700 md:text-lg xl:text-xl'>{date}</time>
+      <h3 className='text-lg font-semibold text-gray-900 md:text-2xl xl:text-3xl'>{title}</h3>
+      <p className='text-basic md:text-md font-regular text-gray-800 xl:text-xl'>{description}</p>
     </motion.div>
   );
 }

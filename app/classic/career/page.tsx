@@ -83,7 +83,7 @@ export default function ClassicCareer() {
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className='w-full pt-20 text-right lg:w-1/2 xl:w-2/3 xl:pt-30'
       >
-        <div className='relative z-10 w-full border-b border-gray-200 text-center text-sm font-medium text-gray-500 md:text-lg xl:text-lg dark:border-gray-700 dark:text-gray-400'>
+        <div className='relative z-10 w-full border-b border-gray-600 text-center text-sm font-medium text-gray-500 md:text-lg xl:text-lg dark:border-gray-700'>
           <ul className='-mb-px flex w-full flex-wrap'>
             {tabTitles.map((title, index) => (
               <li className='me-2' key={index}>
@@ -92,7 +92,7 @@ export default function ClassicCareer() {
                   className={`inline-block rounded-t-lg border-b-2 px-4 py-2 ${
                     activeTab === index
                       ? 'border-sky-700 font-bold text-sky-700 dark:border-sky-500 dark:text-sky-500'
-                      : 'border-transparent hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300'
+                      : 'border-transparent text-gray-600 hover:border-gray-600 hover:text-gray-700'
                   }`}
                 >
                   {title}
@@ -107,9 +107,9 @@ export default function ClassicCareer() {
             (exp, index) =>
               activeTab === index && (
                 <li key={index} className='mb-8'>
-                  <h3 className='mb-4 text-xl font-bold'>{exp.title}</h3>
+                  <h3 className='mb-4 text-xl font-bold text-gray-700'>{exp.title}</h3>
 
-                  <div className='w-full border-collapse text-left text-sm text-gray-600 lg:block rtl:text-right dark:text-gray-400'>
+                  <div className='w-full border-collapse text-left text-sm text-gray-700 lg:block rtl:text-right'>
                     <div className='border-t border-gray-700 bg-gray-50/50 md:grid md:grid-cols-[150px_1fr]'>
                       {exp.data.map((item, idx) => (
                         <Fragment key={idx}>
