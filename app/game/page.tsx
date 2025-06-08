@@ -13,14 +13,22 @@ export default function ClassicMain() {
   const [lastDirection, setLastDirection] = useState<'left' | 'right'>('right');
   const [isJumping, setIsJumping] = useState(false);
 
+  const isMoveFront = (e: KeyboardEvent) => {
+    return e.key === 'ArrowRight' || e.key === 'd';
+  };
+
+  const isMoveMoveBack = (e: KeyboardEvent) => {
+    return e.key === 'ArrowLeft' || e.key === 'a';
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.repeat) return;
 
-      if (e.key === 'ArrowRight') {
+      if (isMoveFront(e)) {
         setDirection('right');
         setLastDirection('right');
-      } else if (e.key === 'ArrowLeft') {
+      } else if (isMoveMoveBack(e)) {
         setDirection('left');
         setLastDirection('left');
       } else if (e.key === ' ' && !isJumping) {
@@ -29,7 +37,7 @@ export default function ClassicMain() {
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
-      if ((e.key === 'ArrowRight' && direction === 'right') || (e.key === 'ArrowLeft' && direction === 'left')) {
+      if (isMoveFront(e) || isMoveMoveBack(e)) {
         setDirection(null);
       }
     };
