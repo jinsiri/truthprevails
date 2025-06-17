@@ -14,11 +14,11 @@ export default function ClassicMain() {
   const [isJumping, setIsJumping] = useState(false);
 
   const isMoveFront = (e: KeyboardEvent) => {
-    return e.key === 'ArrowRight' || e.key === 'd';
+    return e.key === 'ArrowRight' || e.code === 'KeyD';
   };
 
   const isMoveMoveBack = (e: KeyboardEvent) => {
-    return e.key === 'ArrowLeft' || e.key === 'a';
+    return e.key === 'ArrowLeft' || e.code === 'KeyA';
   };
 
   useEffect(() => {
