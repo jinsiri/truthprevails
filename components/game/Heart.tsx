@@ -41,8 +41,8 @@ export function Heart() {
       <Image src={`/images/heart_full.webp`} alt='heart' width={width} height={height} />
       {theme === 'dark' ? (
         <>
-          <Image src={`/images/heart_half.webp`} alt='heart' width={width} height={height} />
-          <Image src={`/images/heart_zero.webp`} alt='heart' width={width} height={height} />
+          <Image src={`/images/heart_half_transparent.webp`} alt='heart' width={width} height={height} />
+          <Image src={`/images/heart_zero_transparent.webp`} alt='heart' width={width} height={height} />
         </>
       ) : (
         <>
