@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { IconTransfer } from '@tabler/icons-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { Cloud } from '@/components/game/Cloud';
+import { Heart } from '@/components/game/Heart';
 
 export default function ClassicMain() {
   const [frame, setFrame] = useState(0);
@@ -103,7 +105,12 @@ export default function ClassicMain() {
   return (
     <>
       <section className='home group relative flex h-screen items-center justify-center overflow-hidden bg-sky-200'>
+        <Cloud />
+
+        <Heart />
+
         <p className={'absolute top-1/3 left-1/2 -translate-x-1/2 text-2xl'}>페이지 준비중입니다! :)</p>
+
         <div className='absolute right-0 bottom-0 left-0 h-50 border-t-2 border-gray-950 bg-green-500 dark:border-gray-100 dark:bg-green-950'>
           <Image
             src={`/images/side_0${isJumping ? 2 : frame + 1}.webp`}
