@@ -27,6 +27,10 @@ export default function GameMain() {
   const [direction, setDirection] = useState<Direction | null>(null);
   const [lastDirection, setLastDirection] = useState<Direction>('right');
   const [isJumping, setIsJumping] = useState(false);
+  const isSide = lastDirection === 'left' || lastDirection === 'right';
+  const isBackOrFront = lastDirection === 'up' || lastDirection === 'down';
+  const imageSrc = isSide ? `/images/game/side_0${isJumping ? 2 : frame + 1}.webp` : `/images/game/${lastDirection === 'up' ? 'back' : 'front_book'}.png`;
+  const transformStyle = isSide ? `scaleX(${lastDirection === 'left' ? -1 : 1}) translateY(${-positionY}px)` : undefined;
 
   useEffect(() => {
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
@@ -62,6 +66,7 @@ export default function GameMain() {
 
         if (newDir) {
           setDirection(newDir);
+          setLastDirection(newDir);
         } else {
           setDirection(null);
         }
@@ -86,8 +91,10 @@ export default function GameMain() {
         setPosition((prev) => {
           if (direction === 'right') {
             return Math.min(window.innerWidth - 150, prev + 5);
-          } else {
+          } else if (direction === 'left') {
             return Math.max(0, prev - 5);
+          } else {
+            return prev;
           }
         });
       }, 100);
@@ -177,10 +184,21 @@ export default function GameMain() {
             className={'absolute bottom-[70%] z-30 w-[8%]'}
             style={{
               left: `${position}px`,
-              transform: `${lastDirection === 'left' ? 'scaleX(-1)' : 'scaleX(1)'} translateY(${-positionY}px)`,
             }}
           >
-            <Image src={`/images/game/side_0${isJumping ? 2 : frame + 1}.webp`} alt='jinsil' width={154} height={154} layout={'responsive'} priority />
+            {(isSide || isBackOrFront) && (
+              <Image
+                src={imageSrc}
+                alt='jinsil'
+                width={154}
+                height={154}
+                layout='responsive'
+                priority
+                style={{
+                  ...(transformStyle ? { transform: transformStyle } : {}),
+                }}
+              />
+            )}
           </div>
         </div>
       </section>
