@@ -24,6 +24,12 @@ export default function ClassicMain() {
   };
 
   useEffect(() => {
+    const handleContextMenu = (e: MouseEvent) => e.preventDefault();
+    document.addEventListener('contextmenu', handleContextMenu);
+    return () => document.removeEventListener('contextmenu', handleContextMenu);
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.repeat) return;
 
@@ -104,16 +110,48 @@ export default function ClassicMain() {
 
   return (
     <>
-      <section className='home group relative flex h-screen items-center justify-center overflow-hidden bg-sky-200'>
+      <section className='home group relative flex h-screen items-center justify-center overflow-hidden bg-sky-200 select-none'>
         <Cloud />
 
         <Heart />
 
-        <p className={'absolute top-1/3 left-1/2 -translate-x-1/2 text-2xl'}>페이지 준비중입니다! :)</p>
+        {/*<div className={'absolute top-20 right-8 z-10'}>
+          <div className='relative min-h-50 w-[250px] border-4 border-[#3b2f1c] bg-[#fdf3d2] px-6 py-6 text-lg font-semibold text-[#3b2f1c] shadow-[4px_4px_0_#000]'>
+            <h3 className={'text-2xl font-bold'}>능력치</h3>
+            <ul className={'mt-2'}>
+              <li>빠른 지식 습득</li>
+              <li>문해력</li>
+              <li>될 때까지 하기</li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
 
-        <div className='absolute right-0 bottom-0 left-0 h-50 border-t-2 border-gray-950 bg-green-500 dark:border-gray-100 dark:bg-green-950'>
+          <div className='relative mt-6 min-h-50 w-[250px] border-4 border-[#3b2f1c] bg-[#fdf3d2] px-6 py-6 text-lg font-semibold text-[#3b2f1c] shadow-[4px_4px_0_#000]'>
+            <h3 className={'text-2xl font-bold'}>보유 기술</h3>
+            <ul className={'mt-2'}>
+              <li>빠른 습득</li>
+              <li>지속</li>
+              <li>빠른 습득</li>
+              <li>빠른 습득</li>
+              <li>빠른 습득</li>
+              <li>빠른 습득</li>
+            </ul>
+          </div>
+        </div>*/}
+
+        <p className={'absolute top-1/3 left-1/2 z-100 -translate-x-1/2 border-4 bg-white px-6 py-1 text-2xl text-black'}>페이지 준비중입니다! :)</p>
+
+        <div className='absolute right-0 bottom-0 left-0 h-50 border-t-4 border-gray-950 bg-[#b0a58c] dark:border-gray-100 dark:bg-[#46311e]'>
+          <Image className={'absolute bottom-[76%] left-[5%] z-20'} src={`/images/game/school.webp`} alt='학교' width={500} height={591} />
+          <Image className={'absolute bottom-[80%] left-[36%] z-20'} src={`/images/game/building.webp`} alt='회사' width={540} height={591} />
+          <Image className={'absolute bottom-[80%] left-[69%] z-20'} src={`/images/game/info.webp`} alt='인포센터' width={280} height={591} />
+          <div className={'absolute -bottom-[4%] z-30 h-30 w-full bg-[url("/images/game/flowers_mini.webp")] bg-contain bg-repeat-x'}></div>
+          <div className={'pattern-tree absolute bottom-[100%] h-60 w-full'}></div>
           <Image
-            src={`/images/side_0${isJumping ? 2 : frame + 1}.webp`}
+            className={'z-30'}
+            src={`/images/game/side_0${isJumping ? 2 : frame + 1}.webp`}
             alt='jinsil'
             width={150}
             height={150}
@@ -121,7 +159,7 @@ export default function ClassicMain() {
             style={{
               left: `${position}px`,
               transform: `${lastDirection === 'left' ? 'scaleX(-1)' : 'scaleX(1)'} translateY(${-positionY}px)`,
-              bottom: '80%',
+              bottom: '70%',
               transition: 'transform 0.1s linear',
               position: 'absolute',
             }}
@@ -129,7 +167,10 @@ export default function ClassicMain() {
         </div>
       </section>
 
-      <Link href='/' className='fixed bottom-8 left-6 flex items-center gap-1 text-base font-light md:left-8 md:text-xl'>
+      <Link
+        href='/'
+        className='fixed bottom-8 left-6 z-60 flex items-center gap-1 rounded-md border-4 border-black bg-amber-50 px-4 text-base font-bold text-amber-950 md:left-8 md:text-2xl'
+      >
         <IconTransfer stroke={2} />
         Change mode
       </Link>

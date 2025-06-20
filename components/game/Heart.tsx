@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 export function Heart() {
   const width = 36;
   const height = 28;
+  const fullHeartSrc = '/images/game/heart_full.webp';
   const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
 
   useEffect(() => {
@@ -38,13 +39,13 @@ export function Heart() {
     <div className={'absolute top-8 left-[2%]'}>
       <ul className={'flex gap-3'}>
         <li>
-          <Image src={`/images/game/heart_full.webp`} alt='heart' width={width} height={height} />
+          <Image src={fullHeartSrc} alt='heart' width={width} height={height} />
         </li>
         <li>
-          <Image src={`/images/game/heart_full.webp`} alt='heart' width={width} height={height} />
+          <Image src={fullHeartSrc} alt='heart' width={width} height={height} />
         </li>
         <li>
-          <Image src={`/images/game/heart_full.webp`} alt='heart' width={width} height={height} />
+          <Image src={fullHeartSrc} alt='heart' width={width} height={height} />
         </li>
         {theme === 'dark' ? (
           <>
@@ -58,10 +59,10 @@ export function Heart() {
         ) : (
           <>
             <li>
-              <Image src={`/images/game/heart_full.webp`} alt='heart' width={width} height={height} />
+              <Image src={fullHeartSrc} alt='heart' width={width} height={height} />
             </li>
             <li>
-              <Image src={`/images/game/heart_full.webp`} alt='heart' width={width} height={height} />
+              <Image src={fullHeartSrc} alt='heart' width={width} height={height} />
             </li>
           </>
         )}
