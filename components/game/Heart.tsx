@@ -35,21 +35,38 @@ export function Heart() {
   if (!theme) return null;
 
   return (
-    <div className={'absolute top-8 left-[2%] flex gap-3'}>
-      <Image src={`/images/heart_full.webp`} alt='heart' width={width} height={height} />
-      <Image src={`/images/heart_full.webp`} alt='heart' width={width} height={height} />
-      <Image src={`/images/heart_full.webp`} alt='heart' width={width} height={height} />
-      {theme === 'dark' ? (
-        <>
-          <Image src={`/images/heart_half_transparent.webp`} alt='heart' width={width} height={height} />
-          <Image src={`/images/heart_zero_transparent.webp`} alt='heart' width={width} height={height} />
-        </>
-      ) : (
-        <>
-          <Image src={`/images/heart_full.webp`} alt='heart' width={width} height={height} />
-          <Image src={`/images/heart_full.webp`} alt='heart' width={width} height={height} />
-        </>
-      )}
+    <div className={'absolute top-8 left-[2%]'}>
+      <ul className={'flex gap-3'}>
+        <li>
+          <Image src={`/images/game/heart_full.webp`} alt='heart' width={width} height={height} />
+        </li>
+        <li>
+          <Image src={`/images/game/heart_full.webp`} alt='heart' width={width} height={height} />
+        </li>
+        <li>
+          <Image src={`/images/game/heart_full.webp`} alt='heart' width={width} height={height} />
+        </li>
+        {theme === 'dark' ? (
+          <>
+            <li>
+              <Image src={`/images/game/heart_half.webp`} alt='heart' width={width} height={height} />
+            </li>
+            <li>
+              <Image src={`/images/game/heart_zero.webp`} alt='heart' width={width} height={height} />
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Image src={`/images/game/heart_full.webp`} alt='heart' width={width} height={height} />
+            </li>
+            <li>
+              <Image src={`/images/game/heart_full.webp`} alt='heart' width={width} height={height} />
+            </li>
+          </>
+        )}
+      </ul>
+      {theme === 'dark' && <p className={'mt-2 flex items-center'}>&#42; 밤에는 능률이 다소 떨어집니다.</p>}
     </div>
   );
 }
