@@ -67,8 +67,8 @@ export default function ClassicLearning() {
 
         <ThemedImage
           className={'right-10 -bottom-28 -mt-30 max-w-1/2 lg:absolute lg:mt-0 lg:w-1/3 xl:w-1/4'}
-          lightSrc={`/images/edu.webp`}
-          darkSrc={`/images/edu_w.webp`}
+          lightSrc={`/images/classic/edu.webp`}
+          darkSrc={`/images/classic/edu_w.webp`}
           alt={'educated list'}
           width={450}
           height={450}

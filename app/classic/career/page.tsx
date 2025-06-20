@@ -136,8 +136,8 @@ export default function ClassicCareer() {
 
         <ThemedImage
           className={'bottom-0 mt-10 inline-block lg:absolute lg:left-0 lg:mt-0 lg:w-1/2 lg:-scale-x-100 xl:w-1/3'}
-          lightSrc={`/images/career.webp`}
-          darkSrc={`/images/career_w.webp`}
+          lightSrc={`/images/classic/career.webp`}
+          darkSrc={`/images/classic/career_w.webp`}
           alt={'My career step'}
           width={700}
           height={700}
