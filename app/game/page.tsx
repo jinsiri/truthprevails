@@ -1,27 +1,32 @@
 'use client';
 
 import Link from 'next/link';
-import { IconTransfer } from '@tabler/icons-react';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { IconTransfer } from '@tabler/icons-react';
+import { useEffect, useRef, useState } from 'react';
 import { Cloud } from '@/components/game/Cloud';
 import { Heart } from '@/components/game/Heart';
 
-export default function ClassicMain() {
+type Direction = 'up' | 'down' | 'left' | 'right';
+const keyToDirection: Record<string, Direction> = {
+  ArrowRight: 'right',
+  ArrowLeft: 'left',
+  ArrowUp: 'up',
+  ArrowDown: 'down',
+  KeyD: 'right',
+  KeyA: 'left',
+  KeyW: 'up',
+  KeyS: 'down',
+};
+
+export default function GameMain() {
+  const pressedKeys = useRef<Set<string>>(new Set());
   const [frame, setFrame] = useState(0);
   const [position, setPosition] = useState(0);
   const [positionY, setPositionY] = useState(0);
-  const [direction, setDirection] = useState<'left' | 'right' | null>(null);
-  const [lastDirection, setLastDirection] = useState<'left' | 'right'>('right');
+  const [direction, setDirection] = useState<Direction | null>(null);
+  const [lastDirection, setLastDirection] = useState<Direction>('right');
   const [isJumping, setIsJumping] = useState(false);
-
-  const isMoveFront = (e: KeyboardEvent) => {
-    return e.key === 'ArrowRight' || e.code === 'KeyD';
-  };
-
-  const isMoveMoveBack = (e: KeyboardEvent) => {
-    return e.key === 'ArrowLeft' || e.code === 'KeyA';
-  };
 
   useEffect(() => {
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
@@ -33,20 +38,33 @@ export default function ClassicMain() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.repeat) return;
 
-      if (isMoveFront(e)) {
-        setDirection('right');
-        setLastDirection('right');
-      } else if (isMoveMoveBack(e)) {
-        setDirection('left');
-        setLastDirection('left');
-      } else if (e.key === ' ' && !isJumping) {
+      const dir = keyToDirection[e.code];
+      if (dir) {
+        pressedKeys.current.add(e.code);
+        setDirection(dir);
+        setLastDirection(dir);
+        return;
+      }
+
+      if (e.code === 'Space' && !isJumping) {
         setIsJumping(true);
       }
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
-      if (isMoveFront(e) || isMoveMoveBack(e)) {
-        setDirection(null);
+      const dir = keyToDirection[e.code];
+      if (dir) {
+        pressedKeys.current.delete(e.code);
+
+        const remaining = Array.from(pressedKeys.current);
+        const lastKey = remaining[remaining.length - 1];
+        const newDir = keyToDirection[lastKey];
+
+        if (newDir) {
+          setDirection(newDir);
+        } else {
+          setDirection(null);
+        }
       }
     };
 
@@ -85,7 +103,7 @@ export default function ClassicMain() {
 
     let jumpUp = true;
     let jumpHeight = 0;
-    const jumpMaxHeight = 100;
+    const jumpMaxHeight = 80;
     const jumpSpeed = 10;
 
     const jumpInterval = setInterval(() => {
@@ -160,7 +178,6 @@ export default function ClassicMain() {
             style={{
               left: `${position}px`,
               transform: `${lastDirection === 'left' ? 'scaleX(-1)' : 'scaleX(1)'} translateY(${-positionY}px)`,
-              transition: 'transform 0.1s linear',
             }}
           >
             <Image src={`/images/game/side_0${isJumping ? 2 : frame + 1}.webp`} alt='jinsil' width={154} height={154} layout={'responsive'} priority />
