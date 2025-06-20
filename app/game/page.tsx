@@ -144,26 +144,27 @@ export default function ClassicMain() {
         <p className={'absolute top-1/3 left-1/2 z-100 -translate-x-1/2 border-4 bg-white px-6 py-1 text-2xl text-black'}>페이지 준비중입니다! :)</p>
 
         <div className='absolute right-0 bottom-0 left-0 h-50 border-t-4 border-gray-950 bg-[#b0a58c] dark:border-gray-100 dark:bg-[#46311e]'>
-          <Image className={'absolute bottom-[76%] left-[5%] z-20'} src={`/images/game/school.webp`} alt='학교' width={500} height={591} />
-          <Image className={'absolute bottom-[80%] left-[36%] z-20'} src={`/images/game/building.webp`} alt='회사' width={540} height={591} />
-          <Image className={'absolute bottom-[80%] left-[69%] z-20'} src={`/images/game/info.webp`} alt='인포센터' width={280} height={591} />
+          <div className={'absolute bottom-[76%] left-[5%] z-20 w-[28%]'}>
+            <Image src={`/images/game/school.webp`} alt='학교' width={538} height={421} layout={'responsive'} />
+          </div>
+          <div className={'absolute bottom-[80%] left-[36%] z-20 w-[29%]'}>
+            <Image src={`/images/game/building.webp`} alt='회사' width={557} height={691} layout={'responsive'} />
+          </div>
+          <div className={'absolute bottom-[80%] left-[69%] z-20 w-[18%]'}>
+            <Image src={`/images/game/info.webp`} alt='인포센터' width={280} height={323} />
+          </div>
           <div className={'absolute -bottom-[4%] z-30 h-30 w-full bg-[url("/images/game/flowers_mini.webp")] bg-contain bg-repeat-x'}></div>
           <div className={'pattern-tree absolute bottom-[100%] h-60 w-full'}></div>
-          <Image
-            className={'z-30'}
-            src={`/images/game/side_0${isJumping ? 2 : frame + 1}.webp`}
-            alt='jinsil'
-            width={150}
-            height={150}
-            priority
+          <div
+            className={'absolute bottom-[70%] z-30 w-[8%]'}
             style={{
               left: `${position}px`,
               transform: `${lastDirection === 'left' ? 'scaleX(-1)' : 'scaleX(1)'} translateY(${-positionY}px)`,
-              bottom: '70%',
               transition: 'transform 0.1s linear',
-              position: 'absolute',
             }}
-          />
+          >
+            <Image src={`/images/game/side_0${isJumping ? 2 : frame + 1}.webp`} alt='jinsil' width={154} height={154} layout={'responsive'} priority />
+          </div>
         </div>
       </section>
 
