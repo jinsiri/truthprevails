@@ -140,6 +140,23 @@ export default function GameMain() {
 
         <Heart />
 
+        {/*        <div className={'absolute top-0 right-0 bottom-0 left-0 z-100 bg-black/80 text-center text-xl text-white'}>
+          <ul className={'absolute top-1/3 left-1/2 flex -translate-x-1/2 items-end gap-x-10'}>
+            <li>
+              <figure className={'w-max-[40%]'}>
+                <Image src={`/images/game/wasd.webp`} alt='방향키' width={200} height={421} layout={'responsive'} />
+                <figcaption className={'mt-3'}>WASD 키: 이동</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure className={'w-max-[40%]'}>
+                <Image src={`/images/game/spacebar.webp`} alt='점프' width={230} height={421} layout={'responsive'} />
+                <figcaption className={'mt-3'}>스페이스바: 점프</figcaption>
+              </figure>
+            </li>
+          </ul>
+        </div>*/}
+
         {/*<div className={'absolute top-20 right-8 z-10'}>
           <div className='relative min-h-50 w-[250px] border-4 border-[#3b2f1c] bg-[#fdf3d2] px-6 py-6 text-lg font-semibold text-[#3b2f1c] shadow-[4px_4px_0_#000]'>
             <h3 className={'text-2xl font-bold'}>능력치</h3>
@@ -166,7 +183,18 @@ export default function GameMain() {
           </div>
         </div>*/}
 
-        <p className={'absolute top-1/3 left-1/2 z-100 -translate-x-1/2 border-4 bg-white px-6 py-1 text-2xl text-black'}>페이지 준비중입니다! :)</p>
+        <p
+          className={
+            'text-md absolute top-1/4 left-1/2 z-100 w-[90%] max-w-3xl -translate-x-1/2 rounded-xl border-4 bg-black/80 px-6 pt-6 pb-8 text-center text-white lg:text-2xl'
+          }
+        >
+          <strong className={'mb-4 block border-t-2 border-b-2 py-2'}>* 알림 *</strong>
+          선택하신 모드는 데스크톱에 최적화되어 있습니다.
+          <br />
+          모바일에선 일부 기능이 원활하지 않을 수 있으니 <br />
+          PC로 접속하시거나 왼쪽 아래 Change Mode 버튼을 통해 <br />
+          클래식 모드 이용을 권장드립니다.
+        </p>
 
         <div className='absolute right-0 bottom-0 left-0 h-50 border-t-4 border-gray-950 bg-[#b0a58c] dark:border-gray-100 dark:bg-[#46311e]'>
           <div className={'absolute bottom-[76%] left-[5%] z-20 w-[28%]'}>
