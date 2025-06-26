@@ -4,7 +4,7 @@ import { IconTransfer } from '@tabler/icons-react';
 export default function ClassicMain() {
   return (
     <>
-      <section className='home group'>
+      <section className='home group overflow-hidden'>
         <div className='relative flex h-screen w-full items-center justify-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-[length:200%] bg-[position:left] transition-[background-position] duration-1000 group-hover:bg-[position:right]'>
           <div className={'px-6 text-right text-black'}>
             <h1 className={'relative text-[6em] leading-[0.7] font-black md:text-[160px] lg:text-[180px] xl:text-[200px]'}>
@@ -22,7 +22,7 @@ export default function ClassicMain() {
         </div>
       </section>
 
-      <Link href={'/'} className={'fixed bottom-8 left-6 flex items-center gap-1 text-base font-light text-gray-900 md:left-8 md:text-xl'}>
+      <Link href={'/game'} className={'fixed bottom-8 left-6 flex items-center gap-1 text-base font-light text-gray-900 md:left-8 md:text-xl'}>
         <IconTransfer stroke={2} />
         Change mode
       </Link>

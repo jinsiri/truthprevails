@@ -30,7 +30,7 @@ export default function ThemeToggleButton() {
   return (
     <button
       onClick={(e) => toggleTheme(e)}
-      className='text-background hover:bg-elevated fixed top-[24] right-6 z-50 inline-flex cursor-pointer items-center justify-center rounded-full bg-amber-200 p-2 transition lg:top-[14] dark:bg-amber-500'
+      className='text-background hover:bg-elevated fixed top-[24] right-4 z-50 inline-flex cursor-pointer items-center justify-center rounded-full bg-amber-200 p-2 transition md:right-6 lg:top-[14] dark:bg-amber-500'
       aria-label='Toggle dark mode'
     >
       {isDark ? <IconSun stroke={2} /> : <IconMoonStars stroke={2} />}

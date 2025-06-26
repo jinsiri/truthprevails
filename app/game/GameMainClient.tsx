@@ -254,7 +254,7 @@ export default function GameMainClient({ isMobile }: GameMainClientProps) {
       </section>
 
       <Link
-        href='/'
+        href='/classic'
         className='fixed bottom-8 left-6 z-60 flex items-center gap-1 rounded-md border-4 border-black bg-amber-50 px-4 text-base font-bold text-amber-950 md:left-8 md:text-2xl'
       >
         <IconTransfer stroke={2} />
