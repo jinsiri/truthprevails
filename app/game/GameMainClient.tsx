@@ -27,7 +27,7 @@ interface GameMainClientProps {
 export default function GameMainClient({ isMobile }: GameMainClientProps) {
   const pressedKeys = useRef<Set<string>>(new Set());
   const [msgState, setMsgState] = useState(isMobile);
-  const [guideState, setGuideState] = useState(false);
+  const [guideState, setGuideState] = useState(!isMobile);
   const [frame, setFrame] = useState(0);
   const [position, setPosition] = useState(0);
   const [positionY, setPositionY] = useState(0);
@@ -160,8 +160,13 @@ export default function GameMainClient({ isMobile }: GameMainClientProps) {
         <Heart />
 
         {guideState && (
-          <div className={'absolute top-0 right-0 bottom-0 left-0 z-100 bg-black/80 text-center text-xl text-white'} onClick={() => setGuideState(false)}>
-            <ul className={'absolute top-1/3 left-1/2 flex -translate-x-1/2 items-end gap-x-10'}>
+          <div
+            className={
+              'absolute top-0 right-0 bottom-0 left-0 z-100 flex flex-col items-center justify-center bg-black/80 px-4 text-center text-xl break-keep text-white'
+            }
+            onClick={() => setGuideState(false)}
+          >
+            <ul className={'flex items-end gap-x-10'}>
               <li>
                 <figure className={'w-max-[40%]'}>
                   <Image src={`/images/game/wasd.webp`} alt='방향키' width={200} height={421} />
@@ -175,6 +180,7 @@ export default function GameMainClient({ isMobile }: GameMainClientProps) {
                 </figure>
               </li>
             </ul>
+            <p className={'text-md mt-6 md:mt-20 md:text-2xl'}>아무 키나 누르시면 게임이 시작됩니다! :)</p>
           </div>
         )}
 
