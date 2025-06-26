@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-export function Heart() {
+export default function Heart() {
   const width = 36;
   const height = 28;
   const fullHeartSrc = '/images/game/heart_full.webp';

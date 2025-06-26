@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export function Cloud() {
+export default function Cloud() {
   const cloudSrc = '/images/game/cloud.webp';
 
   return (
