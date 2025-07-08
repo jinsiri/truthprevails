@@ -1,8 +1,12 @@
+import { headers } from 'next/headers';
+import { userAgent } from 'next/server';
 import GameMainClient from './GameMainClient';
 
-export default function GameMain({ searchParams }: { searchParams: { viewport?: string } }) {
-  const viewport = searchParams.viewport || 'desktop';
-  const isMobile = viewport === 'mobile';
+export default async function Page() {
+  const headersList = await headers();
+  const ua = userAgent({ headers: headersList });
+
+  const isMobile = ua.device.type === 'mobile';
 
   return <GameMainClient isMobile={isMobile} />;
 }
