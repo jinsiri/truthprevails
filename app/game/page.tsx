@@ -1,14 +1,11 @@
-export const dynamic = 'force-dynamic';
+'use client';
 
-import { headers } from 'next/headers';
-import { userAgent } from 'next/server';
+import { useSearchParams } from 'next/navigation';
 import GameMainClient from './GameMainClient';
 
-export default async function GameMain() {
-  const headersList = await headers();
-  const ua = userAgent({ headers: headersList });
+export default function GamePage() {
+  const searchParams = useSearchParams();
+  const viewport = searchParams.get('viewport') ?? 'desktop';
 
-  const isMobile = ua.device.type === 'mobile';
-
-  return <GameMainClient isMobile={isMobile} />;
+  return <GameMainClient isMobile={viewport !== 'desktop'} />;
 }

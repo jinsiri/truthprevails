@@ -1,10 +1,20 @@
-import { NextRequest, NextResponse, userAgent } from 'next/server';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const url = request.nextUrl;
-  const { device } = userAgent(request);
-  const viewport = device.type || 'desktop';
+  const ua = request.headers.get('user-agent') || '';
+  const isMobile = /Mobi|Android/i.test(ua);
 
-  url.searchParams.set('viewport', viewport);
-  return NextResponse.rewrite(url);
+  const url = request.nextUrl;
+
+  if (!url.searchParams.has('viewport')) {
+    url.searchParams.set('viewport', isMobile ? 'mobile' : 'desktop');
+    return NextResponse.redirect(url);
+  }
+
+  return NextResponse.next();
 }
+
+export const config = {
+  matcher: ['/game', '/'],
+};
