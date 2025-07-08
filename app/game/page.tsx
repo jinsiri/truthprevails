@@ -1,11 +1,12 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import GameMainClient from './GameMainClient';
+import { Suspense } from 'react';
 
 export default function GamePage() {
-  const searchParams = useSearchParams();
-  const viewport = searchParams.get('viewport') ?? 'desktop';
-
-  return <GameMainClient isMobile={viewport !== 'desktop'} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <GameMainClient />
+    </Suspense>
+  );
 }

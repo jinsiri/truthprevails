@@ -7,6 +7,7 @@ import { IconTransfer } from '@tabler/icons-react';
 import MessageBox from '@/components/game/MessageBox';
 import Cloud from '@/components/game/Cloud';
 import Heart from '@/components/game/Heart';
+import { useSearchParams } from 'next/navigation';
 
 type Direction = 'up' | 'down' | 'left' | 'right';
 const keyToDirection: Record<string, Direction> = {
@@ -20,11 +21,10 @@ const keyToDirection: Record<string, Direction> = {
   KeyS: 'down',
 };
 
-interface GameMainClientProps {
-  isMobile: boolean;
-}
-
-export default function GameMainClient({ isMobile }: GameMainClientProps) {
+export default function GameMainClient() {
+  const searchParams = useSearchParams();
+  const viewport = searchParams.get('viewport') ?? 'desktop';
+  const isMobile = viewport !== 'desktop';
   const pressedKeys = useRef<Set<string>>(new Set());
   const [msgState, setMsgState] = useState(isMobile);
   const [guideState, setGuideState] = useState(!isMobile);
