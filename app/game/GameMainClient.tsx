@@ -8,6 +8,7 @@ import MessageBox from '@/components/game/MessageBox';
 import Cloud from '@/components/game/Cloud';
 import Heart from '@/components/game/Heart';
 import { useSearchParams } from 'next/navigation';
+import Guide from '@/components/game/Guide';
 
 type Direction = 'up' | 'down' | 'left' | 'right';
 const keyToDirection: Record<string, Direction> = {
@@ -20,6 +21,42 @@ const keyToDirection: Record<string, Direction> = {
   KeyW: 'up',
   KeyS: 'down',
 };
+
+const INTERACTION_POINTS = [
+  {
+    id: 'school',
+    name: '학교',
+    left: 5,
+    range: [12, 18],
+    action: () => alert('학교로 입장합니다!'),
+    image: '/images/game/school.webp',
+    width: 538,
+    height: 421,
+    style: 'bottom-[76%] left-[5%] w-[28%]',
+  },
+  {
+    id: 'office',
+    name: '회사',
+    left: 36,
+    range: [44, 49],
+    action: () => console.log('회사 업무 시작!'),
+    image: '/images/game/building.webp',
+    width: 557,
+    height: 691,
+    style: 'bottom-[80%] left-[36%] w-[29%]',
+  },
+  {
+    id: 'info',
+    name: '인포센터',
+    left: 69,
+    range: [68, 71],
+    action: () => alert('정보를 확인합니다.'),
+    image: '/images/game/info.webp',
+    width: 280,
+    height: 323,
+    style: 'bottom-[80%] left-[69%] w-[18%]',
+  },
+];
 
 export default function GameMainClient() {
   const searchParams = useSearchParams();
@@ -34,10 +71,29 @@ export default function GameMainClient() {
   const [direction, setDirection] = useState<Direction | null>(null);
   const [lastDirection, setLastDirection] = useState<Direction>('right');
   const [isJumping, setIsJumping] = useState(false);
+  const [activeObject, setActiveObject] = useState<(typeof INTERACTION_POINTS)[0] | null>(null);
+  const [isEntering, setIsEntering] = useState(false);
   const isSide = lastDirection === 'left' || lastDirection === 'right';
   const isBackOrFront = lastDirection === 'up' || lastDirection === 'down';
   const imageSrc = isSide ? `/images/game/side_0${isJumping ? 2 : frame + 1}.webp` : `/images/game/${lastDirection === 'up' ? 'back' : 'front_book'}.png`;
   const transformStyle = isSide ? `scaleX(${lastDirection === 'left' ? -1 : 1}) translateY(${-positionY}px)` : undefined;
+  const enteringStyle = isEntering
+    ? {
+        transform: `${transformStyle || ''} scale(0.8) translateY(20px)`,
+        opacity: 0,
+        transition: 'all 0.8s ease-in-out',
+      }
+    : {
+        transition: 'all 0.1s linear',
+      };
+
+  useEffect(() => {
+    const containerWidth = window.innerWidth;
+    const currentPosPercent = (position / containerWidth) * 100;
+    const target = INTERACTION_POINTS.find((obj) => currentPosPercent >= obj.range[0] && currentPosPercent <= obj.range[1]);
+
+    setActiveObject(target || null);
+  }, [position]);
 
   useEffect(() => {
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
@@ -49,17 +105,28 @@ export default function GameMainClient() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.repeat) return;
 
+      if (e.code === 'KeyW' && activeObject && !isEntering) {
+        setIsEntering(true); // 입장 연출 시작
+        setDirection(null); // 이동 멈춤
+        setLastDirection('up');
+
+        setTimeout(() => {
+          activeObject.action();
+        }, 1000);
+
+        return;
+      }
+
       const dir = keyToDirection[e.code];
       if (dir) {
         pressedKeys.current.add(e.code);
         setDirection(dir);
         setLastDirection(dir);
+
         return;
       }
 
-      if (e.code === 'Space' && !isJumping) {
-        setIsJumping(true);
-      }
+      if (e.code === 'Space' && !isJumping) setIsJumping(true);
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
@@ -159,56 +226,7 @@ export default function GameMainClient() {
 
         <Heart />
 
-        {guideState && (
-          <div
-            className={
-              'absolute top-0 right-0 bottom-0 left-0 z-100 flex flex-col items-center justify-center bg-black/80 px-4 text-center text-xl break-keep text-white'
-            }
-            onClick={() => setGuideState(false)}
-          >
-            <ul className={'flex items-end gap-x-10'}>
-              <li>
-                <figure className={'w-max-[40%]'}>
-                  <Image src={`/images/game/wasd.webp`} alt='방향키' width={200} height={421} />
-                  <figcaption className={'mt-3'}>WASD 키: 이동</figcaption>
-                </figure>
-              </li>
-              <li>
-                <figure className={'w-max-[40%]'}>
-                  <Image src={`/images/game/spacebar.webp`} alt='점프' width={230} height={421} />
-                  <figcaption className={'mt-3'}>스페이스바: 점프</figcaption>
-                </figure>
-              </li>
-            </ul>
-            <p className={'text-md mt-6 md:mt-20 md:text-2xl'}>아무 키나 누르시면 게임이 시작됩니다! :)</p>
-          </div>
-        )}
-
-        {/*<div className={'absolute top-20 right-8 z-10'}>
-          <div className='relative min-h-50 w-[250px] border-4 border-[#3b2f1c] bg-[#fdf3d2] px-6 py-6 text-lg font-semibold text-[#3b2f1c] shadow-[4px_4px_0_#000]'>
-            <h3 className={'text-2xl font-bold'}>능력치</h3>
-            <ul className={'mt-2'}>
-              <li>빠른 지식 습득</li>
-              <li>문해력</li>
-              <li>될 때까지 하기</li>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
-          </div>
-
-          <div className='relative mt-6 min-h-50 w-[250px] border-4 border-[#3b2f1c] bg-[#fdf3d2] px-6 py-6 text-lg font-semibold text-[#3b2f1c] shadow-[4px_4px_0_#000]'>
-            <h3 className={'text-2xl font-bold'}>보유 기술</h3>
-            <ul className={'mt-2'}>
-              <li>빠른 습득</li>
-              <li>지속</li>
-              <li>빠른 습득</li>
-              <li>빠른 습득</li>
-              <li>빠른 습득</li>
-              <li>빠른 습득</li>
-            </ul>
-          </div>
-        </div>*/}
+        {guideState && <Guide onClick={() => setGuideState(false)} />}
 
         {msgState && (
           <MessageBox
@@ -226,23 +244,29 @@ export default function GameMainClient() {
         )}
 
         <div className='absolute right-0 bottom-0 left-0 h-50 border-t-4 border-gray-950 bg-[#b0a58c] dark:border-gray-100 dark:bg-[#46311e]'>
-          <div className={'absolute bottom-[76%] left-[5%] z-20 w-[28%]'}>
-            <Image src={`/images/game/school.webp`} alt='학교' width={538} height={421} />
-          </div>
-          <div className={'absolute bottom-[80%] left-[36%] z-20 w-[29%]'}>
-            <Image src={`/images/game/building.webp`} alt='회사' width={557} height={691} />
-          </div>
-          <div className={'absolute bottom-[80%] left-[69%] z-20 w-[18%]'}>
-            <Image src={`/images/game/info.webp`} alt='인포센터' width={280} height={323} />
-          </div>
+          {INTERACTION_POINTS.map((obj) => (
+            <div key={obj.id} className={`absolute z-20 ${obj.style}`}>
+              <Image src={obj.image} alt={obj.name} width={obj.width} height={obj.height} />
+            </div>
+          ))}
           <div className={'absolute -bottom-[4%] z-30 h-30 w-full bg-[url("/images/game/flowers_mini.webp")] bg-contain bg-repeat-x'}></div>
-          <div className={'pattern-tree absolute bottom-[100%] h-60 w-full'}></div>
+          <div className={'pattern-tree absolute bottom-[100%] h-60 w-full'}></div>ㅇ
           <div
             className={'absolute bottom-[70%] z-30 w-[8%]'}
             style={{
               left: `${position}px`,
+              zIndex: isEntering ? 15 : 35,
+              ...enteringStyle,
             }}
           >
+            {activeObject && (
+              <div className='absolute -top-8 left-1/2 flex -translate-x-1/2 flex-col items-center'>
+                <div className='animate-bounce rounded border-2 border-black bg-white px-2 py-1 text-xs font-bold whitespace-nowrap'>
+                  [W] {activeObject.name} 입장
+                </div>
+              </div>
+            )}
+
             {(isSide || isBackOrFront) && (
               <Image
                 src={imageSrc}
