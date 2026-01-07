@@ -252,7 +252,7 @@ export default function GameMainClient() {
             </div>
           ))}
           <div className={'absolute -bottom-[4%] z-30 h-30 w-full bg-[url("/images/game/flowers_mini.webp")] bg-contain bg-repeat-x'}></div>
-          <div className={'pattern-tree absolute bottom-[100%] h-60 w-full'}></div>ㅇ
+          <div className={'pattern-tree absolute bottom-[100%] h-60 w-full'}></div>
           <div
             className={'absolute bottom-[70%] z-30 w-[8%]'}
             style={{
