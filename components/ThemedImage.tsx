@@ -6,12 +6,13 @@ interface ThemedImageProps {
   lightSrc: string;
   darkSrc: string;
   alt: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   priority?: boolean;
+  fill?: boolean;
 }
 
-export default function ThemedImage({ className = '', lightSrc, darkSrc, alt, width, height, priority = false }: ThemedImageProps) {
+export default function ThemedImage({ className = '', lightSrc, darkSrc, alt, width, height, priority = false, fill }: ThemedImageProps) {
   const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
 
   useEffect(() => {
@@ -42,7 +43,18 @@ export default function ThemedImage({ className = '', lightSrc, darkSrc, alt, wi
 
   const src = theme === 'dark' ? darkSrc : lightSrc;
 
-  return (
+  return fill ? (
+    <Image
+      className={`${className}`}
+      src={src}
+      alt={alt}
+      priority={priority}
+      fill
+      style={{
+        imageRendering: 'pixelated',
+      }}
+    />
+  ) : (
     <Image
       className={`${className} ${theme === 'dark' ? 'opacity-70' : 'opacity-100'}`}
       src={src}

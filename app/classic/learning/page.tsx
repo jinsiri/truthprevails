@@ -1,7 +1,6 @@
 'use client';
 
 import { TimelineItem } from '@/components/classic/TimelineItem';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import ThemedImage from '@/components/ThemedImage';
 

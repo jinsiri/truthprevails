@@ -4,10 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { IconTransfer } from '@tabler/icons-react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import MessageBox from '@/components/game/MessageBox';
 import Cloud from '@/components/game/Cloud';
 import Heart from '@/components/game/Heart';
-import { useSearchParams } from 'next/navigation';
 import Guide from '@/components/game/Guide';
 
 type Direction = 'up' | 'down' | 'left' | 'right';
@@ -28,7 +29,7 @@ const INTERACTION_POINTS = [
     name: '학교',
     left: 5,
     range: [12, 18],
-    action: () => alert('학교로 입장합니다!'),
+    action: (router: AppRouterInstance) => router.push('/game/learning'),
     image: '/images/game/school.webp',
     width: 538,
     height: 421,
@@ -39,7 +40,7 @@ const INTERACTION_POINTS = [
     name: '회사',
     left: 36,
     range: [44, 49],
-    action: () => console.log('회사 업무 시작!'),
+    action: (router: AppRouterInstance) => router.push('/game/career'),
     image: '/images/game/building.webp',
     width: 557,
     height: 691,
@@ -50,7 +51,7 @@ const INTERACTION_POINTS = [
     name: '인포센터',
     left: 69,
     range: [68, 71],
-    action: () => alert('정보를 확인합니다.'),
+    action: (router: AppRouterInstance) => router.push('/game/contact'),
     image: '/images/game/info.webp',
     width: 280,
     height: 323,
@@ -59,6 +60,7 @@ const INTERACTION_POINTS = [
 ];
 
 export default function GameMainClient() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const viewport = searchParams.get('viewport') ?? 'desktop';
   const isMobile = viewport !== 'desktop';
@@ -111,7 +113,7 @@ export default function GameMainClient() {
         setLastDirection('up');
 
         setTimeout(() => {
-          activeObject.action();
+          activeObject.action(router);
         }, 1000);
 
         return;
@@ -262,7 +264,7 @@ export default function GameMainClient() {
             {activeObject && (
               <div className='absolute -top-8 left-1/2 flex -translate-x-1/2 flex-col items-center'>
                 <div className='animate-bounce rounded border-2 border-black bg-white px-2 py-1 text-xs font-bold whitespace-nowrap'>
-                  [W] {activeObject.name} 입장
+                  <span className={'text-black'}>[W] {activeObject.name} 입장</span>
                 </div>
               </div>
             )}
