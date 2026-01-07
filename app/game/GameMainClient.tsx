@@ -230,6 +230,15 @@ export default function GameMainClient() {
 
         {guideState && <Guide onClick={() => setGuideState(false)} />}
 
+        {
+          <div className={'absolute top-20 right-8 z-10'}>
+            <div className='relative min-h-50 w-[350px] border-4 border-[#3b2f1c] bg-[#fdf3d2] px-6 py-6 text-lg font-semibold text-[#3b2f1c] shadow-[4px_4px_0_#000]'>
+              방문해주셔서 감사합니다! <br />
+              <br />이 테마는 아직 보완중으로 왼쪽 하단 버튼을 눌러 클래식 모드 이용을 권장드립니다 :)
+            </div>
+          </div>
+        }
+
         {msgState && (
           <MessageBox
             onClose={() => {
