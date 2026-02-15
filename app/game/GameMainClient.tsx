@@ -70,9 +70,7 @@ export default function GameMainClient() {
   const [guideState, setGuideState] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = sessionStorage.getItem('guideState');
-      if (saved !== null) {
-        return JSON.parse(saved);
-      }
+      if (saved !== null) return JSON.parse(saved);
     }
     return !isMobile;
   });
@@ -88,24 +86,18 @@ export default function GameMainClient() {
     return 0;
   });
 
-  const [positionY, setPositionY] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = sessionStorage.getItem('lastPosition');
-      if (saved) {
-        const { y } = JSON.parse(saved);
-        return y;
-      }
-    }
-    return 0;
-  });
+  const [positionY, setPositionY] = useState(0);
   const [direction, setDirection] = useState<Direction | null>(null);
-  const [lastDirection, setLastDirection] = useState<Direction>('right');
+  const [lastDirection, setLastDirection] = useState<Direction>('down');
   const [isJumping, setIsJumping] = useState(false);
   const [activeObject, setActiveObject] = useState<(typeof INTERACTION_POINTS)[0] | null>(null);
   const [isEntering, setIsEntering] = useState(false);
+  const activeObjectRef = useRef(activeObject);
+
   const isSide = lastDirection === 'left' || lastDirection === 'right';
   const isBackOrFront = lastDirection === 'up' || lastDirection === 'down';
   const imageSrc = isSide ? `/images/game/side_0${isJumping ? 2 : frame + 1}.webp` : `/images/game/${lastDirection === 'up' ? 'back' : 'front_book'}.png`;
+
   const transformStyle = isSide ? `scaleX(${lastDirection === 'left' ? -1 : 1}) translateY(${-positionY}px)` : undefined;
   const enteringStyle = isEntering
     ? {
@@ -118,31 +110,40 @@ export default function GameMainClient() {
       };
 
   useEffect(() => {
-    const containerWidth = window.innerWidth;
-    const currentPosPercent = (position / containerWidth) * 100;
-    const target = INTERACTION_POINTS.find((obj) => currentPosPercent >= obj.range[0] && currentPosPercent <= obj.range[1]);
-
-    setActiveObject(target || null);
-  }, [position]);
-
-  useEffect(() => {
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
     document.addEventListener('contextmenu', handleContextMenu);
     return () => document.removeEventListener('contextmenu', handleContextMenu);
   }, []);
 
   useEffect(() => {
+    activeObjectRef.current = activeObject;
+  }, [activeObject]);
+
+  useEffect(() => {
+    const target = INTERACTION_POINTS.find((obj) => position >= obj.range[0] && position <= obj.range[1]);
+    setActiveObject(target || null);
+  }, [position]);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.repeat) return;
 
-      if (e.code === 'KeyW' && activeObject && !isEntering) {
-        setIsEntering(true); // 입장 연출 시작
-        setDirection(null); // 이동 멈춤
+      const currentActive = activeObjectRef.current;
+      if (e.code === 'KeyW' && currentActive && !isEntering) {
+        setIsEntering(true);
+        setDirection(null);
         setLastDirection('up');
-        sessionStorage.setItem('lastPosition', JSON.stringify({ x: position, y: positionY }));
+
+        sessionStorage.setItem(
+          'lastPosition',
+          JSON.stringify({
+            x: position,
+            y: positionY,
+          }),
+        );
 
         setTimeout(() => {
-          activeObject.action(router);
+          currentActive.action(router);
         }, 1000);
 
         return;
@@ -153,8 +154,6 @@ export default function GameMainClient() {
         pressedKeys.current.add(e.code);
         setDirection(dir);
         setLastDirection(dir);
-
-        return;
       }
 
       if (e.code === 'Space' && !isJumping) setIsJumping(true);
@@ -164,7 +163,6 @@ export default function GameMainClient() {
       const dir = keyToDirection[e.code];
       if (dir) {
         pressedKeys.current.delete(e.code);
-
         const remaining = Array.from(pressedKeys.current);
         const lastKey = remaining[remaining.length - 1];
         const newDir = keyToDirection[lastKey];
@@ -184,7 +182,7 @@ export default function GameMainClient() {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, [direction, isJumping]);
+  }, [direction, isJumping, position, positionY, router, isEntering]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -194,10 +192,11 @@ export default function GameMainClient() {
         setFrame((prev) => (isJumping ? 1 : prev === 0 ? 1 : 0));
 
         setPosition((prev: number) => {
+          const moveSpeed = 0.8;
           if (direction === 'right') {
-            return Math.min(window.innerWidth - 150, prev + 5);
+            return Math.min(92, prev + moveSpeed);
           } else if (direction === 'left') {
-            return Math.max(0, prev - 5);
+            return Math.max(0, prev - moveSpeed);
           } else {
             return prev;
           }
@@ -212,7 +211,6 @@ export default function GameMainClient() {
 
   useEffect(() => {
     if (!isJumping) return;
-
     let jumpUp = true;
     let jumpHeight = 0;
     const jumpMaxHeight = 80;
@@ -221,9 +219,7 @@ export default function GameMainClient() {
     const jumpInterval = setInterval(() => {
       if (jumpUp) {
         jumpHeight += jumpSpeed;
-        if (jumpHeight >= jumpMaxHeight) {
-          jumpUp = false;
-        }
+        if (jumpHeight >= jumpMaxHeight) jumpUp = false;
       } else {
         jumpHeight -= jumpSpeed;
         if (jumpHeight <= 0) {
@@ -248,33 +244,25 @@ export default function GameMainClient() {
 
   useEffect(() => {
     if (!guideState && isMobile) return;
-
-    const handleKeyDown = () => {
-      setGuideState(false);
-    };
+    const handleKeyDown = () => setGuideState(false);
     window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [guideState]);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [guideState, isMobile]);
 
   return (
     <>
       <section className='home group relative flex h-screen items-center justify-center overflow-hidden bg-sky-200 select-none'>
         <Cloud />
-
         <Heart />
 
         {guideState && <Guide onClick={() => setGuideState(false)} />}
 
-        {
-          <div className={'absolute top-20 right-8 z-10'}>
-            <div className='relative min-h-50 w-[350px] border-4 border-[#3b2f1c] bg-[#fdf3d2] px-6 py-6 text-lg font-semibold text-[#3b2f1c] shadow-[4px_4px_0_#000]'>
-              방문해주셔서 감사합니다! <br />
-              <br />이 테마는 아직 보완중으로 왼쪽 하단 버튼을 눌러 클래식 모드 이용을 권장드립니다 :)
-            </div>
+        <div className={'absolute top-20 right-8 z-10'}>
+          <div className='relative min-h-50 w-[350px] border-4 border-[#3b2f1c] bg-[#fdf3d2] px-6 py-6 text-lg font-semibold text-[#3b2f1c] shadow-[4px_4px_0_#000]'>
+            방문해주셔서 감사합니다! <br />
+            <br />이 테마는 아직 보완중으로 왼쪽 하단 버튼을 눌러 클래식 모드 이용을 권장드립니다 :)
           </div>
-        }
+        </div>
 
         {msgState && (
           <MessageBox
@@ -285,9 +273,7 @@ export default function GameMainClient() {
           >
             선택하신 모드는 데스크톱에 최적화되어 있습니다.
             <br />
-            모바일에선 일부 기능이 원활하지 않을 수 있으니 <br />
-            PC로 접속하시거나 왼쪽 아래 Change Mode 버튼을 통해 <br />
-            클래식 모드 이용을 권장드립니다.
+            모바일에선 일부 기능이 원활하지 않을 수 있으니 PC 접속을 권장합니다.
           </MessageBox>
         )}
 
@@ -299,10 +285,12 @@ export default function GameMainClient() {
           ))}
           <div className={'absolute -bottom-[4%] z-30 h-30 w-full bg-[url("/images/game/flowers_mini.webp")] bg-contain bg-repeat-x'}></div>
           <div className={'pattern-tree absolute bottom-[100%] h-60 w-full'}></div>
+
+          {/* 4. inline style의 left를 px 대신 %로 적용 */}
           <div
             className={'absolute bottom-[70%] z-30 w-[8%]'}
             style={{
-              left: `${position}px`,
+              left: `${position}%`,
               zIndex: isEntering ? 15 : 35,
               ...enteringStyle,
             }}
@@ -335,8 +323,7 @@ export default function GameMainClient() {
         href='/classic'
         className='fixed bottom-8 left-6 z-60 flex items-center gap-1 rounded-md border-4 border-black bg-amber-50 px-4 text-base font-bold text-amber-950 md:left-8 md:text-2xl'
       >
-        <IconTransfer stroke={2} />
-        Change mode
+        <IconTransfer stroke={2} /> Change mode
       </Link>
     </>
   );
