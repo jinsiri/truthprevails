@@ -64,12 +64,40 @@ export default function GameMainClient() {
   const searchParams = useSearchParams();
   const viewport = searchParams.get('viewport') ?? 'desktop';
   const isMobile = viewport !== 'desktop';
+  const isFirstRender = useRef(true);
   const pressedKeys = useRef<Set<string>>(new Set());
   const [msgState, setMsgState] = useState(isMobile);
-  const [guideState, setGuideState] = useState(!isMobile);
+  const [guideState, setGuideState] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = sessionStorage.getItem('guideState');
+      if (saved !== null) {
+        return JSON.parse(saved);
+      }
+    }
+    return !isMobile;
+  });
   const [frame, setFrame] = useState(0);
-  const [position, setPosition] = useState(0);
-  const [positionY, setPositionY] = useState(0);
+  const [position, setPosition] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = sessionStorage.getItem('lastPosition');
+      if (saved) {
+        const { x } = JSON.parse(saved);
+        return x;
+      }
+    }
+    return 0;
+  });
+
+  const [positionY, setPositionY] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = sessionStorage.getItem('lastPosition');
+      if (saved) {
+        const { y } = JSON.parse(saved);
+        return y;
+      }
+    }
+    return 0;
+  });
   const [direction, setDirection] = useState<Direction | null>(null);
   const [lastDirection, setLastDirection] = useState<Direction>('right');
   const [isJumping, setIsJumping] = useState(false);
@@ -111,6 +139,7 @@ export default function GameMainClient() {
         setIsEntering(true); // 입장 연출 시작
         setDirection(null); // 이동 멈춤
         setLastDirection('up');
+        sessionStorage.setItem('lastPosition', JSON.stringify({ x: position, y: positionY }));
 
         setTimeout(() => {
           activeObject.action(router);
@@ -164,7 +193,7 @@ export default function GameMainClient() {
       interval = setInterval(() => {
         setFrame((prev) => (isJumping ? 1 : prev === 0 ? 1 : 0));
 
-        setPosition((prev) => {
+        setPosition((prev: number) => {
           if (direction === 'right') {
             return Math.min(window.innerWidth - 150, prev + 5);
           } else if (direction === 'left') {
@@ -210,7 +239,15 @@ export default function GameMainClient() {
   }, [isJumping]);
 
   useEffect(() => {
-    if (!guideState) return;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    sessionStorage.setItem('guideState', JSON.stringify(guideState));
+  }, [guideState]);
+
+  useEffect(() => {
+    if (!guideState && isMobile) return;
 
     const handleKeyDown = () => {
       setGuideState(false);
