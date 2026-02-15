@@ -8,8 +8,8 @@ export default function GameCareer() {
     <main className='relative min-h-screen w-full overflow-hidden'>
       <ThemedImage
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
-        lightSrc={`/images/game/company_day.png`}
-        darkSrc={`/images/game/company_night.png`}
+        lightSrc={`/images/game/company_day_v2.png`}
+        darkSrc={`/images/game/company_night_v2.png`}
         alt={'educated list'}
         priority
         fill={true}
