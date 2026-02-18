@@ -13,9 +13,9 @@ interface TimelineEntry {
 
 const timelineData: TimelineEntry[] = [
   {
-    date: '2024.03 ~',
+    date: '2024.03 ~ 2026.02',
     title: '방송통신대학교 컴퓨터과학과',
-    description: '편입, 현재 4학년 1학기 재학중',
+    description: '편입, 졸업',
     color: 'blue',
   },
   {
