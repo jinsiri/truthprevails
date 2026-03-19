@@ -170,10 +170,6 @@ body {
   color: var(--foreground);
 }
 
-footer {
-  color: #666;
-}
-
 img {
   -webkit-user-drag: none;
   user-select: none;
@@ -228,51 +224,12 @@ img {
   opacity: 1;
 }
 
-.game-box {
-  position: relative;
-  margin: 1.75rem auto 2rem;
-  background: url('/images/bookroom.webp') no-repeat center center/cover;
-  overflow: hidden;
+.main-home {
+  background: url('/images/devroom_day.webp') no-repeat center center/cover;
 }
 
-.game-box .text-hello {
-  position: absolute;
-  top: 8%;
-  right: 20%;
-  padding: 1rem 1.75rem;
-  background-color: #fff;
-  font-size: 1.75rem;
-  color: #333;
-  border: 10px solid #333;
-  border-radius: 10px;
-  transform: scale(0.7);
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.game-box img {
-  transition: transform 0.3s ease-in;
-}
-
-.game-box img:hover {
-  transform: scale(1.1, 1.1);
-}
-
-.game-box img:hover + p {
-  transform: scale(1);
-  opacity: 1;
-}
-
-@keyframes hello {
-  0% {
-    transform: scale(1.2, 1.2) rotateZ(10deg);
-  }
-  50% {
-    transform: scale(1.2, 1.2) rotateZ(-10deg);
-  }
-  100% {
-    transform: scale(1.2, 1.2) rotateZ(10deg);
-  }
+.dark .main-home {
+  background: url('/images/devroom_night.webp') no-repeat center center/cover;
 }
 
 .classic > section:not(.home):first-of-type {
@@ -285,4 +242,25 @@ img {
   background-position: bottom left;
   background-origin: content-box;
   background-size: 30%;
+}
+
+@keyframes float {
+  0 %, 100% {transform: translate(0, -20%);}
+  50% {transform: translate(0, -20%);}
+}
+
+.animate-float {
+  animation: float 1.5s steps(2) infinite;
+}
+
+.mode-btns > a {
+  position: relative;
+}
+
+.mode-btns > a.active:after {
+  content: '\25B6';
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: inherit;
 }
