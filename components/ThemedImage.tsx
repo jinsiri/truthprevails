@@ -55,13 +55,6 @@ export default function ThemedImage({ className = '', lightSrc, darkSrc, alt, wi
       }}
     />
   ) : (
-    <Image
-      className={`${className} ${theme === 'dark' ? 'opacity-70' : 'opacity-100'}`}
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      priority={priority}
-    />
+    <Image className={`${className}`} src={src} alt={alt} width={width} height={height} priority={priority} />
   );
 }
