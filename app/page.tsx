@@ -12,9 +12,9 @@ export default function Home() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+      if (e.code === 'ArrowUp' || e.code === 'ArrowDown' || e.code === 'KeyW' || e.code === 'KeyS') {
         setActiveMode((prev) => (prev === 'game' ? 'classic' : 'game'));
-      } else if (e.key === 'Enter') {
+      } else if (e.code === 'Enter') {
         router.push(activeMode === 'game' ? '/game' : '/classic');
       }
     };
