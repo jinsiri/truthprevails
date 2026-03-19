@@ -26,8 +26,8 @@ export default function Home() {
     <main className={'main-home relative flex min-h-screen flex-col items-center justify-center bg-amber-50 px-4 pt-10 pb-2.5'}>
       <div className={'absolute top-0 right-0 bottom-0 left-0 bg-black/40'}></div>
       <div className={'relative mb-10 space-y-2 p-4 text-center text-white md:w-auto md:space-y-0 md:space-x-2 md:px-10 md:py-[3.75rem]'}>
-        <h2 className={'mb-2 font-sans text-3xl break-keep md:mb-4 md:text-5xl lg:text-[4.75rem]'}>진실의 세계: 환영합니다!</h2>
-        <p className={'mb-10 inline-block border-t-2 pt-4 font-sans text-4xl'}>Welcome to the World of Truth!</p>
+        <h2 className={'mb-2 font-sans text-4xl break-keep md:mb-4 md:text-5xl lg:text-[4.75rem]'}>진실의 세계: 환영합니다!</h2>
+        <p className={'mb-10 inline-block border-t-2 pt-2 font-sans text-xl md:pt-4 md:text-2xl lg:text-4xl'}>Welcome to the World of Truth!</p>
         <div className={'mode-btns m-auto max-w-[500px]'}>
           <Link
             className={clsx(
