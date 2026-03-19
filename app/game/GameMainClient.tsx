@@ -126,6 +126,10 @@ export default function GameMainClient() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.shiftKey || e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+        pressedKeys.current.add('Shift');
+      }
+
       const currentActive = activeObjectRef.current;
       if ((e.code === 'KeyW' || e.code === 'ArrowUp') && currentActive && !isEntering) {
         setIsEntering(true);
@@ -158,16 +162,18 @@ export default function GameMainClient() {
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+        pressedKeys.current.delete('Shift');
+      }
+
       const dir = keyToDirection[e.code];
       if (dir) {
         pressedKeys.current.delete(e.code);
-        const remaining = Array.from(pressedKeys.current);
-        const lastKey = remaining[remaining.length - 1];
-        const newDir = keyToDirection[lastKey];
-
-        if (newDir) {
-          setDirection(newDir);
-          setLastDirection(newDir);
+        const remaining = Array.from(pressedKeys.current).filter((k) => k !== 'Shift');
+        if (remaining.length > 0) {
+          const nextDir = keyToDirection[remaining[remaining.length - 1]];
+          setDirection(nextDir);
+          setLastDirection(nextDir);
         } else {
           setDirection(null);
         }
@@ -190,7 +196,9 @@ export default function GameMainClient() {
         setFrame((prev) => (isJumping ? 1 : prev === 0 ? 1 : 0));
 
         setPosition((prev: number) => {
-          const moveSpeed = 0.8;
+          const isDashing = pressedKeys.current.has('Shift');
+          const moveSpeed = isDashing ? 1.6 : 0.8;
+
           if (direction === 'right') {
             return Math.min(92, prev + moveSpeed);
           } else if (direction === 'left') {

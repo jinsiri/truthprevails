@@ -22,7 +22,11 @@ export default function Guide({ onClick }: { onClick: () => void }) {
           </figure>
         </li>
       </ul>
-      <p className={'text-md mt-6 md:mt-20 md:text-2xl'}>아무 키나 누르시면 게임이 시작됩니다! :)</p>
+      <p className={'text-md mt-6 md:mt-20 md:text-2xl'}>
+        [Shift]를 같이 누르시면 더 빠르게 이동할 수 있습니다!
+        <br />
+        아무 키나 누르시면 게임이 시작됩니다! :)
+      </p>
     </div>
   );
 }
