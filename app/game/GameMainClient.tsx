@@ -126,10 +126,8 @@ export default function GameMainClient() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.repeat) return;
-
       const currentActive = activeObjectRef.current;
-      if (e.code === 'KeyW' && currentActive && !isEntering) {
+      if ((e.code === 'KeyW' || e.code === 'ArrowUp') && currentActive && !isEntering) {
         setIsEntering(true);
         setDirection(null);
         setLastDirection('up');
@@ -278,8 +276,6 @@ export default function GameMainClient() {
           ))}
           <div className={'absolute -bottom-[4%] z-30 h-30 w-full bg-[url("/images/game/flowers_mini.webp")] bg-contain bg-repeat-x'}></div>
           <div className={'pattern-tree absolute bottom-[100%] h-60 w-full'}></div>
-
-          {/* 4. inline style의 left를 px 대신 %로 적용 */}
           <div
             className={'absolute bottom-[70%] z-30 w-[8%]'}
             style={{
@@ -291,7 +287,7 @@ export default function GameMainClient() {
             {activeObject && (
               <div className='absolute -top-8 left-1/2 flex -translate-x-1/2 flex-col items-center'>
                 <div className='animate-bounce rounded border-2 border-black bg-white px-2 py-1 text-xs font-bold whitespace-nowrap'>
-                  <span className={'text-black'}>[W] {activeObject.name} 입장</span>
+                  <span className={'text-black'}>[W or ↑] {activeObject.name} 입장</span>
                 </div>
               </div>
             )}
