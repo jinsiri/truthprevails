@@ -3,9 +3,10 @@
 import ThemedImage from '@/components/ThemedImage';
 import SpeechBubble from '@/components/game/SpeechBubble';
 import clsx from 'clsx';
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import { useKeyboardList } from '@/hooks/useKeyboardList';
 import { EXPERIENCE, EXPERIENCE_TABS } from '@/constants/dataset';
+import { useUIStore } from '@/store/useUIStore';
 
 interface Mode {
   companyNm: string;
@@ -15,17 +16,17 @@ const MODES: Mode[] = [{ companyNm: '시스원' }, { companyNm: '프리랜서' }
 
 export default function GameCareer() {
   const containerRef = useRef<HTMLUListElement>(null);
-  const [active, setActive] = useState(false);
+  const { activeView, openView } = useUIStore();
   const { selectedIndex, handleKeyDown, setSelectedIndex } = useKeyboardList({
     items: MODES,
     onSelect: () => {
-      setActive(true);
+      openView('career');
     },
   });
 
   useEffect(() => {
     containerRef.current?.focus();
-  }, []);
+  }, [activeView]);
 
   return (
     <main className='relative min-h-screen w-full overflow-hidden'>
@@ -39,36 +40,38 @@ export default function GameCareer() {
       />
 
       <section className='relative z-10 min-h-screen w-full p-8'>
-        <div className={clsx('group absolute -bottom-15 z-10 transition-all duration-1000', active ? 'right-0' : 'right-1/4')}>
+        <div className={clsx('group absolute -bottom-15 z-10 transition-all duration-1000', activeView === 'career' ? 'right-0' : 'right-1/4')}>
           <ThemedImage
             lightSrc={`/images/game/company_jinsil_day.png`}
             darkSrc={`/images/game/company_jinsil_night.png`}
-            width={active ? 400 : 300}
-            height={active ? 900 : 800}
+            width={activeView === 'career' ? 400 : 300}
+            height={activeView === 'career' ? 900 : 800}
             alt={'jinsil'}
           />
           <SpeechBubble text={'이런 일을 했습니다!'} />
         </div>
 
-        <div className={clsx('absolute left-1/4 h-[50vh] w-[46%] transition-all duration-1000', active ? 'bottom-5 left-[5%] h-[90vh] w-[90%]' : 'bottom-20')}>
+        <div
+          className={clsx(
+            'absolute left-1/4 h-[50vh] w-[46%] transition-all duration-1000',
+            activeView === 'career' ? 'bottom-5 left-[5%] h-[90vh] w-[90%]' : 'bottom-20',
+          )}
+        >
           <div className='block h-3/4 w-full overflow-y-auto rounded-lg border-8 border-gray-400 bg-white p-4 md:p-8'>
-            {!active && (
+            {activeView !== 'career' && (
               <>
                 <h2 className={'mb-4 text-2xl md:mb-6 md:text-4xl'}>경력사항</h2>
                 <ul
                   ref={containerRef}
                   onKeyDown={handleKeyDown}
                   tabIndex={0}
-                  className={clsx(
-                    'mode-btns flex w-full max-w-[70%] cursor-pointer flex-col gap-x-6 gap-y-2 text-xl outline-none md:text-2xl',
-                    active && 'max-w-full',
-                  )}
+                  className={clsx('mode-btns flex w-full max-w-[70%] cursor-pointer flex-col gap-x-6 gap-y-2 text-xl outline-none md:text-2xl')}
                 >
                   {EXPERIENCE_TABS.map((mode, index) => (
                     <li
                       key={mode}
                       onMouseEnter={() => setSelectedIndex(index)}
-                      onClick={() => setActive(true)}
+                      onClick={() => openView('career')}
                       className={clsx('flex items-center justify-between px-4 py-2 hover:text-blue-900', selectedIndex === index && 'active bg-gray-200')}
                     >
                       {mode}
@@ -79,7 +82,7 @@ export default function GameCareer() {
               </>
             )}
 
-            {active && (
+            {activeView === 'career' && (
               <>
                 <h3 className={'mb-4 text-2xl md:mb-6 md:text-4xl'}>{EXPERIENCE_TABS[selectedIndex]}</h3>
                 <ul className='pt-2 text-left text-lg lg:pr-0'>

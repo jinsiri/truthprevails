@@ -2,24 +2,121 @@
 
 import ThemedImage from '@/components/ThemedImage';
 import Image from 'next/image';
-import SpeechBubble from '@/components/game/SpeechBubble';
+import { useUIStore } from '@/store/useUIStore';
+import clsx from 'clsx';
+import { useEffect, useRef } from 'react';
+import { useKeyboardList } from '@/hooks/useKeyboardList';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
+interface Mode {
+  title: string;
+  address: string;
+}
+
+const MODES: Mode[] = [
+  {
+    title: 'GITHUB',
+    address: 'https://github.com/jinsiri',
+  },
+  {
+    title: 'TECH BLOG',
+    address: 'https://today-i-played.tistory.com/',
+  },
+];
 export default function GameContact() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { activeView, openView } = useUIStore();
+  const { selectedIndex, handleKeyDown, setSelectedIndex } = useKeyboardList({
+    items: MODES,
+    onSelect: (mode) => window.open(mode.address, '_blank', 'noopener,noreferrer'),
+  });
+
+  useEffect(() => {
+    containerRef.current?.focus();
+  }, [activeView]);
+
   return (
     <main className='relative min-h-screen w-full overflow-hidden'>
       <ThemedImage
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
-        lightSrc={`/images/game/info_day.png`}
-        darkSrc={`/images/game/info_night.png`}
-        alt={'educated list'}
+        lightSrc={`/images/game/info_day_v2.jpg`}
+        darkSrc={`/images/game/info_night_v2.jpg`}
+        alt={'인포센터 배경'}
         priority
         fill={true}
       />
 
       <section className='relative z-10 min-h-screen w-full p-8'>
-        <div className='group absolute -bottom-15 left-40'>
-          <Image width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={''} />
-          <SpeechBubble text={'QR 코드를 스캔하시면 연락처를 확인하실 수 있습니다.'} />
+        <div className='absolute top-[45%] right-[30%] cursor-pointer'>
+          <Image width={200} height={600} src={'/images/game/jinsil_back.webp'} alt={'진실'} />
+        </div>
+
+        <div className='absolute right-[18%] -bottom-20'>
+          <div
+            className='animate-stardust-float absolute top-0 left-1/2 -translate-x-1/2 scale-60 cursor-pointer transition-all'
+            onClick={() => openView('contact')}
+          >
+            <Image width={300} height={300} src={'/images/game/book.png'} alt={'방명록'} />
+            <Image
+              src='/images/game/stardust.png'
+              width={300}
+              height={300}
+              className='animate-stardust-fade absolute -inset-10 object-contain transition-all'
+              alt='반짝이 가루'
+            />
+          </div>
+          <Image width={700} height={500} src={'/images/game/info_table.png'} alt={'탁자'} />
+        </div>
+
+        <div
+          className={clsx(
+            'absolute top-1/2 left-1/2 h-[70vh] w-[90%] max-w-[100vh] -translate-1/2 border-4 border-[#3e2723] bg-[#5d4037] p-2 font-mono shadow-[8px_8px_0px_0px_rgba(0,0,0,0.2)]',
+            activeView === 'contact' ? 'visible' : 'hidden',
+          )}
+        >
+          <div className='relative flex h-full min-h-[400px] flex-col border-2 border-[#d7ccc8] bg-[#fff9eb] md:flex-row'>
+            <div className='absolute top-0 bottom-0 left-1/2 hidden w-px bg-[#d7ccc8] shadow-[0_0_10px_rgba(0,0,0,0.1)] md:block'></div>
+
+            <div
+              className='mode-btns type-b flex flex-1 flex-col items-center justify-center space-y-4 p-8'
+              ref={containerRef}
+              onKeyDown={handleKeyDown}
+              tabIndex={0}
+            >
+              <h3 className='mb-4 border-b-2 border-dashed border-[#d7ccc8] pb-2 text-center text-xl font-bold text-[#5d4037] md:text-3xl'>VISITOR LOG</h3>
+              {MODES.map((mode, index) => (
+                <Link
+                  key={mode.address}
+                  onMouseEnter={() => setSelectedIndex(index)}
+                  className={clsx(
+                    'w-full bg-[#8d6e63] px-4 py-3 text-center text-white shadow-[4px_4px_0px_0px_#5d4037] transition-all hover:translate-y-1 hover:shadow-none active:bg-[#5d4037]',
+                    selectedIndex === index && 'active translate-y-1 shadow-none active:bg-[#5d4037]',
+                  )}
+                  href={mode.address}
+                  target='_blank'
+                >
+                  {mode.title}
+                </Link>
+              ))}
+            </div>
+
+            <div className='flex flex-1 flex-col items-center justify-center bg-[#fdf5e6] p-8'>
+              <div className='mb-4 text-center text-sm text-[#8d6e63] italic md:text-lg'>Scan to Contact Me!</div>
+
+              <div className='flex h-40 w-40 items-center justify-center border-4 border-[#8d6e63] bg-white p-2 shadow-[4px_4px_0px_0px_rgba(141,110,99,0.3)]'>
+                <div className='flex h-full w-full items-center justify-center bg-[#3e2723] text-center text-[10px]'>
+                  <Image src={`/images/classic/contact_qr.png`} alt={'developer.js.corn@gmail.com'} width={250} height={250} />
+                </div>
+              </div>
+
+              <p className='mt-6 text-center text-xs leading-relaxed text-[#a1887f] md:text-lg'>
+                Leave a mark in <br /> &quot;TRUTH WORLD&quot;
+              </p>
+            </div>
+          </div>
+
+          <div className='absolute -top-6 right-12 h-12 w-[3%] border-2 border-red-900 bg-red-700 shadow-md'></div>
         </div>
       </section>
     </main>

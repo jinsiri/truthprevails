@@ -257,10 +257,34 @@ img {
   position: relative;
 }
 
-.mode-btns > a.active:after {
+.mode-btns:not(.type-b) > a.active:after {
   content: '\25B6';
   position: absolute;
   top: 0;
   left: 0;
   font-size: inherit;
+}
+
+.mode-btns.type-b > a.active:before {
+  content: '\25B6';
+  margin-right: 10px;
+}
+
+@layer utilities {
+  .animate-stardust-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  .animate-stardust-fade {
+    animation: fade-in-out 3s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fade-in-out {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
 }
