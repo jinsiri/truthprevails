@@ -4,8 +4,24 @@ import ThemedImage from '@/components/ThemedImage';
 import Image from 'next/image';
 import { Footprints } from 'lucide-react';
 import SpeechBubble from '@/components/game/SpeechBubble';
+import { useEffect, useRef } from 'react';
+import { useKeyboardList } from '@/hooks/useKeyboardList';
+import { EDUCATION } from '@/constants/dataset';
+import clsx from 'clsx';
 
 export default function GameLearning() {
+  const containerRef = useRef<HTMLOListElement>(null);
+  const { selectedIndex, handleKeyDown, setSelectedIndex } = useKeyboardList({
+    items: EDUCATION,
+    onSelect: () => {
+      // setActive(true);
+    },
+  });
+
+  useEffect(() => {
+    containerRef.current?.focus();
+  }, []);
+
   return (
     <main className='relative min-h-screen w-full overflow-hidden'>
       <ThemedImage
@@ -27,22 +43,27 @@ export default function GameLearning() {
           <h2 className={'mb-5 flex items-center'}>
             <Footprints className={'mr-4'} size={38} /> LEVEL UP: 교육 여정
           </h2>
-          <ol className={'text-xl'}>
-            <li className={'mb-2'}>
-              <button className={'visit flex w-full cursor-pointer items-center justify-between rounded-md border-2 p-4 transition-all hover:bg-green-800'}>
-                &gt; 1. 신명여자고등학교<small className={'text-gray-400'}>(2009.03 ~ 2012.02 / 졸업)</small>
-              </button>
-            </li>
-            <li className={'mb-2'}>
-              <button className={'flex w-full cursor-pointer items-center justify-between rounded-md border-2 p-4 transition-all hover:bg-green-800'}>
-                &gt; 2. 인천대학교 국어국문학과<small className={'text-gray-400'}>(2012.03 ~ 2018.02 / 졸업)</small>
-              </button>
-            </li>
-            <li className={'mb-2'}>
-              <button className={'flex w-full cursor-pointer items-center justify-between rounded-md border-2 p-4 transition-all hover:bg-green-800'}>
-                &gt; 3. 방송통신대학교 컴퓨터과학과<small className={'text-gray-400'}>(2024.03 ~ 2026.02 / 편입 후 졸업)</small>
-              </button>
-            </li>
+          <ol ref={containerRef} onKeyDown={handleKeyDown} tabIndex={0} className={'mode-btns text-xl outline-none'}>
+            {EDUCATION.map((mode, index) => (
+              <li
+                key={`EDU_${index}`}
+                onMouseEnter={() => setSelectedIndex(index)}
+                // onClick={() => setActive(true)}
+                className={'mb-2'}
+              >
+                <button
+                  className={clsx(
+                    'flex w-full cursor-pointer items-center justify-between rounded-md border-2 p-4 transition-all hover:bg-green-800',
+                    selectedIndex === index && 'bg-green-800',
+                  )}
+                >
+                  {index + 1}. {mode.title}
+                  <small className={'text-gray-400'}>
+                    ({mode.date} / {mode.description})
+                  </small>
+                </button>
+              </li>
+            ))}
           </ol>
         </div>
       </section>
