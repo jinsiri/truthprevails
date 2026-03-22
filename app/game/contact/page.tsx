@@ -2,6 +2,7 @@
 
 import ThemedImage from '@/components/ThemedImage';
 import Image from 'next/image';
+import SpeechBubble from '@/components/game/SpeechBubble';
 
 export default function GameContact() {
   return (
@@ -16,7 +17,10 @@ export default function GameContact() {
       />
 
       <section className='relative z-10 min-h-screen w-full p-8'>
-        <Image className={'absolute -bottom-15 left-40'} width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={''} />
+        <div className='group absolute -bottom-15 left-40'>
+          <Image width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={''} />
+          <SpeechBubble text={'QR 코드를 스캔하시면 연락처를 확인하실 수 있습니다.'} />
+        </div>
       </section>
     </main>
   );

@@ -7,15 +7,28 @@ import { useRouter } from 'next/navigation';
 import { useKeyboardList } from '@/hooks/useKeyboardList';
 import { useEffect, useRef } from 'react';
 
-type Mode = 'game' | 'classic';
-const MODES: Mode[] = ['game', 'classic'];
+interface Mode {
+  korNm: string;
+  address: string;
+}
+
+const MODES: Mode[] = [
+  {
+    korNm: '게임 모드',
+    address: '/game',
+  },
+  {
+    korNm: '클래식 모드',
+    address: '/classic',
+  },
+];
 
 export default function Home() {
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const { selectedIndex, handleKeyDown, setSelectedIndex } = useKeyboardList({
     items: MODES,
-    onSelect: (mode) => router.push(`/${mode}`),
+    onSelect: (mode) => router.push(mode.address),
   });
 
   useEffect(() => {
@@ -31,15 +44,15 @@ export default function Home() {
         <div ref={containerRef} onKeyDown={handleKeyDown} tabIndex={0} className={'mode-btns m-auto max-w-[500px] outline-none'}>
           {MODES.map((mode, index) => (
             <Link
-              key={mode}
+              key={mode.address}
               onMouseEnter={() => setSelectedIndex(index)}
               className={clsx(
                 'mt-2 flex items-center justify-between pr-2 pl-8 text-xl hover:bg-white/20 md:text-2xl',
                 selectedIndex === index && 'active bg-white/20',
               )}
-              href={`/${mode}`}
+              href={mode.address}
             >
-              {mode}
+              {mode.korNm}
               {selectedIndex === index && <span>Enter</span>}
             </Link>
           ))}
