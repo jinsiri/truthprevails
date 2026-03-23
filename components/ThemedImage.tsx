@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import clsx from 'clsx';
 
 interface ThemedImageProps {
   className?: string;
@@ -12,8 +13,8 @@ interface ThemedImageProps {
   fill?: boolean;
 }
 
-export default function ThemedImage({ className = '', lightSrc, darkSrc, alt, width, height, priority = false, fill }: ThemedImageProps) {
-  const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
+export default function ThemedImage({ className, lightSrc, darkSrc, alt, width, height, priority = false, fill }: ThemedImageProps) {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -45,7 +46,7 @@ export default function ThemedImage({ className = '', lightSrc, darkSrc, alt, wi
 
   return fill ? (
     <Image
-      className={`${className}`}
+      className={clsx(className && className)}
       src={src}
       alt={alt}
       priority={priority}
@@ -55,6 +56,6 @@ export default function ThemedImage({ className = '', lightSrc, darkSrc, alt, wi
       }}
     />
   ) : (
-    <Image className={`${className}`} src={src} alt={alt} width={width} height={height} priority={priority} />
+    <Image className={clsx(className && className)} src={src} alt={alt} width={width} height={height} priority={priority} />
   );
 }
