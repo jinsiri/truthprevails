@@ -4,10 +4,10 @@ import ThemedImage from '@/components/ThemedImage';
 import Image from 'next/image';
 import { useUIStore } from '@/store/useUIStore';
 import clsx from 'clsx';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useKeyboardList } from '@/hooks/useKeyboardList';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import SpeechBubble from '@/components/game/SpeechBubble';
 
 interface Mode {
   title: string;
@@ -31,6 +31,7 @@ export default function GameContact() {
     items: MODES,
     onSelect: (mode) => window.open(mode.address, '_blank', 'noopener,noreferrer'),
   });
+  const [activeJin, setActiveJin] = useState(false);
 
   useEffect(() => {
     containerRef.current?.focus();
@@ -48,16 +49,23 @@ export default function GameContact() {
       />
 
       <section className='relative z-10 min-h-screen w-full p-8'>
-        <div className='absolute top-[45%] right-[30%] cursor-pointer'>
-          <Image width={200} height={600} src={'/images/game/jinsil_back.webp'} alt={'진실'} />
-        </div>
+        <button className='absolute top-[45%] right-[30%] cursor-pointer' onClick={() => setActiveJin(!activeJin)}>
+          {activeJin ? (
+            <>
+              <Image width={200} height={600} src={'/images/game/jinsil_standing.png'} alt={'진실 앞모습'} />
+              <SpeechBubble text={'반갑습니다! 아래 방명록을 눌러 깃허브/기술로그에 방문해주세요!'} />
+            </>
+          ) : (
+            <Image width={200} height={600} src={'/images/game/jinsil_back.webp'} alt={'진실 뒷모습'} />
+          )}
+        </button>
 
         <div className='absolute right-[18%] -bottom-20'>
-          <div
+          <button
             className='animate-stardust-float absolute top-0 left-1/2 -translate-x-1/2 scale-60 cursor-pointer transition-all'
             onClick={() => openView('contact')}
           >
-            <Image width={300} height={300} src={'/images/game/book.png'} alt={'방명록'} />
+            <Image src={'/images/game/book.png'} width={300} height={300} alt={'방명록'} />
             <Image
               src='/images/game/stardust.png'
               width={300}
@@ -65,7 +73,7 @@ export default function GameContact() {
               className='animate-stardust-fade absolute -inset-10 object-contain transition-all'
               alt='반짝이 가루'
             />
-          </div>
+          </button>
           <Image width={700} height={500} src={'/images/game/info_table.png'} alt={'탁자'} />
         </div>
 
@@ -79,7 +87,7 @@ export default function GameContact() {
             <div className='absolute top-0 bottom-0 left-1/2 hidden w-px bg-[#d7ccc8] shadow-[0_0_10px_rgba(0,0,0,0.1)] md:block'></div>
 
             <div
-              className='mode-btns type-b flex flex-1 flex-col items-center justify-center space-y-4 p-8'
+              className='mode-btns type-b flex flex-1 flex-col items-center justify-center space-y-4 p-8 outline-none'
               ref={containerRef}
               onKeyDown={handleKeyDown}
               tabIndex={0}
