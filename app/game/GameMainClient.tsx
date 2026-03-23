@@ -58,7 +58,7 @@ const INTERACTION_POINTS = [
     image: '/images/game/info.webp',
     width: 280,
     height: 323,
-    style: 'bottom-[80%] left-[69%] w-[18%]',
+    style: 'bottom-[80%] left-[69%] w-[15%]',
   },
 ];
 
@@ -270,9 +270,17 @@ export default function GameMainClient() {
 
         <div className='absolute right-0 bottom-0 left-0 h-50 border-t-4 border-gray-950 bg-[#b0a58c] dark:border-gray-100 dark:bg-[#46311e]'>
           {INTERACTION_POINTS.map((obj) => (
-            <div key={obj.id} className={`absolute z-20 ${obj.style}`}>
-              <Image src={obj.image} alt={obj.name} width={obj.width} height={obj.height} />
-            </div>
+            <button
+              key={obj.id}
+              className={`group absolute z-20 cursor-pointer rounded-xl p-6 focus:outline-none ${obj.style}`}
+              onClick={() => obj.action(router)}
+            >
+              <span
+                className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/30 via-orange-400/20 to-white/20 opacity-0 blur-md transition-all duration-500 group-focus:scale-130 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}
+                style={{ width: obj.width + 'px', height: obj.width + 'px' }}
+              ></span>
+              <Image className='relative' src={obj.image} alt={obj.name} width={obj.width} height={obj.height} />
+            </button>
           ))}
           <div className="absolute -bottom-[4%] z-30 h-30 w-full bg-[url('/images/game/flowers_mini.webp')] bg-contain bg-repeat-x"></div>
           <div className='pattern-tree absolute bottom-[100%] h-60 w-full'></div>
