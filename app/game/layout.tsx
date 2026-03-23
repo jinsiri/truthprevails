@@ -3,6 +3,7 @@ import GlobalKeyHandler from '@/components/game/GlobalKeyHandler';
 import BackButton from '@/components/game/BackButton';
 import { Suspense } from 'react';
 import LoadingSpinner from '@/components/game/LoadingSpinner';
+import GlobalViewportHandler from '@/components/game/GlobalViewportHandler';
 
 export default function GameLayout({
   children,
@@ -12,6 +13,7 @@ export default function GameLayout({
   return (
     <main className='game w-full'>
       <GlobalKeyHandler />
+      <GlobalViewportHandler />
       <ThemeToggleButton />
       {children}
       <Suspense fallback={<LoadingSpinner />}>
