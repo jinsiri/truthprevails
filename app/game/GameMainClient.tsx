@@ -34,8 +34,8 @@ const INTERACTION_POINTS = [
     range: [12, 18],
     action: (router: AppRouterInstance) => router.push('/game/learning'),
     image: '/images/game/school.webp',
-    width: 538,
-    height: 421,
+    width: 990,
+    height: 775,
     style: 'bottom-[76%] left-[5%] w-[28%]',
   },
   {
@@ -273,13 +273,14 @@ export default function GameMainClient() {
             <button
               key={obj.id}
               className={`group absolute z-20 cursor-pointer rounded-xl p-6 focus:outline-none ${obj.style}`}
+              style={{ aspectRatio: obj.width / obj.height }}
               onClick={() => obj.action(router)}
             >
               <span
                 className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/30 via-orange-400/20 to-white/20 opacity-0 blur-md transition-all duration-500 group-focus:scale-130 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}
-                style={{ width: obj.width + 'px', aspectRatio: 1 }}
+                style={{ width: '100%', aspectRatio: 1 }}
               ></span>
-              <Image className='relative' src={obj.image} alt={obj.name} width={obj.width} height={obj.height} />
+              <Image className='relative' src={obj.image} alt={obj.name} fill />
             </button>
           ))}
           <div className="absolute -bottom-[4%] z-30 h-30 w-full bg-[url('/images/game/flowers_mini.webp')] bg-contain bg-repeat-x"></div>
