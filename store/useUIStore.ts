@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type ViewType = 'about' | 'career' | 'skills' | 'contact' | null;
+type ViewType = 'about' | 'career' | 'careerDetail' | 'skills' | 'contact' | null;
 
 interface UIState {
   activeView: ViewType;

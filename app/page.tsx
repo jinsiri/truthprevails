@@ -26,9 +26,9 @@ const MODES: Mode[] = [
 export default function Home() {
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
-  const { selectedIndex, handleKeyDown, setSelectedIndex } = useKeyboardList({
-    items: MODES,
-    onSelect: (mode) => router.push(mode.address),
+  const { vIdx, handleKeyDown, setVIdx } = useKeyboardList({
+    vItems: MODES,
+    onSelectV: (mode) => router.push(mode.address),
   });
 
   useEffect(() => {
@@ -45,15 +45,12 @@ export default function Home() {
           {MODES.map((mode, index) => (
             <Link
               key={mode.address}
-              onMouseEnter={() => setSelectedIndex(index)}
-              className={clsx(
-                'mt-2 flex items-center justify-between pr-2 pl-8 text-xl hover:bg-white/20 md:text-2xl',
-                selectedIndex === index && 'active bg-white/20',
-              )}
+              onMouseEnter={() => setVIdx(index)}
+              className={clsx('mt-2 flex items-center justify-between pr-2 pl-8 text-xl hover:bg-white/20 md:text-2xl', vIdx === index && 'active bg-white/20')}
               href={mode.address}
             >
               {mode.korNm}
-              {selectedIndex === index && <span>Enter</span>}
+              {vIdx === index && <span>Enter</span>}
             </Link>
           ))}
         </div>

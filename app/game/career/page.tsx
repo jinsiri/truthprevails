@@ -7,25 +7,34 @@ import { Fragment, useEffect, useRef } from 'react';
 import { useKeyboardList } from '@/hooks/useKeyboardList';
 import { EXPERIENCE, EXPERIENCE_TABS } from '@/constants/dataset';
 import { useUIStore } from '@/store/useUIStore';
-
-interface Mode {
-  companyNm: string;
-}
-
-const MODES: Mode[] = [{ companyNm: '시스원' }, { companyNm: '프리랜서' }, { companyNm: '미르나인' }];
+import { SquareChevronLeft, SquareChevronRight } from 'lucide-react';
 
 export default function GameCareer() {
   const containerRef = useRef<HTMLUListElement>(null);
+  const careerDetailRef = useRef<HTMLDivElement>(null);
   const { activeView, openView } = useUIStore();
-  const { selectedIndex, handleKeyDown, setSelectedIndex } = useKeyboardList({
-    items: MODES,
-    onSelect: () => {
-      openView('career');
+  const { vIdx, hIdx, handleKeyDown, setVIdx, setHIdx } = useKeyboardList({
+    vItems: activeView === 'career' ? [] : EXPERIENCE_TABS,
+    onSelectV: () => openView('career'),
+    hItems: activeView === 'careerDetail' ? [] : EXPERIENCE_TABS,
+    onSelectH: () => {
+      openView('careerDetail');
     },
   });
 
   useEffect(() => {
-    containerRef.current?.focus();
+    const timer = setTimeout(() => {
+      if (activeView === 'career') {
+        setHIdx(vIdx);
+        careerDetailRef.current?.focus();
+      } else {
+        setVIdx(hIdx);
+        containerRef.current?.focus();
+      }
+    }, 10);
+
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeView]);
 
   return (
@@ -40,27 +49,27 @@ export default function GameCareer() {
       />
 
       <section className='relative z-10 min-h-screen w-full p-8'>
-        <div className={clsx('group absolute -bottom-15 z-10 transition-all duration-1000', activeView === 'career' ? 'right-0' : 'right-1/4')}>
+        <div className={clsx('group absolute -bottom-15 z-10 hidden transition-all duration-1000 md:block', activeView === 'career' ? 'right-0' : 'right-1/4')}>
           <ThemedImage
             lightSrc={`/images/game/company_jinsil_day.png`}
             darkSrc={`/images/game/company_jinsil_night.png`}
             width={activeView === 'career' ? 400 : 300}
             height={activeView === 'career' ? 900 : 800}
-            alt={'jinsil'}
+            alt={'발표하는 캐릭터'}
           />
           <SpeechBubble text={'이런 일을 했습니다!'} />
         </div>
 
         <div
           className={clsx(
-            'absolute left-1/4 h-[50vh] w-[46%] transition-all duration-1000',
-            activeView === 'career' ? 'bottom-5 left-[5%] h-[90vh] w-[90%]' : 'bottom-20',
+            'absolute bottom-0 left-1/2 w-[90%] -translate-x-1/2 transition-all duration-1000',
+            activeView === 'career' ? 'h-[90vh]' : 'h-[70vh] max-w-[1000px]',
           )}
         >
-          <div className='block h-3/4 w-full overflow-y-auto rounded-lg border-8 border-gray-400 bg-white p-4 md:p-8'>
+          <div className='block h-3/4 w-full overflow-y-auto rounded-lg border-8 border-gray-400 bg-gray-50 p-4 md:p-8 lg:p-12'>
             {activeView !== 'career' && (
               <>
-                <h2 className={'mb-4 text-2xl md:mb-6 md:text-4xl'}>경력사항</h2>
+                <h2 className={'mb-4 text-2xl md:mb-8 md:text-4xl lg:mb-10'}>경력사항</h2>
                 <ul
                   ref={containerRef}
                   onKeyDown={handleKeyDown}
@@ -70,12 +79,12 @@ export default function GameCareer() {
                   {EXPERIENCE_TABS.map((mode, index) => (
                     <li
                       key={mode}
-                      onMouseEnter={() => setSelectedIndex(index)}
+                      onMouseEnter={() => setVIdx(index)}
                       onClick={() => openView('career')}
-                      className={clsx('flex items-center justify-between px-4 py-2 hover:text-blue-900', selectedIndex === index && 'active bg-gray-200')}
+                      className={clsx('flex items-center justify-between px-4 py-2', vIdx === index && 'active bg-gray-200')}
                     >
                       {mode}
-                      {selectedIndex === index && <span>Enter</span>}
+                      {vIdx === index && <span>Enter</span>}
                     </li>
                   ))}
                 </ul>
@@ -84,11 +93,34 @@ export default function GameCareer() {
 
             {activeView === 'career' && (
               <>
-                <h3 className={'mb-4 text-2xl md:mb-6 md:text-4xl'}>{EXPERIENCE_TABS[selectedIndex]}</h3>
-                <ul className='pt-2 text-left text-lg lg:pr-0'>
+                <div className={'mb-4 flex items-center justify-between gap-x-4 md:mb-6'}>
+                  <h3 className={'text-2xl md:text-4xl'}>{EXPERIENCE_TABS[hIdx]}</h3>
+                  <div ref={careerDetailRef} className={'flex items-center outline-none'} onKeyDown={handleKeyDown} tabIndex={0}>
+                    <button
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
+                      }}
+                      onClick={() => setHIdx((prev) => (prev - 1 + EXPERIENCE_TABS.length) % EXPERIENCE_TABS.length)}
+                      className={'font-inherit cursor-pointer outline-none hover:text-blue-400 focus:text-blue-400'}
+                    >
+                      <SquareChevronLeft size={30} />
+                    </button>
+                    <button
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
+                      }}
+                      onClick={() => setHIdx((prev) => (prev + 1) % EXPERIENCE_TABS.length)}
+                      className={'font-inherit cursor-pointer outline-none hover:text-blue-400 focus:text-blue-400'}
+                    >
+                      <SquareChevronRight size={30} />
+                    </button>
+                  </div>
+                </div>
+
+                <ul className='w-[90%] pt-2 text-left text-lg lg:pr-0'>
                   {EXPERIENCE.map(
                     (exp, index) =>
-                      selectedIndex === index && (
+                      hIdx === index && (
                         <li key={index} className='mb-8'>
                           <h3 className='mb-4 text-xl font-bold text-gray-700'>{exp.title}</h3>
 

@@ -27,9 +27,9 @@ const MODES: Mode[] = [
 export default function GameContact() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { activeView, openView } = useUIStore();
-  const { selectedIndex, handleKeyDown, setSelectedIndex } = useKeyboardList({
-    items: MODES,
-    onSelect: (mode) => window.open(mode.address, '_blank', 'noopener,noreferrer'),
+  const { vIdx, handleKeyDown, setVIdx } = useKeyboardList({
+    vItems: MODES,
+    onSelectV: (mode) => window.open(mode.address, '_blank', 'noopener,noreferrer'),
   });
   const [activeJin, setActiveJin] = useState(false);
 
@@ -96,10 +96,10 @@ export default function GameContact() {
               {MODES.map((mode, index) => (
                 <Link
                   key={mode.address}
-                  onMouseEnter={() => setSelectedIndex(index)}
+                  onMouseEnter={() => setVIdx(index)}
                   className={clsx(
                     'w-full bg-[#8d6e63] px-4 py-3 text-center text-white shadow-[4px_4px_0px_0px_#5d4037] transition-all hover:translate-y-1 hover:shadow-none active:bg-[#5d4037]',
-                    selectedIndex === index && 'active translate-y-1 shadow-none active:bg-[#5d4037]',
+                    vIdx === index && 'active translate-y-1 shadow-none active:bg-[#5d4037]',
                   )}
                   href={mode.address}
                   target='_blank'

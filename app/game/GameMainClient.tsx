@@ -277,7 +277,7 @@ export default function GameMainClient() {
             >
               <span
                 className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/30 via-orange-400/20 to-white/20 opacity-0 blur-md transition-all duration-500 group-focus:scale-130 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}
-                style={{ width: obj.width + 'px', height: obj.width + 'px' }}
+                style={{ width: obj.width + 'px', aspectRatio: 1 }}
               ></span>
               <Image className='relative' src={obj.image} alt={obj.name} width={obj.width} height={obj.height} />
             </button>
@@ -293,7 +293,7 @@ export default function GameMainClient() {
               ...enteringAnimation,
             }}
           >
-            {activeObject && !isEntering && (
+            {!isMobile && activeObject && !isEntering && (
               <div className='absolute -top-8 left-1/2 flex -translate-x-1/2 flex-col items-center'>
                 <div className='animate-bounce rounded border-2 border-black bg-white px-2 py-1 text-xs font-bold whitespace-nowrap'>
                   <span className='text-black'>[W or ↑] {activeObject.name} 입장</span>

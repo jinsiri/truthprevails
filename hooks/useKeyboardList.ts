@@ -1,43 +1,55 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 
-interface KeyboardListConfig<T> {
-  items: T[];
-  onSelect: (item: T) => void;
-  loop?: boolean;
+interface KeyboardListConfig<T, U> {
+  vItems?: T[];
+  hItems?: U[];
+  onSelectV?: (item: T) => void;
+  onSelectH?: (item: U) => void;
 }
 
-export function useKeyboardList<T>({ items, onSelect, loop = true }: KeyboardListConfig<T>) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+export function useKeyboardList<T, U>({ vItems, hItems, onSelectV, onSelectH }: KeyboardListConfig<T, U>) {
+  const [activeSection, setActiveSection] = useState<'v' | 'h'>('v');
+  const [vIdx, setVIdx] = useState(0);
+  const [hIdx, setHIdx] = useState(0);
+
+  const getNextIdx = (prev: number, step: number, length: number) => {
+    if (length === 0) return 0;
+    return (prev + step + length) % length;
+  };
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement) return;
+      const { code } = e;
 
-      const { key } = e;
-      const move = (step: number) => {
+      if (['ArrowUp', 'ArrowDown', 'KeyW', 'KeyS'].includes(code)) {
         e.preventDefault();
-        setSelectedIndex((prev) => {
-          const next = prev + step;
-          if (loop) return (next + items.length) % items.length;
-          return Math.max(0, Math.min(items.length - 1, next));
-        });
-      };
-
-      if (key === 'ArrowDown' || key === 's') move(1);
-      if (key === 'ArrowUp' || key === 'w') move(-1);
-      if (key === 'Enter') {
+        if (!vItems || vItems.length === 0) return;
+        const step = code === 'ArrowUp' || code === 'KeyW' ? -1 : 1;
+        setActiveSection('v');
+        setVIdx((prev) => getNextIdx(prev, step, vItems.length));
+      } else if (['ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD'].includes(code)) {
         e.preventDefault();
-        onSelect(items[selectedIndex]);
+        if (!hItems || hItems.length === 0) return;
+        const step = code === 'ArrowLeft' || code === 'KeyA' ? -1 : 1;
+        setActiveSection('h');
+        setHIdx((prev) => getNextIdx(prev, step, hItems.length));
+      } else if (code === 'Enter' || code === 'Space') {
+        e.preventDefault();
+        if (activeSection === 'v' && vItems && onSelectV) onSelectV(vItems[vIdx]);
+        if (activeSection === 'h' && hItems && onSelectH) onSelectH(hItems[hIdx]);
       }
     },
-    [items, selectedIndex, onSelect, loop],
+    [vItems, hItems, vIdx, hIdx, activeSection, onSelectV, onSelectH],
   );
 
   return {
-    selectedIndex,
-    setSelectedIndex,
+    activeSection,
+    vIdx,
+    hIdx,
+    setVIdx,
+    setHIdx,
+    vItems,
+    hItems,
     handleKeyDown,
-    containerRef,
   };
 }
