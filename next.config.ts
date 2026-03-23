@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
   output: isProd ? 'export' : undefined,
   basePath: prefix,
   assetPrefix: prefix,
+  images: {
+    loader: 'custom',
+    loaderFile: './image-loader.js',
+  },
 };
 
 export default nextConfig;
