@@ -49,23 +49,37 @@ export default function GameContact() {
       />
 
       <section className='relative z-10 min-h-screen w-full p-8'>
-        <button className='absolute top-[45%] right-[30%] cursor-pointer' onClick={() => setActiveJin(!activeJin)}>
+        <button className='group absolute top-[45%] right-[30%] cursor-pointer p-6 focus:outline-none' onClick={() => setActiveJin(!activeJin)}>
+          <span
+            className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/60 via-orange-400/40 to-white/40 opacity-0 blur-md transition-all duration-500 group-focus:scale-200 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}
+          ></span>
           {activeJin ? (
-            <>
+            <div className={'relative'}>
               <Image width={200} height={600} src={'/images/game/jinsil_standing.png'} alt={'진실 앞모습'} />
               <SpeechBubble text={'반갑습니다! 아래 방명록을 눌러 깃허브/기술로그에 방문해주세요!'} />
-            </>
+            </div>
           ) : (
-            <Image width={200} height={600} src={'/images/game/jinsil_back.webp'} alt={'진실 뒷모습'} />
+            <Image className={'relative'} width={200} height={600} src={'/images/game/jinsil_back.webp'} alt={'진실 뒷모습'} />
           )}
         </button>
 
-        <div className='absolute right-[18%] -bottom-20'>
+        <div
+          className={clsx(
+            'absolute transition-all duration-700 ease-in-out',
+            'aspect-[750/408]',
+            'xl:right-[18%] xl:-bottom-20 xl:w-[700px] xl:translate-x-0 xl:scale-100',
+            'right-1/2 -bottom-15 w-[650px] translate-x-1/2',
+          )}
+        >
+          <Image fill src={'/images/game/info_table.png'} alt={'탁자'} />
           <button
-            className='animate-stardust-float absolute top-0 left-1/2 -translate-x-1/2 scale-60 cursor-pointer transition-all'
+            className='group animate-stardust-float absolute top-0 left-1/2 aspect-[750/408] -translate-x-1/2 scale-60 cursor-pointer transition-all focus:outline-none'
             onClick={() => openView('contact')}
           >
-            <Image src={'/images/game/book.png'} width={300} height={300} alt={'방명록'} />
+            <span
+              className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/60 via-orange-400/40 to-white/40 opacity-0 blur-md transition-all duration-500 group-focus:scale-200 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}
+            ></span>
+            <Image className={'relative'} src={'/images/game/book.png'} width={300} height={300} alt={'방명록'} />
             <Image
               src='/images/game/stardust.png'
               width={300}
@@ -74,7 +88,6 @@ export default function GameContact() {
               alt='반짝이 가루'
             />
           </button>
-          <Image width={700} height={500} src={'/images/game/info_table.png'} alt={'탁자'} />
         </div>
 
         <div
