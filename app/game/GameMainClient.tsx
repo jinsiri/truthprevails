@@ -251,7 +251,6 @@ export default function GameMainClient() {
     <>
       <section className={clsx('home group relative flex h-screen items-center justify-center overflow-hidden bg-sky-200 select-none')}>
         <Cloud />
-        <Heart />
 
         {guideState && <Guide onClick={() => setGuideState(false)} />}
 
