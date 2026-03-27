@@ -96,7 +96,7 @@ export default function GameContact() {
             activeView === 'contact' ? 'visible' : 'hidden',
           )}
         >
-          <div className='relative flex h-full min-h-[400px] flex-col border-2 border-[#d7ccc8] bg-[#fff9eb] md:flex-row'>
+          <div className='relative flex h-full min-h-[400px] flex-col overflow-y-auto border-2 border-[#d7ccc8] bg-[#fff9eb] md:flex-row'>
             <div className='absolute top-0 bottom-0 left-1/2 hidden w-px bg-[#d7ccc8] shadow-[0_0_10px_rgba(0,0,0,0.1)] md:block'></div>
 
             <div

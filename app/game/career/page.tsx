@@ -92,7 +92,7 @@ export default function GameCareer() {
 
             {activeView === 'career' && (
               <>
-                <div className={'mb-4 flex items-center justify-between gap-x-4 md:mb-6 md:w-[80%]'}>
+                <div className={'sticky top-0 mb-4 flex items-center justify-between gap-x-4 bg-gray-50 md:mb-6 md:w-[80%]'}>
                   <h3 className={'text-2xl md:text-4xl'}>{EXPERIENCE_TABS[hIdx]}</h3>
                   <div ref={careerDetailRef} className={'flex items-center outline-none'} onKeyDown={handleKeyDown} tabIndex={0}>
                     <button
