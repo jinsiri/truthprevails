@@ -19,7 +19,7 @@ export default function GameLayout({
       <GlobalKeyHandler />
       <Heart />
       <ThemeToggleButton />
-      <ButtonGroup positionClass={'top-18 right-6'}>
+      <ButtonGroup positionClass={'top-18 right-4 md:right-6'}>
         <CharacterStatus />
         <MasteredSkills />
         <Inventory />
