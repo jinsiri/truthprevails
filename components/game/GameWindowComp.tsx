@@ -67,7 +67,7 @@ export function MasteredSkills() {
       )}
       <button
         onClick={() => setOpenSkills(!openSkills)}
-        className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm bg-blue-600 p-2 text-white transition dark:bg-blue-200 dark:text-black'
+        className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-blue-600 p-2 text-white transition dark:bg-blue-200 dark:text-black'
         aria-label='Toggle dark mode'
       >
         <SparkleIcon />
@@ -103,7 +103,7 @@ export function CharacterStatus() {
       )}
       <button
         onClick={() => setOpenStats(!openStats)}
-        className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm bg-green-600 p-2 text-white transition dark:bg-green-200 dark:text-black'
+        className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-green-600 p-2 text-white transition dark:bg-green-200 dark:text-black'
         aria-label='Toggle dark mode'
       >
         <Sprout />
