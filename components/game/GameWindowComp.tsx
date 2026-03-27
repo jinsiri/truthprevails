@@ -46,7 +46,7 @@ export function MasteredSkills() {
   return (
     <section className={'relative'}>
       {openSkills && (
-        <div className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] md:right-6'>
+        <div className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]'>
           <button
             className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'}
             onClick={() => setOpenSkills(false)}
@@ -67,7 +67,7 @@ export function MasteredSkills() {
       )}
       <button
         onClick={() => setOpenSkills(!openSkills)}
-        className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm bg-blue-600 p-2 text-white transition md:right-6 lg:top-16 dark:bg-blue-200 dark:text-black'
+        className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm bg-blue-600 p-2 text-white transition dark:bg-blue-200 dark:text-black'
         aria-label='Toggle dark mode'
       >
         <SparkleIcon />
@@ -82,7 +82,7 @@ export function CharacterStatus() {
   return (
     <section className={'relative'}>
       {openStats && (
-        <div className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] md:right-6'>
+        <div className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]'>
           <button
             className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'}
             onClick={() => setOpenStats(false)}
@@ -103,7 +103,7 @@ export function CharacterStatus() {
       )}
       <button
         onClick={() => setOpenStats(!openStats)}
-        className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm bg-green-600 p-2 text-white transition md:right-6 dark:bg-green-200 dark:text-black'
+        className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm bg-green-600 p-2 text-white transition dark:bg-green-200 dark:text-black'
         aria-label='Toggle dark mode'
       >
         <Sprout />

@@ -8,7 +8,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import MessageBox from '@/components/game/MessageBox';
 import Cloud from '@/components/game/Cloud';
-import Heart from '@/components/game/Heart';
 import Guide from '@/components/game/Guide';
 import clsx from 'clsx';
 import LoadingSpinner from '@/components/game/LoadingSpinner';
