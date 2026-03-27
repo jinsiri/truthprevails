@@ -46,7 +46,7 @@ export function MasteredSkills() {
   return (
     <section className={'relative'}>
       {openSkills && (
-        <div className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]'>
+        <div className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] dark:border-amber-100 dark:bg-orange-950'>
           <button
             className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'}
             onClick={() => setOpenSkills(false)}
@@ -82,7 +82,7 @@ export function CharacterStatus() {
   return (
     <section className={'relative'}>
       {openStats && (
-        <div className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]'>
+        <div className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] dark:border-amber-100 dark:bg-orange-950'>
           <button
             className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'}
             onClick={() => setOpenStats(false)}
@@ -90,7 +90,7 @@ export function CharacterStatus() {
             <X />
           </button>
 
-          <h3 className='mb-6 flex items-center gap-2 border-b-2 border-amber-200 pb-2 text-lg font-black text-amber-950 uppercase'>
+          <h3 className='mb-6 flex items-center gap-2 border-b-2 border-amber-200 pb-2 text-lg text-amber-950 uppercase'>
             <span className='text-amber-600'>★</span> Character Status
           </h3>
 
