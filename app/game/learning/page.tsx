@@ -8,9 +8,11 @@ import { useEffect, useRef } from 'react';
 import { useKeyboardList } from '@/hooks/useKeyboardList';
 import { EDUCATION } from '@/constants/dataset';
 import clsx from 'clsx';
+import useQuestStore from '@/store/useQuestStore';
 
 export default function GameLearning() {
   const containerRef = useRef<HTMLOListElement>(null);
+  const incrementProgress = useQuestStore((state) => state.incrementProgress);
   const { vIdx, handleKeyDown, setVIdx } = useKeyboardList({
     vItems: EDUCATION,
     onSelectV: () => {
@@ -19,6 +21,7 @@ export default function GameLearning() {
   });
 
   useEffect(() => {
+    incrementProgress(3);
     containerRef.current?.focus();
   }, []);
 

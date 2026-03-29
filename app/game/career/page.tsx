@@ -8,11 +8,13 @@ import { useKeyboardList } from '@/hooks/useKeyboardList';
 import { EXPERIENCE, EXPERIENCE_TABS } from '@/constants/dataset';
 import { useUIStore } from '@/store/useUIStore';
 import { SquareChevronLeft, SquareChevronRight } from 'lucide-react';
+import useQuestStore from '@/store/useQuestStore';
 
 export default function GameCareer() {
   const containerRef = useRef<HTMLUListElement>(null);
   const careerDetailRef = useRef<HTMLDivElement>(null);
   const { activeView, openView } = useUIStore();
+  const incrementProgress = useQuestStore((state) => state.incrementProgress);
   const { vIdx, hIdx, handleKeyDown, setVIdx, setHIdx } = useKeyboardList({
     vItems: activeView === 'career' ? [] : EXPERIENCE_TABS,
     onSelectV: () => openView('career'),
@@ -23,6 +25,8 @@ export default function GameCareer() {
   });
 
   useEffect(() => {
+    incrementProgress(3);
+
     const timer = setTimeout(() => {
       if (activeView === 'career') {
         setHIdx(vIdx);

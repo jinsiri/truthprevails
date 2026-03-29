@@ -2,6 +2,7 @@
 
 import { SparkleIcon, Sprout, X } from 'lucide-react';
 import { useUIStore } from '@/store/useUIStore';
+import useQuestStore from '@/store/useQuestStore';
 
 interface StatBarProps {
   label: string;
@@ -75,6 +76,7 @@ export function MasteredSkills() {
 
 export function CharacterStatus() {
   const { activeView, openView, closeView } = useUIStore();
+  const incrementProgress = useQuestStore((state) => state.incrementProgress);
 
   return (
     <section className={'relative'}>
@@ -96,7 +98,10 @@ export function CharacterStatus() {
         </div>
       )}
       <button
-        onClick={() => openView('statWindow')}
+        onClick={() => {
+          openView('statWindow');
+          incrementProgress(1);
+        }}
         className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-green-600 p-2 text-white transition dark:bg-green-200 dark:text-black'
         aria-label='Toggle dark mode'
       >

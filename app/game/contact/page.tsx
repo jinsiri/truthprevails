@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useKeyboardList } from '@/hooks/useKeyboardList';
 import Link from 'next/link';
 import SpeechBubble from '@/components/game/SpeechBubble';
+import useQuestStore from '@/store/useQuestStore';
 
 interface Mode {
   title: string;
@@ -27,6 +28,7 @@ const MODES: Mode[] = [
 export default function GameContact() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { activeView, openView } = useUIStore();
+  const incrementProgress = useQuestStore((state) => state.incrementProgress);
   const { vIdx, handleKeyDown, setVIdx } = useKeyboardList({
     vItems: MODES,
     onSelectV: (mode) => window.open(mode.address, '_blank', 'noopener,noreferrer'),
@@ -34,6 +36,7 @@ export default function GameContact() {
   const [activeJin, setActiveJin] = useState(false);
 
   useEffect(() => {
+    incrementProgress(3);
     containerRef.current?.focus();
   }, [activeView]);
 
