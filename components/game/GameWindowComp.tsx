@@ -43,6 +43,7 @@ const StatBar = ({ label, level, colorClass, description }: StatBarProps) => {
 
 export function MasteredSkills() {
   const { activeView, openView, closeView } = useUIStore();
+  const incrementProgress = useQuestStore((state) => state.incrementProgress);
 
   return (
     <section className={'relative'}>
@@ -64,7 +65,10 @@ export function MasteredSkills() {
         </div>
       )}
       <button
-        onClick={() => openView('skillWindow')}
+        onClick={() => {
+          openView('skillWindow');
+          incrementProgress(2);
+        }}
         className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-blue-600 p-2 text-white transition dark:bg-blue-200 dark:text-black'
         aria-label='Toggle dark mode'
       >

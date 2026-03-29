@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { IconTransfer } from '@tabler/icons-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import MessageBox from '@/components/game/MessageBox';
 import Cloud from '@/components/game/Cloud';
 import Guide from '@/components/game/Guide';
@@ -31,7 +30,7 @@ const INTERACTION_POINTS = [
     name: '학교',
     left: 5,
     range: [12, 18],
-    action: (router: AppRouterInstance) => router.push('/game/learning'),
+    path: '/game/learning',
     image: '/images/game/school.webp',
     width: 990,
     height: 775,
@@ -42,7 +41,7 @@ const INTERACTION_POINTS = [
     name: '회사',
     left: 36,
     range: [44, 49],
-    action: (router: AppRouterInstance) => router.push('/game/career'),
+    path: '/game/career',
     image: '/images/game/building.webp',
     width: 557,
     height: 691,
@@ -53,7 +52,7 @@ const INTERACTION_POINTS = [
     name: '인포센터',
     left: 69,
     range: [68, 71],
-    action: (router: AppRouterInstance) => router.push('/game/contact'),
+    path: '/game/contact',
     image: '/images/game/info.webp',
     width: 280,
     height: 323,
@@ -111,7 +110,7 @@ export default function GameMainClient() {
     sessionStorage.setItem('lastPosition', JSON.stringify({ x: currentPos, y: 0 }));
 
     setTimeout(() => {
-      currentActive.action(router);
+      router.push(currentActive.path);
     }, 1000);
   }, [router]);
 
@@ -272,7 +271,9 @@ export default function GameMainClient() {
               key={obj.id}
               className={`group absolute z-20 cursor-pointer rounded-xl p-6 focus:outline-none ${obj.style}`}
               style={{ aspectRatio: obj.width / obj.height }}
-              onClick={() => obj.action(router)}
+              onClick={() => {
+                router.push(obj.path);
+              }}
             >
               <span
                 className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/30 via-orange-400/20 to-white/20 opacity-0 blur-md transition-all duration-500 group-focus:scale-130 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}

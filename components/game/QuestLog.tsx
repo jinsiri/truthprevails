@@ -36,6 +36,7 @@ const QuestProgressItem = ({ title, current, total, isComplete }: QuestProgressI
 export function UserQuestLog() {
   const { activeView, openView, closeView } = useUIStore();
   const quests = useQuestStore((state) => state.quests);
+  const isAllDone = useQuestStore((state) => state.checkAllCompleted());
 
   return (
     <section className={'relative'}>
@@ -53,8 +54,14 @@ export function UserQuestLog() {
             <QuestProgressItem key={quest.id} title={quest.title} current={quest.current} total={quest.total} isComplete={quest.current >= quest.total} />
           ))}
 
-          <div className='mt-4 border border-[#bcaaa4] bg-[#efebe9] p-2 text-[10px] leading-tight text-[#5d4037]'>
-            <strong>💡 Tip:</strong> 모든 단서를 모으면 <span className='font-bold text-emerald-700'>면접 제의</span> 버튼이 활성화됩니다!
+          <div className='mt-4 border border-[#bcaaa4] bg-[#efebe9] p-2 text-[12px] leading-tight text-[#5d4037]'>
+            {isAllDone ? (
+              <>모든 퀘스트를 완료하셨습니다! 감사합니다!</>
+            ) : (
+              <>
+                <strong>💡 Tip:</strong> 화면 내 건물과 버튼을 눌러 퀘스트를 완료하세요!
+              </>
+            )}
           </div>
         </div>
       )}

@@ -21,7 +21,7 @@ export default function GameLearning() {
   });
 
   useEffect(() => {
-    incrementProgress(3);
+    incrementProgress(4);
     containerRef.current?.focus();
   }, []);
 

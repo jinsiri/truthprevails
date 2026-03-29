@@ -36,7 +36,7 @@ export default function GameContact() {
   const [activeJin, setActiveJin] = useState(false);
 
   useEffect(() => {
-    incrementProgress(3);
+    incrementProgress(4);
     containerRef.current?.focus();
   }, [activeView]);
 

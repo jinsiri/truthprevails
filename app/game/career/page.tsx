@@ -25,7 +25,7 @@ export default function GameCareer() {
   });
 
   useEffect(() => {
-    incrementProgress(3);
+    incrementProgress(4);
 
     const timer = setTimeout(() => {
       if (activeView === 'career') {

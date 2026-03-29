@@ -67,7 +67,7 @@ export default function Inventory() {
       <button
         onClick={() => {
           openView('inventoryWindow');
-          incrementProgress(2);
+          incrementProgress(3);
         }}
         className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-yellow-600 p-2 text-white transition dark:bg-yellow-200 dark:text-black'
         aria-label='Toggle dark mode'
