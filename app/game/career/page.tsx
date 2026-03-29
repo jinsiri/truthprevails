@@ -11,6 +11,7 @@ import { SquareChevronLeft, SquareChevronRight } from 'lucide-react';
 import useQuestStore from '@/store/useQuestStore';
 
 export default function GameCareer() {
+  const countRef = useRef(false);
   const containerRef = useRef<HTMLUListElement>(null);
   const careerDetailRef = useRef<HTMLDivElement>(null);
   const { activeView, openView } = useUIStore();
@@ -25,8 +26,12 @@ export default function GameCareer() {
   });
 
   useEffect(() => {
+    if (countRef.current) return;
     incrementProgress(4);
+    countRef.current = true;
+  }, [incrementProgress]);
 
+  useEffect(() => {
     const timer = setTimeout(() => {
       if (activeView === 'career') {
         setHIdx(vIdx);

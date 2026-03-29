@@ -26,6 +26,7 @@ const MODES: Mode[] = [
   },
 ];
 export default function GameContact() {
+  const countRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { activeView, openView } = useUIStore();
   const incrementProgress = useQuestStore((state) => state.incrementProgress);
@@ -36,9 +37,14 @@ export default function GameContact() {
   const [activeJin, setActiveJin] = useState(false);
 
   useEffect(() => {
-    incrementProgress(4);
     containerRef.current?.focus();
   }, [activeView]);
+
+  useEffect(() => {
+    if (countRef.current) return;
+    incrementProgress(4);
+    countRef.current = true;
+  }, [incrementProgress]);
 
   return (
     <main className='relative min-h-screen w-full overflow-hidden'>

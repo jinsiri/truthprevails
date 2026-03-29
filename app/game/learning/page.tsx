@@ -11,6 +11,7 @@ import clsx from 'clsx';
 import useQuestStore from '@/store/useQuestStore';
 
 export default function GameLearning() {
+  const countRef = useRef(false);
   const containerRef = useRef<HTMLOListElement>(null);
   const incrementProgress = useQuestStore((state) => state.incrementProgress);
   const { vIdx, handleKeyDown, setVIdx } = useKeyboardList({
@@ -21,9 +22,14 @@ export default function GameLearning() {
   });
 
   useEffect(() => {
-    incrementProgress(4);
     containerRef.current?.focus();
   }, []);
+
+  useEffect(() => {
+    if (countRef.current) return;
+    incrementProgress(4);
+    countRef.current = true;
+  }, [incrementProgress]);
 
   return (
     <main className='relative min-h-screen w-full overflow-hidden'>
