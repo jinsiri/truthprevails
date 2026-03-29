@@ -1,9 +1,6 @@
 'use client';
 
-import { useState } from 'react';
 import { SparkleIcon, Sprout, X } from 'lucide-react';
-import { useKeyboardList } from '@/hooks/useKeyboardList';
-import { EXPERIENCE_TABS } from '@/constants/dataset';
 import { useUIStore } from '@/store/useUIStore';
 
 interface StatBarProps {

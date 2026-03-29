@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { BriefcaseBusiness, X } from 'lucide-react';
 import { useUIStore } from '@/store/useUIStore';
 

@@ -1,7 +1,6 @@
 'use client';
 
 import { Scroll, X } from 'lucide-react';
-import { useState } from 'react';
 import { useUIStore } from '@/store/useUIStore';
 
 interface QuestItemProps {
