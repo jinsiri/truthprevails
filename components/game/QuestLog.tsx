@@ -2,6 +2,7 @@
 
 import { Scroll, X } from 'lucide-react';
 import { useState } from 'react';
+import { useUIStore } from '@/store/useUIStore';
 
 interface QuestItemProps {
   level?: number;
@@ -91,22 +92,18 @@ const QuestProgressItem = ({ title, current, total, isComplete }: QuestProgressI
 };
 
 export function UserQuestLog() {
-  const [openQuest, setOpenQuest] = useState(false);
+  const { activeView, openView, closeView } = useUIStore();
 
   return (
     <section className={'relative'}>
-      {openQuest && (
+      {activeView === 'questWindow' && (
         <div className='absolute top-0 right-0 z-51 w-80 border-4 border-[#5d4037] bg-[#f4e4bc] p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.2)]'>
-          <button
-            className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center text-black'}
-            onClick={() => setOpenQuest(false)}
-          >
+          <button className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center text-black'} onClick={closeView}>
             <X />
           </button>
 
           <h3 className='mb-4 flex items-center justify-between border-b-2 border-[#d7ccc8] pb-1 text-sm font-black text-[#3e2723]'>
             <span>📋 현재 수행 중인 퀘스트</span>
-            {/*<span className='animate-bounce text-[10px] text-emerald-600'>진행 중...</span>*/}
           </h3>
 
           <QuestProgressItem title="신비한 개발자 '진실'의 스탯 확인" current={1} total={1} isComplete={true} />
@@ -120,7 +117,7 @@ export function UserQuestLog() {
         </div>
       )}
       <button
-        onClick={() => setOpenQuest(!openQuest)}
+        onClick={() => openView('questWindow')}
         className='hover:bg-elevated z-50 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-purple-600 p-2 text-white transition dark:bg-purple-200 dark:text-black'
         aria-label='Toggle dark mode'
       >

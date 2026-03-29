@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import { SparkleIcon, Sprout, X } from 'lucide-react';
+import { useKeyboardList } from '@/hooks/useKeyboardList';
+import { EXPERIENCE_TABS } from '@/constants/dataset';
+import { useUIStore } from '@/store/useUIStore';
 
 interface StatBarProps {
   label: string;
@@ -41,16 +44,13 @@ const StatBar = ({ label, level, colorClass, description }: StatBarProps) => {
 };
 
 export function MasteredSkills() {
-  const [openSkills, setOpenSkills] = useState(false);
+  const { activeView, openView, closeView } = useUIStore();
 
   return (
     <section className={'relative'}>
-      {openSkills && (
+      {activeView === 'skillWindow' && (
         <div className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] dark:border-amber-100 dark:bg-orange-950'>
-          <button
-            className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'}
-            onClick={() => setOpenSkills(false)}
-          >
+          <button className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'} onClick={closeView}>
             <X />
           </button>
 
@@ -66,7 +66,7 @@ export function MasteredSkills() {
         </div>
       )}
       <button
-        onClick={() => setOpenSkills(!openSkills)}
+        onClick={() => openView('skillWindow')}
         className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-blue-600 p-2 text-white transition dark:bg-blue-200 dark:text-black'
         aria-label='Toggle dark mode'
       >
@@ -77,16 +77,13 @@ export function MasteredSkills() {
 }
 
 export function CharacterStatus() {
-  const [openStats, setOpenStats] = useState(false);
+  const { activeView, openView, closeView } = useUIStore();
 
   return (
     <section className={'relative'}>
-      {openStats && (
+      {activeView === 'statWindow' && (
         <div className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] dark:border-amber-100 dark:bg-orange-950'>
-          <button
-            className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'}
-            onClick={() => setOpenStats(false)}
-          >
+          <button className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'} onClick={closeView}>
             <X />
           </button>
 
@@ -102,7 +99,7 @@ export function CharacterStatus() {
         </div>
       )}
       <button
-        onClick={() => setOpenStats(!openStats)}
+        onClick={() => openView('statWindow')}
         className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-green-600 p-2 text-white transition dark:bg-green-200 dark:text-black'
         aria-label='Toggle dark mode'
       >

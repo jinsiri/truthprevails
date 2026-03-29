@@ -24,12 +24,15 @@ export default function GameLayout({
         <MasteredSkills />
         <Inventory />
         <UserQuestLog />
-        {/*<QuestLog />*/}
       </ButtonGroup>
       {children}
       <Suspense fallback={<LoadingSpinner />}>
         <BackButton />
       </Suspense>
+
+      {/*{isGuideOn && (*/}
+      {/*<div className='pointer-events-none fixed inset-0 z-[100] bg-black/60' style={{ clipPath: 'polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)' }}></div>*/}
+      {/*)}*/}
     </main>
   );
 }

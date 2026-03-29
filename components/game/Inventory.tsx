@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { BriefcaseBusiness, X } from 'lucide-react';
+import { useUIStore } from '@/store/useUIStore';
 
 interface InventoryItemProps {
   icon: string;
@@ -34,16 +35,13 @@ const InventoryItem = ({ icon, name, level, description }: InventoryItemProps) =
 };
 
 export default function Inventory() {
-  const [openItems, setOpenItems] = useState(false);
+  const { activeView, openView, closeView } = useUIStore();
 
   return (
     <section className={'relative'}>
-      {openItems && (
+      {activeView === 'inventoryWindow' && (
         <div className='absolute top-0 right-0 z-51 w-80 rounded-sm border-4 border-stone-950 bg-stone-800 p-5 text-stone-200 shadow-[4px_4px_0px_rgba(0,0,0,0.3)]'>
-          <button
-            className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center text-white'}
-            onClick={() => setOpenItems(false)}
-          >
+          <button className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center text-white'} onClick={closeView}>
             <X />
           </button>
 
@@ -75,7 +73,7 @@ export default function Inventory() {
         </div>
       )}
       <button
-        onClick={() => setOpenItems(!openItems)}
+        onClick={() => openView('inventoryWindow')}
         className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-yellow-600 p-2 text-white transition dark:bg-yellow-200 dark:text-black'
         aria-label='Toggle dark mode'
       >
