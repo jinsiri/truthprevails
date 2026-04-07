@@ -48,19 +48,20 @@ export function MasteredSkills() {
   return (
     <section className={'relative'}>
       {activeView === 'skillWindow' && (
-        <div className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] dark:border-amber-100 dark:bg-orange-950'>
+        <div className='absolute top-0 right-0 z-51 max-h-[70vh] w-64 overflow-y-auto rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] dark:border-amber-100 dark:bg-orange-950'>
           <button className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'} onClick={closeView}>
             <X />
           </button>
-
           <h3 className='mb-6 flex items-center gap-2 border-b-2 border-amber-200 pb-2 text-lg font-black text-amber-950 uppercase'>
             <span className='text-amber-600'>★</span> Mastered Skills
           </h3>
-
-          <StatBar label='React' level={90} colorClass='bg-cyan-400' />
-          <StatBar label='TypeScript' level={80} colorClass='bg-blue-600' />
-          <StatBar label='Tailwind' level={95} colorClass='bg-teal-300' />
-
+          <StatBar label='React' level={95} colorClass='bg-cyan-500' />
+          <StatBar label='TypeScript' level={90} colorClass='bg-blue-600' />
+          <StatBar label='Zustand / Redux' level={85} colorClass='bg-cyan-400' />
+          <StatBar label='Tailwind / SCSS' level={95} colorClass='bg-pink-500' />
+          <StatBar label='Java / Spring Boot' level={80} colorClass='bg-emerald-600' />
+          <StatBar label='PostgreSQL' level={80} colorClass='bg-emerald-500' />
+          <StatBar label='Linux / Docker' level={75} colorClass='bg-slate-500' />
           <p className='mt-4 text-right text-[12px] leading-tight break-keep text-stone-500'>* 경험치는 실제 프로젝트 기여도 기반입니다.</p>
         </div>
       )}
