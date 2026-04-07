@@ -9,6 +9,7 @@ import { useKeyboardList } from '@/hooks/useKeyboardList';
 import Link from 'next/link';
 import SpeechBubble from '@/components/game/SpeechBubble';
 import useQuestStore from '@/store/useQuestStore';
+import { X } from 'lucide-react';
 
 interface Mode {
   title: string;
@@ -27,14 +28,19 @@ const MODES: Mode[] = [
 ];
 export default function GameContact() {
   const countRef = useRef(false);
+  const focusingRef = useRef<HTMLButtonElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { activeView, openView } = useUIStore();
+  const { activeView, openView, closeView } = useUIStore();
   const incrementProgress = useQuestStore((state) => state.incrementProgress);
   const { vIdx, handleKeyDown, setVIdx } = useKeyboardList({
     vItems: MODES,
     onSelectV: (mode) => window.open(mode.address, '_blank', 'noopener,noreferrer'),
   });
   const [activeJin, setActiveJin] = useState(false);
+
+  useEffect(() => {
+    focusingRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     containerRef.current?.focus();
@@ -57,18 +63,29 @@ export default function GameContact() {
         fill={true}
       />
 
-      <section className='relative z-10 min-h-screen w-full p-8'>
-        <button className='group absolute top-[45%] right-[30%] cursor-pointer p-6 focus:outline-none' onClick={() => setActiveJin(!activeJin)}>
+      <section className='relative z-10 h-screen w-full overflow-hidden p-8'>
+        <button
+          ref={focusingRef}
+          className='group absolute top-[45%] right-[30%] cursor-pointer p-6 focus:outline-none'
+          onClick={() => setActiveJin(!activeJin)}
+        >
           <span
             className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/60 via-orange-400/40 to-white/40 opacity-0 blur-md transition-all duration-500 group-focus:scale-200 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}
           ></span>
           {activeJin ? (
             <div className={'relative'}>
               <Image width={200} height={600} src={'/images/game/jinsil_standing.png'} alt={'진실 앞모습'} />
-              <SpeechBubble text={'반갑습니다! 아래 방명록을 눌러 깃허브/기술로그에 방문해주세요!'} />
+              <SpeechBubble text={'반갑습니다! 탭키 또는 마우스로 아래 방명록을 눌러 깃허브/기술로그에 방문해주세요!'} />
             </div>
           ) : (
-            <Image className={'relative'} width={200} height={600} src={'/images/game/jinsil_back.webp'} alt={'진실 뒷모습'} />
+            <>
+              <Image className={'relative'} width={200} height={600} src={'/images/game/jinsil_back.webp'} alt={'진실 뒷모습'} />
+              <div className='absolute -top-4 left-1/2 flex -translate-x-1/2 flex-col items-center'>
+                <div className='animate-bounce rounded border-2 border-black bg-white px-2 py-1 text-xs font-bold whitespace-nowrap'>
+                  <span className='text-black'>[Enter or 클릭]</span>
+                </div>
+              </div>
+            </>
           )}
         </button>
 
@@ -108,9 +125,13 @@ export default function GameContact() {
           <div className='relative flex h-full min-h-[400px] flex-col overflow-y-auto border-2 border-[#d7ccc8] bg-[#fff9eb] md:flex-row'>
             <div className='absolute top-0 bottom-0 left-1/2 hidden w-px bg-[#d7ccc8] shadow-[0_0_10px_rgba(0,0,0,0.1)] md:block'></div>
 
+            <button className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'} onClick={closeView}>
+              <X />
+            </button>
+
             <div
-              className='mode-btns type-b flex flex-1 flex-col items-center justify-center space-y-4 p-8 outline-none'
               ref={containerRef}
+              className='mode-btns type-b flex flex-1 flex-col items-center justify-center space-y-4 p-8 outline-none'
               onKeyDown={handleKeyDown}
               tabIndex={0}
             >
@@ -146,7 +167,7 @@ export default function GameContact() {
             </div>
           </div>
 
-          <div className='absolute -top-6 right-12 h-12 w-[3%] border-2 border-red-900 bg-red-700 shadow-md'></div>
+          <div className='absolute -top-6 left-12 h-12 w-[3%] border-2 border-blue-900 bg-blue-700 shadow-md'></div>
         </div>
       </section>
     </main>
