@@ -93,7 +93,7 @@ export default function Inventory() {
                   {hoveredItem.level && <span className='ml-auto font-mono text-[10px] text-blue-400'>LV.{hoveredItem.level}</span>}
                 </div>
                 <p className='text-[11px] leading-[1.4] text-stone-300 antialiased'>{hoveredItem.description}</p>
-                <p className='mt-2 text-right text-[9px] font-bold tracking-widest text-stone-500 uppercase'>Jinsil's Items</p>
+                <p className='mt-2 text-right text-[9px] font-bold tracking-widest text-stone-500 uppercase'>Jinsil&apos;s Items</p>
               </div>
             ) : (
               <div className='flex flex-col items-center justify-center text-[12px] text-stone-400'>
