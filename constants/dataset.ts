@@ -70,6 +70,8 @@ interface TimelineEntry {
   title: string;
   description: string;
   color?: 'blue' | 'green' | 'yellow';
+  skillSet: string[];
+  spotKey: string;
 }
 export const EDUCATION: TimelineEntry[] = [
   {
@@ -77,17 +79,23 @@ export const EDUCATION: TimelineEntry[] = [
     title: '방송통신대학교 컴퓨터과학과',
     description: '편입, 졸업',
     color: 'blue',
+    skillSet: ['공학 지식'],
+    spotKey: 'cs',
   },
   {
     date: '2012.03 - 2018.02',
     title: '인천대학교 국어국문학과',
     description: '졸업',
     color: 'blue',
+    skillSet: ['커뮤니케이션 능력', '인문학적 사고'],
+    spotKey: 'kl',
   },
   {
     date: '2009.03 - 2012.02',
     title: '신명여자고등학교',
     description: '졸업',
     color: 'blue',
+    skillSet: ['기초 지식'],
+    spotKey: 'hs',
   },
 ];
