@@ -59,7 +59,6 @@ export default function GameContact() {
         lightSrc={`/images/game/info_day_v2.jpg`}
         darkSrc={`/images/game/info_night_v2.jpg`}
         alt={'인포센터 배경'}
-        priority
         fill={true}
       />
 
@@ -91,13 +90,13 @@ export default function GameContact() {
 
         <div
           className={clsx(
-            'absolute transition-all duration-700 ease-in-out',
+            'fixed transition-all duration-700 ease-in-out',
             'aspect-[750/408]',
             'xl:right-[18%] xl:-bottom-20 xl:w-[700px] xl:translate-x-0 xl:scale-100',
             'right-1/2 -bottom-15 w-[650px] translate-x-1/2',
           )}
         >
-          <Image fill src={'/images/game/info_table.png'} alt={'탁자'} />
+          <Image fill src={'/images/game/info_table.png'} priority alt={'탁자'} />
           <button
             className='group animate-stardust-float absolute top-0 left-1/2 aspect-[750/408] -translate-x-1/2 scale-60 cursor-pointer transition-all focus:outline-none'
             onClick={() => openView('contact')}
