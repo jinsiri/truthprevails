@@ -31,9 +31,9 @@ export function CharacterAnimation({ skillSet, textColor }: { skillSet: string[]
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1, ease: 'easeOut' }}
-      className='group absolute -bottom-15 left-1/2 z-10 hidden -translate-x-1/2 md:block'
+      className='group absolute -bottom-15 left-1/2 z-10 -translate-x-1/2'
     >
-      <div className='relative h-[425px] w-[300px]'>
+      <div className='pointer-events-none relative h-[425px] w-[300px]'>
         <div className='absolute -top-24 left-1/2 flex w-full -translate-x-1/2 flex-col items-center'>
           {skillSet.map((skill, i) => (
             <motion.span
