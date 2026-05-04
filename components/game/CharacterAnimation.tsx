@@ -26,7 +26,7 @@ export default function CharacterAnimation({ skillSet, textColor }: { skillSet: 
       className='group absolute -bottom-15 left-1/2 z-10 -translate-x-1/2'
     >
       <div className='pointer-events-none relative h-[425px] w-[300px]'>
-        <div className='absolute -top-24 left-1/2 flex w-full -translate-x-1/2 flex-col items-center'>
+        <div className='absolute -top-10 left-1/2 flex w-full -translate-x-1/2 flex-col items-center'>
           {skillSet.map((skill, i) => (
             <motion.span
               key={i}
@@ -41,7 +41,10 @@ export default function CharacterAnimation({ skillSet, textColor }: { skillSet: 
                 delay: i * 0.2,
                 times: [0, 0.1, 0.8, 1],
               }}
-              className={clsx(textColor || 'text-yellow-300', 'absolute text-lg font-bold whitespace-nowrap drop-shadow-[0_2px_0_rgba(0,0,0,1)]')}
+              className={clsx(
+                textColor ? `text-${textColor}-300` : 'text-yellow-300',
+                'absolute text-lg font-bold whitespace-nowrap drop-shadow-[0_2px_0_rgba(0,0,0,1)]',
+              )}
             >
               {`+10% ${skill}`}
             </motion.span>
