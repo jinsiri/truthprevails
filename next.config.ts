@@ -10,7 +10,8 @@ const nextConfig: NextConfig = {
   assetPrefix: prefix,
   images: {
     loader: 'custom',
-    loaderFile: './image-loader.js',
+    loaderFile: './image-loader.ts',
+    unoptimized: true,
   },
 };
 

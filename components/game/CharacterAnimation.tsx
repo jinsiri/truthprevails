@@ -47,9 +47,9 @@ export default function CharacterAnimation({ skillSet, textClass = 'text-yellow-
           ))}
         </div>
 
-        <Image src={'/images/game/study_01.webp'} alt='jinsil' width={300} height={425} className={`${0 === index ? 'block' : 'hidden'} object-contain`} />
-        <Image src={'/images/game/study_02.webp'} alt='jinsil' width={300} height={425} className={`${1 === index ? 'block' : 'hidden'} object-contain`} />
-        <Image src={'/images/game/study_03.webp'} alt='jinsil' width={300} height={425} className={`${2 === index ? 'block' : 'hidden'} object-contain`} />
+        {IMAGES.map((src, i) => (
+          <Image key={src} src={src} alt='jinsil' width={300} height={425} className={`${i === index ? 'block' : 'hidden'} object-contain`} />
+        ))}
       </div>
     </motion.div>
   );
