@@ -11,7 +11,14 @@ const nextConfig: NextConfig = {
   images: {
     loader: 'custom',
     loaderFile: './image-loader.ts',
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ik.imagekit.io',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 
