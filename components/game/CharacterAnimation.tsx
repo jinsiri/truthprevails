@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import clsx from 'clsx';
 import Image from 'next/image';
 
 const IMAGES = ['/images/game/study_01.webp', '/images/game/study_02.webp', '/images/game/study_03.webp'];
 
-export default function CharacterAnimation({ skillSet, textColor }: { skillSet: string[]; textColor?: string }) {
+export default function CharacterAnimation({ skillSet, textClass = 'text-yellow-300' }: { skillSet: string[]; textClass?: string }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -41,10 +40,7 @@ export default function CharacterAnimation({ skillSet, textColor }: { skillSet: 
                 delay: i * 0.2,
                 times: [0, 0.1, 0.8, 1],
               }}
-              className={clsx(
-                textColor ? `text-${textColor}-300` : 'text-yellow-300',
-                'absolute text-lg font-bold whitespace-nowrap drop-shadow-[0_2px_0_rgba(0,0,0,1)]',
-              )}
+              className={`absolute text-lg font-bold whitespace-nowrap drop-shadow-[0_2px_0_rgba(0,0,0,1)] ${textClass}`}
             >
               {`+10% ${skill}`}
             </motion.span>
@@ -52,7 +48,7 @@ export default function CharacterAnimation({ skillSet, textColor }: { skillSet: 
         </div>
 
         {IMAGES.map((src, i) => (
-          <Image key={src} src={src} alt='jinsil' width={300} height={425} priority className={`${i === index ? 'block' : 'hidden'} object-contain`} />
+          <Image key={src} src={src} alt='jinsil' width={300} height={425} className={`${i === index ? 'block' : 'hidden'} object-contain`} />
         ))}
       </div>
     </motion.div>

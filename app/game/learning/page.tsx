@@ -16,7 +16,7 @@ export default function GameLearning() {
   const containerRef = useRef<HTMLOListElement>(null);
   const [hide, setHide] = useState(false);
   const [skillSet, setSkillSet] = useState(['지식']);
-  const [textColor, setTextColor] = useState('yellow');
+  const [textClass, setTextClass] = useState('');
   const incrementProgress = useQuestStore((state) => state.incrementProgress);
   const { vIdx, handleKeyDown, setVIdx } = useKeyboardList({
     vItems: EDUCATION,
@@ -49,7 +49,7 @@ export default function GameLearning() {
 
       <section className='relative z-10 min-h-screen w-full p-8'>
         {hide ? (
-          <CharacterAnimation skillSet={skillSet} textColor={textColor} />
+          <CharacterAnimation skillSet={skillSet} textClass={textClass} />
         ) : (
           <div className='group absolute -bottom-15 left-0 hidden md:block lg:left-20 xl:left-30'>
             <Image width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} />
@@ -71,7 +71,7 @@ export default function GameLearning() {
                   )}
                   onClick={() => {
                     setSkillSet(mode.skillSet);
-                    setTextColor(mode.color);
+                    setTextClass(mode.textClass);
                   }}
                 >
                   {index + 1}. {mode.title}

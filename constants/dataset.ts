@@ -72,6 +72,7 @@ interface TimelineEntry {
   color: 'blue' | 'purple' | 'yellow';
   skillSet: string[];
   spotKey: string;
+  textClass: string;
 }
 export const EDUCATION: TimelineEntry[] = [
   {
@@ -81,6 +82,7 @@ export const EDUCATION: TimelineEntry[] = [
     color: 'blue',
     skillSet: ['공학 지식'],
     spotKey: 'cs',
+    textClass: 'text-blue-300',
   },
   {
     date: '2012.03 - 2018.02',
@@ -89,6 +91,7 @@ export const EDUCATION: TimelineEntry[] = [
     color: 'yellow',
     skillSet: ['커뮤니케이션 능력', '인문학적 사고'],
     spotKey: 'kl',
+    textClass: 'text-yellow-300',
   },
   {
     date: '2009.03 - 2012.02',
@@ -97,5 +100,6 @@ export const EDUCATION: TimelineEntry[] = [
     color: 'purple',
     skillSet: ['기초 지식'],
     spotKey: 'hs',
+    textClass: 'text-purple-300',
   },
 ];
