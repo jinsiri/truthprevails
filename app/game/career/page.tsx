@@ -9,6 +9,7 @@ import { EXPERIENCE, EXPERIENCE_TABS } from '@/constants/dataset';
 import { useUIStore } from '@/store/useUIStore';
 import { SquareChevronLeft, SquareChevronRight } from 'lucide-react';
 import useQuestStore from '@/store/useQuestStore';
+import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 export default function GameCareer() {
   const countRef = useRef(false);
@@ -50,8 +51,8 @@ export default function GameCareer() {
     <main className='relative min-h-screen w-full overflow-hidden'>
       <ThemedImage
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
-        lightSrc={`/images/game/company_day_v3.png`}
-        darkSrc={`/images/game/company_night_v3.png`}
+        lightSrc={`${IMAGE_ROOT}/images/game/company_day_v3.png`}
+        darkSrc={`${IMAGE_ROOT}/images/game/company_night_v3.png`}
         alt={'educated list'}
         priority
         fill={true}
@@ -70,7 +71,12 @@ export default function GameCareer() {
               activeView === 'career' ? 'right-10 max-w-[400px]' : '-right-20',
             )}
           >
-            <ThemedImage lightSrc={`/images/game/company_jinsil_day.png`} darkSrc={`/images/game/company_jinsil_night.png`} fill alt={'발표하는 캐릭터'} />
+            <ThemedImage
+              lightSrc={`${IMAGE_ROOT}/images/game/company_jinsil_day.png`}
+              darkSrc={`${IMAGE_ROOT}/images/game/company_jinsil_night.png`}
+              fill
+              alt={'발표하는 캐릭터'}
+            />
             <SpeechBubble text={'이런 일을 했습니다!'} />
           </div>
 

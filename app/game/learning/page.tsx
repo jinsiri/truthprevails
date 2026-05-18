@@ -10,6 +10,7 @@ import { EDUCATION } from '@/constants/dataset';
 import clsx from 'clsx';
 import useQuestStore from '@/store/useQuestStore';
 import CharacterAnimation from '@/components/game/CharacterAnimation';
+import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 export default function GameLearning() {
   const countRef = useRef(false);
@@ -40,8 +41,8 @@ export default function GameLearning() {
     <main className='relative min-h-screen w-full overflow-hidden'>
       <ThemedImage
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
-        lightSrc={`/images/game/school_day.png`}
-        darkSrc={`/images/game/school_night.png`}
+        lightSrc={`${IMAGE_ROOT}/images/game/school_day.png`}
+        darkSrc={`${IMAGE_ROOT}/images/game/school_night.png`}
         alt={'educated list'}
         priority
         fill={true}

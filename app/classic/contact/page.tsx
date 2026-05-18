@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import ThemedImage from '@/components/ThemedImage';
+import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 export default function ClassicContact() {
   return (
@@ -31,8 +32,8 @@ export default function ClassicContact() {
         transition={{ duration: 0.5 }}
       >
         <ThemedImage
-          lightSrc={`/images/classic/search.png`}
-          darkSrc={'/images/classic/search_w.webp'}
+          lightSrc={`${IMAGE_ROOT}/images/classic/search.png`}
+          darkSrc={`${IMAGE_ROOT}/images/classic/search_w.webp`}
           alt={'How to contact jinsil'}
           width={650}
           height={650}
@@ -48,7 +49,13 @@ export default function ClassicContact() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Image src={`/images/classic/contact_qr.png`} alt={'developer.js.corn@gmail.com'} width={250} height={250} className={'border-20 border-amber-400'} />
+        <Image
+          src={`${IMAGE_ROOT}/images/classic/contact_qr.png`}
+          alt={'developer.js.corn@gmail.com'}
+          width={250}
+          height={250}
+          className={'border-20 border-amber-400'}
+        />
 
         <p className={'mt-6 text-base font-medium break-keep xl:text-xl'}>
           카메라를 열어 <strong className={'text-purple-700'}>QR 코드를 스캔</strong>하시면 연락처를 추가하실 수 있습니다

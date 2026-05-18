@@ -10,6 +10,7 @@ import Link from 'next/link';
 import SpeechBubble from '@/components/game/SpeechBubble';
 import useQuestStore from '@/store/useQuestStore';
 import { X } from 'lucide-react';
+import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 interface Mode {
   title: string;
@@ -56,8 +57,8 @@ export default function GameContact() {
     <main className='relative min-h-screen w-full overflow-hidden'>
       <ThemedImage
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
-        lightSrc={`/images/game/info_day_v2.jpg`}
-        darkSrc={`/images/game/info_night_v2.jpg`}
+        lightSrc={`${IMAGE_ROOT}/images/game/info_day_v2.jpg`}
+        darkSrc={`${IMAGE_ROOT}/images/game/info_night_v2.jpg`}
         alt={'인포센터 배경'}
         fill={true}
       />
@@ -73,12 +74,12 @@ export default function GameContact() {
           ></span>
           {activeJin ? (
             <div className={'relative'}>
-              <Image width={200} height={600} src={'/images/game/jinsil_standing.png'} alt={'진실 앞모습'} />
+              <Image width={200} height={600} src={`${IMAGE_ROOT}/images/game/jinsil_standing.png`} alt={'진실 앞모습'} />
               <SpeechBubble text={'반갑습니다! 탭키 또는 마우스로 아래 방명록을 눌러 깃허브/기술로그에 방문해주세요!'} />
             </div>
           ) : (
             <>
-              <Image className={'relative'} width={200} height={600} src={'/images/game/jinsil_back.webp'} alt={'진실 뒷모습'} />
+              <Image className={'relative'} width={200} height={600} src={`${IMAGE_ROOT}/images/game/jinsil_back.webp`} alt={'진실 뒷모습'} />
               <div className='absolute -top-4 left-1/2 flex -translate-x-1/2 flex-col items-center'>
                 <div className='animate-bounce rounded border-2 border-black bg-white px-2 py-1 text-xs font-bold whitespace-nowrap'>
                   <span className='text-black'>[Enter or 클릭]</span>
@@ -96,7 +97,7 @@ export default function GameContact() {
             'right-1/2 -bottom-15 w-[650px] translate-x-1/2',
           )}
         >
-          <Image fill src={'/images/game/info_table.png'} priority alt={'탁자'} />
+          <Image fill src={`${IMAGE_ROOT}/images/game/info_table.png`} priority alt={'탁자'} />
           <button
             className='group animate-stardust-float absolute top-0 left-1/2 aspect-[750/408] -translate-x-1/2 scale-60 cursor-pointer transition-all focus:outline-none'
             onClick={() => openView('contact')}
@@ -104,9 +105,9 @@ export default function GameContact() {
             <span
               className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/60 via-orange-400/40 to-white/40 opacity-0 blur-md transition-all duration-500 group-focus:scale-200 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}
             ></span>
-            <Image className={'relative'} src={'/images/game/book.png'} width={300} height={300} alt={'방명록'} />
+            <Image className={'relative'} src={`${IMAGE_ROOT}/images/game/book.png`} width={300} height={300} alt={'방명록'} />
             <Image
-              src='/images/game/stardust.png'
+              src={`${IMAGE_ROOT}/images/game/stardust.png`}
               width={300}
               height={300}
               className='animate-stardust-fade absolute -inset-10 object-contain transition-all'
@@ -156,7 +157,7 @@ export default function GameContact() {
 
               <div className='flex h-40 w-40 items-center justify-center border-4 border-[#8d6e63] bg-white p-2 shadow-[4px_4px_0px_0px_rgba(141,110,99,0.3)]'>
                 <div className='flex h-full w-full items-center justify-center bg-[#3e2723] text-center text-[10px]'>
-                  <Image src={`/images/classic/contact_qr.png`} alt={'developer.js.corn@gmail.com'} width={250} height={250} />
+                  <Image src={`${IMAGE_ROOT}/images/classic/contact_qr.png`} alt={'developer.js.corn@gmail.com'} width={250} height={250} />
                 </div>
               </div>
 

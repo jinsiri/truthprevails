@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Fragment, useState } from 'react';
 import ThemedImage from '@/components/ThemedImage';
 import { EXPERIENCE, EXPERIENCE_TABS } from '@/constants/dataset';
+import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 export default function ClassicCareer() {
   const [activeTab, setActiveTab] = useState(0);
@@ -70,8 +71,8 @@ export default function ClassicCareer() {
 
         <ThemedImage
           className={'bottom-0 mt-10 inline-block lg:absolute lg:left-0 lg:mt-0 lg:w-1/2 lg:-scale-x-100 xl:w-1/3'}
-          lightSrc={`/images/classic/career.webp`}
-          darkSrc={`/images/classic/career_w.webp`}
+          lightSrc={`${IMAGE_ROOT}/images/classic/career.webp`}
+          darkSrc={`${IMAGE_ROOT}/images/classic/career_w.webp`}
           alt={'My career step'}
           width={700}
           height={700}

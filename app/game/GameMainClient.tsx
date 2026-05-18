@@ -10,6 +10,7 @@ import Cloud from '@/components/game/Cloud';
 import Guide from '@/components/game/Guide';
 import clsx from 'clsx';
 import LoadingSpinner from '@/components/game/LoadingSpinner';
+import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 type Direction = 'up' | 'down' | 'left' | 'right';
 
@@ -31,7 +32,7 @@ const INTERACTION_POINTS = [
     left: 5,
     range: [12, 18],
     path: '/game/learning',
-    image: '/images/game/school.webp',
+    image: `${IMAGE_ROOT}/images/game/school.webp`,
     width: 990,
     height: 775,
     style: 'bottom-[76%] left-[5%] w-[28%]',
@@ -42,7 +43,7 @@ const INTERACTION_POINTS = [
     left: 36,
     range: [44, 49],
     path: '/game/career',
-    image: '/images/game/building.webp',
+    image: `${IMAGE_ROOT}/images/game/building.webp`,
     width: 557,
     height: 691,
     style: 'bottom-[80%] left-[36%] w-[29%]',
@@ -53,7 +54,7 @@ const INTERACTION_POINTS = [
     left: 69,
     range: [68, 71],
     path: '/game/contact',
-    image: '/images/game/info.webp',
+    image: `${IMAGE_ROOT}/images/game/info.webp`,
     width: 280,
     height: 323,
     style: 'bottom-[80%] left-[69%] w-[15%]',
@@ -227,7 +228,9 @@ export default function GameMainClient() {
 
   const isSide = lastDirection === 'left' || lastDirection === 'right';
   const isBackOrFront = lastDirection === 'up' || lastDirection === 'down';
-  const imageSrc = isSide ? `/images/game/side_0${isJumping ? 2 : frame + 1}.webp` : `/images/game/${lastDirection === 'up' ? 'back' : 'front_book'}.png`;
+  const imageSrc = isSide
+    ? `${IMAGE_ROOT}/images/game/side_0${isJumping ? 2 : frame + 1}.webp`
+    : `${IMAGE_ROOT}/images/game/${lastDirection === 'up' ? 'back' : 'front_book'}.png`;
 
   const transformStyle = isSide ? `scaleX(${lastDirection === 'left' ? -1 : 1}) translateY(${-positionY}px)` : `translateY(${-positionY}px)`;
 
@@ -282,7 +285,12 @@ export default function GameMainClient() {
               <Image className='relative' src={obj.image} alt={obj.name} fill />
             </button>
           ))}
-          <div className="absolute -bottom-[4%] z-30 h-30 w-full bg-[url('/images/game/flowers_mini.webp')] bg-contain bg-repeat-x"></div>
+          <div
+            className={`absolute -bottom-[4%] z-30 h-30 w-full bg-contain bg-repeat-x`}
+            style={{
+              backgroundImage: `url(${IMAGE_ROOT}/images/game/flowers_mini.webp)`,
+            }}
+          ></div>
           <div className='pattern-tree absolute bottom-[100%] h-60 w-full'></div>
 
           <div
