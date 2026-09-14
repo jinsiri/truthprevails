@@ -1,5 +1,7 @@
 'use client';
 
+import GameDialog from '@/components/game/GameDialog';
+
 import { useUIStore } from '@/store/useUIStore';
 import { X, BriefcaseBusiness } from 'lucide-react';
 import useQuestStore from '@/store/useQuestStore';
@@ -57,9 +59,14 @@ export default function Inventory() {
   return (
     <section className={'relative'}>
       {activeView === 'inventoryWindow' && (
-        <div className='animate-in fade-in zoom-in-95 absolute top-0 right-0 z-51 w-80 rounded-sm border-4 border-stone-950 bg-stone-800 p-5 text-stone-200 shadow-[4px_4px_0px_rgba(0,0,0,0.3)] duration-200'>
+        <GameDialog
+          label='인벤토리'
+          onClose={closeView}
+          className='animate-in fade-in zoom-in-95 absolute top-0 right-0 z-51 w-80 rounded-sm border-4 border-stone-950 bg-stone-800 p-5 text-stone-200 shadow-[4px_4px_0px_rgba(0,0,0,0.3)] duration-200'
+        >
           <button
             className='absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center text-stone-400 transition-colors hover:text-white'
+            aria-label='닫기'
             onClick={closeView}
           >
             <X size={20} />
@@ -102,11 +109,12 @@ export default function Inventory() {
               </div>
             )}
           </div>
-        </div>
+        </GameDialog>
       )}
 
       <button
-        onClick={() => {
+        onClick={(event) => {
+          event.currentTarget.focus();
           openView('inventoryWindow');
           incrementProgress(3);
         }}

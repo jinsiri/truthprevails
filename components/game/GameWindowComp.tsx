@@ -1,5 +1,7 @@
 'use client';
 
+import GameDialog from '@/components/game/GameDialog';
+
 import { SparkleIcon, Sprout, X } from 'lucide-react';
 import { useUIStore } from '@/store/useUIStore';
 import useQuestStore from '@/store/useQuestStore';
@@ -48,8 +50,16 @@ export function MasteredSkills() {
   return (
     <section className={'relative'}>
       {activeView === 'skillWindow' && (
-        <div className='absolute top-0 right-0 z-51 max-h-[70vh] w-64 overflow-y-auto rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] dark:border-amber-100 dark:bg-orange-950'>
-          <button className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'} onClick={closeView}>
+        <GameDialog
+          label='주력 스킬'
+          onClose={closeView}
+          className='absolute top-0 right-0 z-51 max-h-[70vh] w-64 overflow-y-auto rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] dark:border-amber-100 dark:bg-orange-950'
+        >
+          <button
+            className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'}
+            aria-label='닫기'
+            onClick={closeView}
+          >
             <X />
           </button>
           <h3 className='mb-6 flex items-center gap-2 border-b-2 border-amber-200 pb-2 text-lg font-black text-amber-950 uppercase'>
@@ -63,15 +73,16 @@ export function MasteredSkills() {
           <StatBar label='PostgreSQL' level={80} colorClass='bg-emerald-500' />
           <StatBar label='Linux / Docker' level={75} colorClass='bg-slate-500' />
           <p className='mt-4 text-right text-[12px] leading-tight break-keep text-stone-500'>* 경험치는 실제 프로젝트 기여도 기반입니다.</p>
-        </div>
+        </GameDialog>
       )}
       <button
-        onClick={() => {
+        onClick={(event) => {
+          event.currentTarget.focus();
           openView('skillWindow');
           incrementProgress(2);
         }}
         className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-blue-600 p-2 text-white transition dark:bg-blue-200 dark:text-black'
-        aria-label='Toggle dark mode'
+        aria-label='주력 스킬 열기'
       >
         <SparkleIcon />
       </button>
@@ -86,8 +97,16 @@ export function CharacterStatus() {
   return (
     <section className={'relative'}>
       {activeView === 'statWindow' && (
-        <div className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] dark:border-amber-100 dark:bg-orange-950'>
-          <button className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'} onClick={closeView}>
+        <GameDialog
+          label='캐릭터 스탯'
+          onClose={closeView}
+          className='absolute top-0 right-0 z-51 w-64 rounded-sm border-4 border-amber-900 bg-orange-50 p-6 shadow-[4px_4px_0px_rgba(0,0,0,0.2)] dark:border-amber-100 dark:bg-orange-950'
+        >
+          <button
+            className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'}
+            aria-label='닫기'
+            onClick={closeView}
+          >
             <X />
           </button>
 
@@ -100,15 +119,16 @@ export function CharacterStatus() {
           <StatBar label='DEX (Detail)' level={95} colorClass='bg-orange-500' description={'1px도 놓치지 않는 UI 디테일'} />
           <StatBar label='CHA (Teamwork)' level={95} colorClass='bg-red-500' description={'협업과 소통, 긍정적인 에너지'} />
           <StatBar label='LUK (Growth)' level={95} colorClass='bg-orange-700' description={'새로운 기술을 빨아들이는 학습 운'} />
-        </div>
+        </GameDialog>
       )}
       <button
-        onClick={() => {
+        onClick={(event) => {
+          event.currentTarget.focus();
           openView('statWindow');
           incrementProgress(1);
         }}
         className='hover:bg-elevated inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-green-600 p-2 text-white transition dark:bg-green-200 dark:text-black'
-        aria-label='Toggle dark mode'
+        aria-label='캐릭터 스탯 열기'
       >
         <Sprout />
       </button>

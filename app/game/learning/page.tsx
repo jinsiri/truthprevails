@@ -19,12 +19,14 @@ export default function GameLearning() {
   const [skillSet, setSkillSet] = useState(['지식']);
   const [textClass, setTextClass] = useState('');
   const incrementProgress = useQuestStore((state) => state.incrementProgress);
+  const selectEducation = (mode: (typeof EDUCATION)[number]) => {
+    setHide(true);
+    setSkillSet(mode.skillSet);
+    setTextClass(mode.textClass);
+  };
   const { vIdx, handleKeyDown, setVIdx } = useKeyboardList({
     vItems: EDUCATION,
-    onSelectV: (mode) => {
-      setHide(true);
-      setSkillSet(mode.skillSet);
-    },
+    onSelectV: selectEducation,
   });
 
   useEffect(() => {
@@ -64,16 +66,15 @@ export default function GameLearning() {
           </h2>
           <ol ref={containerRef} onKeyDown={handleKeyDown} tabIndex={0} className={'mode-btns sm:text-md text-sm outline-none md:text-lg lg:text-xl'}>
             {EDUCATION.map((mode, index) => (
-              <li key={`EDU_${index}`} onMouseEnter={() => setVIdx(index)} onClick={() => setHide(true)} className={'mb-2'}>
+              <li key={`EDU_${index}`} className={'mb-2'}>
                 <button
+                  data-keyboard-v={index}
+                  onFocus={() => setVIdx(index)}
                   className={clsx(
                     'flex w-full cursor-pointer items-center justify-between rounded-md border-2 p-4 transition-all hover:bg-green-800',
                     vIdx === index && 'bg-green-800',
                   )}
-                  onClick={() => {
-                    setSkillSet(mode.skillSet);
-                    setTextClass(mode.textClass);
-                  }}
+                  onClick={() => selectEducation(mode)}
                 >
                   {index + 1}. {mode.title}
                   <small className={'text-gray-400'}>

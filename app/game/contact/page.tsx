@@ -1,5 +1,6 @@
 'use client';
 
+import GameDialog from '@/components/game/GameDialog';
 import ThemedImage from '@/components/ThemedImage';
 import Image from 'next/image';
 import { useUIStore } from '@/store/useUIStore';
@@ -30,7 +31,6 @@ const MODES: Mode[] = [
 export default function GameContact() {
   const countRef = useRef(false);
   const focusingRef = useRef<HTMLButtonElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const { activeView, openView, closeView } = useUIStore();
   const incrementProgress = useQuestStore((state) => state.incrementProgress);
   const { vIdx, handleKeyDown, setVIdx } = useKeyboardList({
@@ -42,10 +42,6 @@ export default function GameContact() {
   useEffect(() => {
     focusingRef.current?.focus();
   }, []);
-
-  useEffect(() => {
-    containerRef.current?.focus();
-  }, [activeView]);
 
   useEffect(() => {
     if (countRef.current) return;
@@ -100,7 +96,10 @@ export default function GameContact() {
           <Image fill src={`${IMAGE_ROOT}/images/game/info_table.png`} priority alt={'탁자'} />
           <button
             className='group animate-stardust-float absolute top-0 left-1/2 aspect-[750/408] -translate-x-1/2 scale-60 cursor-pointer transition-all focus:outline-none'
-            onClick={() => openView('contact')}
+            onClick={(event) => {
+              event.currentTarget.focus();
+              openView('contact');
+            }}
           >
             <span
               className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/60 via-orange-400/40 to-white/40 opacity-0 blur-md transition-all duration-500 group-focus:scale-200 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}
@@ -116,59 +115,62 @@ export default function GameContact() {
           </button>
         </div>
 
-        <div
-          className={clsx(
-            'absolute top-1/2 left-1/2 h-[70vh] w-[90%] max-w-[100vh] -translate-1/2 border-4 border-[#3e2723] bg-[#5d4037] p-2 font-mono shadow-[8px_8px_0px_0px_rgba(0,0,0,0.2)]',
-            activeView === 'contact' ? 'visible' : 'hidden',
-          )}
-        >
-          <div className='relative flex h-full min-h-[400px] flex-col overflow-y-auto border-2 border-[#d7ccc8] bg-[#fff9eb] md:flex-row'>
-            <div className='absolute top-0 bottom-0 left-1/2 hidden w-px bg-[#d7ccc8] shadow-[0_0_10px_rgba(0,0,0,0.1)] md:block'></div>
+        {activeView === 'contact' && (
+          <GameDialog
+            label='방명록'
+            onClose={closeView}
+            className={clsx(
+              'absolute top-1/2 left-1/2 h-[70vh] w-[90%] max-w-[100vh] -translate-1/2 border-4 border-[#3e2723] bg-[#5d4037] p-2 font-mono shadow-[8px_8px_0px_0px_rgba(0,0,0,0.2)]',
+            )}
+          >
+            <div className='relative flex h-full min-h-[400px] flex-col overflow-y-auto border-2 border-[#d7ccc8] bg-[#fff9eb] md:flex-row'>
+              <div className='absolute top-0 bottom-0 left-1/2 hidden w-px bg-[#d7ccc8] shadow-[0_0_10px_rgba(0,0,0,0.1)] md:block'></div>
 
-            <button className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'} onClick={closeView}>
-              <X />
-            </button>
+              <button
+                className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'}
+                aria-label='닫기'
+                onClick={closeView}
+              >
+                <X />
+              </button>
 
-            <div
-              ref={containerRef}
-              className='mode-btns type-b flex flex-1 flex-col items-center justify-center space-y-4 p-8 outline-none'
-              onKeyDown={handleKeyDown}
-              tabIndex={0}
-            >
-              <h3 className='mb-4 border-b-2 border-dashed border-[#d7ccc8] pb-2 text-center text-xl font-bold text-[#5d4037] md:text-3xl'>VISITOR LOG</h3>
-              {MODES.map((mode, index) => (
-                <Link
-                  key={mode.address}
-                  onMouseEnter={() => setVIdx(index)}
-                  className={clsx(
-                    'w-full bg-[#8d6e63] px-4 py-3 text-center text-white shadow-[4px_4px_0px_0px_#5d4037] transition-all hover:translate-y-1 hover:shadow-none active:bg-[#5d4037]',
-                    vIdx === index && 'active translate-y-1 shadow-none active:bg-[#5d4037]',
-                  )}
-                  href={mode.address}
-                  target='_blank'
-                >
-                  {mode.title}
-                </Link>
-              ))}
-            </div>
-
-            <div className='flex flex-1 flex-col items-center justify-center bg-[#fdf5e6] p-8'>
-              <div className='mb-4 text-center text-sm text-[#8d6e63] italic md:text-lg'>Scan to Contact Me!</div>
-
-              <div className='flex h-40 w-40 items-center justify-center border-4 border-[#8d6e63] bg-white p-2 shadow-[4px_4px_0px_0px_rgba(141,110,99,0.3)]'>
-                <div className='flex h-full w-full items-center justify-center bg-[#3e2723] text-center text-[10px]'>
-                  <Image src={`${IMAGE_ROOT}/images/classic/contact_qr.png`} alt={'developer.js.corn@gmail.com'} width={250} height={250} />
-                </div>
+              <div className='mode-btns type-b flex flex-1 flex-col items-center justify-center space-y-4 p-8 outline-none' onKeyDown={handleKeyDown}>
+                <h3 className='mb-4 border-b-2 border-dashed border-[#d7ccc8] pb-2 text-center text-xl font-bold text-[#5d4037] md:text-3xl'>VISITOR LOG</h3>
+                {MODES.map((mode, index) => (
+                  <Link
+                    key={mode.address}
+                    data-keyboard-v={index}
+                    onFocus={() => setVIdx(index)}
+                    className={clsx(
+                      'w-full bg-[#8d6e63] px-4 py-3 text-center text-white shadow-[4px_4px_0px_0px_#5d4037] transition-all hover:translate-y-1 hover:shadow-none active:bg-[#5d4037]',
+                      vIdx === index && 'active translate-y-1 shadow-none active:bg-[#5d4037]',
+                    )}
+                    href={mode.address}
+                    target='_blank'
+                  >
+                    {mode.title}
+                  </Link>
+                ))}
               </div>
 
-              <p className='mt-6 text-center text-xs leading-relaxed text-[#a1887f] md:text-lg'>
-                Leave a mark in <br /> &quot;TRUTH WORLD&quot;
-              </p>
-            </div>
-          </div>
+              <div className='flex flex-1 flex-col items-center justify-center bg-[#fdf5e6] p-8'>
+                <div className='mb-4 text-center text-sm text-[#8d6e63] italic md:text-lg'>Scan to Contact Me!</div>
 
-          <div className='absolute -top-6 left-12 h-12 w-[3%] border-2 border-blue-900 bg-blue-700 shadow-md'></div>
-        </div>
+                <div className='flex h-40 w-40 items-center justify-center border-4 border-[#8d6e63] bg-white p-2 shadow-[4px_4px_0px_0px_rgba(141,110,99,0.3)]'>
+                  <div className='flex h-full w-full items-center justify-center bg-[#3e2723] text-center text-[10px]'>
+                    <Image src={`${IMAGE_ROOT}/images/classic/contact_qr.png`} alt={'developer.js.corn@gmail.com'} width={250} height={250} />
+                  </div>
+                </div>
+
+                <p className='mt-6 text-center text-xs leading-relaxed text-[#a1887f] md:text-lg'>
+                  Leave a mark in <br /> &quot;TRUTH WORLD&quot;
+                </p>
+              </div>
+            </div>
+
+            <div className='absolute -top-6 left-12 h-12 w-[3%] border-2 border-blue-900 bg-blue-700 shadow-md'></div>
+          </GameDialog>
+        )}
       </section>
     </main>
   );

@@ -45,7 +45,8 @@ export default function Home() {
           {MODES.map((mode, index) => (
             <Link
               key={mode.address}
-              onMouseEnter={() => setVIdx(index)}
+              data-keyboard-v={index}
+              onFocus={() => setVIdx(index)}
               className={clsx('mt-2 flex items-center justify-between pr-2 pl-8 text-xl hover:bg-white/20 md:text-2xl', vIdx === index && 'active bg-white/20')}
               href={mode.address}
             >

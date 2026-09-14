@@ -16,11 +16,12 @@ export default function GameCareer() {
   const containerRef = useRef<HTMLUListElement>(null);
   const careerDetailRef = useRef<HTMLDivElement>(null);
   const { activeView, openView } = useUIStore();
+  const previousView = useRef(activeView);
   const incrementProgress = useQuestStore((state) => state.incrementProgress);
   const { vIdx, hIdx, handleKeyDown, setVIdx, setHIdx } = useKeyboardList({
     vItems: activeView === 'career' ? [] : EXPERIENCE_TABS,
     onSelectV: () => openView('career'),
-    hItems: activeView === 'careerDetail' ? [] : EXPERIENCE_TABS,
+    hItems: activeView === 'career' ? EXPERIENCE_TABS : [],
     onSelectH: () => {
       openView('careerDetail');
     },
@@ -33,6 +34,11 @@ export default function GameCareer() {
   }, [incrementProgress]);
 
   useEffect(() => {
+    const isPopup = (view: typeof activeView) => view !== null && view !== 'career' && view !== 'careerDetail';
+    const popupChanged = isPopup(activeView) || isPopup(previousView.current);
+    previousView.current = activeView;
+    if (popupChanged) return;
+
     const timer = setTimeout(() => {
       if (activeView === 'career') {
         setHIdx(vIdx);
@@ -91,14 +97,19 @@ export default function GameCareer() {
                   className={clsx('mode-btns flex cursor-pointer flex-col gap-x-6 gap-y-2 text-xl outline-none md:w-[80%] md:text-2xl')}
                 >
                   {EXPERIENCE_TABS.map((mode, index) => (
-                    <li
-                      key={mode}
-                      onMouseEnter={() => setVIdx(index)}
-                      onClick={() => openView('career')}
-                      className={clsx('flex items-center justify-between px-4 py-2', vIdx === index && 'active bg-gray-200')}
-                    >
-                      {mode}
-                      {vIdx === index && <span>Enter</span>}
+                    <li key={mode}>
+                      <button
+                        data-keyboard-v={index}
+                        onFocus={() => setVIdx(index)}
+                        onClick={() => {
+                          setVIdx(index);
+                          openView('career');
+                        }}
+                        className={clsx('flex w-full cursor-pointer items-center justify-between px-4 py-2', vIdx === index && 'active bg-gray-200')}
+                      >
+                        {mode}
+                        {vIdx === index && <span>Enter</span>}
+                      </button>
                     </li>
                   ))}
                 </ul>

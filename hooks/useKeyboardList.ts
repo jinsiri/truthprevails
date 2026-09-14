@@ -20,23 +20,41 @@ export function useKeyboardList<T, U>({ vItems, hItems, onSelectV, onSelectH }: 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       const { code } = e;
+      const target = e.target as HTMLElement;
+      if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || target.closest('input, textarea, select, [contenteditable="true"]')) return;
+
+      const focusItem = (section: 'v' | 'h', index: number) => {
+        e.currentTarget.querySelector<HTMLElement>(`[data-keyboard-${section}="${index}"]`)?.focus();
+      };
 
       if (['ArrowUp', 'ArrowDown', 'KeyW', 'KeyS'].includes(code)) {
-        e.preventDefault();
         if (!vItems || vItems.length === 0) return;
+        e.preventDefault();
         const step = code === 'ArrowUp' || code === 'KeyW' ? -1 : 1;
         setActiveSection('v');
-        setVIdx((prev) => getNextIdx(prev, step, vItems.length));
+        const next = getNextIdx(vIdx, step, vItems.length);
+        setVIdx(next);
+        focusItem('v', next);
       } else if (['ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD'].includes(code)) {
-        e.preventDefault();
         if (!hItems || hItems.length === 0) return;
+        e.preventDefault();
         const step = code === 'ArrowLeft' || code === 'KeyA' ? -1 : 1;
         setActiveSection('h');
-        setHIdx((prev) => getNextIdx(prev, step, hItems.length));
+        const next = getNextIdx(hIdx, step, hItems.length);
+        setHIdx(next);
+        focusItem('h', next);
       } else if (code === 'Enter' || code === 'Space') {
+        if (target !== e.currentTarget) {
+          const link = target.closest<HTMLAnchorElement>('a[href]');
+          if (code === 'Space' && link) {
+            e.preventDefault();
+            link.click();
+          }
+          return;
+        }
         e.preventDefault();
-        if (activeSection === 'v' && vItems && onSelectV) onSelectV(vItems[vIdx]);
-        if (activeSection === 'h' && hItems && onSelectH) onSelectH(hItems[hIdx]);
+        if (activeSection === 'v' && vItems && vItems[vIdx] !== undefined && onSelectV) onSelectV(vItems[vIdx]);
+        if (activeSection === 'h' && hItems && hItems[hIdx] !== undefined && onSelectH) onSelectH(hItems[hIdx]);
       }
     },
     [vItems, hItems, vIdx, hIdx, activeSection, onSelectV, onSelectH],

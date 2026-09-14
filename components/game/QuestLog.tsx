@@ -1,5 +1,7 @@
 'use client';
 
+import GameDialog from '@/components/game/GameDialog';
+
 import { Scroll, X } from 'lucide-react';
 import { useUIStore } from '@/store/useUIStore';
 import useQuestStore from '@/store/useQuestStore';
@@ -41,8 +43,16 @@ export function UserQuestLog() {
   return (
     <section className={'relative'}>
       {activeView === 'questWindow' && (
-        <div className='absolute top-0 right-0 z-51 w-80 border-4 border-[#5d4037] bg-[#f4e4bc] p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.2)]'>
-          <button className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center text-black'} onClick={closeView}>
+        <GameDialog
+          label='퀘스트'
+          onClose={closeView}
+          className='absolute top-0 right-0 z-51 w-80 border-4 border-[#5d4037] bg-[#f4e4bc] p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.2)]'
+        >
+          <button
+            className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center text-black'}
+            aria-label='닫기'
+            onClick={closeView}
+          >
             <X />
           </button>
 
@@ -63,12 +73,15 @@ export function UserQuestLog() {
               </>
             )}
           </div>
-        </div>
+        </GameDialog>
       )}
       <button
-        onClick={() => openView('questWindow')}
+        onClick={(event) => {
+          event.currentTarget.focus();
+          openView('questWindow');
+        }}
         className='hover:bg-elevated z-50 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-purple-600 p-2 text-white transition dark:bg-purple-200 dark:text-black'
-        aria-label='Toggle dark mode'
+        aria-label='퀘스트 열기'
       >
         <Scroll />
       </button>
