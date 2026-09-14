@@ -14,12 +14,12 @@ interface Mode {
 
 const MODES: Mode[] = [
   {
-    korNm: '게임 모드',
-    address: '/game',
-  },
-  {
     korNm: '클래식 모드',
     address: '/classic',
+  },
+  {
+    korNm: '게임 모드',
+    address: '/game',
   },
 ];
 
