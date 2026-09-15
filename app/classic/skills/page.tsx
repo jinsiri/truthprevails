@@ -45,11 +45,11 @@ const tabInfo = [
   { id: 'icon', text: '아이콘' },
   { id: 'text', text: '텍스트' },
 ];
-const frontendTextList = ['Html5', 'Css3', 'SCSS', 'Javascript', 'Typescript', 'React', 'Next'];
+const frontendTextList = ['HTML5', 'CSS3', 'SCSS/SASS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Recoil', 'Redux', 'Zustand', 'TanStack Query', '웹 접근성', 'Cross Browsing'];
 const frontendIcons = [SiHtml5, SiCss3, BsFiletypeScss, SiJavascript, SiTypescript, SiReact, SiNextdotjs];
-const backendTextList = ['Java', 'Spring', 'Springboot', 'Postgresql', 'Docker', 'Linux'];
+const backendTextList = ['Java', 'Spring Boot', 'Spring Data JPA', 'PostgreSQL', 'Supabase'];
 const backendIcons = [FaJava, SiSpring, SiSpringboot, SiPostgresql, FaDocker, FaLinux];
-const toolsTextList = ['Git', 'Github'];
+const toolsTextList = ['Linux', 'Docker', 'Git', 'Vercel', 'Figma'];
 const toolsIcons = [FaGit, FaGithub];
 
 export default function ClassicSkills() {

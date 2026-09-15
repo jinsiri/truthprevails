@@ -15,7 +15,11 @@ export default function ClassicContact() {
         <ul className={'w-full space-y-2 rounded-xl border-4 bg-gray-50/50 p-4 md:space-y-6 md:p-10'}>
           <li className={'items-center gap-1 md:flex md:gap-2'}>
             <h3 className={'w-40 text-purple-700 dark:text-purple-300'}>E-MAIL</h3>
-            <a href={'mailto:developer.js.corn@gmail.com'}>developer.js.corn@gmail.com</a>
+            <a href={'mailto:jinsil.kwon.dev@gmail.com'}>jinsil.kwon.dev@gmail.com</a>
+          </li>
+          <li className={'items-center gap-1 md:flex md:gap-2'}>
+            <h3 className={'w-40 text-purple-700 dark:text-purple-300'}>PHONE</h3>
+            <a href={'tel:01034845519'}>010-3484-5519</a>
           </li>
           <li className={'items-center gap-1 md:flex md:gap-2'}>
             <h3 className={'w-40 text-purple-700 uppercase dark:text-purple-300'}>Github</h3>
@@ -51,7 +55,7 @@ export default function ClassicContact() {
       >
         <Image
           src={`${IMAGE_ROOT}/images/classic/contact_qr.png`}
-          alt={'developer.js.corn@gmail.com'}
+          alt={'jinsil.kwon.dev@gmail.com'}
           width={250}
           height={250}
           className={'border-20 border-purple-300 dark:border-[#463058]'}

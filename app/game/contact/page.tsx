@@ -20,6 +20,10 @@ interface Mode {
 
 const MODES: Mode[] = [
   {
+    title: 'EMAIL',
+    address: 'mailto:jinsil.kwon.dev@gmail.com',
+  },
+  {
     title: 'GITHUB',
     address: 'https://github.com/jinsiri',
   },
@@ -158,7 +162,7 @@ export default function GameContact() {
 
                 <div className='flex h-40 w-40 items-center justify-center border-4 border-[#8d6e63] bg-white p-2 shadow-[4px_4px_0px_0px_rgba(141,110,99,0.3)]'>
                   <div className='flex h-full w-full items-center justify-center bg-[#3e2723] text-center text-[10px]'>
-                    <Image src={`${IMAGE_ROOT}/images/classic/contact_qr.png`} alt={'developer.js.corn@gmail.com'} width={250} height={250} />
+                    <Image src={`${IMAGE_ROOT}/images/classic/contact_qr.png`} alt={'jinsil.kwon.dev@gmail.com'} width={250} height={250} />
                   </div>
                 </div>
 

@@ -71,14 +71,14 @@ export default function GameLearning() {
                   data-keyboard-v={index}
                   onFocus={() => setVIdx(index)}
                   className={clsx(
-                    'flex w-full cursor-pointer items-center justify-between rounded-md border-2 p-4 transition-all hover:bg-green-800',
+                    'grid w-full cursor-pointer grid-cols-1 gap-1 rounded-md border-2 p-4 text-left transition-all hover:bg-green-800 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-x-4',
                     vIdx === index && 'bg-green-800',
                   )}
                   onClick={() => selectEducation(mode)}
                 >
-                  {index + 1}. {mode.title}
-                  <small className={'text-gray-400'}>
-                    ({mode.date} / {mode.description})
+                  <span>{index + 1}. {mode.title}</span>
+                  <small className={'text-left text-xs leading-relaxed text-gray-300 sm:max-w-[250px] sm:text-right sm:text-sm'}>
+                    ({mode.date} / {mode.gameDescription ?? mode.description})
                   </small>
                 </button>
               </li>
