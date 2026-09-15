@@ -31,7 +31,7 @@ const MODES: Mode[] = [
     image: '/images/classic/about.webp',
     previewImage: {
       day: `${IMAGE_ROOT}/images/preview_classic_day.png`,
-      night: `${IMAGE_ROOT}/images/preview_classic_night.png`,
+      night: `${IMAGE_ROOT}/images/preview_classic_night.png?v=2`,
     },
   },
   {
