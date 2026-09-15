@@ -3,7 +3,7 @@
 import { TimelineItem } from '@/components/classic/TimelineItem';
 import { motion } from 'framer-motion';
 import ThemedImage from '@/components/ThemedImage';
-import { EDUCATION } from '@/constants/dataset';
+import { EDUCATION, PROJECTS } from '@/constants/dataset';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 export default function ClassicLearning() {
@@ -49,27 +49,24 @@ export default function ClassicLearning() {
         />
       </div>
 
-      {/*<motion.div
-        className={'pb-10 pl-6 lg:absolute lg:bottom-0 lg:left-0 lg:pl-10'}
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{
-          delay: 0.7,
-          duration: 0.3,
-        }}
+      <motion.div
+        className={'mt-16 px-6 pb-16 lg:mt-24 lg:ml-6 lg:w-2/3 lg:pr-10 xl:ml-10 xl:w-3/4 xl:pr-[100px]'}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.4 }}
       >
-        <h3 className={'mt-10 text-2xl font-black uppercase md:text-3xl lg:mt-20 lg:text-5xl'}>Side projects</h3>
-        <ul className={'mt-4 text-base md:text-xl'}>
-          <li className='relative pl-6'>
-            <div className={'absolute left-0 mt-1 h-3 w-3 rounded-full bg-blue-700 xl:mt-2'}></div>
-            <Link href={'#github_address'}>할 일 관리 웹 어플리케이션 YOURTODO</Link>
-          </li>
-          <li className='relative pl-6'>
-            <div className={'absolute left-0 mt-1 h-3 w-3 rounded-full bg-blue-700 xl:mt-2'}></div>
-            <Link href={'#github_address'}>그룹웨어 EASY-C</Link>
-          </li>
-        </ul>
-      </motion.div>*/}
+        <h3 className={'text-2xl font-black uppercase md:text-3xl lg:text-5xl'}>Side Projects</h3>
+        <div className={'mt-6 grid gap-4 md:grid-cols-3'}>
+          {PROJECTS.map((project) => (
+            <article key={project.title} className={'rounded-xl border border-black/10 bg-white/30 p-4 text-left shadow-sm dark:border-white/10 dark:bg-black/20'}>
+              <p className={'text-xs font-medium text-gray-600 dark:text-gray-300'}>{project.date}</p>
+              <h4 className={'mt-2 text-lg font-black md:text-xl'}>{project.title}</h4>
+              <p className={'mt-2 text-sm leading-relaxed break-keep md:text-base'}>{project.description}</p>
+              <p className={'mt-3 text-xs leading-relaxed text-gray-600 dark:text-gray-300'}>{project.stack}</p>
+            </article>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }
