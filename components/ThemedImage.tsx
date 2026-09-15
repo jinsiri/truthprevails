@@ -11,9 +11,11 @@ interface ThemedImageProps {
   height?: number;
   priority?: boolean;
   fill?: boolean;
+  sizes?: string;
+  pixelated?: boolean;
 }
 
-export default function ThemedImage({ className, lightSrc, darkSrc, alt, width, height, priority = false, fill }: ThemedImageProps) {
+export default function ThemedImage({ className, lightSrc, darkSrc, alt, width, height, priority = false, fill, sizes, pixelated = true }: ThemedImageProps) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
@@ -51,8 +53,9 @@ export default function ThemedImage({ className, lightSrc, darkSrc, alt, width, 
       alt={alt}
       priority={priority}
       fill
+      sizes={sizes}
       style={{
-        imageRendering: 'pixelated',
+        imageRendering: pixelated ? 'pixelated' : 'auto',
       }}
     />
   ) : (
