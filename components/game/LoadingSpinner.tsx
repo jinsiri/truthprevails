@@ -1,6 +1,6 @@
 export default function LoadingSpinner() {
   return (
-    <div className='loading fixed z-[100] flex h-screen w-full items-center justify-center bg-blue-200'>
+    <div className='loading fixed z-[100] flex h-screen w-full items-center justify-center bg-blue-200 dark:bg-blue-950'>
       <div role='status'>
         <svg
           aria-hidden='true'

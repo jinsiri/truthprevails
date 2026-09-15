@@ -18,7 +18,7 @@ const traits = [
 
 export default function ClassicAbout() {
   return (
-    <section className='bg-indigo-300 lg:h-screen'>
+    <section className='bg-indigo-300 dark:bg-[#191b35] lg:h-screen'>
       <h2 className='text-4xl font-black uppercase md:text-5xl lg:text-7xl'>_About</h2>
       <div className='mt-10 items-center lg:flex'>
         <motion.div className='flex-shrink-0' initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 1, ease: 'easeOut' }}>

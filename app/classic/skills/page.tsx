@@ -56,7 +56,7 @@ export default function ClassicSkills() {
   const [activeTab, setActiveTab] = useState('icon');
 
   return (
-    <section className={'relative flex min-h-screen flex-col items-center bg-emerald-300 md:items-start md:overflow-hidden'}>
+    <section className={'relative flex min-h-screen flex-col items-center bg-emerald-300 dark:bg-[#12332c] md:items-start md:overflow-hidden'}>
       <h2 className={'w-full text-right text-4xl font-black uppercase md:text-5xl lg:text-7xl'}>Skills_</h2>
       <motion.div
         className={'-right-10 bottom-0 mt-10 max-w-1/2 md:absolute'}

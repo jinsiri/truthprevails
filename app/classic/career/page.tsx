@@ -10,7 +10,7 @@ export default function ClassicCareer() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section className={'relative flex min-h-screen w-full flex-col items-end bg-sky-300'}>
+    <section className={'relative flex min-h-screen w-full flex-col items-end bg-sky-300 dark:bg-[#10273b]'}>
       <h2 className={'absolute top-20 left-0 text-left text-4xl font-black uppercase md:text-5xl lg:text-7xl'}>_Career</h2>
       <motion.div
         initial={{ opacity: 0 }}
