@@ -52,7 +52,9 @@ export default function GameDialog({ children, className, label, onClose }: Game
 
     document.addEventListener('focusin', containFocus);
     document.addEventListener('keydown', handleTab, true);
-    focusFirst();
+    const initialFocus = getFocusable().find((element) => element.hasAttribute('data-dialog-initial-focus'));
+    if (initialFocus) initialFocus.focus();
+    else focusFirst();
 
     return () => {
       document.removeEventListener('focusin', containFocus);

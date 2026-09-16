@@ -126,6 +126,7 @@ export default function GameContact() {
                 {CONTACT_LINKS.map((mode, index) => (
                   <Link
                     key={mode.address}
+                    data-dialog-initial-focus={mode.address === `mailto:${CONTACT.email}` ? '' : undefined}
                     data-keyboard-v={index}
                     onFocus={() => setVIdx(index)}
                     className={clsx(
