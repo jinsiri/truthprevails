@@ -59,10 +59,10 @@ export default function ClassicLearning() {
         <div className={'mt-6 grid gap-4 md:grid-cols-3'}>
           {PROJECTS.map((project) => (
             <article key={project.title} className={'rounded-xl border border-black/10 bg-white/30 p-4 text-left shadow-sm dark:border-white/10 dark:bg-black/20'}>
-              <p className={'text-xs font-medium text-gray-600 dark:text-gray-300'}>{project.date}</p>
+              <p className={'text-xs font-medium text-gray-600 dark:text-gray-700'}>{project.date}</p>
               <h4 className={'mt-2 text-lg font-black md:text-xl'}>{project.title}</h4>
               <p className={'mt-2 text-sm leading-relaxed break-keep md:text-base'}>{project.description}</p>
-              <p className={'mt-3 text-xs leading-relaxed text-gray-600 dark:text-gray-300'}>{project.stack}</p>
+              <p className={'mt-3 text-xs leading-relaxed text-gray-600 dark:text-gray-700'}>{project.stack}</p>
             </article>
           ))}
         </div>
