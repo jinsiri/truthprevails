@@ -4,7 +4,7 @@ import ThemedImage from '@/components/ThemedImage';
 import Image from 'next/image';
 import { Footprints } from 'lucide-react';
 import SpeechBubble from '@/components/game/SpeechBubble';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useKeyboardList } from '@/hooks/useKeyboardList';
 import { EDUCATION } from '@/constants/dataset';
 import clsx from 'clsx';
@@ -16,6 +16,8 @@ export default function GameLearning() {
   const countRef = useRef(false);
   const containerRef = useRef<HTMLOListElement>(null);
   const [hide, setHide] = useState(false);
+  const [characterReady, setCharacterReady] = useState(false);
+  const handleCharacterReady = useCallback(() => setCharacterReady(true), []);
   const [skillSet, setSkillSet] = useState(['지식']);
   const [textClass, setTextClass] = useState('');
   const incrementProgress = useQuestStore((state) => state.incrementProgress);
@@ -51,9 +53,8 @@ export default function GameLearning() {
       />
 
       <section className='relative z-10 min-h-screen w-full p-8'>
-        {hide ? (
-          <CharacterAnimation skillSet={skillSet} textClass={textClass} />
-        ) : (
+        <CharacterAnimation skillSet={skillSet} textClass={textClass} active={hide} onReady={handleCharacterReady} />
+        {!(hide && characterReady) && (
           <div className='group absolute -bottom-15 left-0 hidden md:block lg:left-20 xl:left-30'>
             <Image width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} />
             <SpeechBubble text={'자세히 보고 싶은 과정을 선택하세요!'} />
@@ -76,7 +77,9 @@ export default function GameLearning() {
                   )}
                   onClick={() => selectEducation(mode)}
                 >
-                  <span>{index + 1}. {mode.title}</span>
+                  <span>
+                    {index + 1}. {mode.title}
+                  </span>
                   <small className={'text-left text-xs leading-relaxed text-gray-300 sm:max-w-[250px] sm:text-right sm:text-sm'}>
                     ({mode.date} / {mode.gameDescription ?? mode.description})
                   </small>
