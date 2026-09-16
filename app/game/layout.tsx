@@ -3,7 +3,8 @@ import GlobalKeyHandler from '@/components/game/GlobalKeyHandler';
 import BackButton from '@/components/game/BackButton';
 import { Suspense } from 'react';
 import LoadingSpinner from '@/components/game/LoadingSpinner';
-import { CharacterStatus, MasteredSkills } from '@/components/game/GameWindowComp';
+import { CharacterStatus } from '@/components/game/character/CharacterStatus';
+import { MasteredSkills } from '@/components/game/character/MasteredSkills';
 import { UserQuestLog } from '@/components/game/QuestLog';
 import Inventory from '@/components/game/Inventory';
 import Heart from '@/components/game/Heart';
@@ -29,10 +30,6 @@ export default function GameLayout({
       <Suspense fallback={<LoadingSpinner />}>
         <BackButton />
       </Suspense>
-
-      {/*{isGuideOn && (*/}
-      {/*<div className='pointer-events-none fixed inset-0 z-[100] bg-black/60' style={{ clipPath: 'polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%)' }}></div>*/}
-      {/*)}*/}
     </main>
   );
 }

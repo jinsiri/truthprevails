@@ -1,12 +1,8 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
-interface Quest {
-  id: number;
-  title: string;
-  current: number;
-  total: number;
-}
+import type { Quest } from '@/features/game/types';
+import { INITIAL_QUESTS } from '@/features/game/quests';
 
 interface QuestState {
   quests: Quest[];
@@ -17,12 +13,7 @@ interface QuestState {
 const useQuestStore = create<QuestState>()(
   persist(
     (set, get) => ({
-      quests: [
-        { id: 1, title: "개발자 '진실'의 스탯 확인", current: 0, total: 1 },
-        { id: 2, title: '주력 스킬 확인', current: 0, total: 1 },
-        { id: 3, title: '인벤토리 아이템 조사', current: 0, total: 1 },
-        { id: 4, title: '진실의 성장 기록 읽기', current: 0, total: 3 },
-      ],
+      quests: INITIAL_QUESTS.map((quest) => ({ ...quest })),
 
       incrementProgress: (id) =>
         set((state) => ({

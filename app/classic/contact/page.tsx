@@ -3,11 +3,12 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import ThemedImage from '@/components/ThemedImage';
+import { CONTACT } from '@/features/portfolio/contact';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 export default function ClassicContact() {
   return (
-    <section className={'relative min-h-screen bg-purple-200 px-6 pb-[50vw] dark:bg-[#281638] md:pb-0 lg:px-0 xl:h-screen xl:overflow-hidden'}>
+    <section className={'relative min-h-screen bg-purple-200 px-6 pb-[50vw] md:pb-0 lg:px-0 xl:h-screen xl:overflow-hidden dark:bg-[#281638]'}>
       <h2 className={'text-center text-2xl font-black uppercase md:text-5xl lg:text-7xl'}>Contact</h2>
       <div
         className={'my-10 items-center px-4 text-base font-medium md:my-20 md:px-10 md:text-2xl lg:flex lg:h-3/4 lg:text-3xl xl:my-0 xl:px-[25%] xl:text-4xl'}
@@ -15,16 +16,16 @@ export default function ClassicContact() {
         <ul className={'w-full space-y-2 rounded-xl border-4 bg-gray-50/50 p-4 md:space-y-6 md:p-10'}>
           <li className={'items-center gap-1 md:flex md:gap-2'}>
             <h3 className={'w-40 text-purple-700 dark:text-purple-300'}>E-MAIL</h3>
-            <a href={'mailto:jinsil.kwon.dev@gmail.com'}>jinsil.kwon.dev@gmail.com</a>
+            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
           </li>
           <li className={'items-center gap-1 md:flex md:gap-2'}>
             <h3 className={'w-40 text-purple-700 dark:text-purple-300'}>PHONE</h3>
-            <a href={'tel:01034845519'}>010-3484-5519</a>
+            <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
           </li>
           <li className={'items-center gap-1 md:flex md:gap-2'}>
             <h3 className={'w-40 text-purple-700 uppercase dark:text-purple-300'}>Github</h3>
-            <a href={'https://github.com/jinsiri'} target='_blank'>
-              https://github.com/jinsiri
+            <a href={CONTACT.github} target='_blank'>
+              {CONTACT.github}
             </a>
           </li>
         </ul>
@@ -47,7 +48,7 @@ export default function ClassicContact() {
 
       <motion.div
         className={
-          'top-40 right-0 hidden h-3/4 flex-col items-center rounded-tl-xl bg-purple-100 px-10 py-14 text-center dark:bg-[#21122e] md:flex xl:absolute xl:w-[20%] xl:max-w-1/3'
+          'top-40 right-0 hidden h-3/4 flex-col items-center rounded-tl-xl bg-purple-100 px-10 py-14 text-center md:flex xl:absolute xl:w-[20%] xl:max-w-1/3 dark:bg-[#21122e]'
         }
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -55,7 +56,7 @@ export default function ClassicContact() {
       >
         <Image
           src={`${IMAGE_ROOT}/images/classic/contact_qr.png`}
-          alt={'jinsil.kwon.dev@gmail.com'}
+          alt={CONTACT.email}
           width={250}
           height={250}
           className={'border-20 border-purple-300 dark:border-[#463058]'}

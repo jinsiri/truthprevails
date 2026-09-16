@@ -13,32 +13,15 @@ import useQuestStore from '@/store/useQuestStore';
 import { X } from 'lucide-react';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
-interface Mode {
-  title: string;
-  address: string;
-}
+import { CONTACT, CONTACT_LINKS } from '@/features/portfolio/contact';
 
-const MODES: Mode[] = [
-  {
-    title: 'EMAIL',
-    address: 'mailto:jinsil.kwon.dev@gmail.com',
-  },
-  {
-    title: 'GITHUB',
-    address: 'https://github.com/jinsiri',
-  },
-  {
-    title: 'TECH BLOG',
-    address: 'https://today-i-played.tistory.com/',
-  },
-];
 export default function GameContact() {
   const countRef = useRef(false);
   const focusingRef = useRef<HTMLButtonElement>(null);
   const { activeView, openView, closeView } = useUIStore();
   const incrementProgress = useQuestStore((state) => state.incrementProgress);
   const { vIdx, handleKeyDown, setVIdx } = useKeyboardList({
-    vItems: MODES,
+    vItems: CONTACT_LINKS,
     onSelectV: (mode) => window.open(mode.address, '_blank', 'noopener,noreferrer'),
   });
   const [activeJin, setActiveJin] = useState(false);
@@ -140,7 +123,7 @@ export default function GameContact() {
 
               <div className='mode-btns type-b flex flex-1 flex-col items-center justify-center space-y-4 p-8 outline-none' onKeyDown={handleKeyDown}>
                 <h3 className='mb-4 border-b-2 border-dashed border-[#d7ccc8] pb-2 text-center text-xl font-bold text-[#5d4037] md:text-3xl'>VISITOR LOG</h3>
-                {MODES.map((mode, index) => (
+                {CONTACT_LINKS.map((mode, index) => (
                   <Link
                     key={mode.address}
                     data-keyboard-v={index}
@@ -162,7 +145,7 @@ export default function GameContact() {
 
                 <div className='flex h-40 w-40 items-center justify-center border-4 border-[#8d6e63] bg-white p-2 shadow-[4px_4px_0px_0px_rgba(141,110,99,0.3)]'>
                   <div className='flex h-full w-full items-center justify-center bg-[#3e2723] text-center text-[10px]'>
-                    <Image src={`${IMAGE_ROOT}/images/classic/contact_qr.png`} alt={'jinsil.kwon.dev@gmail.com'} width={250} height={250} />
+                    <Image src={`${IMAGE_ROOT}/images/classic/contact_qr.png`} alt={CONTACT.email} width={250} height={250} />
                   </div>
                 </div>
 

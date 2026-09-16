@@ -1,62 +1,20 @@
 'use client';
 
-import { SiReact, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiSpring, SiSpringboot, SiNextdotjs, SiPostgresql } from 'react-icons/si';
-import { BsFiletypeScss } from 'react-icons/bs';
-import { FaDocker, FaGit, FaGithub, FaJava, FaLinux } from 'react-icons/fa';
 import { GrCertificate } from 'react-icons/gr';
 import { motion } from 'framer-motion';
 import ThemedImage from '@/components/ThemedImage';
 import { useState } from 'react';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
-const AnimatedIconList = ({ icons, startDelay = 0 }: { icons: React.ElementType[]; startDelay?: number }) => (
-  <ul className='flex flex-wrap gap-2'>
-    {icons.map((Icon, index) => (
-      <motion.li
-        key={index}
-        initial={{ opacity: 0, y: 20, x: -10 }}
-        animate={{ opacity: 1, y: 0, x: 0 }}
-        transition={{
-          delay: startDelay + index * 0.075,
-          duration: 0.3,
-        }}
-      >
-        <Icon />
-      </motion.li>
-    ))}
-  </ul>
-);
-
-const SkillTextList = ({ skills }: { skills: string[] }) => (
-  <ul className='flex flex-wrap gap-2'>
-    {skills.map((skill, index) => {
-      const addComma = index < skills.length - 1 ? skill.concat(',') : skill;
-
-      return (
-        <li key={index} className={'text-base md:text-xl lg:text-2xl'}>
-          {addComma}
-        </li>
-      );
-    })}
-  </ul>
-);
-
-const tabInfo = [
-  { id: 'icon', text: '아이콘' },
-  { id: 'text', text: '텍스트' },
-];
-const frontendTextList = ['HTML5', 'CSS3', 'SCSS/SASS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Recoil', 'Redux', 'Zustand', 'TanStack Query', '웹 접근성', 'Cross Browsing'];
-const frontendIcons = [SiHtml5, SiCss3, BsFiletypeScss, SiJavascript, SiTypescript, SiReact, SiNextdotjs];
-const backendTextList = ['Java', 'Spring Boot', 'Spring Data JPA', 'PostgreSQL', 'Supabase'];
-const backendIcons = [FaJava, SiSpring, SiSpringboot, SiPostgresql, FaDocker, FaLinux];
-const toolsTextList = ['Linux', 'Docker', 'Git', 'Vercel', 'Figma'];
-const toolsIcons = [FaGit, FaGithub];
+import { AnimatedIconList } from '@/components/classic/skills/AnimatedIconList';
+import { SkillTextList } from '@/components/classic/skills/SkillTextList';
+import { tabInfo, frontendTextList, frontendIcons, backendTextList, backendIcons, toolsTextList, toolsIcons } from '@/features/portfolio/skills';
 
 export default function ClassicSkills() {
   const [activeTab, setActiveTab] = useState('icon');
 
   return (
-    <section className={'relative flex min-h-screen flex-col items-center bg-emerald-300 dark:bg-[#12332c] md:items-start md:overflow-hidden'}>
+    <section className={'relative flex min-h-screen flex-col items-center bg-emerald-300 md:items-start md:overflow-hidden dark:bg-[#12332c]'}>
       <h2 className={'w-full text-right text-4xl font-black uppercase md:text-5xl lg:text-7xl'}>Skills_</h2>
       <motion.div
         className={'-right-10 bottom-0 mt-10 max-w-1/2 md:absolute'}

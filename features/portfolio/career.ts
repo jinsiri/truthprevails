@@ -1,5 +1,7 @@
+import type { Experience } from './types';
+
 export const EXPERIENCE_TABS = ['시스원(SysOne)', '프리랜서', '미르나인(Mir9)'];
-export const EXPERIENCE = [
+export const EXPERIENCE: Experience[] = [
   {
     title: 'ITSM 솔루션 v2.0 차세대 전면 리뉴얼 및 개발',
     data: [
@@ -60,59 +62,5 @@ export const EXPERIENCE = [
       },
       { label: '기술', value: 'HTML5, CSS3, SCSS/SASS, JavaScript, jQuery' },
     ],
-  },
-];
-
-interface TimelineEntry {
-  date: string;
-  title: string;
-  description: string;
-  gameDescription?: string;
-  color: 'blue' | 'purple' | 'yellow';
-  skillSet: string[];
-  spotKey: string;
-  textClass: string;
-}
-export const EDUCATION: TimelineEntry[] = [
-  {
-    date: '2024.03 - 2026.02',
-    title: '방송통신대학교 컴퓨터과학과',
-    description: '편입·졸업 (학점 4.1 / 4.5)',
-    gameDescription: '편입·졸업',
-    color: 'blue',
-    skillSet: ['공학 지식'],
-    spotKey: 'cs',
-    textClass: 'text-blue-300',
-  },
-  {
-    date: '2012.03 - 2018.02',
-    title: '인천대학교 국어국문학과',
-    description: '졸업 (학점 3.84 / 4.5)',
-    gameDescription: '졸업',
-    color: 'yellow',
-    skillSet: ['커뮤니케이션 능력', '인문학적 사고'],
-    spotKey: 'kl',
-    textClass: 'text-yellow-300',
-  },
-];
-
-export const PROJECTS = [
-  {
-    date: '2026.03 1차 완료 · 수시 업데이트',
-    title: 'TRUTH WORLD',
-    description: '게임형·클래식 듀얼 모드로 이력을 소개하는 개인 포트폴리오 웹사이트',
-    stack: 'Next.js 15, React 19, TypeScript, Zustand, Framer Motion, Tailwind CSS',
-  },
-  {
-    date: '2026.01 ~ 2026.06',
-    title: 'EASY-C',
-    description: '조직도·부서 트리 관리 기능을 담은 그룹웨어 웹 애플리케이션',
-    stack: 'Next.js, TypeScript, Zustand, Java, PostgreSQL',
-  },
-  {
-    date: '2026.07 ~ 진행 중',
-    title: 'SEORO-SEORO',
-    description: '모임 권한과 독서 기록을 관리하는 독서 모임 웹 애플리케이션',
-    stack: 'Next.js, TypeScript, TanStack Query, Zustand, Supabase',
   },
 ];

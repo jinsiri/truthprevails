@@ -6,7 +6,8 @@ import { Footprints } from 'lucide-react';
 import SpeechBubble from '@/components/game/SpeechBubble';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useKeyboardList } from '@/hooks/useKeyboardList';
-import { EDUCATION } from '@/constants/dataset';
+import { EDUCATION } from '@/features/portfolio/education';
+import type { EducationEntry } from '@/features/portfolio/types';
 import clsx from 'clsx';
 import useQuestStore from '@/store/useQuestStore';
 import CharacterAnimation from '@/components/game/CharacterAnimation';
@@ -21,7 +22,7 @@ export default function GameLearning() {
   const [skillSet, setSkillSet] = useState(['지식']);
   const [textClass, setTextClass] = useState('');
   const incrementProgress = useQuestStore((state) => state.incrementProgress);
-  const selectEducation = (mode: (typeof EDUCATION)[number]) => {
+  const selectEducation = (mode: EducationEntry) => {
     setHide(true);
     setSkillSet(mode.skillSet);
     setTextClass(mode.textClass);

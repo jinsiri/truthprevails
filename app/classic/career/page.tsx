@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Fragment, useState } from 'react';
 import ThemedImage from '@/components/ThemedImage';
-import { EXPERIENCE, EXPERIENCE_TABS } from '@/constants/dataset';
+import { EXPERIENCE, EXPERIENCE_TABS } from '@/features/portfolio/career';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 export default function ClassicCareer() {

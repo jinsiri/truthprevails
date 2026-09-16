@@ -6,51 +6,8 @@ import { useUIStore } from '@/store/useUIStore';
 import { X, BriefcaseBusiness } from 'lucide-react';
 import useQuestStore from '@/store/useQuestStore';
 
-interface InventoryItemProps {
-  icon: string;
-  name: string;
-  level?: number;
-  description: string;
-}
-
-const InventoryItem = ({ icon, name, level, description }: InventoryItemProps) => {
-  const setHoveredItem = useUIStore((state) => state.setHoveredItem);
-  const toggleFigmaMode = useUIStore((state) => state.toggleFigmaMode);
-
-  const handleMouseEnter = () => {
-    setHoveredItem({ name, icon, description, level });
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredItem(null);
-  };
-
-  const handleDoubleClick = () => {
-    if (name === 'Figma') {
-      toggleFigmaMode();
-    }
-  };
-
-  return (
-    <button
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onFocus={handleMouseEnter}
-      onBlur={handleMouseLeave}
-      onClick={handleMouseEnter}
-      onDoubleClick={handleDoubleClick}
-      className='group relative flex h-16 w-16 cursor-pointer flex-col items-center justify-center rounded-sm border-2 border-stone-900 bg-stone-700 p-1 shadow-[inset_2px_2px_0px_rgba(0,0,0,0.3)] transition-colors hover:bg-stone-600 active:scale-95'
-    >
-      <span className='text-3xl select-none'>{icon}</span>
-
-      {level && (
-        <span className='absolute -right-1 -bottom-1 z-10 rounded-sm border border-blue-900 bg-blue-600 px-1 py-0.5 font-mono text-[9px] text-white'>
-          Lv.{level}
-        </span>
-      )}
-    </button>
-  );
-};
+import { InventoryItem } from './inventory/InventoryItem';
+import { INVENTORY_ITEMS } from '@/features/game/inventory';
 
 export default function Inventory() {
   const { activeView, openView, closeView, hoveredItem } = useUIStore();
@@ -77,14 +34,9 @@ export default function Inventory() {
           </h3>
 
           <div className='mb-4 grid grid-cols-4 gap-2'>
-            <InventoryItem icon='📜' name='정보처리기사' description='CS 기초 지식과 설계 능력을 마스터했음을 증명하는 고대 문서입니다.' />
-            <InventoryItem icon='💎' name='SQLD' description='정교한 데이터 모델링과 쿼리 최적화 능력이 깃든 보석입니다.' />
-            <InventoryItem icon='🎖️' name='6Y+ Badge' description='6년+ IT 전장을 누비며 얻은 경력 개발자의 완장입니다.' />
-            <InventoryItem icon='📝' name='TroubleShooter' description='복잡한 장애 상황에서도 침착하게 원인을 찾아 해결하는 기록장입니다.' />
-            <InventoryItem icon='🎨' name='Figma' description='디자인 시스템을 깊이 이해하고 완벽하게 코드로 구현하는 붓입니다.' />
-            <InventoryItem icon='👁️' name='Code Reviewer' description='동료의 코드를 분석하고 성장을 돕는 날카로운 통찰력의 눈입니다.' />
-            <InventoryItem icon='📢' name='Speaker' description='기획/디자인과 기술적 간극을 좁히는 원활한 소통 능력을 상징합니다.' />
-            <InventoryItem icon='🐙' name='Git Flow' description='코드의 흐름을 관리하고 안정적인 협업을 조율하는 신비로운 문어입니다.' />
+            {INVENTORY_ITEMS.map((item) => (
+              <InventoryItem key={item.name} {...item} />
+            ))}
 
             {[...Array(8)].map((_, i) => (
               <div key={i} className='h-16 w-16 rounded-sm border-2 border-stone-950 bg-stone-900 opacity-50 shadow-[inset_2px_2px_0px_rgba(0,0,0,0.3)]'></div>

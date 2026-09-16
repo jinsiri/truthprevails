@@ -1,16 +1,6 @@
 import { create } from 'zustand';
 
-export interface InventoryItemData {
-  id?: string;
-  name: string;
-  icon: string;
-  description: string;
-  level?: number;
-  rarity?: 'Normal' | 'Rare' | 'Epic' | 'Legendary';
-  useEffect?: string;
-}
-
-type ViewType = 'about' | 'career' | 'careerDetail' | 'skills' | 'contact' | 'statWindow' | 'skillWindow' | 'questWindow' | 'inventoryWindow' | null;
+import type { InventoryItemData, ViewType } from '@/features/game/types';
 
 interface UIState {
   /** Item */

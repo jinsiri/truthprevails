@@ -12,54 +12,8 @@ import clsx from 'clsx';
 import LoadingSpinner from '@/components/game/LoadingSpinner';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
-type Direction = 'up' | 'down' | 'left' | 'right';
-
-const keyToDirection: Record<string, Direction> = {
-  ArrowRight: 'right',
-  ArrowLeft: 'left',
-  ArrowUp: 'up',
-  ArrowDown: 'down',
-  KeyD: 'right',
-  KeyA: 'left',
-  KeyW: 'up',
-  KeyS: 'down',
-};
-
-const INTERACTION_POINTS = [
-  {
-    id: 'school',
-    name: '학교',
-    left: 5,
-    range: [12, 18],
-    path: '/game/learning',
-    image: `${IMAGE_ROOT}/images/game/school.webp`,
-    width: 990,
-    height: 775,
-    style: 'bottom-[76%] left-[5%] w-[28%]',
-  },
-  {
-    id: 'office',
-    name: '회사',
-    left: 36,
-    range: [44, 49],
-    path: '/game/career',
-    image: `${IMAGE_ROOT}/images/game/building.webp`,
-    width: 557,
-    height: 691,
-    style: 'bottom-[80%] left-[36%] w-[29%]',
-  },
-  {
-    id: 'info',
-    name: '인포센터',
-    left: 69,
-    range: [68, 71],
-    path: '/game/contact',
-    image: `${IMAGE_ROOT}/images/game/info.webp`,
-    width: 280,
-    height: 323,
-    style: 'bottom-[80%] left-[69%] w-[15%]',
-  },
-];
+import { keyToDirection, INTERACTION_POINTS } from '@/features/game/world';
+import type { Direction, InteractionPoint } from '@/features/game/types';
 
 export default function GameMainClient() {
   const router = useRouter();
@@ -73,7 +27,7 @@ export default function GameMainClient() {
   const [direction, setDirection] = useState<Direction | null>(null);
   const [lastDirection, setLastDirection] = useState<Direction>('down');
   const [isJumping, setIsJumping] = useState(false);
-  const [activeObject, setActiveObject] = useState<(typeof INTERACTION_POINTS)[0] | null>(null);
+  const [activeObject, setActiveObject] = useState<InteractionPoint | null>(null);
   const [isEntering, setIsEntering] = useState(false);
   const [frame, setFrame] = useState(0);
   const [guideState, setGuideState] = useState(false);

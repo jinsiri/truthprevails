@@ -5,7 +5,7 @@ import SpeechBubble from '@/components/game/SpeechBubble';
 import clsx from 'clsx';
 import { Fragment, useEffect, useRef } from 'react';
 import { useKeyboardList } from '@/hooks/useKeyboardList';
-import { EXPERIENCE, EXPERIENCE_TABS } from '@/constants/dataset';
+import { EXPERIENCE, EXPERIENCE_TABS } from '@/features/portfolio/career';
 import { useUIStore } from '@/store/useUIStore';
 import { SquareChevronLeft, SquareChevronRight } from 'lucide-react';
 import useQuestStore from '@/store/useQuestStore';
