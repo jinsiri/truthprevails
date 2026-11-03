@@ -13,8 +13,8 @@ export const INVENTORY_ITEMS: InventoryItemData[] = [
   },
   {
     icon: '🎖️',
-    name: '6Y+ Badge',
-    description: '6년+ IT 전장을 누비며 얻은 경력 개발자의 완장입니다.',
+    name: '5Y+ Badge',
+    description: '퍼블리싱부터 개발까지 5년+ IT 전장을 누비며 얻은 완장입니다.',
   },
   {
     icon: '📝',
