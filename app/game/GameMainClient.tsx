@@ -33,7 +33,7 @@ export default function GameMainClient() {
   const [msgState, setMsgState] = useState(false);
 
   useEffect(() => {
-    if (isMobile) setMsgState(true);
+    if (isMobile && sessionStorage.getItem('mobileNoticeShown') === null) setMsgState(true);
   }, [isMobile]);
 
   const pressedKeys = useRef<Set<string>>(new Set());
@@ -215,6 +215,7 @@ export default function GameMainClient() {
         {msgState && (
           <MessageBox
             onClose={() => {
+              sessionStorage.setItem('mobileNoticeShown', 'true');
               setMsgState(false);
               setGuideState(true);
             }}
