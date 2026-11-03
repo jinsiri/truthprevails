@@ -1,46 +1,19 @@
-import type { CharacterStat } from './types';
+import type { CharacterStat, MasteredSkill } from './types';
 
-export const MASTERED_SKILLS: CharacterStat[] = [
-  {
-    label: 'React',
-    level: 95,
-    colorClass: 'bg-cyan-500',
-  },
-  {
-    label: 'TypeScript',
-    level: 90,
-    colorClass: 'bg-blue-600',
-  },
-  {
-    label: 'Recoil / Zustand / Redux',
-    level: 85,
-    colorClass: 'bg-cyan-400',
-  },
-  {
-    label: 'Tailwind / SCSS',
-    level: 95,
-    colorClass: 'bg-pink-500',
-  },
-  {
-    label: 'Java / Spring Boot',
-    level: 80,
-    colorClass: 'bg-emerald-600',
-  },
-  {
-    label: 'TanStack Query',
-    level: 75,
-    colorClass: 'bg-red-500',
-  },
-  {
-    label: 'PostgreSQL / Supabase',
-    level: 80,
-    colorClass: 'bg-emerald-500',
-  },
-  {
-    label: 'Linux / Docker / Vercel',
-    level: 75,
-    colorClass: 'bg-slate-500',
-  },
+// MAIN: 실무에서 주력으로 사용 / SUB: 개인·팀 프로젝트에서 사용
+export const MASTERED_SKILLS: MasteredSkill[] = [
+  { label: 'React', tier: 'MAIN', source: 'ITSM 던전 · 공통 컴포넌트, 권한 트리 UI' },
+  { label: 'Recoil / Redux', tier: 'MAIN', source: 'ITSM 던전 · 상태 관리 전체 전환' },
+  { label: 'Java / Spring Boot / JPA', tier: 'MAIN', source: 'ITSM 던전 · 객체별 권한 검사, 트리 API' },
+  { label: 'PostgreSQL', tier: 'MAIN', source: 'ITSM 던전 · 권한 상속 조회 로직' },
+  { label: 'Linux / Docker', tier: 'MAIN', source: 'ITSM 던전 · 폐쇄망 배포, 의존성 관리' },
+  { label: 'HTML / CSS / SCSS', tier: 'MAIN', source: '퍼블리싱 길드 · 반응형, 웹 접근성' },
+  { label: 'Next.js / TypeScript', tier: 'SUB', source: 'EASY-C · SEORO-SEORO · TRUTH WORLD 퀘스트' },
+  { label: 'Zustand', tier: 'SUB', source: 'EASY-C · TRUTH WORLD 퀘스트' },
+  { label: 'TanStack Query', tier: 'SUB', source: 'SEORO-SEORO 퀘스트 · 조회·변경 흐름' },
+  { label: 'Supabase', tier: 'SUB', source: 'SEORO-SEORO 퀘스트 · DB 설계, RPC' },
+  { label: 'Tailwind CSS', tier: 'SUB', source: 'TRUTH WORLD · SEORO-SEORO 퀘스트' },
+  { label: 'Vercel', tier: 'SUB', source: 'SEORO-SEORO 퀘스트 · 배포' },
 ];
 
 export const CHARACTER_STATS: CharacterStat[] = [

@@ -31,6 +31,14 @@ export interface Quest {
   total: number;
 }
 
+export type SkillTier = 'MAIN' | 'SUB';
+
+export interface MasteredSkill {
+  label: string;
+  tier: SkillTier;
+  source: string;
+}
+
 export interface CharacterStat {
   label: string;
   level: number;
