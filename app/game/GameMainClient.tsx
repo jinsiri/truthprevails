@@ -83,8 +83,19 @@ export default function GameMainClient() {
   }, [position]);
 
   useEffect(() => {
+    const stopMoving = () => {
+      pressedKeys.current.clear();
+      setDirection(null);
+    };
+
     const handleKeyDown = (e: KeyboardEvent) => {
       setGuideState(false);
+
+      // 이동 중 다른 키를 누르면 멈춘다(점프·달리기·방향키는 이동과 같이 쓰는 키라 제외)
+      if (!keyToDirection[e.code] && e.code !== 'Space' && !e.code.includes('Shift')) {
+        stopMoving();
+        return;
+      }
 
       if (e.shiftKey) pressedKeys.current.add('Shift');
 
@@ -122,11 +133,21 @@ export default function GameMainClient() {
       }
     };
 
+    // 팝업·버튼으로 포커스가 옮겨가면 keyup이 막히거나 누락되므로, 이동 키를 놓친 채 계속 걷지 않게 멈춘다
+    const handlePointerDown = (e: PointerEvent) => {
+      if (!(e.target instanceof Element) || !e.target.closest('[data-touch-controls]')) stopMoving();
+    };
+
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
+    // 캡처 단계에서 받아야 팝업이 이벤트 전파를 막아도 키를 뗀 것을 놓치지 않는다
+    window.addEventListener('keyup', handleKeyUp, true);
+    window.addEventListener('pointerdown', handlePointerDown, true);
+    window.addEventListener('blur', stopMoving);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener('keyup', handleKeyUp, true);
+      window.removeEventListener('pointerdown', handlePointerDown, true);
+      window.removeEventListener('blur', stopMoving);
     };
   }, [handleInteraction]);
 

@@ -37,7 +37,7 @@ function HoldButton({ label, onHold, onRelease, children }: { label: string; onH
 
 export default function TouchControls({ onMove, onJump, onEnter, enterLabel }: TouchControlsProps) {
   return (
-    <div className='pointer-events-none fixed right-6 bottom-24 left-6 z-60 flex items-end justify-between'>
+    <div data-touch-controls className='pointer-events-none fixed right-6 bottom-24 left-6 z-60 flex items-end justify-between'>
       <div className='pointer-events-auto flex gap-3'>
         <HoldButton label='왼쪽으로 이동' onHold={() => onMove('left')} onRelease={() => onMove(null)}>
           <IconCaretLeftFilled size={28} />
