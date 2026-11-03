@@ -69,7 +69,7 @@ export function UserQuestLog() {
               <>모든 퀘스트를 완료하셨습니다! 감사합니다!</>
             ) : (
               <>
-                <strong>💡 Tip:</strong> 화면 내 건물과 버튼을 눌러 퀘스트를 완료하세요!
+                <strong>💡 Tip:</strong> 화면 내 건물과 버튼을 누르고, 점프로 숨은 아이템도 찾아보세요!
               </>
             )}
           </div>

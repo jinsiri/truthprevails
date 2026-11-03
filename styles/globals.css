@@ -277,6 +277,22 @@ img {
   .animate-stardust-fade {
     animation: fade-in-out 3s ease-in-out infinite;
   }
+  .animate-landing-dust {
+    animation: landing-dust 0.4s steps(4) forwards;
+  }
+  .animate-item-toast {
+    animation: item-toast 0.25s steps(3);
+  }
+}
+
+@keyframes landing-dust {
+  0% { opacity: 0.9; transform: translateX(-50%) scale(0.6); }
+  100% { opacity: 0; transform: translateX(-50%) scale(1.4); }
+}
+
+@keyframes item-toast {
+  0% { opacity: 0; transform: translateY(-12px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes float {
