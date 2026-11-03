@@ -23,6 +23,6 @@ export const frontendTextList = [
 ];
 export const frontendIcons = [SiHtml5, SiCss3, BsFiletypeScss, SiJavascript, SiTypescript, SiReact, SiNextdotjs];
 export const backendTextList = ['Java', 'Spring Boot', 'Spring Data JPA', 'PostgreSQL', 'Supabase'];
-export const backendIcons = [FaJava, SiSpring, SiSpringboot, SiPostgresql, FaDocker, FaLinux];
+export const backendIcons = [FaJava, SiSpring, SiSpringboot, SiPostgresql];
 export const toolsTextList = ['Linux', 'Docker', 'Git', 'Vercel', 'Figma'];
-export const toolsIcons = [FaGit, FaGithub];
+export const toolsIcons = [FaLinux, FaDocker, FaGit, FaGithub];

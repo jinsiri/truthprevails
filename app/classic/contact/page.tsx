@@ -24,8 +24,14 @@ export default function ClassicContact() {
           </li>
           <li className={'items-center gap-1 md:flex md:gap-2'}>
             <h3 className={'w-40 text-purple-700 uppercase dark:text-purple-300'}>Github</h3>
-            <a href={CONTACT.github} target='_blank'>
+            <a href={CONTACT.github} target='_blank' rel='noopener noreferrer'>
               {CONTACT.github}
+            </a>
+          </li>
+          <li className={'items-center gap-1 md:flex md:gap-2'}>
+            <h3 className={'w-40 text-purple-700 uppercase dark:text-purple-300'}>Blog</h3>
+            <a href={CONTACT.blog} target='_blank' rel='noopener noreferrer' className={'break-all'}>
+              {CONTACT.blog}
             </a>
           </li>
         </ul>

@@ -70,7 +70,7 @@ export default function ClassicSkills() {
         >
           <GrCertificate />
           <p className='md:text-md text-sm lg:text-xl'>
-            (2022. 12) SQL Developer
+            (2022. 12) SQLD (SQL 개발자)
             <br />
             (2021. 08) 정보처리기사
           </p>
