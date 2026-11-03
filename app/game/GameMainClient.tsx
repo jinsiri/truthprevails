@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { IconTransfer } from '@tabler/icons-react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import MessageBox from '@/components/game/MessageBox';
 import Cloud from '@/components/game/Cloud';
 import Guide from '@/components/game/Guide';
@@ -17,9 +18,7 @@ import type { Direction, InteractionPoint } from '@/features/game/types';
 
 export default function GameMainClient() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const viewport = searchParams.get('viewport') ?? 'desktop';
-  const isMobile = viewport !== 'desktop';
+  const isMobile = useIsMobile();
 
   const [isReady, setIsReady] = useState(false);
   const [position, setPosition] = useState(0);
@@ -31,7 +30,11 @@ export default function GameMainClient() {
   const [isEntering, setIsEntering] = useState(false);
   const [frame, setFrame] = useState(0);
   const [guideState, setGuideState] = useState(false);
-  const [msgState, setMsgState] = useState(isMobile);
+  const [msgState, setMsgState] = useState(false);
+
+  useEffect(() => {
+    if (isMobile) setMsgState(true);
+  }, [isMobile]);
 
   const pressedKeys = useRef<Set<string>>(new Set());
   const stateRef = useRef({ position, isEntering, activeObject, isJumping });
