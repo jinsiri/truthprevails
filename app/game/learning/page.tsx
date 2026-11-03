@@ -1,7 +1,7 @@
 'use client';
 
 import ThemedImage from '@/components/ThemedImage';
-import FadeInImage from '@/components/FadeInImage';
+import Image from 'next/image';
 import { Footprints } from 'lucide-react';
 import SpeechBubble from '@/components/game/SpeechBubble';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -45,6 +45,7 @@ export default function GameLearning() {
   return (
     <main className='relative min-h-dvh w-full overflow-hidden'>
       <ThemedImage
+        fadeIn={false}
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
         lightSrc={`${IMAGE_ROOT}/images/game/school_day.png`}
         darkSrc={`${IMAGE_ROOT}/images/game/school_night.png`}
@@ -58,7 +59,7 @@ export default function GameLearning() {
         <CharacterAnimation skillSet={skillSet} textClass={textClass} active={hide} onReady={handleCharacterReady} />
         {!(hide && characterReady) && (
           <div className='group absolute -bottom-15 left-0 hidden md:block lg:left-20 xl:left-30'>
-            <FadeInImage width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} />
+            <Image width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} />
             <SpeechBubble text={'자세히 보고 싶은 과정을 선택하세요!'} />
           </div>
         )}

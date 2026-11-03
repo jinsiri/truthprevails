@@ -1,4 +1,4 @@
-import FadeInImage from '@/components/FadeInImage';
+import Image from 'next/image';
 import clsx from 'clsx';
 import { IconArrowBigUpLines, IconCaretDownFilled, IconCaretLeftFilled, IconCaretRightFilled, IconDoorEnter } from '@tabler/icons-react';
 import { touchButtonClass } from './TouchControls';
@@ -58,13 +58,13 @@ export default function Guide({ onClick, isMobile = false }: { onClick: () => vo
           <ul className={'flex items-end gap-x-10'}>
             <li>
               <figure className={'w-max-[40%]'}>
-                <FadeInImage src={`/images/game/wasd.webp`} alt='방향키' width={200} height={421} />
+                <Image src={`/images/game/wasd.webp`} alt='방향키' width={200} height={421} />
                 <figcaption className={'mt-3'}>WASD 키: 이동</figcaption>
               </figure>
             </li>
             <li>
               <figure className={'w-max-[40%]'}>
-                <FadeInImage src={`/images/game/spacebar.webp`} alt='점프' width={230} height={421} />
+                <Image src={`/images/game/spacebar.webp`} alt='점프' width={230} height={421} />
                 <figcaption className={'mt-3'}>스페이스바: 점프</figcaption>
               </figure>
             </li>

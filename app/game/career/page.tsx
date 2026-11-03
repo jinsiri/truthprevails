@@ -58,6 +58,7 @@ export default function GameCareer() {
   return (
     <main className='relative min-h-dvh w-full overflow-hidden'>
       <ThemedImage
+        fadeIn={false}
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
         lightSrc={`${IMAGE_ROOT}/images/game/company_day_v3.png`}
         darkSrc={`${IMAGE_ROOT}/images/game/company_night_v3.png`}
@@ -83,6 +84,7 @@ export default function GameCareer() {
             )}
           >
             <ThemedImage
+              fadeIn={false}
               lightSrc={`${IMAGE_ROOT}/images/game/company_jinsil_day.png`}
               darkSrc={`${IMAGE_ROOT}/images/game/company_jinsil_night.png`}
               fill

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import FadeInImage from './FadeInImage';
 import clsx from 'clsx';
 
@@ -13,6 +14,8 @@ interface ThemedImageProps {
   fill?: boolean;
   sizes?: string;
   pixelated?: boolean;
+  /** 로딩 후 서서히 나타나기. 픽셀 게임 화면에서는 끈다 */
+  fadeIn?: boolean;
 }
 
 // ThemeToggleButton과 같은 기준: data-theme > 저장된 테마 > 시스템 설정
@@ -26,7 +29,19 @@ function getInitialTheme(): 'light' | 'dark' {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
-export default function ThemedImage({ className, lightSrc, darkSrc, alt, width, height, priority = false, fill, sizes, pixelated = true }: ThemedImageProps) {
+export default function ThemedImage({
+  className,
+  lightSrc,
+  darkSrc,
+  alt,
+  width,
+  height,
+  priority = false,
+  fill,
+  sizes,
+  pixelated = true,
+  fadeIn = true,
+}: ThemedImageProps) {
   // 테마를 확정한 뒤에 렌더해야 다크 모드에서 라이트 이미지를 먼저 받는 이중 다운로드가 없다
   const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
 
@@ -56,9 +71,10 @@ export default function ThemedImage({ className, lightSrc, darkSrc, alt, width, 
   }
 
   const src = theme === 'dark' ? darkSrc : lightSrc;
+  const ImageComponent = fadeIn ? FadeInImage : Image;
 
   return fill ? (
-    <FadeInImage
+    <ImageComponent
       className={clsx(className && className)}
       src={src}
       alt={alt}
@@ -70,6 +86,6 @@ export default function ThemedImage({ className, lightSrc, darkSrc, alt, width, 
       }}
     />
   ) : (
-    <FadeInImage className={clsx(className && className)} src={src} alt={alt} width={width} height={height} priority={priority} />
+    <ImageComponent className={clsx(className && className)} src={src} alt={alt} width={width} height={height} priority={priority} />
   );
 }
