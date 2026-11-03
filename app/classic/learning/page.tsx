@@ -67,6 +67,16 @@ export default function ClassicLearning() {
               <h4 className={'mt-2 text-lg font-black md:text-xl'}>{project.title}</h4>
               <p className={'mt-2 text-sm leading-relaxed break-keep md:text-base'}>{project.description}</p>
               <p className={'mt-3 text-xs leading-relaxed text-gray-600 dark:text-gray-700'}>{project.stack}</p>
+              {project.link && (
+                <a
+                  href={project.link.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className={'mt-3 inline-block text-sm font-bold underline underline-offset-4'}
+                >
+                  {project.link.label} ↗
+                </a>
+              )}
             </article>
           ))}
         </div>

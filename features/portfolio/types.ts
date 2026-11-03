@@ -18,6 +18,7 @@ export interface Project {
   title: string;
   description: string;
   stack: string;
+  link?: { href: string; label: string };
 }
 export interface ContactLink {
   title: string;

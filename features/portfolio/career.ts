@@ -3,27 +3,29 @@ import type { Experience } from './types';
 export const EXPERIENCE_TABS = ['시스원(SysOne)', '프리랜서', '미르나인(Mir9)'];
 export const EXPERIENCE: Experience[] = [
   {
-    title: 'ITSM 솔루션 v2.0 차세대 전면 리뉴얼 및 개발',
+    title: 'ITSM 솔루션 v2.0 리뉴얼 및 개발',
     data: [
       { label: '기간', value: '2022.07 ~ 2024.11(2년 5개월)' },
       { label: '프로젝트명', value: 'B2B IT 자산 관리 시스템(ITSM) v2.0' },
       {
         label: '성과',
         value: [
-          '레거시 시스템을 엔터프라이즈급 ITSM v2.0으로 전면 재구축',
-          '프론트엔드 파트 리딩 및 공통 컴포넌트 라이브러리 구축 주도',
-          'Redux 보일러플레이트를 줄이고 Recoil로 상태 관리 마이그레이션',
+          '상세 조회 API에 객체별 접근 권한 검사를 추가해 문서 ID 변경을 통한 비인가 조회 차단',
+          '반복되던 목록·선택 UI를 단일·다중 선택 공통 컴포넌트로 통합해 여러 업무 화면에 적용',
+          'Redux에서 Recoil로 상태 관리 전체 전환 직접 수행',
+          '장비 배치 편집 후 전체 재조회 대신 변경 항목만 반영해 중복 조회 감소',
         ],
       },
       {
         label: '역할',
         value: [
-          'Dynamic Tree UI 및 백엔드 권한 필터링 기반 RBAC 구현',
-          '폐쇄망 환경의 정적 자원 관리 및 패키지 의존성 제어',
-          'Spring Boot/JPA REST API 설계 및 Linux/Docker 배포 자동화',
+          '3인 개발팀에서 프론트엔드 설계 주도, 기획·디자인 전담자 없이 화면 구성과 사용자 동선 설계',
+          '권한 상속 조회 로직(Spring Boot)과 React 권한 설정 트리 UI 개발',
+          '폐쇄망 환경의 이미지 조회 API 연동 공통 컴포넌트 개발',
+          'Linux/Docker 환경 셸 스크립트 배포, 정적 자원 및 패키지 의존성 관리',
         ],
       },
-      { label: '기술', value: 'React, Recoil, Java, Spring Boot, Spring Data JPA, Linux, Docker' },
+      { label: '기술', value: 'React, Recoil, Redux, Java, Spring Boot, Spring Data JPA, PostgreSQL, Linux, Docker' },
     ],
   },
   {
@@ -33,7 +35,7 @@ export const EXPERIENCE: Experience[] = [
       { label: '프로젝트명', value: '토니모리, AHC 등 브랜드 이벤트 페이지 및 CMS 구축' },
       {
         label: '성과',
-        value: ['다수 브랜드 이벤트 페이지 및 CMS 추가 구축', '퇴사 후에도 기술 자문 및 프로젝트 의뢰 수주'],
+        value: ['다수 브랜드 이벤트 페이지 및 CMS 추가 구축', '이전 재직처·파트너사에서 후속 프로젝트 의뢰'],
       },
       {
         label: '역할',
@@ -49,7 +51,7 @@ export const EXPERIENCE: Experience[] = [
       { label: '프로젝트명', value: '다양한 산업군 기업 홍보 및 이벤트 사이트 구축' },
       {
         label: '성과',
-        value: ['SCSS 기반 모듈형 CSS 설계', '크로스 브라우징·반응형·웹 접근성(WA) 100% 최적화', '시맨틱 마크업을 통한 SEO 품질 개선'],
+        value: ['SCSS 기반 모듈형 CSS 설계', '브라우저 호환성·반응형·웹 접근성을 고려한 구현', '시맨틱 마크업을 통한 SEO 품질 개선'],
       },
       {
         label: '역할',
