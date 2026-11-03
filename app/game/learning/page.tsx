@@ -81,7 +81,7 @@ export default function GameLearning() {
                   <span>
                     {index + 1}. {mode.title}
                   </span>
-                  <small className={'text-left text-xs leading-relaxed text-gray-300 sm:max-w-[250px] sm:text-right sm:text-sm'}>
+                  <small className={'text-left text-xs leading-relaxed text-white/90 sm:max-w-[250px] sm:text-right sm:text-sm'}>
                     ({mode.date} / {mode.gameDescription ?? mode.description})
                   </small>
                 </button>

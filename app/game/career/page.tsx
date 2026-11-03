@@ -126,6 +126,7 @@ export default function GameCareer() {
                         if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
                       }}
                       onClick={() => setHIdx((prev) => (prev - 1 + EXPERIENCE_TABS.length) % EXPERIENCE_TABS.length)}
+                      aria-label='이전 경력'
                       className={'font-inherit cursor-pointer outline-none hover:text-blue-400 focus:text-blue-400'}
                     >
                       <SquareChevronLeft size={30} />
@@ -135,6 +136,7 @@ export default function GameCareer() {
                         if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
                       }}
                       onClick={() => setHIdx((prev) => (prev + 1) % EXPERIENCE_TABS.length)}
+                      aria-label='다음 경력'
                       className={'font-inherit cursor-pointer outline-none hover:text-blue-400 focus:text-blue-400'}
                     >
                       <SquareChevronRight size={30} />
