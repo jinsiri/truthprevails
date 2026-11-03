@@ -1,4 +1,3 @@
-import { traits } from '@/features/portfolio/profile';
 import type { Collectible } from './types';
 
 export const COLLECTIBLE_QUEST_ID = 5;
@@ -11,7 +10,7 @@ export const COLLECTIBLES: Collectible[] = [
     icon: 'coffee',
     x: 34.5,
     height: 1.3,
-    message: traits[0],
+    message: '진실의 아침을 깨우는 한 잔입니다. 해가 떠 있는 동안 집중력이 최고치에 도달합니다.',
   },
   {
     id: 'book',
@@ -19,14 +18,14 @@ export const COLLECTIBLES: Collectible[] = [
     icon: 'book',
     x: 66.5,
     height: 1.6,
-    message: `${traits[5]} ${traits[6]}`,
+    message: '닳도록 읽은 소설책입니다. 문학으로 다진 문해력이 기획서와 API 문서 독해에서 빛을 발합니다.',
   },
   {
     id: 'puzzle',
-    name: '마지막 퍼즐 조각',
+    name: '잃어버린 퍼즐 조각',
     icon: 'puzzle',
     x: 90,
     height: 2.3,
-    message: traits[3],
+    message: '복잡한 로직의 마지막 빈칸을 채우는 조각입니다. 어려운 문제일수록 진실의 의욕이 차오릅니다.',
   },
 ];
