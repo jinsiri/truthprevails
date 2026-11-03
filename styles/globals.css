@@ -225,11 +225,11 @@ img {
 }
 
 .main-home {
-  background: url('/images/devroom_day.webp') no-repeat center center/cover;
+  background: url('https://ik.imagekit.io/ry2wztqvv/truthprevails/images/devroom_day.webp?tr=w-1920') no-repeat center center/cover;
 }
 
 .dark .main-home {
-  background: url('/images/devroom_night.webp') no-repeat center center/cover;
+  background: url('https://ik.imagekit.io/ry2wztqvv/truthprevails/images/devroom_night.webp?tr=w-1920') no-repeat center center/cover;
 }
 
 .classic > section:not(.home):first-of-type {
@@ -237,7 +237,7 @@ img {
 }
 
 .pattern-tree {
-  background-image: url('/images/game/tree_pattern.webp');
+  background-image: url('https://ik.imagekit.io/ry2wztqvv/truthprevails/images/game/tree_pattern.webp?tr=w-800');
   background-repeat: repeat-x;
   background-position: bottom left;
   background-origin: content-box;

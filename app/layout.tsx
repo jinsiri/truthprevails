@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
+import { preconnect } from 'react-dom';
+import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 export const metadata: Metadata = {
   title: 'TRUTH WORLD',
@@ -30,6 +32,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  preconnect(new URL(IMAGE_ROOT).origin);
+
   return (
     <html lang='ko'>
       <body>{children}</body>

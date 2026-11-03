@@ -63,6 +63,7 @@ export default function GameCareer() {
         darkSrc={`${IMAGE_ROOT}/images/game/company_night_v3.png`}
         alt={'educated list'}
         priority
+        sizes='100vw'
         fill={true}
       />
 
@@ -85,6 +86,7 @@ export default function GameCareer() {
               lightSrc={`${IMAGE_ROOT}/images/game/company_jinsil_day.png`}
               darkSrc={`${IMAGE_ROOT}/images/game/company_jinsil_night.png`}
               fill
+              sizes='(min-width: 1334px) 400px, 30vw'
               alt={'발표하는 캐릭터'}
             />
             <SpeechBubble text={'이런 일을 했습니다!'} />

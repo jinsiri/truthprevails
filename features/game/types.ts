@@ -12,6 +12,8 @@ export interface InteractionPoint {
   width: number;
   height: number;
   style: string;
+  /** 월드 폭 대비 건물 너비(%), 이미지 sizes 계산용 */
+  widthPercent: number;
 }
 
 export interface InventoryItemData {

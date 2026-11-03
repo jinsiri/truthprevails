@@ -15,16 +15,23 @@ interface ThemedImageProps {
   pixelated?: boolean;
 }
 
+// ThemeToggleButton과 같은 기준: data-theme > 저장된 테마 > 시스템 설정
+function getInitialTheme(): 'light' | 'dark' {
+  const current = document.documentElement.getAttribute('data-theme');
+  if (current === 'dark' || current === 'light') return current;
+  try {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || saved === 'light') return saved;
+  } catch {}
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
 export default function ThemedImage({ className, lightSrc, darkSrc, alt, width, height, priority = false, fill, sizes, pixelated = true }: ThemedImageProps) {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  // 테마를 확정한 뒤에 렌더해야 다크 모드에서 라이트 이미지를 먼저 받는 이중 다운로드가 없다
+  const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
 
   useEffect(() => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    if (currentTheme === 'dark' || currentTheme === 'light') {
-      setTheme(currentTheme);
-    } else {
-      setTheme('light');
-    }
+    setTheme(getInitialTheme());
 
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {

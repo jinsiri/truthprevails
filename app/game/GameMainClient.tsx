@@ -18,6 +18,8 @@ import { keyToDirection, INTERACTION_POINTS } from '@/features/game/world';
 import type { Direction, InteractionPoint } from '@/features/game/types';
 
 const MOBILE_WORLD_WIDTH = 960;
+// 처음 움직일 때 깜빡이지 않도록 캐릭터 동작 이미지를 미리 받아 둔다
+const CHARACTER_SPRITES = ['side_01.webp', 'side_02.webp', 'back.png', 'front_book.png'].map((file) => `${IMAGE_ROOT}/images/game/${file}`);
 
 export default function GameMainClient() {
   const router = useRouter();
@@ -56,7 +58,7 @@ export default function GameMainClient() {
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
     document.addEventListener('contextmenu', handleContextMenu);
 
-    setTimeout(() => setIsReady(true), 500);
+    setTimeout(() => setIsReady(true), 0);
     return () => document.removeEventListener('contextmenu', handleContextMenu);
   }, [isMobile]);
 
@@ -240,6 +242,10 @@ export default function GameMainClient() {
       <section className={clsx('home group relative flex h-dvh items-center justify-center overflow-hidden bg-sky-200 select-none')}>
         <Cloud />
 
+        {CHARACTER_SPRITES.map((src) => (
+          <Image key={src} src={src} alt='' width={154} height={154} priority className='hidden' />
+        ))}
+
         {guideState && <Guide isMobile={isMobile} onClick={() => setGuideState(false)} />}
 
         {msgState && (
@@ -273,7 +279,13 @@ export default function GameMainClient() {
                 className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/30 via-orange-400/20 to-white/20 opacity-0 blur-md transition-all duration-500 group-focus:scale-130 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}
                 style={{ width: '100%', aspectRatio: 1 }}
               ></span>
-              <Image className='relative' src={obj.image} alt={obj.name} fill />
+              <Image
+                className='relative'
+                src={obj.image}
+                alt={obj.name}
+                fill
+                sizes={`(max-width: 767px) ${Math.round((MOBILE_WORLD_WIDTH * obj.widthPercent) / 100)}px, ${obj.widthPercent}vw`}
+              />
               {activeObject?.id !== obj.id && (
                 <span
                   aria-hidden
@@ -288,7 +300,7 @@ export default function GameMainClient() {
           <div
             className={`absolute -bottom-[4%] z-30 h-30 w-full bg-contain bg-repeat-x`}
             style={{
-              backgroundImage: `url(${IMAGE_ROOT}/images/game/flowers_mini.webp)`,
+              backgroundImage: `url(${IMAGE_ROOT}/images/game/flowers_mini.webp?tr=h-240)`,
             }}
           ></div>
           <div className='pattern-tree absolute bottom-[100%] h-60 w-full'></div>

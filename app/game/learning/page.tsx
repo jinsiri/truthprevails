@@ -50,6 +50,7 @@ export default function GameLearning() {
         darkSrc={`${IMAGE_ROOT}/images/game/school_night.png`}
         alt={'educated list'}
         priority
+        sizes='100vw'
         fill={true}
       />
 

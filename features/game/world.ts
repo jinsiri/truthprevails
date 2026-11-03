@@ -24,6 +24,7 @@ export const INTERACTION_POINTS: InteractionPoint[] = [
     width: 990,
     height: 775,
     style: 'bottom-[76%] left-[5%] w-[28%]',
+    widthPercent: 28,
   },
   {
     id: 'office',
@@ -36,6 +37,7 @@ export const INTERACTION_POINTS: InteractionPoint[] = [
     width: 557,
     height: 691,
     style: 'bottom-[80%] left-[36%] w-[29%]',
+    widthPercent: 29,
   },
   {
     id: 'info',
@@ -48,5 +50,6 @@ export const INTERACTION_POINTS: InteractionPoint[] = [
     width: 280,
     height: 323,
     style: 'bottom-[80%] left-[69%] w-[15%]',
+    widthPercent: 15,
   },
 ];
