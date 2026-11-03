@@ -2,19 +2,22 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { CSSProperties, useEffect, useRef, useState, useCallback } from 'react';
 import { IconTransfer } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import MessageBox from '@/components/game/MessageBox';
 import Cloud from '@/components/game/Cloud';
 import Guide from '@/components/game/Guide';
+import TouchControls from '@/components/game/TouchControls';
 import clsx from 'clsx';
 import LoadingSpinner from '@/components/game/LoadingSpinner';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 import { keyToDirection, INTERACTION_POINTS } from '@/features/game/world';
 import type { Direction, InteractionPoint } from '@/features/game/types';
+
+const MOBILE_WORLD_WIDTH = 960;
 
 export default function GameMainClient() {
   const router = useRouter();
@@ -191,6 +194,21 @@ export default function GameMainClient() {
 
   const transformStyle = isSide ? `scaleX(${lastDirection === 'left' ? -1 : 1}) translateY(${-positionY}px)` : `translateY(${-positionY}px)`;
 
+  // 모바일: 월드를 화면보다 넓게(MOBILE_WORLD_WIDTH) 깔고 캐릭터를 따라 가로 스크롤
+  const worldWidth = `max(100vw, ${MOBILE_WORLD_WIDTH}px)`;
+  const cameraX = `clamp(calc(100vw - ${worldWidth}), calc(50vw - ${worldWidth} * ${(position + 4) / 100}), 0px)`;
+
+  const handleTouchMove = (dir: Direction | null) => {
+    setGuideState(false);
+    if (!dir) {
+      setDirection(null);
+      return;
+    }
+    if (stateRef.current.isEntering) return;
+    setDirection(dir);
+    setLastDirection(dir);
+  };
+
   const enteringAnimation = isEntering
     ? {
         transform: `${transformStyle} scale(0.8) translateY(20px)`,
@@ -210,7 +228,7 @@ export default function GameMainClient() {
       <section className={clsx('home group relative flex h-screen items-center justify-center overflow-hidden bg-sky-200 select-none')}>
         <Cloud />
 
-        {guideState && <Guide onClick={() => setGuideState(false)} />}
+        {guideState && <Guide isMobile={isMobile} onClick={() => setGuideState(false)} />}
 
         {msgState && (
           <MessageBox
@@ -226,7 +244,10 @@ export default function GameMainClient() {
           </MessageBox>
         )}
 
-        <div className='absolute right-0 bottom-0 left-0 h-50 border-t-4 border-gray-950 bg-[#b0a58c] dark:border-gray-100 dark:bg-[#46311e]'>
+        <div
+          className='absolute bottom-0 left-0 h-72 w-full border-t-4 border-gray-950 bg-[#b0a58c] max-md:w-(--world) max-md:translate-x-(--camera) max-md:transition-[translate] max-md:duration-100 max-md:ease-linear md:h-50 dark:border-gray-100 dark:bg-[#46311e]'
+          style={{ '--world': worldWidth, '--camera': cameraX } as CSSProperties}
+        >
           {INTERACTION_POINTS.map((obj) => (
             <button
               key={obj.id}
@@ -259,10 +280,13 @@ export default function GameMainClient() {
               ...enteringAnimation,
             }}
           >
-            {!isMobile && activeObject && !isEntering && (
+            {activeObject && !isEntering && (
               <div className='absolute -top-8 left-1/2 flex -translate-x-1/2 flex-col items-center'>
                 <div className='animate-bounce rounded border-2 border-black bg-white px-2 py-1 text-xs font-bold whitespace-nowrap'>
-                  <span className='text-black'>[W or ↑] {activeObject.name} 입장</span>
+                  <span className='text-black'>
+                    {!isMobile && '[W or ↑] '}
+                    {activeObject.name} 입장
+                  </span>
                 </div>
               </div>
             )}
@@ -282,6 +306,18 @@ export default function GameMainClient() {
           </div>
         </div>
       </section>
+
+      {isMobile && !msgState && (
+        <TouchControls
+          onMove={handleTouchMove}
+          onJump={() => {
+            setGuideState(false);
+            if (!stateRef.current.isJumping) setIsJumping(true);
+          }}
+          onEnter={handleInteraction}
+          enterLabel={activeObject && !isEntering ? activeObject.name : null}
+        />
+      )}
 
       <Link
         href='/classic'
