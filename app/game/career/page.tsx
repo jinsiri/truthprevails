@@ -68,7 +68,9 @@ export default function GameCareer() {
         <div
           className={clsx(
             'absolute bottom-0 left-1/2 w-[90%] -translate-x-1/2 transition-all duration-1000',
-            activeView === 'career' ? 'h-[90vh]' : 'h-[70vh] max-w-[1000px]',
+            // 모바일: 우측 고정 버튼(~255px) 아래에서 보드가 시작하도록 높이 제한
+            'h-[calc(100dvh-17rem)]',
+            activeView === 'career' ? 'md:h-[90vh]' : 'max-w-[1000px] md:h-[70vh]',
           )}
         >
           <div
