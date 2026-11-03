@@ -7,7 +7,7 @@
 
 ## ✨ 핵심 컨셉 (Core Concept)
 
-이 사이트는 사용자의 취형에 따라 두 가지 모드를 제공하며, 특히 **웹 접근성**에 중점을 두었습니다.
+이 사이트는 사용자의 취향에 따라 두 가지 모드를 제공하며, 특히 **웹 접근성**에 중점을 두었습니다.
 
 * **Classic Mode**: 가독성과 전문성에 집중한 정갈한 레이아웃입니다.
 * **Game Mode (A11y Focused)**:
@@ -22,7 +22,7 @@
 프로젝트의 성능과 확장성을 위해 최신 기술들을 조합하여 구축했습니다.
 
 ### Framework & Language
-- **Next.js 15 (App Router)**: Turbopack을 활용한 빠른 빌드와 서버 컴포넌트 최적화.
+- **Next.js 15 (App Router)**: 정적 내보내기(Static Export)로 GitHub Pages에 배포.
 - **React 19**: 최신 리액트 생태계의 기능을 적극 활용.
 - **TypeScript**: 안정적인 개발을 위한 엄격한 타입 추론.
 
