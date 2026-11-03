@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import ThemedImage from '@/components/ThemedImage';
+import FadeInImage from '@/components/FadeInImage';
 import { CONTACT } from '@/features/portfolio/contact';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
@@ -60,7 +60,7 @@ export default function ClassicContact() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Image
+        <FadeInImage
           src={`${IMAGE_ROOT}/images/classic/contact_qr.png`}
           alt={CONTACT.email}
           width={250}

@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import FadeInImage from '@/components/FadeInImage';
 import { useEffect, useState } from 'react';
 
 const HEART_IMAGES = {
@@ -32,7 +32,7 @@ export default function Heart() {
       <ul className='grid h-[34px] w-full auto-cols-fr grid-flow-col gap-2'>
         {hearts.map((src, index) => (
           <li key={index} className='relative aspect-[96/89] h-full'>
-            <Image src={src} alt={`heart-${index}`} fill sizes='50px' className='object-contain' />
+            <FadeInImage src={src} alt={`heart-${index}`} fill sizes='50px' className='object-contain' />
           </li>
         ))}
       </ul>

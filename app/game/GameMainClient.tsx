@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import FadeInImage from '@/components/FadeInImage';
 import Link from 'next/link';
 import { CSSProperties, useEffect, useRef, useState, useCallback } from 'react';
 import { IconCaretDownFilled, IconTransfer } from '@tabler/icons-react';
@@ -279,7 +280,7 @@ export default function GameMainClient() {
                 className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/30 via-orange-400/20 to-white/20 opacity-0 blur-md transition-all duration-500 group-focus:scale-130 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}
                 style={{ width: '100%', aspectRatio: 1 }}
               ></span>
-              <Image
+              <FadeInImage
                 className='relative'
                 src={obj.image}
                 alt={obj.name}

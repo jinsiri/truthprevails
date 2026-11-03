@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import FadeInImage from './FadeInImage';
 import clsx from 'clsx';
 
 interface ThemedImageProps {
@@ -49,12 +49,16 @@ export default function ThemedImage({ className, lightSrc, darkSrc, alt, width, 
     return () => observer.disconnect();
   }, []);
 
-  if (!theme) return null;
+  // 테마 확정 전에도 자리를 잡아 둬야 이미지가 나타날 때 레이아웃이 튀지 않는다
+  if (!theme) {
+    if (fill || !width || !height) return null;
+    return <span aria-hidden className={clsx(className, 'block max-w-full')} style={{ width, aspectRatio: `${width} / ${height}` }} />;
+  }
 
   const src = theme === 'dark' ? darkSrc : lightSrc;
 
   return fill ? (
-    <Image
+    <FadeInImage
       className={clsx(className && className)}
       src={src}
       alt={alt}
@@ -66,6 +70,6 @@ export default function ThemedImage({ className, lightSrc, darkSrc, alt, width, 
       }}
     />
   ) : (
-    <Image className={clsx(className && className)} src={src} alt={alt} width={width} height={height} priority={priority} />
+    <FadeInImage className={clsx(className && className)} src={src} alt={alt} width={width} height={height} priority={priority} />
   );
 }

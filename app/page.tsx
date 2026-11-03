@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { useKeyboardList } from '@/hooks/useKeyboardList';
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
+import FadeInImage from '@/components/FadeInImage';
 import ThemedImage from '@/components/ThemedImage';
 import { ArrowRight } from 'lucide-react';
 
@@ -59,7 +59,7 @@ export default function Home() {
                 href={mode.address}
               >
                 <span className={'relative h-14 w-20 shrink-0 overflow-hidden rounded-lg border border-white/30 bg-black/20'}>
-                  <Image src={mode.image} alt='' fill sizes='80px' className='object-cover transition duration-500' />
+                  <FadeInImage src={mode.image} alt='' fill sizes='80px' className='object-cover transition duration-500' />
                 </span>
                 <span className='min-w-0 flex-1'>
                   <span className='block text-lg md:text-xl'>{mode.korNm}</span>
@@ -75,6 +75,7 @@ export default function Home() {
           <div className={'overflow-hidden rounded-2xl border border-white/40 bg-black/35 shadow-2xl backdrop-blur-sm'}>
             <div className='relative aspect-[3024/1644] overflow-hidden bg-black/20'>
               <ThemedImage
+                key={MODES[vIdx].address}
                 lightSrc={MODES[vIdx].previewImage.day}
                 darkSrc={MODES[vIdx].previewImage.night}
                 alt={`${MODES[vIdx].korNm} 진입 화면 미리보기`}
