@@ -8,7 +8,7 @@ import { useKeyboardList } from '@/hooks/useKeyboardList';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import ThemedImage from '@/components/ThemedImage';
-import { RightArrow } from 'next/dist/client/components/react-dev-overlay/ui/icons/right-arrow';
+import { ArrowRight } from 'lucide-react';
 
 import { MODES } from '@/features/site/modes';
 
@@ -93,14 +93,14 @@ export default function Home() {
               >
                 이 모드로 들어가기{' '}
                 <span aria-hidden>
-                  <RightArrow />
+                  <ArrowRight size={16} />
                 </span>
               </Link>
             </div>
           </div>
         </div>
       </div>
-      <footer className={'fixed bottom-0 z-50 py-3 text-sm text-white/50'}>© 2026. Jinsil Kwon all rights reserved.</footer>
+      <footer className={'relative mt-6 text-sm text-white/50'}>© 2026. Jinsil Kwon all rights reserved.</footer>
       <ThemeToggleButton />
     </main>
   );
