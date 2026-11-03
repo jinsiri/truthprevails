@@ -19,7 +19,7 @@ export const MODES: SiteMode[] = [
     address: '/game',
     enNm: 'GAME',
     description: '직접 탐험하며 인터랙티브 모험해보기',
-    detail: '탐험 · 퀘스트 · 스킬 · 우체통',
+    detail: '탐험 · 퀘스트 · 스킬 · 연락 수첩',
     image: '/images/game/school.webp',
     previewImage: {
       day: `${IMAGE_ROOT}/images/preview_game_day.png`,

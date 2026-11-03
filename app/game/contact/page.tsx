@@ -61,7 +61,7 @@ export default function GameContact() {
           {activeJin ? (
             <div className={'relative'}>
               <Image width={200} height={600} src={`${IMAGE_ROOT}/images/game/jinsil_standing.png`} alt={'진실 앞모습'} />
-              <SpeechBubble text={`반갑습니다! ${isMobile ? '' : '탭키 또는 마우스로 '}아래 우체통을 눌러 깃허브/기술 블로그에 방문해주세요!`} />
+              <SpeechBubble text={`반갑습니다! ${isMobile ? '' : '탭키 또는 마우스로 '}아래 책을 눌러 깃허브/기술 블로그에 방문해주세요!`} />
             </div>
           ) : (
             <>
@@ -94,7 +94,7 @@ export default function GameContact() {
             <span
               className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/60 via-orange-400/40 to-white/40 opacity-0 blur-md transition-all duration-500 group-focus:scale-200 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}
             ></span>
-            <Image className={'relative'} src={`${IMAGE_ROOT}/images/game/book.png`} width={300} height={300} alt={'우체통'} />
+            <Image className={'relative'} src={`${IMAGE_ROOT}/images/game/book.png`} width={300} height={300} alt={'연락 수첩'} />
             <Image
               src={`${IMAGE_ROOT}/images/game/stardust.png`}
               width={300}
@@ -107,7 +107,7 @@ export default function GameContact() {
 
         {activeView === 'contact' && (
           <GameDialog
-            label='우체통'
+            label='연락 수첩'
             onClose={closeView}
             className={clsx(
               // 모바일: 우측 고정 버튼(~255px) 아래 ~ 뒤로가기 버튼 위 영역에 배치
@@ -127,7 +127,7 @@ export default function GameContact() {
               </button>
 
               <div className='mode-btns type-b flex flex-1 flex-col items-center justify-center space-y-4 p-8 outline-none' onKeyDown={handleKeyDown}>
-                <h3 className='mb-4 border-b-2 border-dashed border-[#d7ccc8] pb-2 text-center text-xl font-bold text-[#5d4037] md:text-3xl'>MAILBOX</h3>
+                <h3 className='mb-4 border-b-2 border-dashed border-[#d7ccc8] pb-2 text-center text-xl font-bold text-[#5d4037] md:text-3xl'>CONTACT BOOK</h3>
                 {CONTACT_LINKS.map((mode, index) => (
                   <Link
                     key={mode.address}
