@@ -16,6 +16,15 @@ export interface InteractionPoint {
   widthPercent: number;
 }
 
+export interface Collectible {
+  id: string;
+  name: string;
+  icon: 'coffee' | 'book' | 'puzzle';
+  x: number;
+  height: number;
+  message: string;
+}
+
 export interface InventoryItemData {
   id?: string;
   name: string;

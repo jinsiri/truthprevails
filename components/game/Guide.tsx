@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { IconArrowBigUpLines, IconCaretDownFilled, IconCaretLeftFilled, IconCaretRightFilled, IconDoorEnter } from '@tabler/icons-react';
 import { touchButtonClass } from './TouchControls';
 
-const keyClass = clsx(touchButtonClass, 'bg-gray-100');
+const keyClass = clsx(touchButtonClass, 'bg-gray-100 text-gray-950');
 
 export default function Guide({ onClick, isMobile = false }: { onClick: () => void; isMobile?: boolean }) {
   return (
