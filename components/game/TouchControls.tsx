@@ -12,7 +12,7 @@ interface TouchControlsProps {
   enterLabel: string | null;
 }
 
-const buttonClass =
+export const touchButtonClass =
   'flex h-14 min-w-14 cursor-pointer touch-none items-center justify-center gap-1 rounded-lg border-4 border-black px-2 font-bold text-gray-950 select-none active:translate-y-0.5';
 
 function HoldButton({ label, onHold, onRelease, children }: { label: string; onHold: () => void; onRelease: () => void; children: ReactNode }) {
@@ -24,7 +24,7 @@ function HoldButton({ label, onHold, onRelease, children }: { label: string; onH
   return (
     <button
       aria-label={label}
-      className={clsx(buttonClass, 'bg-gray-100 active:bg-gray-300')}
+      className={clsx(touchButtonClass, 'bg-gray-100 active:bg-gray-300')}
       onPointerDown={handleDown}
       onPointerUp={onRelease}
       onPointerCancel={onRelease}
@@ -48,13 +48,13 @@ export default function TouchControls({ onMove, onJump, onEnter, enterLabel }: T
       </div>
 
       <div className='pointer-events-auto flex gap-3'>
-        <button aria-label='점프' className={clsx(buttonClass, 'bg-gray-100 active:bg-gray-300')} onPointerDown={onJump}>
+        <button aria-label='점프' className={clsx(touchButtonClass, 'bg-gray-100 active:bg-gray-300')} onPointerDown={onJump}>
           <IconArrowBigUpLines size={26} />
         </button>
         <button
           aria-label={enterLabel ? `${enterLabel} 입장` : '입장'}
           disabled={!enterLabel}
-          className={clsx(buttonClass, enterLabel ? 'animate-pulse bg-amber-200' : 'bg-gray-100 opacity-50')}
+          className={clsx(touchButtonClass, enterLabel ? 'animate-pulse bg-amber-200' : 'bg-gray-100 opacity-50')}
           onClick={onEnter}
         >
           <IconDoorEnter size={24} />

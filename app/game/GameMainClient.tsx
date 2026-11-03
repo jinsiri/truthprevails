@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { CSSProperties, useEffect, useRef, useState, useCallback } from 'react';
-import { IconTransfer } from '@tabler/icons-react';
+import { IconCaretDownFilled, IconTransfer } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import MessageBox from '@/components/game/MessageBox';
@@ -129,21 +129,35 @@ export default function GameMainClient() {
   }, [handleInteraction]);
 
   useEffect(() => {
-    let moveInterval: NodeJS.Timeout | null = null;
+    let rafId: number | null = null;
 
     if (direction && !isEntering) {
-      moveInterval = setInterval(() => {
-        setFrame((prev) => (isJumping ? 1 : prev === 0 ? 1 : 0));
+      // 매 프레임 위치를 갱신해야 모바일에서 끊김 없이 이동한다(속도 단위: %/100ms)
+      let last = performance.now();
+      let frameElapsed = 0;
+
+      const tick = (now: number) => {
+        const delta = Math.min(now - last, 50);
+        last = now;
+
+        frameElapsed += delta;
+        if (frameElapsed >= 100) {
+          frameElapsed = 0;
+          setFrame((prev) => (isJumping ? 1 : prev === 0 ? 1 : 0));
+        }
 
         setPosition((prev) => {
           const isDashing = pressedKeys.current.has('Shift');
-          const moveSpeed = isDashing ? 1.6 : 0.8;
+          const moveSpeed = (isDashing ? 1.6 : isMobile ? 1.3 : 0.8) * (delta / 100);
 
           if (direction === 'right') return Math.min(92, prev + moveSpeed);
           if (direction === 'left') return Math.max(0, prev - moveSpeed);
           return prev;
         });
-      }, 100);
+
+        rafId = requestAnimationFrame(tick);
+      };
+      rafId = requestAnimationFrame(tick);
     } else {
       if (!isJumping) {
         setFrame(0);
@@ -151,9 +165,9 @@ export default function GameMainClient() {
     }
 
     return () => {
-      if (moveInterval) clearInterval(moveInterval);
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
-  }, [direction, isJumping, isEntering]);
+  }, [direction, isJumping, isEntering, isMobile]);
 
   useEffect(() => {
     if (!isJumping) return;
@@ -215,9 +229,7 @@ export default function GameMainClient() {
         opacity: 0,
         transition: 'all 0.8s ease-in-out',
       }
-    : {
-        transition: 'all 0.1s linear',
-      };
+    : {};
 
   if (!isReady) {
     return <LoadingSpinner />;
@@ -225,7 +237,7 @@ export default function GameMainClient() {
 
   return (
     <>
-      <section className={clsx('home group relative flex h-screen items-center justify-center overflow-hidden bg-sky-200 select-none')}>
+      <section className={clsx('home group relative flex h-dvh items-center justify-center overflow-hidden bg-sky-200 select-none')}>
         <Cloud />
 
         {guideState && <Guide isMobile={isMobile} onClick={() => setGuideState(false)} />}
@@ -245,7 +257,7 @@ export default function GameMainClient() {
         )}
 
         <div
-          className='absolute bottom-0 left-0 h-72 w-full border-t-4 border-gray-950 bg-[#b0a58c] max-md:w-(--world) max-md:translate-x-(--camera) max-md:transition-[translate] max-md:duration-100 max-md:ease-linear md:h-50 dark:border-gray-100 dark:bg-[#46311e]'
+          className='absolute bottom-0 left-0 h-72 w-full border-t-4 border-gray-950 bg-[#b0a58c] max-md:w-(--world) max-md:translate-x-(--camera) md:h-50 dark:border-gray-100 dark:bg-[#46311e]'
           style={{ '--world': worldWidth, '--camera': cameraX } as CSSProperties}
         >
           {INTERACTION_POINTS.map((obj) => (
@@ -262,6 +274,15 @@ export default function GameMainClient() {
                 style={{ width: '100%', aspectRatio: 1 }}
               ></span>
               <Image className='relative' src={obj.image} alt={obj.name} fill />
+              {activeObject?.id !== obj.id && (
+                <span
+                  aria-hidden
+                  className='pointer-events-none absolute -translate-x-1/2 -translate-y-full animate-bounce text-yellow-300 [filter:drop-shadow(0_0_1px_#000)_drop-shadow(0_0_1px_#000)_drop-shadow(0_2px_0_#000)]'
+                  style={{ left: `${obj.door.x}%`, top: `${obj.door.y}%` }}
+                >
+                  <IconCaretDownFilled className='h-9 w-9 md:h-10 md:w-10' />
+                </span>
+              )}
             </button>
           ))}
           <div

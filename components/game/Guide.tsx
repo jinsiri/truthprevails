@@ -1,5 +1,9 @@
 import Image from 'next/image';
-import { IconArrowBigUpLines, IconCaretLeftFilled, IconCaretRightFilled, IconDoorEnter } from '@tabler/icons-react';
+import clsx from 'clsx';
+import { IconArrowBigUpLines, IconCaretDownFilled, IconCaretLeftFilled, IconCaretRightFilled, IconDoorEnter } from '@tabler/icons-react';
+import { touchButtonClass } from './TouchControls';
+
+const keyClass = clsx(touchButtonClass, 'bg-gray-100');
 
 export default function Guide({ onClick, isMobile = false }: { onClick: () => void; isMobile?: boolean }) {
   return (
@@ -11,22 +15,43 @@ export default function Guide({ onClick, isMobile = false }: { onClick: () => vo
     >
       {isMobile ? (
         <>
-          <ul className={'flex flex-col items-start gap-y-4 text-lg'}>
-            <li className={'flex items-center gap-x-3'}>
-              <IconCaretLeftFilled size={28} />
-              <IconCaretRightFilled size={28} />
-              버튼을 누르고 있으면 이동
+          <ul className={'flex items-end gap-x-6'}>
+            <li>
+              <figure className={'flex flex-col items-center'}>
+                <div className={'flex gap-2'}>
+                  <span className={keyClass}>
+                    <IconCaretLeftFilled size={28} />
+                  </span>
+                  <span className={keyClass}>
+                    <IconCaretRightFilled size={28} />
+                  </span>
+                </div>
+                <figcaption className={'mt-3'}>이동</figcaption>
+              </figure>
             </li>
-            <li className={'flex items-center gap-x-3'}>
-              <IconArrowBigUpLines size={28} />
-              버튼: 점프
+            <li>
+              <figure className={'flex flex-col items-center'}>
+                <span className={keyClass}>
+                  <IconArrowBigUpLines size={26} />
+                </span>
+                <figcaption className={'mt-3'}>점프</figcaption>
+              </figure>
             </li>
-            <li className={'flex items-center gap-x-3'}>
-              <IconDoorEnter size={28} />
-              건물 앞에서 입장
+            <li>
+              <figure className={'flex flex-col items-center'}>
+                <span className={keyClass}>
+                  <IconDoorEnter size={24} />
+                  <span className='text-sm'>입장</span>
+                </span>
+                <figcaption className={'mt-3'}>입장</figcaption>
+              </figure>
             </li>
           </ul>
-          <p className={'text-md mt-8'}>화면을 터치하면 게임이 시작됩니다! :)</p>
+          <p className={'mt-6 text-base'}>
+            <IconCaretDownFilled className={'inline h-5 w-5 align-[-3px] text-yellow-300'} /> 표시된 문 앞에서 입장할 수 있습니다!
+            <br />
+            화면을 터치하면 게임이 시작됩니다! :)
+          </p>
         </>
       ) : (
         <>

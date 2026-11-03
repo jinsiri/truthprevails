@@ -5,6 +5,8 @@ export interface InteractionPoint {
   name: string;
   left: number;
   range: [number, number];
+  /** 입장 지점(문) 위치: 건물 이미지 기준 %, y는 문 윗변 */
+  door: { x: number; y: number };
   path: string;
   image: string;
   width: number;

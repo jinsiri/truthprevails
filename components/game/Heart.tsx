@@ -37,7 +37,11 @@ export default function Heart() {
         ))}
       </ul>
 
-      {theme === 'dark' && <p className='mt-2 flex items-center rounded-sm bg-black/60 px-2 text-sm break-keep text-white'>* 밤에는 능률이 다소 떨어집니다.</p>}
+      {theme === 'dark' && (
+        <p className='mt-2 flex items-center rounded-sm bg-black/85 px-2 py-0.5 text-xs break-keep text-white md:bg-black/60 md:py-0 md:text-sm'>
+          * 밤에는 능률이 다소 떨어집니다.
+        </p>
+      )}
     </div>
   );
 }

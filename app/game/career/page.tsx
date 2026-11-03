@@ -10,12 +10,14 @@ import { useUIStore } from '@/store/useUIStore';
 import { SquareChevronLeft, SquareChevronRight } from 'lucide-react';
 import useQuestStore from '@/store/useQuestStore';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 export default function GameCareer() {
   const countRef = useRef(false);
   const containerRef = useRef<HTMLUListElement>(null);
   const careerDetailRef = useRef<HTMLDivElement>(null);
   const { activeView, openView } = useUIStore();
+  const isMobile = useIsMobile();
   const previousView = useRef(activeView);
   const incrementProgress = useQuestStore((state) => state.incrementProgress);
   const { vIdx, hIdx, handleKeyDown, setVIdx, setHIdx } = useKeyboardList({
@@ -54,7 +56,7 @@ export default function GameCareer() {
   }, [activeView]);
 
   return (
-    <main className='relative min-h-screen w-full overflow-hidden'>
+    <main className='relative min-h-dvh w-full overflow-hidden'>
       <ThemedImage
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
         lightSrc={`${IMAGE_ROOT}/images/game/company_day_v3.png`}
@@ -64,12 +66,12 @@ export default function GameCareer() {
         fill={true}
       />
 
-      <section className='relative z-10 min-h-screen w-full p-8'>
+      <section className='relative z-10 min-h-dvh w-full p-8'>
         <div
           className={clsx(
-            'absolute bottom-0 left-1/2 w-[90%] -translate-x-1/2 transition-all duration-1000',
-            // 모바일: 우측 고정 버튼(~255px) 아래에서 보드가 시작하도록 높이 제한
-            'h-[calc(100dvh-17rem)]',
+            'absolute left-1/2 w-[90%] -translate-x-1/2 transition-all duration-1000',
+            // 모바일: 우측 고정 버튼(~255px) 아래 ~ 뒤로가기 버튼 위 영역에 보드 배치
+            'top-[17rem] bottom-24 md:top-auto md:bottom-0',
             activeView === 'career' ? 'md:h-[90vh]' : 'max-w-[1000px] md:h-[70vh]',
           )}
         >
@@ -88,7 +90,7 @@ export default function GameCareer() {
             <SpeechBubble text={'이런 일을 했습니다!'} />
           </div>
 
-          <div className='block h-3/4 w-full overflow-y-auto rounded-lg border-8 border-gray-400 bg-gray-50 p-4 md:p-8 lg:p-12'>
+          <div className='block h-full w-full overflow-y-auto rounded-lg border-8 border-gray-400 bg-gray-50 p-4 md:h-3/4 md:p-8 lg:p-12'>
             {activeView !== 'career' && (
               <>
                 <h2 className={'mb-4 text-2xl md:mb-8 md:text-4xl lg:mb-10'}>경력사항</h2>
@@ -110,7 +112,7 @@ export default function GameCareer() {
                         className={clsx('flex w-full cursor-pointer items-center justify-between px-4 py-2', vIdx === index && 'active bg-gray-200')}
                       >
                         {mode}
-                        {vIdx === index && <span>Enter</span>}
+                        {!isMobile && vIdx === index && <span>Enter</span>}
                       </button>
                     </li>
                   ))}

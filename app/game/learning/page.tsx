@@ -43,7 +43,7 @@ export default function GameLearning() {
   }, [incrementProgress]);
 
   return (
-    <main className='relative min-h-screen w-full overflow-hidden'>
+    <main className='relative min-h-dvh w-full overflow-hidden'>
       <ThemedImage
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
         lightSrc={`${IMAGE_ROOT}/images/game/school_day.png`}
@@ -53,7 +53,7 @@ export default function GameLearning() {
         fill={true}
       />
 
-      <section className='relative z-10 min-h-screen w-full p-8'>
+      <section className='relative z-10 min-h-dvh w-full p-8'>
         <CharacterAnimation skillSet={skillSet} textClass={textClass} active={hide} onReady={handleCharacterReady} />
         {!(hide && characterReady) && (
           <div className='group absolute -bottom-15 left-0 hidden md:block lg:left-20 xl:left-30'>

@@ -12,6 +12,7 @@ import SpeechBubble from '@/components/game/SpeechBubble';
 import useQuestStore from '@/store/useQuestStore';
 import { X } from 'lucide-react';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 import { CONTACT, CONTACT_LINKS } from '@/features/portfolio/contact';
 
@@ -25,6 +26,7 @@ export default function GameContact() {
     onSelectV: (mode) => window.open(mode.address, '_blank', 'noopener,noreferrer'),
   });
   const [activeJin, setActiveJin] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     focusingRef.current?.focus();
@@ -37,16 +39,17 @@ export default function GameContact() {
   }, [incrementProgress]);
 
   return (
-    <main className='relative min-h-screen w-full overflow-hidden'>
+    <main className='relative min-h-dvh w-full overflow-hidden'>
       <ThemedImage
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
         lightSrc={`${IMAGE_ROOT}/images/game/info_day_v2.jpg`}
         darkSrc={`${IMAGE_ROOT}/images/game/info_night_v2.jpg`}
         alt={'인포센터 배경'}
+        priority
         fill={true}
       />
 
-      <section className='relative z-10 h-screen w-full overflow-hidden p-8'>
+      <section className='relative z-10 h-dvh w-full overflow-hidden p-8'>
         <button
           ref={focusingRef}
           className='group absolute top-[45%] right-[30%] cursor-pointer p-6 focus:outline-none'
@@ -58,14 +61,14 @@ export default function GameContact() {
           {activeJin ? (
             <div className={'relative'}>
               <Image width={200} height={600} src={`${IMAGE_ROOT}/images/game/jinsil_standing.png`} alt={'진실 앞모습'} />
-              <SpeechBubble text={'반갑습니다! 탭키 또는 마우스로 아래 우체통을 눌러 깃허브/기술 블로그에 방문해주세요!'} />
+              <SpeechBubble text={`반갑습니다! ${isMobile ? '' : '탭키 또는 마우스로 '}아래 우체통을 눌러 깃허브/기술 블로그에 방문해주세요!`} />
             </div>
           ) : (
             <>
               <Image className={'relative'} width={200} height={600} src={`${IMAGE_ROOT}/images/game/jinsil_back.webp`} alt={'진실 뒷모습'} />
               <div className='absolute -top-4 left-1/2 flex -translate-x-1/2 flex-col items-center'>
                 <div className='animate-bounce rounded border-2 border-black bg-white px-2 py-1 text-xs font-bold whitespace-nowrap'>
-                  <span className='text-black'>[Enter or 클릭]</span>
+                  <span className='text-black'>{isMobile ? '[터치]' : '[Enter or 클릭]'}</span>
                 </div>
               </div>
             </>
@@ -116,7 +119,7 @@ export default function GameContact() {
               <div className='absolute top-0 bottom-0 left-1/2 hidden w-px bg-[#d7ccc8] shadow-[0_0_10px_rgba(0,0,0,0.1)] md:block'></div>
 
               <button
-                className={'absolute top-0 right-0 inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center'}
+                className={'absolute top-0 right-0 z-10 inline-flex h-12 w-12 cursor-pointer items-center justify-center text-[#5d4037] hover:text-[#3e2723]'}
                 aria-label='닫기'
                 onClick={closeView}
               >
@@ -143,7 +146,7 @@ export default function GameContact() {
                 ))}
               </div>
 
-              <div className='flex flex-1 flex-col items-center justify-center bg-[#fdf5e6] p-8'>
+              <div className='hidden flex-1 flex-col items-center justify-center bg-[#fdf5e6] p-8 md:flex'>
                 <div className='mb-4 text-center text-sm text-[#8d6e63] italic md:text-lg'>Scan to Contact Me!</div>
 
                 <div className='flex h-40 w-40 items-center justify-center border-4 border-[#8d6e63] bg-white p-2 shadow-[4px_4px_0px_0px_rgba(141,110,99,0.3)]'>
