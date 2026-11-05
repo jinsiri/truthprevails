@@ -84,7 +84,7 @@ export default function GameMainClient() {
   // 점프 높이(positionY)는 캐릭터 키 배수. 공중에서 한 번 더 누르면 2단 점프
   const jump = useCallback(() => {
     if (stateRef.current.isEntering || jumpCountRef.current >= 2) return;
-    jumpVelocityRef.current = jumpCountRef.current === 0 ? JUMP_VELOCITY : JUMP_VELOCITY * 0.9;
+    jumpVelocityRef.current = JUMP_VELOCITY;
     jumpCountRef.current += 1;
     setIsJumping(true);
   }, []);
