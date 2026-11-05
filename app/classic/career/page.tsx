@@ -1,13 +1,38 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
+import clsx from 'clsx';
 import ThemedImage from '@/components/ThemedImage';
 import { EXPERIENCE, EXPERIENCE_TABS } from '@/features/portfolio/career';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 export default function ClassicCareer() {
+  const tabSentinelRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState(0);
+  const [isTabStuck, setIsTabStuck] = useState(false);
+
+  const selectTab = (index: number) => {
+    setActiveTab(index);
+    const sentinel = tabSentinelRef.current;
+    if (isTabStuck && sentinel) {
+      const stickyTop = window.matchMedia('(min-width: 1024px)').matches ? 64 : 76;
+      window.scrollTo({ top: sentinel.getBoundingClientRect().top + window.scrollY - stickyTop });
+    }
+  };
+
+  useEffect(() => {
+    const sentinel = tabSentinelRef.current;
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsTabStuck(!entry.isIntersecting && entry.boundingClientRect.top < (entry.rootBounds?.top ?? 0)),
+      {
+        rootMargin: '-80px 0px 0px 0px',
+      },
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className={'relative flex min-h-screen w-full flex-col items-end bg-sky-300 dark:bg-[#10273b]'}>
@@ -18,12 +43,18 @@ export default function ClassicCareer() {
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className='w-full pt-20 text-right lg:w-1/2 xl:w-2/3 xl:pt-30'
       >
-        <div className='relative z-10 w-full border-b border-gray-600 text-center text-sm font-medium text-gray-500 md:text-lg xl:text-lg dark:border-gray-700'>
+        <div ref={tabSentinelRef} aria-hidden />
+        <div
+          className={clsx(
+            'sticky top-[76px] z-10 w-full border-b border-gray-600 bg-sky-300 text-center text-sm font-medium text-gray-500 md:text-lg lg:top-16 xl:text-lg dark:border-gray-700 dark:bg-[#10273b]',
+            isTabStuck && 'before:absolute before:inset-x-0 before:bottom-full before:h-[76px] before:bg-sky-300 lg:before:h-16 dark:before:bg-[#10273b]',
+          )}
+        >
           <ul className='-mb-px flex w-full flex-wrap'>
             {EXPERIENCE_TABS.map((title, index) => (
               <li className='me-2' key={index}>
                 <button
-                  onClick={() => setActiveTab(index)}
+                  onClick={() => selectTab(index)}
                   className={`inline-block rounded-t-lg border-b-2 px-4 py-2 ${
                     activeTab === index
                       ? 'border-sky-700 font-bold text-sky-700 dark:border-sky-500 dark:text-sky-500'
