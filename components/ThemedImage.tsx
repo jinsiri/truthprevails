@@ -14,11 +14,9 @@ interface ThemedImageProps {
   fill?: boolean;
   sizes?: string;
   pixelated?: boolean;
-  /** 로딩 후 서서히 나타나기. 픽셀 게임 화면에서는 끈다 */
   fadeIn?: boolean;
 }
 
-// ThemeToggleButton과 같은 기준: data-theme > 저장된 테마 > 시스템 설정
 function getInitialTheme(): 'light' | 'dark' {
   const current = document.documentElement.getAttribute('data-theme');
   if (current === 'dark' || current === 'light') return current;
@@ -42,7 +40,6 @@ export default function ThemedImage({
   pixelated = true,
   fadeIn = true,
 }: ThemedImageProps) {
-  // 테마를 확정한 뒤에 렌더해야 다크 모드에서 라이트 이미지를 먼저 받는 이중 다운로드가 없다
   const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
 
   useEffect(() => {
@@ -64,7 +61,6 @@ export default function ThemedImage({
     return () => observer.disconnect();
   }, []);
 
-  // 테마 확정 전에도 자리를 잡아 둬야 이미지가 나타날 때 레이아웃이 튀지 않는다
   if (!theme) {
     if (fill || !width || !height) return null;
     return <span aria-hidden className={clsx(className, 'block max-w-full')} style={{ width, aspectRatio: `${width} / ${height}` }} />;

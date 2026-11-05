@@ -38,7 +38,7 @@ const useQuestStore = create<QuestState>()(
     {
       name: 'quest-storage',
       storage: createJSONStorage(() => localStorage),
-      // 퀘스트가 추가돼도 기존 진행도는 유지하고 새 퀘스트만 붙인다
+      // 퀘스트가 추가돼도 저장된 진행도는 유지한다
       merge: (persisted, current) => {
         const saved = (persisted ?? {}) as Partial<QuestState>;
         return {

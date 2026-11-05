@@ -22,9 +22,8 @@ import CollectibleItem from '@/components/game/CollectibleItem';
 import ItemToast from '@/components/game/ItemToast';
 
 const MOBILE_WORLD_WIDTH = 960;
-// 처음 움직일 때 깜빡이지 않도록 캐릭터 동작 이미지를 미리 받아 둔다
 const CHARACTER_SPRITES = ['side_01.webp', 'side_02.webp', 'back.png', 'front_book.png'].map((file) => `${IMAGE_ROOT}/images/game/${file}`);
-// 단위: 캐릭터 키/초. 1단 점프 최고 높이 ≈ JUMP_VELOCITY² / (2 * GRAVITY) = 0.9
+// 단위: 캐릭터 키/초
 const JUMP_VELOCITY = 6;
 const GRAVITY = 20;
 
@@ -43,21 +42,20 @@ export default function GameMainClient() {
   const [frame, setFrame] = useState(0);
   const [guideState, setGuideState] = useState(false);
   const [msgState, setMsgState] = useState(false);
-  // 착지 지점을 고정해 둬야 착지 후 계속 걸어도 먼지가 캐릭터를 따라오지 않는다
   const [landing, setLanding] = useState<{ id: number; x: number } | null>(null);
   const [toastItem, setToastItem] = useState<Collectible | null>(null);
   const collected = useQuestStore((state) => state.collected);
   const collectItem = useQuestStore((state) => state.collectItem);
-
-  useEffect(() => {
-    if (isMobile && sessionStorage.getItem('mobileNoticeShown') === null) setMsgState(true);
-  }, [isMobile]);
 
   const pressedKeys = useRef<Set<string>>(new Set());
   const jumpCountRef = useRef(0);
   const jumpVelocityRef = useRef(0);
   const collectedRef = useRef(collected);
   const stateRef = useRef({ position, isEntering, activeObject, isJumping });
+
+  useEffect(() => {
+    if (isMobile && sessionStorage.getItem('mobileNoticeShown') === null) setMsgState(true);
+  }, [isMobile]);
 
   useEffect(() => {
     stateRef.current = { position, isEntering, activeObject, isJumping };
@@ -81,7 +79,6 @@ export default function GameMainClient() {
     return () => document.removeEventListener('contextmenu', handleContextMenu);
   }, [isMobile]);
 
-  // 점프 높이(positionY)는 캐릭터 키 배수. 공중에서 한 번 더 누르면 2단 점프
   const jump = useCallback(() => {
     if (stateRef.current.isEntering || jumpCountRef.current >= 2) return;
     jumpVelocityRef.current = JUMP_VELOCITY;
@@ -118,7 +115,6 @@ export default function GameMainClient() {
     const handleKeyDown = (e: KeyboardEvent) => {
       setGuideState(false);
 
-      // 이동 중 다른 키를 누르면 멈춘다(점프·달리기·방향키는 이동과 같이 쓰는 키라 제외)
       if (!keyToDirection[e.code] && e.code !== 'Space' && !e.code.includes('Shift')) {
         stopMoving();
         return;
@@ -160,13 +156,12 @@ export default function GameMainClient() {
       }
     };
 
-    // 팝업·버튼으로 포커스가 옮겨가면 keyup이 막히거나 누락되므로, 이동 키를 놓친 채 계속 걷지 않게 멈춘다
     const handlePointerDown = (e: PointerEvent) => {
       if (!(e.target instanceof Element) || !e.target.closest('[data-touch-controls]')) stopMoving();
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    // 캡처 단계에서 받아야 팝업이 이벤트 전파를 막아도 키를 뗀 것을 놓치지 않는다
+    // 팝업이 keyup 전파를 막아도 받도록 캡처 단계에서 듣는다
     window.addEventListener('keyup', handleKeyUp, true);
     window.addEventListener('pointerdown', handlePointerDown, true);
     window.addEventListener('blur', stopMoving);
@@ -182,7 +177,6 @@ export default function GameMainClient() {
     let rafId: number | null = null;
 
     if (direction && !isEntering) {
-      // 매 프레임 위치를 갱신해야 모바일에서 끊김 없이 이동한다(속도 단위: %/100ms)
       let last = performance.now();
       let frameElapsed = 0;
 
@@ -240,7 +234,6 @@ export default function GameMainClient() {
         return;
       }
 
-      // 캐릭터 몸(발~머리) 높이 구간에 아이템이 들어오면 획득
       const center = stateRef.current.position + 4;
       const hit = COLLECTIBLES.find(
         (item) => !collectedRef.current.includes(item.id) && Math.abs(item.x - center) < 3 && height + 1 > item.height + 0.15 && height < item.height + 0.3,
@@ -279,7 +272,6 @@ export default function GameMainClient() {
   const jumpOffset = `translateY(${-positionY * 100}%)`;
   const transformStyle = isSide ? `scaleX(${lastDirection === 'left' ? -1 : 1}) ${jumpOffset}` : jumpOffset;
 
-  // 모바일: 월드를 화면보다 넓게(MOBILE_WORLD_WIDTH) 깔고 캐릭터를 따라 가로 스크롤
   const worldWidth = `max(100vw, ${MOBILE_WORLD_WIDTH}px)`;
   const cameraX = `clamp(calc(100vw - ${worldWidth}), calc(50vw - ${worldWidth} * ${(position + 4) / 100}), 0px)`;
 

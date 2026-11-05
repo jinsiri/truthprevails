@@ -63,7 +63,6 @@ export default function GameLearning() {
               <Image width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} />
               <SpeechBubble text={'자세히 보고 싶은 과정을 선택하세요!'} />
             </div>
-            {/* 모바일: PC처럼 하반신이 화면 아래로 잘리게 크게 두고 말풍선은 옆으로 */}
             <div className='absolute -bottom-16 left-2 w-36 md:hidden'>
               <Image width={144} height={224} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} />
               <SpeechBubble placement='right' text={'자세히 보고 싶은 과정을 선택하세요!'} />

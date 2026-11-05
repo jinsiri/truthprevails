@@ -2,8 +2,7 @@ import type { Collectible } from './types';
 
 export const COLLECTIBLE_QUEST_ID = 5;
 
-// x: 월드 가로 위치(%) / height: 지면에서 띄운 높이(캐릭터 키 배수).
-// 1단 점프로는 약 1.75까지, 2단 점프로는 약 2.65까지 닿는다(머리 기준). 2는 2단 점프를 언제 눌러도 닿는 높이
+// height: 캐릭터 키 배수(1단 점프 ~1.75, 2단 점프 ~2.65까지 닿음)
 export const COLLECTIBLES: Collectible[] = [
   {
     id: 'coffee',

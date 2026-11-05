@@ -12,7 +12,6 @@ export function CollectibleIcon({ icon, className }: { icon: Collectible['icon']
   return <Icon className={className} stroke={2} />;
 }
 
-// 지면(캐릭터 발 위치) 기준 캐릭터 키 배수만큼 띄워서 배치. 1cqw = 월드 너비 1%, 캐릭터 키 = 8cqw
 export default function CollectibleItem({ item }: { item: Collectible }) {
   return (
     <div

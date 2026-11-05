@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 
-// top: 캐릭터 머리 위 가운데 / right: 캐릭터 오른쪽(화면 가장자리에 붙은 작은 캐릭터용)
 export default function SpeechBubble({ text, placement = 'top' }: { text: string; placement?: 'top' | 'right' }) {
   return (
     <div

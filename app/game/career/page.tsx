@@ -72,7 +72,6 @@ export default function GameCareer() {
         <div
           className={clsx(
             'absolute left-1/2 w-[90%] -translate-x-1/2 transition-all duration-1000',
-            // 모바일: 우측 고정 버튼(~255px) 아래 ~ 뒤로가기 버튼 위 영역에 보드 배치
             'top-[17rem] bottom-24 md:top-auto md:bottom-0',
             activeView === 'career' ? 'md:h-[90vh]' : 'max-w-[1000px] md:h-[70vh]',
           )}
@@ -94,7 +93,6 @@ export default function GameCareer() {
             <SpeechBubble text={'이런 일을 했습니다!'} />
           </div>
 
-          {/* 모바일: PC처럼 하반신이 화면 아래로 잘리게 보드 앞 왼쪽 아래에 크게 두고 말풍선은 옆으로 */}
           <div className='absolute -bottom-40 -left-2 z-10 aspect-[651/950] w-36 md:hidden'>
             <ThemedImage
               fadeIn={false}
@@ -104,14 +102,12 @@ export default function GameCareer() {
               sizes='144px'
               alt={'발표하는 캐릭터'}
             />
-            {/* 상세 화면에서는 말풍선이 본문을 가리므로 목록에서만 보여준다 */}
             {activeView !== 'career' && <SpeechBubble placement='right' text={'이런 일을 했습니다!'} />}
           </div>
 
           <div
             className={clsx(
               'block h-full w-full overflow-y-auto rounded-lg border-8 border-gray-400 bg-gray-50 p-4 md:h-3/4 md:p-8 lg:p-12',
-              // 모바일 상세: 마지막 내용까지 캐릭터 위로 스크롤되도록 아래 여백
               activeView === 'career' && 'max-md:pb-36',
             )}
           >
@@ -146,7 +142,6 @@ export default function GameCareer() {
 
             {activeView === 'career' && (
               <>
-                {/* 보드 안쪽 여백(p-4/8/12)만큼 위로 늘려 붙여야 스크롤된 본문이 헤더 위로 비치지 않는다 */}
                 <div
                   className={
                     'sticky -top-4 -mt-4 mb-4 flex items-center justify-between gap-x-4 bg-gray-50 pt-4 md:-top-8 md:-mt-8 md:mb-6 md:w-[80%] md:pt-8 lg:-top-12 lg:-mt-12 lg:pt-12'
