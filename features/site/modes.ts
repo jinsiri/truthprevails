@@ -18,7 +18,7 @@ export const MODES: SiteMode[] = [
     korNm: '게임 모드',
     address: '/game',
     enNm: 'GAME',
-    description: '직접 탐험하며 인터랙티브 모험해보기',
+    description: '직접 탐험하며 모험해보기',
     detail: '탐험 · 퀘스트 · 스킬 · 연락 수첩',
     image: '/images/game/school.webp',
     previewImage: {

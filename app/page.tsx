@@ -47,16 +47,23 @@ export default function Home() {
             aria-label='모드 선택'
           >
             {MODES.map((mode, index) => (
-              <Link
+              <button
+                type='button'
                 key={mode.address}
                 data-keyboard-v={index}
+                aria-pressed={vIdx === index}
                 onFocus={() => setVIdx(index)}
                 onMouseEnter={() => setVIdx(index)}
+                onClick={() => setVIdx(index)}
+                onKeyDown={(event) => {
+                  if (event.key !== 'Enter') return;
+                  event.preventDefault();
+                  router.push(mode.address);
+                }}
                 className={clsx(
-                  'group flex items-center gap-4 rounded-xl border border-white/25 bg-black/20 p-3 pr-4 text-left transition duration-300 hover:bg-white/20 md:p-4',
+                  'group flex w-full cursor-pointer items-center gap-4 rounded-xl border border-white/25 bg-black/20 p-3 pr-4 text-left transition duration-300 hover:bg-white/20 md:p-4',
                   vIdx === index && 'border-white/80 bg-white/20 shadow-lg shadow-black/20',
                 )}
-                href={mode.address}
               >
                 <span className={'relative h-14 w-20 shrink-0 overflow-hidden rounded-lg border border-white/30 bg-black/20'}>
                   <FadeInImage src={mode.image} alt='' fill sizes='80px' className='object-cover transition duration-500' />
@@ -65,8 +72,8 @@ export default function Home() {
                   <span className='block text-lg md:text-xl'>{mode.korNm}</span>
                   <span className='block text-xs tracking-wider text-white/60 uppercase'>{mode.enNm}</span>
                 </span>
-                <span className={clsx('text-xs transition-opacity', vIdx === index ? 'opacity-100' : 'opacity-0')}>Enter</span>
-              </Link>
+                <span className={clsx('hidden text-xs transition-opacity md:inline', vIdx === index ? 'opacity-100' : 'opacity-0')}>Enter</span>
+              </button>
             ))}
           </div>
         </div>
