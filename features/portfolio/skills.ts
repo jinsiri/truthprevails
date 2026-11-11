@@ -2,10 +2,6 @@ import { SiReact, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiSpring, SiSprin
 import { BsFiletypeScss } from 'react-icons/bs';
 import { FaDocker, FaGit, FaGithub, FaJava, FaLinux } from 'react-icons/fa';
 
-export const tabInfo = [
-  { id: 'icon', text: '아이콘' },
-  { id: 'text', text: '텍스트' },
-];
 export const frontendTextList = [
   'HTML5',
   'CSS3',
