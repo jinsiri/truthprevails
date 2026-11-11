@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { CSSProperties, useEffect, useRef, useState, useCallback } from 'react';
-import { IconCaretDownFilled, IconTransfer } from '@tabler/icons-react';
+import { IconTransfer } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import MessageBox from '@/components/game/MessageBox';
@@ -14,18 +14,17 @@ import clsx from 'clsx';
 import LoadingSpinner from '@/components/game/LoadingSpinner';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
-import { keyToDirection, INTERACTION_POINTS } from '@/features/game/world';
+import { keyToDirection, INTERACTION_POINTS, MOBILE_WORLD_WIDTH } from '@/features/game/world';
 import type { Collectible, Direction, InteractionPoint } from '@/features/game/types';
 import { COLLECTIBLES, COLLECTIBLE_QUEST_ID } from '@/features/game/collectibles';
 import useQuestStore from '@/store/useQuestStore';
 import CollectibleItem from '@/components/game/CollectibleItem';
 import ItemToast from '@/components/game/ItemToast';
+import BuildingButton from '@/components/game/BuildingButton';
+import PlayerCharacter from '@/components/game/PlayerCharacter';
+import { useJump } from '@/hooks/useJump';
 
-const MOBILE_WORLD_WIDTH = 960;
 const CHARACTER_SPRITES = ['side_01.webp', 'side_02.webp', 'back.png', 'front_book.png'].map((file) => `${IMAGE_ROOT}/images/game/${file}`);
-// 단위: 캐릭터 키/초
-const JUMP_VELOCITY = 6;
-const GRAVITY = 20;
 
 export default function GameMainClient() {
   const router = useRouter();
@@ -33,37 +32,36 @@ export default function GameMainClient() {
 
   const [isReady, setIsReady] = useState(false);
   const [position, setPosition] = useState(0);
-  const [positionY, setPositionY] = useState(0);
   const [direction, setDirection] = useState<Direction | null>(null);
   const [lastDirection, setLastDirection] = useState<Direction>('down');
-  const [isJumping, setIsJumping] = useState(false);
   const [activeObject, setActiveObject] = useState<InteractionPoint | null>(null);
   const [isEntering, setIsEntering] = useState(false);
   const [frame, setFrame] = useState(0);
   const [guideState, setGuideState] = useState(false);
   const [msgState, setMsgState] = useState(false);
-  const [landing, setLanding] = useState<{ id: number; x: number } | null>(null);
   const [toastItem, setToastItem] = useState<Collectible | null>(null);
   const collected = useQuestStore((state) => state.collected);
   const collectItem = useQuestStore((state) => state.collectItem);
 
   const pressedKeys = useRef<Set<string>>(new Set());
-  const jumpCountRef = useRef(0);
-  const jumpVelocityRef = useRef(0);
-  const collectedRef = useRef(collected);
-  const stateRef = useRef({ position, isEntering, activeObject, isJumping });
+  const stateRef = useRef({ position, isEntering, activeObject });
+
+  const handleCollect = useCallback(
+    (item: Collectible) => {
+      collectItem(item.id, COLLECTIBLE_QUEST_ID);
+      setToastItem(item);
+    },
+    [collectItem],
+  );
+  const { isJumping, positionY, landing, jump } = useJump({ stateRef, collected, onCollect: handleCollect });
 
   useEffect(() => {
     if (isMobile && sessionStorage.getItem('mobileNoticeShown') === null) setMsgState(true);
   }, [isMobile]);
 
   useEffect(() => {
-    stateRef.current = { position, isEntering, activeObject, isJumping };
-  }, [position, isEntering, activeObject, isJumping]);
-
-  useEffect(() => {
-    collectedRef.current = collected;
-  }, [collected]);
+    stateRef.current = { position, isEntering, activeObject };
+  }, [position, isEntering, activeObject]);
 
   useEffect(() => {
     const savedPos = sessionStorage.getItem('lastPosition');
@@ -78,13 +76,6 @@ export default function GameMainClient() {
     setTimeout(() => setIsReady(true), 0);
     return () => document.removeEventListener('contextmenu', handleContextMenu);
   }, [isMobile]);
-
-  const jump = useCallback(() => {
-    if (stateRef.current.isEntering || jumpCountRef.current >= 2) return;
-    jumpVelocityRef.current = JUMP_VELOCITY;
-    jumpCountRef.current += 1;
-    setIsJumping(true);
-  }, []);
 
   const handleInteraction = useCallback(() => {
     const { activeObject: currentActive, position: currentPos, isEntering: entering } = stateRef.current;
@@ -214,57 +205,10 @@ export default function GameMainClient() {
   }, [direction, isJumping, isEntering, isMobile]);
 
   useEffect(() => {
-    if (!isJumping) return;
-    let height = 0;
-    let last = performance.now();
-    let rafId: number;
-
-    const tick = (now: number) => {
-      const delta = Math.max(0, Math.min(now - last, 50)) / 1000;
-      last = now;
-
-      jumpVelocityRef.current -= GRAVITY * delta;
-      height += jumpVelocityRef.current * delta;
-
-      if (height <= 0 && jumpVelocityRef.current < 0) {
-        jumpCountRef.current = 0;
-        setPositionY(0);
-        setIsJumping(false);
-        setLanding((prev) => ({ id: (prev?.id ?? 0) + 1, x: stateRef.current.position + 4 }));
-        return;
-      }
-
-      const center = stateRef.current.position + 4;
-      const hit = COLLECTIBLES.find(
-        (item) => !collectedRef.current.includes(item.id) && Math.abs(item.x - center) < 3 && height + 1 > item.height + 0.15 && height < item.height + 0.3,
-      );
-      if (hit) {
-        collectItem(hit.id, COLLECTIBLE_QUEST_ID);
-        setToastItem(hit);
-      }
-
-      setPositionY(height);
-      rafId = requestAnimationFrame(tick);
-    };
-    rafId = requestAnimationFrame(tick);
-
-    return () => cancelAnimationFrame(rafId);
-  }, [isJumping, collectItem]);
-
-  useEffect(() => {
     if (isReady) {
       sessionStorage.setItem('guideState', JSON.stringify(guideState));
     }
   }, [guideState, isReady]);
-
-  const isSide = lastDirection === 'left' || lastDirection === 'right';
-  const isBackOrFront = lastDirection === 'up' || lastDirection === 'down';
-  const imageSrc = isSide
-    ? `${IMAGE_ROOT}/images/game/side_0${isJumping ? 2 : frame + 1}.webp`
-    : `${IMAGE_ROOT}/images/game/${lastDirection === 'up' ? 'back' : 'front_book'}.png`;
-
-  const jumpOffset = `translateY(${-positionY * 100}%)`;
-  const transformStyle = isSide ? `scaleX(${lastDirection === 'left' ? -1 : 1}) ${jumpOffset}` : jumpOffset;
 
   const worldWidth = `max(100vw, ${MOBILE_WORLD_WIDTH}px)`;
   const cameraX = `clamp(calc(100vw - ${worldWidth}), calc(50vw - ${worldWidth} * ${(position + 4) / 100}), 0px)`;
@@ -279,14 +223,6 @@ export default function GameMainClient() {
     setDirection(dir);
     setLastDirection(dir);
   };
-
-  const enteringAnimation = isEntering
-    ? {
-        transform: `${transformStyle} scale(0.8) translateY(20px)`,
-        opacity: 0,
-        transition: 'all 0.8s ease-in-out',
-      }
-    : {};
 
   if (!isReady) {
     return <LoadingSpinner />;
@@ -322,35 +258,7 @@ export default function GameMainClient() {
           style={{ '--world': worldWidth, '--camera': cameraX } as CSSProperties}
         >
           {INTERACTION_POINTS.map((obj) => (
-            <button
-              key={obj.id}
-              className={`group absolute z-20 cursor-pointer rounded-xl p-6 focus:outline-none ${obj.style}`}
-              style={{ aspectRatio: obj.width / obj.height }}
-              onClick={() => {
-                router.push(obj.path);
-              }}
-            >
-              <span
-                className={`absolute inset-0 top-1/2 left-1/2 hidden -translate-1/2 overflow-hidden rounded-full bg-gradient-to-r from-yellow-300/30 via-orange-400/20 to-white/20 opacity-0 blur-md transition-all duration-500 group-focus:scale-130 group-focus:opacity-100 md:block dark:from-blue-500/50 dark:via-purple-500/50 dark:to-pink-500/50`}
-                style={{ width: '100%', aspectRatio: 1 }}
-              ></span>
-              <Image
-                className='relative'
-                src={obj.image}
-                alt={obj.name}
-                fill
-                sizes={`(max-width: 767px) ${Math.round((MOBILE_WORLD_WIDTH * obj.widthPercent) / 100)}px, ${obj.widthPercent}vw`}
-              />
-              {activeObject?.id !== obj.id && (
-                <span
-                  aria-hidden
-                  className='pointer-events-none absolute -translate-x-1/2 -translate-y-full animate-bounce text-yellow-300 [filter:drop-shadow(0_0_1px_#000)_drop-shadow(0_0_1px_#000)_drop-shadow(0_2px_0_#000)]'
-                  style={{ left: `${obj.door.x}%`, top: `${obj.door.y}%` }}
-                >
-                  <IconCaretDownFilled className='h-9 w-9 md:h-10 md:w-10' />
-                </span>
-              )}
-            </button>
+            <BuildingButton key={obj.id} building={obj} isActive={activeObject?.id === obj.id} onClick={() => router.push(obj.path)} />
           ))}
           <div
             className={`absolute -bottom-[4%] z-30 h-30 w-full bg-contain bg-repeat-x`}
@@ -373,38 +281,16 @@ export default function GameMainClient() {
             />
           )}
 
-          <div
-            className='absolute bottom-[70%] w-[8%]'
-            style={{
-              left: `${position}%`,
-              zIndex: isEntering ? 15 : 35,
-              ...enteringAnimation,
-            }}
-          >
-            {activeObject && !isEntering && (
-              <div className='absolute -top-8 left-1/2 flex -translate-x-1/2 flex-col items-center'>
-                <div className='animate-bounce rounded border-2 border-black bg-white px-2 py-1 text-xs font-bold whitespace-nowrap'>
-                  <span className='text-black'>
-                    {!isMobile && '[W or ↑] '}
-                    {activeObject.name} 입장
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {(isSide || isBackOrFront) && (
-              <Image
-                src={imageSrc}
-                alt='character'
-                width={154}
-                height={154}
-                priority
-                style={{
-                  transform: transformStyle,
-                }}
-              />
-            )}
-          </div>
+          <PlayerCharacter
+            position={position}
+            positionY={positionY}
+            lastDirection={lastDirection}
+            frame={frame}
+            isJumping={isJumping}
+            isEntering={isEntering}
+            activeObject={activeObject}
+            isMobile={isMobile}
+          />
         </div>
       </section>
 

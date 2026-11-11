@@ -1,6 +1,8 @@
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 import type { Direction, InteractionPoint } from './types';
 
+export const MOBILE_WORLD_WIDTH = 960;
+
 export const keyToDirection: Record<string, Direction> = {
   ArrowRight: 'right',
   ArrowLeft: 'left',
