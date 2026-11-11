@@ -32,7 +32,14 @@ export default function ClassicLearning() {
                 <p className='mt-1 text-[13px] text-(--muted)'>{project.date}</p>
               </div>
               <div>
-                <h3 className='font-editorial text-xl font-bold md:text-2xl'>{project.title}</h3>
+                <h3 className='font-editorial flex flex-wrap items-center gap-x-3 gap-y-1 text-xl font-bold md:text-2xl'>
+                  {project.title}
+                  {project.isCurrentSite && (
+                    <span className='border border-(--accent) px-2 py-0.5 font-sans text-[11px] font-medium tracking-[0.04em] text-(--accent)'>
+                      지금 보고 있는 사이트
+                    </span>
+                  )}
+                </h3>
                 <p className='mt-2 text-[15px] leading-7 md:text-base'>{project.description}</p>
                 <p className='mt-2 text-[13px] leading-6 text-(--muted)'>{project.stack}</p>
                 {project.link && (

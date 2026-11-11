@@ -19,6 +19,7 @@ export interface Project {
   description: string;
   stack: string;
   link?: { href: string; label: string };
+  isCurrentSite?: boolean;
 }
 export interface ContactLink {
   title: string;
