@@ -252,12 +252,6 @@ export default function GameMainClient() {
   }, [isJumping, collectItem]);
 
   useEffect(() => {
-    if (!toastItem) return;
-    const timer = setTimeout(() => setToastItem(null), 3500);
-    return () => clearTimeout(timer);
-  }, [toastItem]);
-
-  useEffect(() => {
     if (isReady) {
       sessionStorage.setItem('guideState', JSON.stringify(guideState));
     }
@@ -414,7 +408,7 @@ export default function GameMainClient() {
         </div>
       </section>
 
-      {toastItem && <ItemToast key={toastItem.id} item={toastItem} count={collected.length} total={COLLECTIBLES.length} />}
+      {toastItem && <ItemToast key={toastItem.id} item={toastItem} count={collected.length} total={COLLECTIBLES.length} onClose={() => setToastItem(null)} />}
 
       {isMobile && !msgState && (
         <TouchControls
