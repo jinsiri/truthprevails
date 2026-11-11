@@ -80,17 +80,32 @@ export default function Home() {
 
         <div className={'w-full'} aria-live='polite'>
           <div className={'overflow-hidden rounded-2xl border border-white/40 bg-black/35 shadow-2xl backdrop-blur-sm'}>
-            <div className='relative aspect-[3024/1644] overflow-hidden bg-black/20'>
-              <ThemedImage
-                key={MODES[vIdx].address}
-                lightSrc={MODES[vIdx].previewImage.day}
-                darkSrc={MODES[vIdx].previewImage.night}
-                alt={`${MODES[vIdx].korNm} 진입 화면 미리보기`}
-                fill
-                sizes='(max-width: 768px) 100vw, 55vw'
-                className='object-cover object-top transition-opacity duration-300'
-                pixelated={false}
-              />
+            <div className='px-4 pt-4 md:px-5 md:pt-5'>
+              <div className='overflow-hidden rounded-lg border border-white/15 shadow-xl shadow-black/50'>
+                <div className='flex items-center gap-3 bg-neutral-800 px-3 py-2'>
+                  <span aria-hidden className='flex gap-1.5'>
+                    <span className='h-2.5 w-2.5 rounded-full bg-[#ff5f57]' />
+                    <span className='h-2.5 w-2.5 rounded-full bg-[#febc2e]' />
+                    <span className='h-2.5 w-2.5 rounded-full bg-[#28c840]' />
+                  </span>
+                  <span className='flex-1 truncate rounded-md bg-neutral-900 px-3 py-0.5 text-center font-sans text-[11px] text-white/60'>
+                    truthprevails.me{MODES[vIdx].address}
+                  </span>
+                  <span aria-hidden className='w-[42px]' />
+                </div>
+                <div className='relative aspect-[3024/1644] overflow-hidden bg-black/20'>
+                  <ThemedImage
+                    key={MODES[vIdx].address}
+                    lightSrc={MODES[vIdx].previewImage.day}
+                    darkSrc={MODES[vIdx].previewImage.night}
+                    alt={`${MODES[vIdx].korNm} 진입 화면 미리보기`}
+                    fill
+                    sizes='(max-width: 768px) 100vw, 55vw'
+                    className='object-cover object-top transition-opacity duration-300'
+                    pixelated={false}
+                  />
+                </div>
+              </div>
             </div>
             <div className='grid gap-1 p-5 md:p-6'>
               <p className='text-base text-white/90 md:text-lg'>{MODES[vIdx].description}</p>
