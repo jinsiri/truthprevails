@@ -1,81 +1,53 @@
-'use client';
+import SectionHeader from '@/components/classic/SectionHeader';
+import { frontendTextList, frontendIcons, backendTextList, backendIcons, toolsTextList, toolsIcons } from '@/features/portfolio/skills';
 
-import { GrCertificate } from 'react-icons/gr';
-import { motion } from 'framer-motion';
-import ThemedImage from '@/components/ThemedImage';
-import { useState } from 'react';
-import { IMAGE_ROOT } from '@/constants/imageSrc';
+const SKILL_GROUPS = [
+  { title: 'FRONTEND', icons: frontendIcons, items: frontendTextList },
+  { title: 'BACKEND', icons: backendIcons, items: backendTextList },
+  { title: 'TOOLS', icons: toolsIcons, items: toolsTextList },
+];
 
-import { AnimatedIconList } from '@/components/classic/skills/AnimatedIconList';
-import { SkillTextList } from '@/components/classic/skills/SkillTextList';
-import { tabInfo, frontendTextList, frontendIcons, backendTextList, backendIcons, toolsTextList, toolsIcons } from '@/features/portfolio/skills';
+const CERTIFICATES = [
+  { date: '2022. 12', name: 'SQLD (SQL 개발자)' },
+  { date: '2021. 08', name: '정보처리기사' },
+];
 
 export default function ClassicSkills() {
-  const [activeTab, setActiveTab] = useState('icon');
-
   return (
-    <section className={'relative flex min-h-screen flex-col items-center bg-emerald-300 md:items-start md:overflow-hidden dark:bg-[#12332c]'}>
-      <h2 className={'w-full text-right text-4xl font-black uppercase md:text-5xl lg:text-7xl'}>Skills_</h2>
-      <motion.div
-        className={'-right-10 bottom-0 mt-10 max-w-1/2 md:absolute'}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
-      >
-        <ThemedImage
-          lightSrc={`${IMAGE_ROOT}/images/classic/skill.webp`}
-          darkSrc={`${IMAGE_ROOT}/images/classic/skill_w.webp`}
-          alt={'my skills'}
-          width={650}
-          height={650}
-          priority
-        />
-      </motion.div>
+    <>
+      <SectionHeader num='02' title='Skills' subtitle='Stack & Certificates' />
 
-      <div className={'relative z-10 mt-8 space-y-8 pl-4 text-4xl md:mt-0 md:text-5xl lg:text-7xl xl:pl-8'}>
-        <div className='relative z-10 w-full border-b border-gray-600 text-center text-sm font-medium text-gray-500 md:text-lg xl:text-lg dark:border-gray-700'>
-          <ul className='-mb-px flex w-full flex-wrap'>
-            {tabInfo.map((ti, index) => (
-              <li className='me-2' key={index}>
-                <button
-                  onClick={() => setActiveTab(ti.id)}
-                  className={`inline-block rounded-t-lg border-b-2 px-4 py-2 ${
-                    activeTab === ti.id
-                      ? 'border-sky-700 font-bold text-sky-700 dark:border-sky-500 dark:text-sky-500'
-                      : 'border-transparent text-gray-600 hover:border-gray-600 hover:text-gray-700'
-                  }`}
-                >
-                  {ti.text}
-                </button>
-              </li>
-            ))}
-          </ul>
+      <dl className='pt-6'>
+        {SKILL_GROUPS.map(({ title, icons, items }) => (
+          <div key={title} className='grid gap-3 border-b border-(--ink)/30 py-7 md:grid-cols-[200px_1fr] md:gap-6'>
+            <dt className='text-xs tracking-[0.16em] text-(--muted)'>{title}</dt>
+            <dd>
+              <ul className='mb-3 flex flex-wrap gap-3 text-2xl md:text-3xl'>
+                {icons.map((Icon, index) => (
+                  <li key={index}>
+                    <Icon />
+                  </li>
+                ))}
+              </ul>
+              <p className='text-[15px] leading-7 md:text-base'>{items.join(' · ')}</p>
+            </dd>
+          </div>
+        ))}
+
+        <div className='grid gap-3 py-7 md:grid-cols-[200px_1fr] md:gap-6'>
+          <dt className='text-xs tracking-[0.16em] text-(--muted)'>CERTIFICATE</dt>
+          <dd>
+            <ul>
+              {CERTIFICATES.map((cert) => (
+                <li key={cert.name} className='flex gap-4 text-[15px] leading-8 md:text-base'>
+                  <span className='font-editorial w-20 shrink-0 text-(--muted)'>{cert.date}</span>
+                  <span>{cert.name}</span>
+                </li>
+              ))}
+            </ul>
+          </dd>
         </div>
-
-        <h3 className='mb-2 text-xl font-medium md:text-2xl lg:text-3xl'>Frontend</h3>
-        {activeTab === 'icon' ? <AnimatedIconList icons={frontendIcons} /> : <SkillTextList skills={frontendTextList} />}
-
-        <h3 className='mb-2 text-xl font-medium md:text-2xl lg:text-3xl'>Backend</h3>
-        {activeTab === 'icon' ? <AnimatedIconList icons={backendIcons} /> : <SkillTextList skills={backendTextList} />}
-
-        <h3 className='mb-2 text-xl font-medium md:text-2xl lg:text-3xl'>Tools</h3>
-        {activeTab === 'icon' ? <AnimatedIconList icons={toolsIcons} /> : <SkillTextList skills={toolsTextList} />}
-
-        <h3 className='mb-2 text-xl font-medium md:text-2xl lg:text-3xl'>Certificate</h3>
-        <motion.div
-          initial={{ opacity: 0, x: -10, y: 20 }}
-          animate={{ opacity: 1, x: 0, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className='mb-10 flex items-center space-x-2 xl:mb-0'
-        >
-          <GrCertificate />
-          <p className='md:text-md text-sm lg:text-xl'>
-            (2022. 12) SQLD (SQL 개발자)
-            <br />
-            (2021. 08) 정보처리기사
-          </p>
-        </motion.div>
-      </div>
-    </section>
+      </dl>
+    </>
   );
 }

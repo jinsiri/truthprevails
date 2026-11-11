@@ -10,8 +10,8 @@ export const MODES: SiteMode[] = [
     detail: '소개 · 경력 · 스킬 · 학습 기록',
     image: '/images/classic/about.webp',
     previewImage: {
-      day: `${IMAGE_ROOT}/images/preview_classic_day.png`,
-      night: `${IMAGE_ROOT}/images/preview_classic_night.png?v=2`,
+      day: `${IMAGE_ROOT}/images/preview_classic_day.png?v=3`,
+      night: `${IMAGE_ROOT}/images/preview_classic_night.png?v=3`,
     },
   },
   {

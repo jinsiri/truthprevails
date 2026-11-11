@@ -30,7 +30,7 @@
 
 ### Styling & Interaction
 - **Tailwind CSS 4**: 유틸리티 기반의 스타일링으로 빠르고 일관된 UI 구현.
-- **Framer Motion**: 클래식 모드의 내비게이션·페이지 콘텐츠 애니메이션.
+- **Framer Motion**: 게임 모드의 캐릭터·스킬 획득 애니메이션.
 - **Icons**: Lucide-react, Tabler Icons, React-icons.
 
 ### State Management

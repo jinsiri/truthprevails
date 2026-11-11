@@ -1,77 +1,59 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import ThemedImage from '@/components/ThemedImage';
 import FadeInImage from '@/components/FadeInImage';
+import SectionHeader from '@/components/classic/SectionHeader';
 import { CONTACT } from '@/features/portfolio/contact';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
+const LINKS = [
+  { label: 'E-MAIL', href: `mailto:${CONTACT.email}`, text: CONTACT.email },
+  { label: 'GITHUB', href: CONTACT.github, text: CONTACT.github.replace('https://', '') },
+  { label: 'BLOG', href: CONTACT.blog, text: CONTACT.blog.replace('https://', '').replace(/\/$/, '') },
+];
+
 export default function ClassicContact() {
   return (
-    <section className={'relative min-h-screen bg-purple-200 px-6 pb-[50vw] md:pb-0 lg:px-0 xl:h-screen xl:overflow-hidden dark:bg-[#281638]'}>
-      <h2 className={'text-center text-2xl font-black uppercase md:text-5xl lg:text-7xl'}>Contact</h2>
-      <div
-        className={'my-10 items-center px-4 text-base font-medium md:my-20 md:px-10 md:text-2xl lg:flex lg:h-3/4 lg:text-3xl xl:my-0 xl:px-[25%] xl:text-4xl'}
-      >
-        <ul className={'w-full space-y-2 rounded-xl border-4 bg-gray-50/50 p-4 md:space-y-6 md:p-10'}>
-          <li className={'items-center gap-1 md:flex md:gap-2'}>
-            <h3 className={'w-40 text-purple-700 dark:text-purple-300'}>E-MAIL</h3>
-            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-          </li>
-          <li className={'items-center gap-1 md:flex md:gap-2'}>
-            <h3 className={'w-40 text-purple-700 dark:text-purple-300'}>PHONE</h3>
-            <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
-          </li>
-          <li className={'items-center gap-1 md:flex md:gap-2'}>
-            <h3 className={'w-40 text-purple-700 uppercase dark:text-purple-300'}>Github</h3>
-            <a href={CONTACT.github} target='_blank' rel='noopener noreferrer'>
-              {CONTACT.github}
-            </a>
-          </li>
-          <li className={'items-center gap-1 md:flex md:gap-2'}>
-            <h3 className={'w-40 text-purple-700 uppercase dark:text-purple-300'}>Blog</h3>
-            <a href={CONTACT.blog} target='_blank' rel='noopener noreferrer' className={'break-all'}>
-              {CONTACT.blog}
-            </a>
-          </li>
-        </ul>
-      </div>
-      <motion.div
-        className={'absolute bottom-0 left-0 max-w-1/2 md:static lg:-bottom-20 lg:-left-40 lg:max-w-1/3 xl:absolute xl:-bottom-40'}
-        initial={{ opacity: 0, x: -20, y: 20 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <ThemedImage
-          lightSrc={`${IMAGE_ROOT}/images/classic/search.png`}
-          darkSrc={`${IMAGE_ROOT}/images/classic/search_w.webp`}
-          alt={'How to contact jinsil'}
-          width={650}
-          height={650}
-          priority
-        />
-      </motion.div>
+    <>
+      <SectionHeader num='05' title='Contact' subtitle='Get in touch' />
 
-      <motion.div
-        className={
-          'top-40 right-0 hidden h-3/4 flex-col items-center rounded-tl-xl bg-purple-100 px-10 py-14 text-center md:flex xl:absolute xl:w-[20%] xl:max-w-1/3 dark:bg-[#21122e]'
-        }
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <FadeInImage
-          src={`${IMAGE_ROOT}/images/classic/contact_qr.png`}
-          alt={CONTACT.email}
-          width={250}
-          height={250}
-          className={'border-20 border-purple-300 dark:border-[#463058]'}
-        />
+      <dl className='pt-6'>
+        {LINKS.map((link) => (
+          <div key={link.label} className='grid gap-1 border-b border-(--ink)/30 py-6 md:grid-cols-[200px_1fr] md:items-baseline md:gap-6'>
+            <dt className='text-xs tracking-[0.16em] text-(--muted)'>{link.label}</dt>
+            <dd>
+              <a
+                href={link.href}
+                target={link.href.startsWith('mailto:') ? undefined : '_blank'}
+                rel='noopener noreferrer'
+                className='font-editorial text-xl break-all hover:text-(--accent) md:text-3xl'
+              >
+                {link.text}
+              </a>
+            </dd>
+          </div>
+        ))}
 
-        <p className={'mt-6 text-base font-medium break-keep xl:text-xl'}>
-          카메라를 열어 <strong className={'text-purple-700 dark:text-purple-300'}>QR 코드를 스캔</strong>하시면 연락처를 추가하실 수 있습니다
-        </p>
-      </motion.div>
-    </section>
+        <div className='grid gap-3 py-6 md:grid-cols-[200px_1fr] md:gap-6'>
+          <dt className='text-xs tracking-[0.16em] text-(--muted)'>PHONE</dt>
+          <dd>
+            <a href={CONTACT.phoneHref} className='inline-block border border-(--ink) px-5 py-3 text-sm font-bold tracking-[0.06em] md:hidden'>
+              전화 걸기 →
+            </a>
+            <div className='hidden items-center gap-6 md:flex'>
+              <FadeInImage
+                src={`${IMAGE_ROOT}/images/classic/contact_qr.png`}
+                alt='연락처 QR 코드'
+                width={120}
+                height={120}
+                className='border border-(--ink) bg-white p-2'
+              />
+              <p className='text-[15px] leading-7 text-(--muted)'>
+                휴대폰 카메라로 QR 코드를 스캔하면
+                <br />
+                연락처를 저장할 수 있습니다.
+              </p>
+            </div>
+          </dd>
+        </div>
+      </dl>
+    </>
   );
 }
