@@ -77,7 +77,7 @@ export default function GameCareer() {
         <div
           className={clsx(
             'absolute left-1/2 w-[90%] -translate-x-1/2 transition-all duration-1000',
-            'top-[17rem] bottom-24 md:top-auto md:bottom-0',
+            'top-32 bottom-24 md:top-auto md:bottom-0',
             activeView === 'career' ? 'md:h-[90vh]' : 'max-w-[1000px] md:h-[70vh]',
           )}
         >

@@ -112,7 +112,7 @@ export default function GameContact() {
             label='연락 수첩'
             onClose={closeView}
             className={clsx(
-              'absolute top-[17rem] bottom-24 left-1/2 w-[90%] max-w-[100vh] -translate-x-1/2 md:top-1/2 md:bottom-auto md:h-[70vh] md:-translate-y-1/2',
+              'absolute top-32 bottom-24 left-1/2 w-[90%] max-w-[100vh] -translate-x-1/2 md:top-1/2 md:bottom-auto md:h-[70vh] md:-translate-y-1/2',
               'border-4 border-[#3e2723] bg-[#5d4037] p-2 font-mono shadow-[8px_8px_0px_0px_rgba(0,0,0,0.2)]',
             )}
           >

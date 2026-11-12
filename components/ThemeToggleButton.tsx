@@ -32,8 +32,8 @@ export default function ThemeToggleButton({ className }: { className?: string })
     <button
       onClick={(e) => toggleTheme(e)}
       className={clsx(
-        'fixed z-50 inline-flex cursor-pointer items-center justify-center rounded-full p-2 transition',
-        className ?? 'text-background hover:bg-elevated top-[24] right-4 bg-amber-200 md:right-6 lg:top-[14] dark:bg-amber-500',
+        'z-50 inline-flex cursor-pointer items-center justify-center p-2 transition',
+        className ?? 'text-background hover:bg-elevated fixed top-[24] right-4 rounded-full bg-amber-200 md:right-6 lg:top-[14] dark:bg-amber-500',
       )}
       aria-label='Toggle dark mode'
     >

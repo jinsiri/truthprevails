@@ -19,8 +19,10 @@ export default function GameLayout({
     <main className='game w-full'>
       <GlobalKeyHandler />
       <Heart />
-      <ThemeToggleButton />
-      <ButtonGroup positionClass={'top-18 right-4 md:right-6'}>
+      <ButtonGroup
+        positionClass={'top-5 right-4 md:right-6'}
+        leading={<ThemeToggleButton className='h-[40px] w-[40px] rounded-sm border-2 border-black bg-[#ffc66e] text-black hover:brightness-95' />}
+      >
         <CharacterStatus />
         <MasteredSkills />
         <Inventory />
