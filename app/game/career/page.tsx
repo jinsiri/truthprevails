@@ -16,6 +16,7 @@ export default function GameCareer() {
   const countRef = useRef(false);
   const containerRef = useRef<HTMLUListElement>(null);
   const careerDetailRef = useRef<HTMLDivElement>(null);
+  const boardRef = useRef<HTMLDivElement>(null);
   const { activeView, openView } = useUIStore();
   const isMobile = useIsMobile();
   const previousView = useRef(activeView);
@@ -28,6 +29,10 @@ export default function GameCareer() {
       openView('careerDetail');
     },
   });
+
+  useEffect(() => {
+    boardRef.current?.scrollTo({ top: 0 });
+  }, [hIdx]);
 
   useEffect(() => {
     if (countRef.current) return;
@@ -106,9 +111,10 @@ export default function GameCareer() {
           </div>
 
           <div
+            ref={boardRef}
             className={clsx(
               'block h-full w-full overflow-y-auto rounded-lg border-8 border-gray-400 bg-gray-50 p-4 md:h-3/4 md:p-8 lg:p-12',
-              activeView === 'career' && 'max-md:pb-36',
+              activeView === 'career' && 'max-md:pb-20',
             )}
           >
             {activeView !== 'career' && (
@@ -176,7 +182,7 @@ export default function GameCareer() {
                   {EXPERIENCE.map(
                     (exp, index) =>
                       hIdx === index && (
-                        <li key={index} className='mb-8'>
+                        <li key={index} className='md:mb-8'>
                           <h3 className='mb-4 text-xl font-bold text-gray-700'>{exp.title}</h3>
 
                           <div className='w-full border-collapse text-left text-sm text-gray-700 lg:block rtl:text-right'>

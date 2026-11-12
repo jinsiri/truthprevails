@@ -44,7 +44,7 @@ export default function CharacterAnimation({
       aria-hidden={!playing}
       className='group absolute -bottom-15 left-1/2 z-10 -translate-x-1/2'
     >
-      <div className='pointer-events-none relative h-[425px] w-[300px]'>
+      <div className='pointer-events-none relative h-[340px] w-[240px] md:h-[425px] md:w-[300px]'>
         <div className='absolute -top-10 left-1/2 flex w-full -translate-x-1/2 flex-col items-center'>
           {playing &&
             skillSet.map((skill, i) => (
