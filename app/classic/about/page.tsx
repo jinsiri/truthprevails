@@ -24,7 +24,7 @@ export default function ClassicAbout() {
               <h2 className='mb-2.5 text-xs tracking-[0.16em] text-(--muted)'>{group.title}</h2>
               <ul>
                 {group.items.map((item) => (
-                  <li key={item} className='text-[15px] leading-[1.9] before:text-(--accent) before:content-["—_"]'>
+                  <li key={item} className='pl-[1.15em] -indent-[1.15em] text-[15px] leading-[1.9] before:text-(--accent) before:content-["—_"]'>
                     {item}
                   </li>
                 ))}

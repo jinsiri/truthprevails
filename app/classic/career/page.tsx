@@ -72,7 +72,7 @@ export default function ClassicCareer() {
                   {Array.isArray(item.value) ? (
                     <ul>
                       {item.value.map((value) => (
-                        <li key={value} className='before:text-(--accent) before:content-["—_"]'>
+                        <li key={value} className='pl-[1.15em] -indent-[1.15em] before:text-(--accent) before:content-["—_"]'>
                           {value}
                         </li>
                       ))}

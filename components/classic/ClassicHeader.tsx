@@ -43,22 +43,25 @@ export default function ClassicHeader() {
       </div>
 
       {isMenuOpen && (
-        <nav className='border-t border-(--ink) md:hidden'>
-          <ul>
-            {navItems.map((item, index) => (
-              <li key={item.href} className='border-b border-(--ink)/20 last:border-b-0'>
-                <Link
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={clsx('flex items-baseline gap-4 px-5 py-4', pathname === item.href && 'font-bold')}
-                >
-                  <span className='font-editorial text-sm text-(--accent)'>{String(index).padStart(2, '0')}</span>
-                  <span className='text-lg uppercase'>{item.label}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <>
+          <div aria-hidden onClick={() => setIsMenuOpen(false)} className='fixed inset-x-0 top-14 bottom-0 bg-black/30 md:hidden' />
+          <nav className='absolute inset-x-0 top-full border-b border-(--ink) bg-(--paper) shadow-lg md:hidden'>
+            <ul>
+              {navItems.map((item, index) => (
+                <li key={item.href} className='border-b border-(--ink)/20 last:border-b-0'>
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={clsx('flex items-baseline gap-4 px-5 py-4', pathname === item.href && 'font-bold')}
+                  >
+                    <span className='font-editorial text-sm text-(--accent)'>{String(index).padStart(2, '0')}</span>
+                    <span className='text-lg uppercase'>{item.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </>
       )}
     </header>
   );
