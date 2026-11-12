@@ -1,11 +1,11 @@
 import SectionHeader from '@/components/classic/SectionHeader';
 import { aboutLead, traitGroups } from '@/features/portfolio/profile';
 
-export default function ClassicAbout() {
+export default function AboutSection() {
   const [before, after] = aboutLead.text.split(aboutLead.highlight);
 
   return (
-    <>
+    <section id='about' className='scroll-mt-14 pt-6 md:scroll-mt-0 md:pt-10'>
       <SectionHeader num='01' title='About' subtitle='User-driven & Code-crafted · Frontend Developer' />
 
       <div className='grid gap-10 pt-10 md:grid-cols-[1.2fr_1fr] md:gap-14'>
@@ -33,6 +33,6 @@ export default function ClassicAbout() {
           ))}
         </div>
       </div>
-    </>
+    </section>
   );
 }

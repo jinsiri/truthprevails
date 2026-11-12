@@ -9,15 +9,14 @@ import { EDUCATION } from '@/features/portfolio/education';
 const SPY_OFFSET = 130;
 const NAV_ITEMS = [...EXPERIENCE_TABS, '학력'];
 
-export default function ClassicCareer() {
+export default function CareerSection() {
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
       const passed = sectionRefs.current.filter((section) => section && section.getBoundingClientRect().top <= SPY_OFFSET);
-      setActiveIndex(isAtBottom ? NAV_ITEMS.length - 1 : Math.max(0, passed.length - 1));
+      setActiveIndex(Math.max(0, passed.length - 1));
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -30,7 +29,7 @@ export default function ClassicCareer() {
   };
 
   return (
-    <>
+    <section id='career' className='scroll-mt-14 pt-6 md:scroll-mt-0 md:pt-10'>
       <SectionHeader num='03' title='Career' subtitle='Experience & Education' />
 
       <nav aria-label='경력 목차' className='sticky top-14 z-10 -mx-5 border-b border-(--ink) bg-(--paper) px-5 md:-mx-8 md:px-8'>
@@ -110,6 +109,6 @@ export default function ClassicCareer() {
           ))}
         </ol>
       </section>
-    </>
+    </section>
   );
 }

@@ -9,9 +9,9 @@ const LINKS = [
   { label: 'BLOG', href: CONTACT.blog, text: CONTACT.blog.replace('https://', '').replace(/\/$/, '') },
 ];
 
-export default function ClassicContact() {
+export default function ContactSection() {
   return (
-    <>
+    <section id='contact' className='scroll-mt-14 pt-6 md:scroll-mt-0 md:pt-10'>
       <SectionHeader num='05' title='Contact' subtitle='Get in touch' />
 
       <dl className='pt-6'>
@@ -54,6 +54,6 @@ export default function ClassicContact() {
           </dd>
         </div>
       </dl>
-    </>
+    </section>
   );
 }

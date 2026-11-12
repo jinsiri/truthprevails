@@ -1,9 +1,9 @@
 import SectionHeader from '@/components/classic/SectionHeader';
 import { PROJECTS } from '@/features/portfolio/projects';
 
-export default function ClassicProjects() {
+export default function ProjectsSection() {
   return (
-    <>
+    <section id='projects' className='scroll-mt-14 pt-6 md:scroll-mt-0 md:pt-10'>
       <SectionHeader num='04' title='Projects' subtitle='Side Projects' />
 
       <section className='pt-6'>
@@ -40,6 +40,6 @@ export default function ClassicProjects() {
           ))}
         </ol>
       </section>
-    </>
+    </section>
   );
 }

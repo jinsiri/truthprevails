@@ -12,9 +12,9 @@ const CERTIFICATES = [
   { date: '2021. 08', name: '정보처리기사' },
 ];
 
-export default function ClassicSkills() {
+export default function SkillsSection() {
   return (
-    <>
+    <section id='skills' className='scroll-mt-14 pt-6 md:scroll-mt-0 md:pt-10'>
       <SectionHeader num='02' title='Skills' subtitle='Stack & Certificates' />
 
       <dl className='pt-6'>
@@ -48,6 +48,6 @@ export default function ClassicSkills() {
           </dd>
         </div>
       </dl>
-    </>
+    </section>
   );
 }
