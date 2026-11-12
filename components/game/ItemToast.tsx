@@ -14,7 +14,7 @@ export default function ItemToast({ item, count, total, onClose }: ItemToastProp
     <div
       role='status'
       onClick={onClose}
-      className='animate-item-toast fixed top-28 right-18 left-4 z-60 flex cursor-pointer items-start gap-3 rounded-xl border-4 border-black bg-black/80 py-3 pr-9 pl-4 text-white md:top-24 md:right-auto md:left-1/2 md:w-[90%] md:max-w-md md:-translate-x-1/2'
+      className='animate-item-toast fixed top-28 right-4 left-4 z-60 flex cursor-pointer items-start gap-3 rounded-xl border-4 border-black bg-black/80 py-3 pr-9 pl-4 text-white md:top-24 md:right-auto md:left-1/2 md:w-[90%] md:max-w-md md:-translate-x-1/2'
     >
       <span className='flex h-11 w-11 shrink-0 items-center justify-center rounded-md border-[3px] border-black bg-yellow-200 text-[#5c2b03]'>
         <CollectibleIcon icon={item.icon} className='h-7 w-7' />
