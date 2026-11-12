@@ -1,32 +1,15 @@
 import SectionHeader from '@/components/classic/SectionHeader';
-import { EDUCATION } from '@/features/portfolio/education';
 import { PROJECTS } from '@/features/portfolio/projects';
 
-export default function ClassicLearning() {
+export default function ClassicProjects() {
   return (
     <>
-      <SectionHeader num='04' title='Learning' subtitle='Education & Side Projects' />
+      <SectionHeader num='04' title='Projects' subtitle='Side Projects' />
 
-      <section className='pt-10'>
-        <h2 className='text-xs tracking-[0.16em] text-(--muted)'>EDUCATION</h2>
-        <ol className='mt-4'>
-          {EDUCATION.map((item) => (
-            <li key={item.title} className='grid gap-1 border-t border-(--ink)/30 py-5 md:grid-cols-[200px_1fr] md:gap-6'>
-              <time className='font-editorial text-(--muted)'>{item.date}</time>
-              <div>
-                <p className='font-editorial text-xl font-bold md:text-2xl'>{item.title}</p>
-                <p className='mt-1 text-[15px] text-(--muted)'>{item.description}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className='pt-12'>
-        <h2 className='text-xs tracking-[0.16em] text-(--muted)'>SIDE PROJECTS</h2>
-        <ol className='mt-4'>
+      <section className='pt-6'>
+        <ol>
           {PROJECTS.map((project, index) => (
-            <li key={project.title} className='grid gap-2 border-t border-(--ink)/30 py-6 md:grid-cols-[200px_1fr] md:gap-6'>
+            <li key={project.title} className='grid gap-2 border-t border-(--ink)/30 py-6 first:border-t-0 md:grid-cols-[200px_1fr] md:gap-6'>
               <div>
                 <span className='font-editorial text-2xl text-(--accent)'>{String(index + 1).padStart(2, '0')}</span>
                 <p className='mt-1 text-[13px] text-(--muted)'>{project.date}</p>

@@ -7,7 +7,7 @@ export const MODES: SiteMode[] = [
     address: '/classic',
     enNm: 'CLASSIC',
     description: '정보 위주로 빠르게 알아보기',
-    detail: '소개 · 경력 · 스킬 · 학습 기록',
+    detail: '소개 · 스킬 · 경력 · 프로젝트',
     image: '/images/classic/about.webp',
     previewImage: {
       day: `${IMAGE_ROOT}/images/preview_classic_day.png?v=3`,

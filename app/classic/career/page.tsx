@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import SectionHeader from '@/components/classic/SectionHeader';
 import { EXPERIENCE, EXPERIENCE_TABS } from '@/features/portfolio/career';
+import { EDUCATION } from '@/features/portfolio/education';
 
 const SPY_OFFSET = 130;
+const NAV_ITEMS = [...EXPERIENCE_TABS, '학력'];
 
 export default function ClassicCareer() {
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
@@ -13,8 +15,9 @@ export default function ClassicCareer() {
 
   useEffect(() => {
     const handleScroll = () => {
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
       const passed = sectionRefs.current.filter((section) => section && section.getBoundingClientRect().top <= SPY_OFFSET);
-      setActiveIndex(Math.max(0, passed.length - 1));
+      setActiveIndex(isAtBottom ? NAV_ITEMS.length - 1 : Math.max(0, passed.length - 1));
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -28,12 +31,12 @@ export default function ClassicCareer() {
 
   return (
     <>
-      <SectionHeader num='03' title='Career' subtitle='Experience & Achievements' />
+      <SectionHeader num='03' title='Career' subtitle='Experience & Education' />
 
       <nav aria-label='경력 목차' className='sticky top-14 z-10 -mx-5 border-b border-(--ink) bg-(--paper) px-5 md:-mx-8 md:px-8'>
         <ul className='flex gap-6 overflow-x-auto text-sm md:gap-8 md:text-[15px]'>
-          {EXPERIENCE_TABS.map((company, index) => (
-            <li key={company}>
+          {NAV_ITEMS.map((label, index) => (
+            <li key={label}>
               <button
                 type='button'
                 aria-current={activeIndex === index ? 'true' : undefined}
@@ -43,7 +46,7 @@ export default function ClassicCareer() {
                   activeIndex === index ? 'border-(--accent) font-bold' : 'border-transparent text-(--muted) hover:text-(--ink)',
                 )}
               >
-                {company}
+                {label}
               </button>
             </li>
           ))}
@@ -56,7 +59,7 @@ export default function ClassicCareer() {
           ref={(element) => {
             sectionRefs.current[index] = element;
           }}
-          className='scroll-mt-28 border-b border-(--ink) pt-10 pb-6 last:border-b-0'
+          className='scroll-mt-28 border-b border-(--ink) pt-10 pb-6'
         >
           <p className='text-xs tracking-[0.16em] text-(--muted)'>
             <span className='font-editorial mr-2 text-(--accent)'>{String(index + 1).padStart(2, '0')}</span>
@@ -86,6 +89,27 @@ export default function ClassicCareer() {
           </dl>
         </article>
       ))}
+
+      <section
+        ref={(element) => {
+          sectionRefs.current[EXPERIENCE.length] = element;
+        }}
+        className='scroll-mt-28 pt-10'
+      >
+        <p className='text-xs tracking-[0.16em] text-(--muted)'>EDUCATION</p>
+        <h2 className='font-editorial mt-2 text-2xl font-bold md:text-3xl'>학력</h2>
+        <ol className='mt-6'>
+          {EDUCATION.map((item) => (
+            <li key={item.title} className='grid gap-1 border-t border-(--ink)/30 py-5 md:grid-cols-[160px_1fr] md:gap-6'>
+              <time className='font-editorial text-(--muted)'>{item.date}</time>
+              <div>
+                <p className='font-editorial text-xl font-bold md:text-2xl'>{item.title}</p>
+                <p className='mt-1 text-[15px] text-(--muted)'>{item.description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
     </>
   );
 }

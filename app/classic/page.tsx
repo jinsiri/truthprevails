@@ -4,8 +4,8 @@ import { navItems } from '@/constants/navItems';
 const SECTION_SUMMARY: Record<string, string> = {
   '/classic/about': '소개와 일하는 방식',
   '/classic/skills': '기술 스택과 자격',
-  '/classic/career': '경력과 주요 성과',
-  '/classic/learning': '학력과 사이드 프로젝트',
+  '/classic/career': '경력과 학력',
+  '/classic/projects': '사이드 프로젝트',
   '/classic/contact': '연락처',
 };
 
