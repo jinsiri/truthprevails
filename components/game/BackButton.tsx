@@ -1,19 +1,19 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { useUIStore } from '@/store/useUIStore';
+import { useSiteBack } from '@/hooks/useSiteBack';
 
 export default function BackButton() {
-  const router = useRouter();
   const isMobile = useIsMobile();
   const { activeView, closeView } = useUIStore();
+  const goBack = useSiteBack();
 
   const handleClick = () => {
     if (activeView) {
       closeView();
     } else {
-      router.back();
+      goBack();
     }
   };
 

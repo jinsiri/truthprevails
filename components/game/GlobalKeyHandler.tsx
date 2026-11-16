@@ -1,12 +1,12 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useUIStore } from '@/store/useUIStore';
+import { useSiteBack } from '@/hooks/useSiteBack';
 
 export default function GlobalKeyHandler() {
-  const router = useRouter();
   const { activeView, closeView } = useUIStore();
+  const goBack = useSiteBack();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -14,14 +14,14 @@ export default function GlobalKeyHandler() {
         if (activeView) {
           closeView();
         } else {
-          router.back();
+          goBack();
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeView, closeView, router]);
+  }, [activeView, closeView, goBack]);
 
   return null;
 }

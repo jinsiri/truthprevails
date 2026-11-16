@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import { preconnect } from 'react-dom';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
+import HistoryDepthTracker from '@/components/HistoryDepthTracker';
 
 export const metadata: Metadata = {
   title: 'TRUTH WORLD',
@@ -36,7 +37,10 @@ export default function RootLayout({
 
   return (
     <html lang='ko'>
-      <body>{children}</body>
+      <body>
+        <HistoryDepthTracker />
+        {children}
+      </body>
     </html>
   );
 }
