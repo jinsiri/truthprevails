@@ -59,7 +59,7 @@ export default function GameLearning() {
         <CharacterAnimation skillSet={skillSet} textClass={textClass} active={hide} onReady={handleCharacterReady} />
         {!(hide && characterReady) && (
           <>
-            <div className='group tablet:w-[320px] pointer-events-none absolute -bottom-15 left-0 z-10 hidden w-[220px] md:block lg:left-20 xl:left-30 xl:w-[300px]'>
+            <div className='group tablet:w-[400px] pointer-events-none absolute -bottom-15 left-0 z-10 hidden w-[220px] md:block lg:left-20 xl:left-30 xl:w-[300px]'>
               <Image width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} className='h-auto w-full' />
               <SpeechBubble text={'자세히 보고 싶은 과정을 선택하세요!'} />
             </div>

@@ -30,12 +30,12 @@ export function ButtonGroup({ children, leading, positionClass = 'top-8 right-8'
           aria-label={isExpanded ? '메뉴 닫기' : '메뉴 열기'}
           aria-expanded={isExpanded}
           onClick={() => setIsOpen((open) => !open)}
-          className='inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-stone-800 p-2 text-white md:hidden'
+          className='wide:hidden inline-flex h-[40px] w-[40px] cursor-pointer items-center justify-center rounded-sm border-2 border-black bg-stone-800 p-2 text-white'
         >
           {isExpanded ? <IconX /> : <IconMenu2 />}
         </button>
       </div>
-      <div className={clsx('flex gap-2', direction === 'col' ? 'flex-col' : 'flex-row', !isExpanded && 'max-md:hidden')}>{children}</div>
+      <div className={clsx('flex gap-2', direction === 'col' ? 'flex-col' : 'flex-row', !isExpanded && 'narrow:hidden')}>{children}</div>
     </div>
   );
 }

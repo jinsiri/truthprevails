@@ -3,7 +3,7 @@
 import ThemedImage from '@/components/ThemedImage';
 import SpeechBubble from '@/components/game/SpeechBubble';
 import clsx from 'clsx';
-import { Fragment, useEffect, useRef } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { useKeyboardList } from '@/hooks/useKeyboardList';
 import { EXPERIENCE, EXPERIENCE_TABS } from '@/features/portfolio/career';
 import { useUIStore } from '@/store/useUIStore';
@@ -17,6 +17,7 @@ export default function GameCareer() {
   const containerRef = useRef<HTMLUListElement>(null);
   const careerDetailRef = useRef<HTMLDivElement>(null);
   const boardRef = useRef<HTMLDivElement>(null);
+  const [isCharacterHidden, setIsCharacterHidden] = useState(false);
   const { activeView, openView } = useUIStore();
   const isMobile = useIsMobile();
   const previousView = useRef(activeView);
@@ -52,6 +53,7 @@ export default function GameCareer() {
         careerDetailRef.current?.focus();
       } else {
         setVIdx(hIdx);
+        setIsCharacterHidden(false);
         containerRef.current?.focus();
       }
     }, 10);
@@ -77,14 +79,15 @@ export default function GameCareer() {
         <div
           className={clsx(
             'absolute left-1/2 w-[90%] -translate-x-1/2 transition-all duration-1000',
-            'top-32 bottom-24 md:top-auto md:bottom-0',
-            activeView === 'career' ? 'md:h-[90vh]' : 'tablet:h-[55vh] max-w-[1000px] md:h-[70vh]',
+            'tablet:bottom-[10%] top-32 bottom-24 md:top-auto md:bottom-0',
+            activeView === 'career' ? 'tablet:h-[80vh] md:h-[90vh]' : 'tablet:h-[60vh] max-w-[1000px] md:h-[70vh]',
           )}
         >
           <div
             className={clsx(
-              'group absolute -bottom-15 z-10 hidden aspect-[651/950] w-[30%] transition-all duration-1000 md:block',
-              activeView === 'career' ? 'right-10 max-w-[400px]' : '-right-20',
+              'group tablet:pointer-events-none tablet:-bottom-[21vh] tablet:w-[50%] tablet:max-w-none absolute -bottom-15 z-10 hidden aspect-[651/950] w-[30%] transition-all duration-1000 md:block',
+              activeView === 'career' ? 'narrow:right-0 right-10 max-w-[400px]' : 'narrow:right-0 -right-20',
+              isCharacterHidden && 'opacity-0',
             )}
           >
             <ThemedImage
@@ -95,26 +98,29 @@ export default function GameCareer() {
               sizes='(min-width: 1334px) 400px, 30vw'
               alt={'발표하는 캐릭터'}
             />
-            <SpeechBubble text={'이런 일을 했습니다!'} />
+            <SpeechBubble placement='left' text={'이런 일을 했습니다!'} className='tablet:[zoom:1.6]' />
           </div>
 
-          <div className='absolute -bottom-40 -left-2 z-10 aspect-[651/950] w-36 md:hidden'>
-            <ThemedImage
-              fadeIn={false}
-              lightSrc={`${IMAGE_ROOT}/images/game/company_jinsil_day.png`}
-              darkSrc={`${IMAGE_ROOT}/images/game/company_jinsil_night.png`}
-              fill
-              sizes='144px'
-              alt={'발표하는 캐릭터'}
-            />
-            {activeView !== 'career' && <SpeechBubble placement='right' text={'이런 일을 했습니다!'} />}
-          </div>
+          {activeView !== 'career' && (
+            <div className='pointer-events-none absolute -right-2 -bottom-40 z-10 aspect-[651/950] w-48 md:hidden'>
+              <ThemedImage
+                fadeIn={false}
+                lightSrc={`${IMAGE_ROOT}/images/game/company_jinsil_day.png`}
+                darkSrc={`${IMAGE_ROOT}/images/game/company_jinsil_night.png`}
+                fill
+                sizes='192px'
+                alt={'발표하는 캐릭터'}
+              />
+              <SpeechBubble placement='left' text={'이런 일을 했습니다!'} className='max-w-[120px]! [zoom:1.2]' />
+            </div>
+          )}
 
           <div
             ref={boardRef}
+            onScroll={(event) => event.currentTarget.scrollTop > 0 && setIsCharacterHidden(true)}
             className={clsx(
               'block h-full w-full overflow-y-auto rounded-lg border-8 border-gray-400 bg-gray-50 p-4 md:h-3/4 md:p-8 lg:p-12',
-              activeView === 'career' && 'tablet:pb-72 max-md:pb-20',
+              activeView === 'career' && 'max-md:pb-20',
             )}
           >
             {activeView !== 'career' && (
@@ -124,9 +130,7 @@ export default function GameCareer() {
                   ref={containerRef}
                   onKeyDown={handleKeyDown}
                   tabIndex={0}
-                  className={clsx(
-                    'mode-btns tablet:w-full tablet:text-3xl flex cursor-pointer flex-col gap-x-6 gap-y-2 text-xl outline-none md:w-[80%] md:text-2xl',
-                  )}
+                  className={clsx('mode-btns tablet:text-3xl flex cursor-pointer flex-col gap-x-6 gap-y-2 text-xl outline-none md:text-2xl')}
                 >
                   {EXPERIENCE_TABS.map((mode, index) => (
                     <li key={mode}>
@@ -155,11 +159,11 @@ export default function GameCareer() {
               <>
                 <div
                   className={
-                    'sticky -top-4 -mt-4 mb-4 flex items-center justify-between gap-x-4 bg-gray-50 pt-4 md:-top-8 md:-mt-8 md:mb-6 md:w-[80%] md:pt-8 lg:-top-12 lg:-mt-12 lg:pt-12'
+                    'sticky -top-4 -mt-4 mb-4 flex items-center justify-between gap-x-4 bg-gray-50 pt-4 md:-top-8 md:-mt-8 md:mb-6 md:pt-8 lg:-top-12 lg:-mt-12 lg:pt-12'
                   }
                 >
                   <h3 className={'tablet:text-5xl text-2xl md:text-4xl'}>{EXPERIENCE_TABS[hIdx]}</h3>
-                  <div ref={careerDetailRef} className={'flex items-center outline-none'} onKeyDown={handleKeyDown} tabIndex={0}>
+                  <div ref={careerDetailRef} className={'tablet:gap-2 flex items-center outline-none'} onKeyDown={handleKeyDown} tabIndex={0}>
                     <button
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
@@ -168,7 +172,7 @@ export default function GameCareer() {
                       aria-label='이전 경력'
                       className={'font-inherit cursor-pointer outline-none hover:text-blue-400 focus:text-blue-400'}
                     >
-                      <SquareChevronLeft size={30} />
+                      <SquareChevronLeft size={30} className='tablet:size-12' />
                     </button>
                     <button
                       onKeyDown={(e) => {
@@ -178,12 +182,12 @@ export default function GameCareer() {
                       aria-label='다음 경력'
                       className={'font-inherit cursor-pointer outline-none hover:text-blue-400 focus:text-blue-400'}
                     >
-                      <SquareChevronRight size={30} />
+                      <SquareChevronRight size={30} className='tablet:size-12' />
                     </button>
                   </div>
                 </div>
 
-                <ul className='tablet:text-xl pt-2 text-left text-lg md:w-[80%] lg:pr-0'>
+                <ul className='tablet:text-xl pt-2 text-left text-lg lg:pr-0'>
                   {EXPERIENCE.map(
                     (exp, index) =>
                       hIdx === index && (
