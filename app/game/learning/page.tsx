@@ -59,7 +59,7 @@ export default function GameLearning() {
         <CharacterAnimation skillSet={skillSet} textClass={textClass} active={hide} onReady={handleCharacterReady} />
         {!(hide && characterReady) && (
           <>
-            <div className='group pointer-events-none absolute -bottom-15 left-0 z-10 hidden w-[220px] md:block lg:left-20 xl:left-30 xl:w-[300px]'>
+            <div className='group tablet:w-[320px] pointer-events-none absolute -bottom-15 left-0 z-10 hidden w-[220px] md:block lg:left-20 xl:left-30 xl:w-[300px]'>
               <Image width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} className='h-auto w-full' />
               <SpeechBubble text={'자세히 보고 싶은 과정을 선택하세요!'} />
             </div>
@@ -70,18 +70,23 @@ export default function GameLearning() {
           </>
         )}
 
-        <div className={'absolute top-[26%] left-[50%] w-[90vw] max-w-[650px] -translate-x-1/2 text-white'}>
-          <h2 className={'mb-5 flex items-center text-xl sm:text-2xl md:text-3xl'}>
+        <div className={'tablet:max-w-[820px] absolute top-[26%] left-[50%] w-[90vw] max-w-[650px] -translate-x-1/2 text-white'}>
+          <h2 className={'tablet:mb-8 tablet:text-4xl mb-5 flex items-center text-xl sm:text-2xl md:text-3xl'}>
             <Footprints className={'mr-4'} size={38} /> LEVEL UP: 교육 여정
           </h2>
-          <ol ref={containerRef} onKeyDown={handleKeyDown} tabIndex={0} className={'mode-btns sm:text-md text-sm outline-none md:text-lg lg:text-xl'}>
+          <ol
+            ref={containerRef}
+            onKeyDown={handleKeyDown}
+            tabIndex={0}
+            className={'mode-btns sm:text-md tablet:text-2xl text-sm outline-none md:text-lg lg:text-xl'}
+          >
             {EDUCATION.map((mode, index) => (
               <li key={`EDU_${index}`} className={'mb-2'}>
                 <button
                   data-keyboard-v={index}
                   onFocus={() => setVIdx(index)}
                   className={clsx(
-                    'grid w-full cursor-pointer grid-cols-1 gap-1 rounded-md border-2 p-4 text-left transition-all hover:bg-green-800 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-x-4',
+                    'tablet:p-6 grid w-full cursor-pointer grid-cols-1 gap-1 rounded-md border-2 p-4 text-left transition-all hover:bg-green-800 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-x-4',
                     vIdx === index && 'bg-green-800',
                   )}
                   onClick={() => {
@@ -92,7 +97,11 @@ export default function GameLearning() {
                   <span>
                     {index + 1}. {mode.title}
                   </span>
-                  <small className={'text-left text-xs leading-relaxed text-white/90 sm:max-w-[250px] sm:text-right sm:text-sm'}>
+                  <small
+                    className={
+                      'tablet:max-w-[320px] tablet:text-base text-left text-xs leading-relaxed text-white/90 sm:max-w-[250px] sm:text-right sm:text-sm'
+                    }
+                  >
                     ({mode.date} / {mode.gameDescription ?? mode.description})
                   </small>
                 </button>

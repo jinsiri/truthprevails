@@ -62,14 +62,20 @@ export default function GameContact() {
           ></span>
           {activeJin ? (
             <div className={'relative'}>
-              <Image width={200} height={600} src={`${IMAGE_ROOT}/images/game/jinsil_standing.png`} alt={'진실 앞모습'} />
+              <Image width={200} height={600} className='tablet:w-[300px] h-auto' src={`${IMAGE_ROOT}/images/game/jinsil_standing.png`} alt={'진실 앞모습'} />
               <SpeechBubble text={`반갑습니다! ${isMobile ? '' : '탭키 또는 마우스로 '}아래 책을 눌러 깃허브/기술 블로그에 방문해주세요!`} />
             </div>
           ) : (
             <>
-              <Image className={'relative'} width={200} height={600} src={`${IMAGE_ROOT}/images/game/jinsil_back.webp`} alt={'진실 뒷모습'} />
+              <Image
+                className={'tablet:w-[300px] relative h-auto'}
+                width={200}
+                height={600}
+                src={`${IMAGE_ROOT}/images/game/jinsil_back.webp`}
+                alt={'진실 뒷모습'}
+              />
               <div className='absolute -top-4 left-1/2 flex -translate-x-1/2 flex-col items-center'>
-                <div className='animate-bounce rounded border-2 border-black bg-white px-2 py-1 text-xs font-bold whitespace-nowrap'>
+                <div className='tablet:text-base animate-bounce rounded border-2 border-black bg-white px-2 py-1 text-xs font-bold whitespace-nowrap'>
                   <span className='text-black'>{isMobile ? '[터치]' : '[Enter or 클릭]'}</span>
                 </div>
               </div>
@@ -82,7 +88,7 @@ export default function GameContact() {
             'fixed transition-all duration-700 ease-in-out',
             'aspect-[750/408]',
             'xl:right-[18%] xl:-bottom-20 xl:w-[700px] xl:translate-x-0 xl:scale-100',
-            'right-1/2 -bottom-15 w-[650px] translate-x-1/2',
+            'tablet:w-[900px] right-1/2 -bottom-15 w-[650px] translate-x-1/2',
           )}
         >
           <Image fill sizes='700px' src={`${IMAGE_ROOT}/images/game/info_table.png`} priority alt={'탁자'} />
@@ -112,7 +118,7 @@ export default function GameContact() {
             label='연락 수첩'
             onClose={closeView}
             className={clsx(
-              'absolute top-32 bottom-24 left-1/2 w-[90%] max-w-[100vh] -translate-x-1/2 md:top-1/2 md:bottom-auto md:h-[70vh] md:-translate-y-1/2',
+              'tablet:h-[50vh] absolute top-32 bottom-24 left-1/2 w-[90%] max-w-[100vh] -translate-x-1/2 md:top-1/2 md:bottom-auto md:h-[70vh] md:-translate-y-1/2',
               'border-4 border-[#3e2723] bg-[#5d4037] p-2 font-mono shadow-[8px_8px_0px_0px_rgba(0,0,0,0.2)]',
             )}
           >
@@ -128,7 +134,9 @@ export default function GameContact() {
               </button>
 
               <div className='mode-btns type-b flex flex-1 flex-col items-center justify-center space-y-4 p-8 outline-none' onKeyDown={handleKeyDown}>
-                <h3 className='mb-4 border-b-2 border-dashed border-[#d7ccc8] pb-2 text-center text-xl font-bold text-[#5d4037] md:text-3xl'>CONTACT BOOK</h3>
+                <h3 className='tablet:text-4xl mb-4 border-b-2 border-dashed border-[#d7ccc8] pb-2 text-center text-xl font-bold text-[#5d4037] md:text-3xl'>
+                  CONTACT BOOK
+                </h3>
                 {CONTACT_LINKS.map((mode, index) => (
                   <Link
                     key={mode.address}
@@ -136,7 +144,7 @@ export default function GameContact() {
                     data-keyboard-v={index}
                     onFocus={() => setVIdx(index)}
                     className={clsx(
-                      'w-full bg-[#8d6e63] px-4 py-3 text-center text-white shadow-[4px_4px_0px_0px_#5d4037] transition-all hover:translate-y-1 hover:shadow-none active:bg-[#5d4037]',
+                      'tablet:py-4 tablet:text-xl w-full bg-[#8d6e63] px-4 py-3 text-center text-white shadow-[4px_4px_0px_0px_#5d4037] transition-all hover:translate-y-1 hover:shadow-none active:bg-[#5d4037]',
                       vIdx === index && 'active translate-y-1 shadow-none active:bg-[#5d4037]',
                     )}
                     href={mode.address}
@@ -148,15 +156,15 @@ export default function GameContact() {
               </div>
 
               <div className='hidden flex-1 flex-col items-center justify-center bg-[#fdf5e6] p-8 md:flex'>
-                <div className='mb-4 text-center text-sm text-[#8d6e63] italic md:text-lg'>Scan to Contact Me!</div>
+                <div className='tablet:text-xl mb-4 text-center text-sm text-[#8d6e63] italic md:text-lg'>Scan to Contact Me!</div>
 
-                <div className='flex h-40 w-40 items-center justify-center border-4 border-[#8d6e63] bg-white p-2 shadow-[4px_4px_0px_0px_rgba(141,110,99,0.3)]'>
+                <div className='tablet:h-52 tablet:w-52 flex h-40 w-40 items-center justify-center border-4 border-[#8d6e63] bg-white p-2 shadow-[4px_4px_0px_0px_rgba(141,110,99,0.3)]'>
                   <div className='flex h-full w-full items-center justify-center bg-[#3e2723] text-center text-[10px]'>
                     <Image src={`${IMAGE_ROOT}/images/classic/contact_qr.png`} alt={CONTACT.email} width={250} height={250} />
                   </div>
                 </div>
 
-                <p className='mt-6 text-center text-xs leading-relaxed text-[#a1887f] md:text-lg'>
+                <p className='tablet:text-xl mt-6 text-center text-xs leading-relaxed text-[#a1887f] md:text-lg'>
                   Leave a mark in <br /> &quot;TRUTH WORLD&quot;
                 </p>
               </div>

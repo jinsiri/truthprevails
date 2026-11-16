@@ -78,7 +78,7 @@ export default function GameCareer() {
           className={clsx(
             'absolute left-1/2 w-[90%] -translate-x-1/2 transition-all duration-1000',
             'top-32 bottom-24 md:top-auto md:bottom-0',
-            activeView === 'career' ? 'md:h-[90vh]' : 'max-w-[1000px] md:h-[70vh]',
+            activeView === 'career' ? 'md:h-[90vh]' : 'tablet:h-[55vh] max-w-[1000px] md:h-[70vh]',
           )}
         >
           <div
@@ -114,17 +114,19 @@ export default function GameCareer() {
             ref={boardRef}
             className={clsx(
               'block h-full w-full overflow-y-auto rounded-lg border-8 border-gray-400 bg-gray-50 p-4 md:h-3/4 md:p-8 lg:p-12',
-              activeView === 'career' && 'max-md:pb-20',
+              activeView === 'career' && 'tablet:pb-72 max-md:pb-20',
             )}
           >
             {activeView !== 'career' && (
               <>
-                <h2 className={'mb-4 text-2xl md:mb-8 md:text-4xl lg:mb-10'}>경력사항</h2>
+                <h2 className={'tablet:text-5xl mb-4 text-2xl md:mb-8 md:text-4xl lg:mb-10'}>경력사항</h2>
                 <ul
                   ref={containerRef}
                   onKeyDown={handleKeyDown}
                   tabIndex={0}
-                  className={clsx('mode-btns flex cursor-pointer flex-col gap-x-6 gap-y-2 text-xl outline-none md:w-[80%] md:text-2xl')}
+                  className={clsx(
+                    'mode-btns tablet:w-full tablet:text-3xl flex cursor-pointer flex-col gap-x-6 gap-y-2 text-xl outline-none md:w-[80%] md:text-2xl',
+                  )}
                 >
                   {EXPERIENCE_TABS.map((mode, index) => (
                     <li key={mode}>
@@ -135,7 +137,10 @@ export default function GameCareer() {
                           setVIdx(index);
                           openView('career');
                         }}
-                        className={clsx('flex w-full cursor-pointer items-center justify-between px-4 py-2', vIdx === index && 'active bg-gray-200')}
+                        className={clsx(
+                          'tablet:py-4 flex w-full cursor-pointer items-center justify-between px-4 py-2',
+                          vIdx === index && 'active bg-gray-200',
+                        )}
                       >
                         {mode}
                         {!isMobile && vIdx === index && <span>Enter</span>}
@@ -153,7 +158,7 @@ export default function GameCareer() {
                     'sticky -top-4 -mt-4 mb-4 flex items-center justify-between gap-x-4 bg-gray-50 pt-4 md:-top-8 md:-mt-8 md:mb-6 md:w-[80%] md:pt-8 lg:-top-12 lg:-mt-12 lg:pt-12'
                   }
                 >
-                  <h3 className={'text-2xl md:text-4xl'}>{EXPERIENCE_TABS[hIdx]}</h3>
+                  <h3 className={'tablet:text-5xl text-2xl md:text-4xl'}>{EXPERIENCE_TABS[hIdx]}</h3>
                   <div ref={careerDetailRef} className={'flex items-center outline-none'} onKeyDown={handleKeyDown} tabIndex={0}>
                     <button
                       onKeyDown={(e) => {
@@ -178,15 +183,15 @@ export default function GameCareer() {
                   </div>
                 </div>
 
-                <ul className='pt-2 text-left text-lg md:w-[80%] lg:pr-0'>
+                <ul className='tablet:text-xl pt-2 text-left text-lg md:w-[80%] lg:pr-0'>
                   {EXPERIENCE.map(
                     (exp, index) =>
                       hIdx === index && (
                         <li key={index} className='md:mb-8'>
-                          <h3 className='mb-4 text-xl font-bold text-gray-700'>{exp.title}</h3>
+                          <h3 className='tablet:text-2xl mb-4 text-xl font-bold text-gray-700'>{exp.title}</h3>
 
-                          <div className='w-full border-collapse text-left text-sm text-gray-700 lg:block rtl:text-right'>
-                            <div className='border-t border-gray-700 bg-gray-50/50 md:grid md:grid-cols-[150px_1fr]'>
+                          <div className='tablet:text-lg w-full border-collapse text-left text-sm text-gray-700 lg:block rtl:text-right'>
+                            <div className='tablet:grid-cols-[180px_1fr] border-t border-gray-700 bg-gray-50/50 md:grid md:grid-cols-[150px_1fr]'>
                               {exp.data.map((item, idx) => (
                                 <Fragment key={idx}>
                                   <div className='border-gray-700 bg-gray-100 p-3 font-semibold md:border-b'>{item.label}</div>
