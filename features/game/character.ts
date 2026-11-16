@@ -3,7 +3,7 @@ import type { CharacterStat, MasteredSkill } from './types';
 // MAIN: 실무에서 주력으로 사용 / SUB: 개인·팀 프로젝트에서 사용
 export const MASTERED_SKILLS: MasteredSkill[] = [
   { label: 'React', tier: 'MAIN', source: 'ITSM 던전 · 공통 컴포넌트, 권한 트리 UI' },
-  { label: 'Recoil / Redux', tier: 'MAIN', source: 'ITSM 던전 · 상태 관리 전체 전환' },
+  { label: 'Recoil / Redux', tier: 'MAIN', source: 'ITSM 던전 · 상태 관리 Recoil 일원화' },
   { label: 'Java / Spring Boot / JPA', tier: 'MAIN', source: 'ITSM 던전 · 객체별 권한 검사, 트리 API' },
   { label: 'PostgreSQL', tier: 'MAIN', source: 'ITSM 던전 · 권한 상속 조회 로직' },
   { label: 'Linux / Docker', tier: 'MAIN', source: 'ITSM 던전 · 폐쇄망 배포, 의존성 관리' },

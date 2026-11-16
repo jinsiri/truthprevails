@@ -1,4 +1,3 @@
-import { IconX } from '@tabler/icons-react';
 import type { Collectible } from '@/features/game/types';
 import { CollectibleIcon } from './CollectibleItem';
 
@@ -13,8 +12,8 @@ export default function ItemToast({ item, count, total, onClose }: ItemToastProp
   return (
     <div
       role='status'
-      onClick={onClose}
-      className='animate-item-toast fixed top-28 right-4 left-4 z-60 flex cursor-pointer items-start gap-3 rounded-xl border-4 border-black bg-black/80 py-3 pr-9 pl-4 text-white md:top-24 md:right-auto md:left-1/2 md:w-[90%] md:max-w-md md:-translate-x-1/2'
+      onAnimationEnd={(event) => event.animationName === 'item-toast-out' && onClose()}
+      className='animate-item-toast pointer-events-none fixed top-28 right-4 left-4 z-60 flex items-start gap-3 rounded-xl border-4 border-black bg-black/80 px-4 py-3 text-white md:top-24 md:right-auto md:left-1/2 md:w-[90%] md:max-w-md md:-translate-x-1/2'
     >
       <span className='flex h-11 w-11 shrink-0 items-center justify-center rounded-md border-[3px] border-black bg-yellow-200 text-[#5c2b03]'>
         <CollectibleIcon icon={item.icon} className='h-7 w-7' />
@@ -25,9 +24,6 @@ export default function ItemToast({ item, count, total, onClose }: ItemToastProp
         </strong>
         {item.message}
       </p>
-      <button type='button' aria-label='닫기' className='absolute top-2 right-2 cursor-pointer text-white/70 hover:text-white'>
-        <IconX size={18} />
-      </button>
     </div>
   );
 }

@@ -6,13 +6,13 @@ export const EXPERIENCE: Experience[] = [
     title: 'ITSM 솔루션 v2.0 리뉴얼 및 개발',
     data: [
       { label: '기간', value: '2022.07 ~ 2024.11(2년 5개월)' },
-      { label: '프로젝트명', value: 'B2B IT 자산 관리 시스템(ITSM) v2.0' },
+      { label: '프로젝트명', value: 'B2B IT 서비스 관리 시스템(ITSM) v2.0' },
       {
         label: '성과',
         value: [
           '상세 조회 API에 객체별 접근 권한 검사를 추가해 문서 ID 변경을 통한 비인가 조회 차단',
           '반복되던 목록·선택 UI를 단일·다중 선택 공통 컴포넌트로 통합해 여러 업무 화면에 적용',
-          'Redux에서 Recoil로 상태 관리 전체 전환 직접 수행',
+          'Redux·Recoil 혼용 구조를 Recoil로 일원화하고 Redux 제거',
           '장비 배치 편집 후 전체 재조회 대신 변경 항목만 반영해 중복 조회 감소',
         ],
       },

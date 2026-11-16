@@ -59,11 +59,11 @@ export default function GameLearning() {
         <CharacterAnimation skillSet={skillSet} textClass={textClass} active={hide} onReady={handleCharacterReady} />
         {!(hide && characterReady) && (
           <>
-            <div className='group absolute -bottom-15 left-0 hidden md:block lg:left-20 xl:left-30'>
-              <Image width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} />
+            <div className='group pointer-events-none absolute -bottom-15 left-0 z-10 hidden w-[220px] md:block lg:left-20 xl:left-30 xl:w-[300px]'>
+              <Image width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} className='h-auto w-full' />
               <SpeechBubble text={'자세히 보고 싶은 과정을 선택하세요!'} />
             </div>
-            <div className='absolute -bottom-16 left-2 w-36 md:hidden'>
+            <div className='pointer-events-none absolute -bottom-16 left-2 z-10 w-36 md:hidden'>
               <Image width={144} height={224} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} />
               <SpeechBubble placement='right' text={'자세히 보고 싶은 과정을 선택하세요!'} />
             </div>
@@ -84,7 +84,10 @@ export default function GameLearning() {
                     'grid w-full cursor-pointer grid-cols-1 gap-1 rounded-md border-2 p-4 text-left transition-all hover:bg-green-800 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-x-4',
                     vIdx === index && 'bg-green-800',
                   )}
-                  onClick={() => selectEducation(mode)}
+                  onClick={() => {
+                    setVIdx(index);
+                    selectEducation(mode);
+                  }}
                 >
                   <span>
                     {index + 1}. {mode.title}

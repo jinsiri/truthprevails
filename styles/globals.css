@@ -264,6 +264,12 @@ img {
   background-size: 30%;
 }
 
+@keyframes item-toast-out {
+  to {
+    opacity: 0;
+  }
+}
+
 @keyframes float {
   0 %,
   100% {
@@ -306,7 +312,9 @@ img {
     animation: landing-dust 0.4s steps(4) forwards;
   }
   .animate-item-toast {
-    animation: item-toast 0.25s steps(3);
+    animation:
+      item-toast 0.25s steps(3),
+      item-toast-out 0.8s ease-in 5.2s forwards;
   }
 }
 

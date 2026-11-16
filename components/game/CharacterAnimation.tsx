@@ -42,7 +42,7 @@ export default function CharacterAnimation({
       animate={{ opacity: playing ? 1 : 0 }}
       transition={{ duration: 1, ease: 'easeOut' }}
       aria-hidden={!playing}
-      className='group absolute -bottom-15 left-1/2 z-10 -translate-x-1/2'
+      className='group pointer-events-none absolute -bottom-15 left-1/2 z-10 -translate-x-1/2'
     >
       <div className='pointer-events-none relative h-[340px] w-[240px] md:h-[425px] md:w-[300px]'>
         <div className='absolute -top-10 left-1/2 flex w-full -translate-x-1/2 flex-col items-center'>

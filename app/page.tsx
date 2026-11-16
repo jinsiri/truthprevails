@@ -61,16 +61,16 @@ export default function Home() {
                   router.push(mode.address);
                 }}
                 className={clsx(
-                  'group flex w-full cursor-pointer items-center gap-4 rounded-xl border border-white/25 bg-black/20 p-3 pr-4 text-left transition duration-300 hover:bg-white/20 md:p-4',
+                  'group flex w-full cursor-pointer items-center gap-3 rounded-xl border border-white/25 bg-black/20 p-2 pr-3 text-left transition duration-300 hover:bg-white/20 md:gap-4 md:p-4',
                   vIdx === index && 'border-white/80 bg-white/20 shadow-lg shadow-black/20',
                 )}
               >
-                <span className={'relative h-14 w-20 shrink-0 overflow-hidden rounded-lg border border-white/30 bg-black/20'}>
+                <span className={'relative h-10 w-14 shrink-0 overflow-hidden rounded-md border border-white/30 bg-black/20 md:h-14 md:w-20 md:rounded-lg'}>
                   <FadeInImage src={mode.image} alt='' fill sizes='80px' className='object-cover transition duration-500' />
                 </span>
                 <span className='min-w-0 flex-1'>
-                  <span className='block text-lg md:text-xl'>{mode.korNm}</span>
-                  <span className='block text-xs tracking-wider text-white/60 uppercase'>{mode.enNm}</span>
+                  <span className='block text-base md:text-xl'>{mode.korNm}</span>
+                  <span className='block text-[10px] tracking-wider text-white/60 uppercase md:text-xs'>{mode.enNm}</span>
                 </span>
                 <span className={clsx('hidden text-xs transition-opacity md:inline', vIdx === index ? 'opacity-100' : 'opacity-0')}>Enter</span>
               </button>
