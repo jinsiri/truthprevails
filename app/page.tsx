@@ -29,7 +29,7 @@ export default function Home() {
       <div className={'absolute inset-0 bg-black/45 backdrop-blur-sm'}></div>
       <div
         className={
-          'relative grid w-full max-w-5xl items-center gap-8 rounded-3xl border border-white/20 bg-black/25 p-6 text-white shadow-2xl backdrop-blur-sm md:grid-cols-[minmax(260px,0.85fr)_minmax(360px,1.15fr)] md:gap-12 md:p-10'
+          'relative grid w-full max-w-5xl grid-cols-1 items-center gap-8 rounded-3xl border border-white/20 bg-black/25 p-6 text-white shadow-2xl backdrop-blur-sm md:grid-cols-[minmax(260px,0.85fr)_minmax(360px,1.15fr)] md:gap-12 md:p-10'
         }
       >
         <div className={'text-center md:text-left'}>
@@ -38,12 +38,12 @@ export default function Home() {
             WELCOME TO
             <br /> THE TRUTH WORLD
           </h2>
-          <p className={'mb-8 border-t border-white/20 pt-3 font-sans text-lg text-white/85 md:text-xl'}>반갑습니다. 어디로 안내해드릴까요?</p>
+          <p className={'border-t border-white/20 pt-3 font-sans text-lg text-white/85 md:mb-8 md:text-xl'}>반갑습니다. 어디로 안내해드릴까요?</p>
           <div
             ref={containerRef}
             onKeyDown={handleKeyDown}
             tabIndex={0}
-            className={'mode-btns mx-auto max-w-[500px] space-y-2 outline-none md:mx-0'}
+            className={'mode-btns mx-auto max-w-[500px] space-y-2 outline-none max-md:hidden md:mx-0'}
             aria-label='모드 선택'
           >
             {MODES.map((mode, index) => (
@@ -78,8 +78,31 @@ export default function Home() {
           </div>
         </div>
 
-        <div className={'w-full'} aria-live='polite'>
-          <div className={'overflow-hidden rounded-2xl border border-white/40 bg-black/35 shadow-2xl backdrop-blur-sm'}>
+        <div className={'w-full'}>
+          <div role='tablist' aria-label='모드 선택' className='flex md:hidden'>
+            {MODES.map((mode, index) => (
+              <button
+                type='button'
+                role='tab'
+                key={mode.address}
+                aria-selected={vIdx === index}
+                onClick={() => setVIdx(index)}
+                className={clsx(
+                  'cursor-pointer rounded-t-xl border px-5 text-base backdrop-blur-sm transition-colors',
+                  vIdx === index
+                    ? 'border-white/40 border-b-transparent bg-black/35 py-2.5 text-white'
+                    : 'mt-1.5 border-white/15 border-b-white/40 bg-black/15 py-2 text-white/55',
+                )}
+              >
+                {mode.korNm}
+              </button>
+            ))}
+            <span aria-hidden className='flex-1 border-b border-white/40' />
+          </div>
+          <div
+            aria-live='polite'
+            className={'overflow-hidden rounded-2xl border border-white/40 bg-black/35 shadow-2xl backdrop-blur-sm max-md:rounded-t-none max-md:border-t-0'}
+          >
             <div className='px-4 pt-4 md:px-5 md:pt-5'>
               <div className='overflow-hidden rounded-lg border border-white/15 shadow-xl shadow-black/50'>
                 <div className='flex items-center gap-3 bg-neutral-800 px-3 py-2'>
@@ -88,10 +111,10 @@ export default function Home() {
                     <span className='h-2.5 w-2.5 rounded-full bg-[#febc2e]' />
                     <span className='h-2.5 w-2.5 rounded-full bg-[#28c840]' />
                   </span>
-                  <span className='flex-1 truncate rounded-md bg-neutral-900 px-3 py-0.5 text-center font-sans text-[11px] text-white/60'>
+                  <span className='flex-1 truncate rounded-md bg-neutral-900 px-2 py-0.5 text-center font-sans text-[11px] text-white/60 md:px-3'>
                     truthprevails.me{MODES[vIdx].address}
                   </span>
-                  <span aria-hidden className='w-[42px]' />
+                  <span aria-hidden className='w-[42px] max-md:hidden' />
                 </div>
                 <div className='relative aspect-[3024/1644] overflow-hidden bg-black/20'>
                   <ThemedImage
