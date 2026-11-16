@@ -28,7 +28,7 @@ export default function Heart() {
       : [HEART_IMAGES.full, HEART_IMAGES.full, HEART_IMAGES.full, HEART_IMAGES.full, HEART_IMAGES.full];
 
   return (
-    <div className='fixed top-[28] left-4 z-50 w-1/2 max-w-[230px] md:left-6 lg:top-[20]'>
+    <div className='tablet:[zoom:1.3] tablet:top-[27px] fixed top-[28] left-4 z-50 w-1/2 max-w-[230px] md:left-6 lg:top-[20]'>
       <ul className='grid h-[34px] w-full auto-cols-fr grid-flow-col gap-2'>
         {hearts.map((src, index) => (
           <li key={index} className='relative aspect-[96/89] h-full'>

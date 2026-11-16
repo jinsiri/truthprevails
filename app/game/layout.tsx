@@ -20,7 +20,7 @@ export default function GameLayout({
       <GlobalKeyHandler />
       <Heart />
       <ButtonGroup
-        positionClass={'top-5 right-4 md:right-6'}
+        positionClass={'top-5 right-4 md:right-6 tablet:top-6'}
         leading={<ThemeToggleButton className='h-[40px] w-[40px] rounded-sm border-2 border-black bg-[#ffc66e] text-black hover:brightness-95' />}
       >
         <CharacterStatus />

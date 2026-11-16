@@ -210,7 +210,7 @@ export default function GameMainClient() {
     }
   }, [guideState, isReady]);
 
-  const worldWidth = `max(100vw, ${MOBILE_WORLD_WIDTH}px)`;
+  const worldWidth = `max(100vw, ${MOBILE_WORLD_WIDTH}px, 120dvh)`;
   const cameraX = `clamp(calc(100vw - ${worldWidth}), calc(50vw - ${worldWidth} * ${(position + 4) / 100}), 0px)`;
 
   const handleTouchMove = (dir: Direction | null) => {
@@ -254,7 +254,7 @@ export default function GameMainClient() {
         )}
 
         <div
-          className='@container absolute bottom-0 left-0 h-72 w-full border-t-4 border-gray-950 bg-[#b0a58c] max-md:w-(--world) max-md:translate-x-(--camera) md:h-50 dark:border-gray-100 dark:bg-[#46311e]'
+          className='narrow:w-(--world) narrow:translate-x-(--camera) wide:h-50 @container absolute bottom-0 left-0 h-72 w-full border-t-4 border-gray-950 bg-[#b0a58c] dark:border-gray-100 dark:bg-[#46311e]'
           style={{ '--world': worldWidth, '--camera': cameraX } as CSSProperties}
         >
           {INTERACTION_POINTS.map((obj) => (
@@ -310,7 +310,7 @@ export default function GameMainClient() {
 
       <Link
         href='/classic'
-        className='fixed bottom-8 left-6 z-60 flex items-center gap-1 rounded-md border-4 border-black bg-amber-50 px-4 text-base font-bold text-amber-950 md:left-8 md:text-2xl'
+        className='tablet:[zoom:1.3] tablet:bottom-6 tablet:left-6 fixed bottom-8 left-6 z-60 flex items-center gap-1 rounded-md border-4 border-black bg-amber-50 px-4 text-base font-bold text-amber-950 md:left-8 md:text-2xl'
       >
         <IconTransfer stroke={2} /> Change mode
       </Link>

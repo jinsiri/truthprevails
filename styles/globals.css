@@ -8,6 +8,9 @@
 }
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant wide (@media (min-width: 64rem) and (orientation: landscape));
+@custom-variant narrow (@media not all and (min-width: 64rem) and (orientation: landscape));
+@custom-variant tablet (@media (min-width: 51rem) and (orientation: portrait));
 
 :root {
   --background: #fff;

@@ -29,21 +29,21 @@ export default function Home() {
       <div className={'absolute inset-0 bg-black/45 backdrop-blur-sm'}></div>
       <div
         className={
-          'relative grid w-full max-w-5xl grid-cols-1 items-center gap-8 rounded-3xl border border-white/20 bg-black/25 p-6 text-white shadow-2xl backdrop-blur-sm md:grid-cols-[minmax(260px,0.85fr)_minmax(360px,1.15fr)] md:gap-12 md:p-10'
+          'wide:max-w-5xl wide:grid-cols-[minmax(260px,0.85fr)_minmax(360px,1.15fr)] wide:gap-12 relative grid w-full max-w-[560px] grid-cols-1 items-center gap-8 rounded-3xl border border-white/20 bg-black/25 p-6 text-white shadow-2xl backdrop-blur-sm md:max-w-[680px] md:p-10 lg:max-w-[760px]'
         }
       >
-        <div className={'text-center md:text-left'}>
+        <div className={'wide:text-left text-center'}>
           <p className={'mb-3 font-sans text-sm tracking-[0.28em] text-white/75 uppercase'}>PORTFOLIO / 2026</p>
           <h2 className={'mb-3 font-sans text-xl leading-tight break-keep md:text-2xl lg:text-3xl'}>
             WELCOME TO
             <br /> THE TRUTH WORLD
           </h2>
-          <p className={'border-t border-white/20 pt-3 font-sans text-lg text-white/85 md:mb-8 md:text-xl'}>반갑습니다. 어디로 안내해드릴까요?</p>
+          <p className={'wide:mb-8 border-t border-white/20 pt-3 font-sans text-lg text-white/85 md:text-xl'}>반갑습니다. 어디로 안내해드릴까요?</p>
           <div
             ref={containerRef}
             onKeyDown={handleKeyDown}
             tabIndex={0}
-            className={'mode-btns mx-auto max-w-[500px] space-y-2 outline-none max-md:hidden md:mx-0'}
+            className={'mode-btns narrow:hidden wide:mx-0 mx-auto max-w-[500px] space-y-2 outline-none'}
             aria-label='모드 선택'
           >
             {MODES.map((mode, index) => (
@@ -79,7 +79,7 @@ export default function Home() {
         </div>
 
         <div className={'w-full'}>
-          <div role='tablist' aria-label='모드 선택' className='flex md:hidden'>
+          <div role='tablist' aria-label='모드 선택' className='wide:hidden flex'>
             {MODES.map((mode, index) => (
               <button
                 type='button'
@@ -88,7 +88,7 @@ export default function Home() {
                 aria-selected={vIdx === index}
                 onClick={() => setVIdx(index)}
                 className={clsx(
-                  'cursor-pointer rounded-t-xl border px-5 text-base backdrop-blur-sm transition-colors',
+                  'cursor-pointer rounded-t-xl border px-5 text-base backdrop-blur-sm transition-colors md:px-6 md:text-lg',
                   vIdx === index
                     ? 'border-white/40 border-b-transparent bg-black/35 py-2.5 text-white'
                     : 'mt-1.5 border-white/15 border-b-white/40 bg-black/15 py-2 text-white/55',
@@ -101,7 +101,7 @@ export default function Home() {
           </div>
           <div
             aria-live='polite'
-            className={'overflow-hidden rounded-2xl border border-white/40 bg-black/35 shadow-2xl backdrop-blur-sm max-md:rounded-t-none max-md:border-t-0'}
+            className={'narrow:rounded-t-none narrow:border-t-0 overflow-hidden rounded-2xl border border-white/40 bg-black/35 shadow-2xl backdrop-blur-sm'}
           >
             <div className='px-4 pt-4 md:px-5 md:pt-5'>
               <div className='overflow-hidden rounded-lg border border-white/15 shadow-xl shadow-black/50'>
@@ -123,7 +123,7 @@ export default function Home() {
                     darkSrc={MODES[vIdx].previewImage.night}
                     alt={`${MODES[vIdx].korNm} 진입 화면 미리보기`}
                     fill
-                    sizes='(max-width: 768px) 100vw, 55vw'
+                    sizes='(min-width: 1024px) and (orientation: landscape) 55vw, (min-width: 768px) 760px, 100vw'
                     className='object-cover object-top transition-opacity duration-300'
                     pixelated={false}
                   />

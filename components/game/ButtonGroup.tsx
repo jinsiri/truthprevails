@@ -22,7 +22,7 @@ export function ButtonGroup({ children, leading, positionClass = 'top-8 right-8'
   const isExpanded = isOpen || PANEL_VIEWS.includes(activeView);
 
   return (
-    <div className={`fixed ${positionClass} z-50 flex flex-col items-end gap-2`}>
+    <div className={`fixed ${positionClass} tablet:[zoom:1.3] z-50 flex flex-col items-end gap-2`}>
       <div className='flex gap-2'>
         {leading}
         <button
