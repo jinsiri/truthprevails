@@ -24,6 +24,9 @@ import BuildingButton from '@/components/game/BuildingButton';
 import PlayerCharacter from '@/components/game/PlayerCharacter';
 import { useJump } from '@/hooks/useJump';
 
+const EXIT_POSITION = 100;
+const EXIT_RETURN_POSITION = 90;
+
 const CHARACTER_SPRITES = ['side_01.webp', 'side_02.webp', 'back.png', 'front_book.png'].map((file) => `${IMAGE_ROOT}/images/game/${file}`);
 
 export default function GameMainClient() {
@@ -44,6 +47,7 @@ export default function GameMainClient() {
   const collectItem = useQuestStore((state) => state.collectItem);
 
   const pressedKeys = useRef<Set<string>>(new Set());
+  const isExitingRef = useRef(false);
   const stateRef = useRef({ position, isEntering, activeObject });
 
   const handleCollect = useCallback(
@@ -175,6 +179,15 @@ export default function GameMainClient() {
         const delta = Math.min(now - last, 50);
         last = now;
 
+        if (direction === 'right' && stateRef.current.position >= EXIT_POSITION) {
+          if (isExitingRef.current) return;
+          isExitingRef.current = true;
+          sessionStorage.setItem('lastPosition', JSON.stringify({ x: EXIT_RETURN_POSITION, y: 0 }));
+          setDirection(null);
+          router.push('/game/contact');
+          return;
+        }
+
         frameElapsed += delta;
         if (frameElapsed >= 100) {
           frameElapsed = 0;
@@ -185,7 +198,7 @@ export default function GameMainClient() {
           const isDashing = pressedKeys.current.has('Shift');
           const moveSpeed = (isDashing ? 1.6 : isMobile ? 1.3 : 0.8) * (delta / 100);
 
-          if (direction === 'right') return Math.min(92, prev + moveSpeed);
+          if (direction === 'right') return Math.min(EXIT_POSITION, prev + moveSpeed);
           if (direction === 'left') return Math.max(0, prev - moveSpeed);
           return prev;
         });
@@ -202,7 +215,7 @@ export default function GameMainClient() {
     return () => {
       if (rafId !== null) cancelAnimationFrame(rafId);
     };
-  }, [direction, isJumping, isEntering, isMobile]);
+  }, [direction, isJumping, isEntering, isMobile, router]);
 
   useEffect(() => {
     if (isReady) {
