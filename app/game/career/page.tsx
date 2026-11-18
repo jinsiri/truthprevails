@@ -69,7 +69,7 @@ export default function GameCareer() {
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
         lightSrc={`${IMAGE_ROOT}/images/game/company_day_v3.png`}
         darkSrc={`${IMAGE_ROOT}/images/game/company_night_v3.png`}
-        alt={'educated list'}
+        alt=''
         priority
         sizes='100vw'
         fill={true}
@@ -96,7 +96,7 @@ export default function GameCareer() {
               darkSrc={`${IMAGE_ROOT}/images/game/company_jinsil_night.png`}
               fill
               sizes='(min-width: 1000px) 300px, 30vw'
-              alt={'발표하는 캐릭터'}
+              alt=''
             />
             {activeView !== 'career' && <SpeechBubble placement='left' text={'이런 일을 했습니다!'} className='tablet:[zoom:1.6] top-[4%]! right-[72%]!' />}
           </div>
@@ -109,7 +109,7 @@ export default function GameCareer() {
                 darkSrc={`${IMAGE_ROOT}/images/game/company_jinsil_night.png`}
                 fill
                 sizes='192px'
-                alt={'발표하는 캐릭터'}
+                alt=''
               />
               <SpeechBubble placement='left' text={'이런 일을 했습니다!'} className='right-[78%]! max-w-[120px]! [zoom:1.2]' />
             </div>

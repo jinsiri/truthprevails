@@ -1,16 +1,21 @@
 import Image from 'next/image';
+import clsx from 'clsx';
+
+const CLOUDS = [
+  'top-[15%] left-[6%] w-16 md:top-12 md:left-[20%] md:w-[90px]',
+  'top-[17%] left-[16%] w-[72px] md:top-18 md:left-[30%] md:w-[100px]',
+  'top-[19.5%] left-[13%] w-14 md:top-22 md:left-[28%] md:w-[80px]',
+  'top-[13%] left-[58%] w-16 md:top-12 md:left-[70%] md:w-[90px]',
+  'top-[15%] left-[68%] w-[72px] md:top-18 md:left-[80%] md:w-[100px]',
+  'top-[17.5%] left-[65%] w-14 md:top-22 md:left-[78%] md:w-[80px]',
+];
 
 export default function Cloud() {
-  const cloudSrc = '/images/game/cloud.webp';
-
   return (
     <>
-      <Image className={'absolute top-12 left-[20%]'} src={cloudSrc} alt='cloud' width={90} height={90} />
-      <Image className={'absolute top-18 left-[30%]'} src={cloudSrc} alt='cloud' width={100} height={100} />
-      <Image className={'absolute top-22 left-[28%]'} src={cloudSrc} alt='cloud' width={80} height={80} />
-      <Image className={'absolute top-12 left-[70%]'} src={cloudSrc} alt='cloud' width={90} height={90} />
-      <Image className={'absolute top-18 left-[80%]'} src={cloudSrc} alt='cloud' width={100} height={100} />
-      <Image className={'absolute top-22 left-[78%]'} src={cloudSrc} alt='cloud' width={80} height={80} />
+      {CLOUDS.map((className) => (
+        <Image key={className} className={clsx('absolute h-auto', className)} src='/images/game/cloud.webp' alt='' aria-hidden width={100} height={64} />
+      ))}
     </>
   );
 }

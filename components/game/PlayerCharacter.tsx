@@ -69,7 +69,7 @@ export default function PlayerCharacter({
         </div>
       )}
 
-      <Image src={imageSrc} alt='character' width={154} height={154} priority style={{ transform: transformStyle }} />
+      <Image src={imageSrc} alt='' width={154} height={154} priority style={{ transform: transformStyle }} />
     </div>
   );
 }

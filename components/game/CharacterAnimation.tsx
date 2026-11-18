@@ -72,7 +72,7 @@ export default function CharacterAnimation({
           <Image
             key={src}
             src={src}
-            alt='jinsil'
+            alt=''
             width={300}
             height={425}
             loading='eager'

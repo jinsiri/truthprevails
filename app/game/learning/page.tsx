@@ -49,7 +49,7 @@ export default function GameLearning() {
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
         lightSrc={`${IMAGE_ROOT}/images/game/school_day.png`}
         darkSrc={`${IMAGE_ROOT}/images/game/school_night.png`}
-        alt={'educated list'}
+        alt=''
         priority
         sizes='100vw'
         fill={true}
@@ -60,11 +60,11 @@ export default function GameLearning() {
         {!(hide && characterReady) && (
           <>
             <div className='group tablet:w-[400px] pointer-events-none absolute -bottom-15 left-0 z-10 hidden w-[220px] md:block lg:left-20 xl:left-30 xl:w-[300px]'>
-              <Image width={300} height={800} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} className='h-auto w-full' />
+              <Image width={300} height={800} src={'/images/game/jinsil_standing.png'} alt='' className='h-auto w-full' />
               <SpeechBubble text={'자세히 보고 싶은 과정을 선택하세요!'} />
             </div>
             <div className='pointer-events-none absolute -bottom-16 left-2 z-10 w-36 md:hidden'>
-              <Image width={144} height={224} src={'/images/game/jinsil_standing.png'} alt={'jinsil'} />
+              <Image width={144} height={224} src={'/images/game/jinsil_standing.png'} alt='' />
               <SpeechBubble placement='right' text={'자세히 보고 싶은 과정을 선택하세요!'} />
             </div>
           </>

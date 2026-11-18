@@ -107,7 +107,7 @@ export default function GameGallery() {
       <div className='absolute top-1/2 left-1/2 aspect-[2752/1548] w-[max(100vw,calc(100dvh*2752/1548))] -translate-1/2'>
         <Image
           src={`${IMAGE_ROOT}/images/game/gallery_day.png`}
-          alt='갤러리 전시실'
+          alt=''
           priority
           fill
           sizes='100vw'
@@ -180,7 +180,7 @@ export default function GameGallery() {
       </div>
 
       <div className='wide:block pointer-events-none absolute right-[2%] -bottom-[7%] z-10 hidden aspect-[605/942] h-[54%]'>
-        <Image src={`${IMAGE_ROOT}/images/game/jinsil_standing.png`} alt='작품을 소개하는 캐릭터' fill sizes='17vw' />
+        <Image src={`${IMAGE_ROOT}/images/game/jinsil_standing.png`} alt='' fill sizes='17vw' />
         <SpeechBubble
           placement='left'
           name='작가 진실'

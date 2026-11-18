@@ -45,7 +45,7 @@ export default function GameContact() {
         className={'absolute right-0 bottom-0 -z-10 object-cover'}
         lightSrc={`${IMAGE_ROOT}/images/game/info_day_v2.jpg`}
         darkSrc={`${IMAGE_ROOT}/images/game/info_night_v2.jpg`}
-        alt={'인포센터 배경'}
+        alt=''
         priority
         sizes='100vw'
         fill={true}
@@ -54,6 +54,8 @@ export default function GameContact() {
       <section className='relative z-10 h-dvh w-full overflow-hidden p-8'>
         <button
           ref={focusingRef}
+          aria-label='진실에게 말 걸기'
+          aria-expanded={activeJin}
           className='group absolute top-[45%] right-[30%] cursor-pointer p-6 focus:outline-none'
           onClick={() => setActiveJin(!activeJin)}
         >
@@ -62,18 +64,12 @@ export default function GameContact() {
           ></span>
           {activeJin ? (
             <div className={'relative'}>
-              <Image width={200} height={600} className='tablet:w-[300px] h-auto' src={`${IMAGE_ROOT}/images/game/jinsil_standing.png`} alt={'진실 앞모습'} />
+              <Image width={200} height={600} className='tablet:w-[300px] h-auto' src={`${IMAGE_ROOT}/images/game/jinsil_standing.png`} alt='' />
               <SpeechBubble text={`반갑습니다! ${isMobile ? '' : '탭키 또는 마우스로 '}아래 책을 눌러 깃허브/기술 블로그에 방문해주세요!`} />
             </div>
           ) : (
             <>
-              <Image
-                className={'tablet:w-[300px] relative h-auto'}
-                width={200}
-                height={600}
-                src={`${IMAGE_ROOT}/images/game/jinsil_back.webp`}
-                alt={'진실 뒷모습'}
-              />
+              <Image className={'tablet:w-[300px] relative h-auto'} width={200} height={600} src={`${IMAGE_ROOT}/images/game/jinsil_back.webp`} alt='' />
               <div className='absolute -top-4 left-1/2 flex -translate-x-1/2 flex-col items-center'>
                 <div className='tablet:text-base animate-bounce rounded border-2 border-black bg-white px-2 py-1 text-xs font-bold whitespace-nowrap'>
                   <span className='text-black'>{isMobile ? '[터치]' : '[Enter or 클릭]'}</span>
@@ -91,7 +87,7 @@ export default function GameContact() {
             'tablet:w-[900px] right-1/2 -bottom-15 w-[650px] translate-x-1/2',
           )}
         >
-          <Image fill sizes='700px' src={`${IMAGE_ROOT}/images/game/info_table.png`} priority alt={'탁자'} />
+          <Image fill sizes='700px' src={`${IMAGE_ROOT}/images/game/info_table.png`} priority alt='' />
           <button
             className='group animate-stardust-float absolute top-0 left-1/2 aspect-[750/408] -translate-x-1/2 scale-60 cursor-pointer transition-all focus:outline-none'
             onClick={(event) => {
@@ -108,7 +104,7 @@ export default function GameContact() {
               width={300}
               height={300}
               className='animate-stardust-fade absolute -inset-10 object-contain transition-all'
-              alt='반짝이 가루'
+              alt=''
             />
           </button>
         </div>
