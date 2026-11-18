@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { IMAGE_ROOT } from '@/constants/imageSrc';
 
-const IMAGES = ['/images/game/study_01.webp', '/images/game/study_02.webp', '/images/game/study_03.webp'];
+const IMAGES = [`${IMAGE_ROOT}/images/game/study_01.webp`, `${IMAGE_ROOT}/images/game/study_02.webp`, `${IMAGE_ROOT}/images/game/study_03.webp`];
 
 export default function CharacterAnimation({
   skillSet,

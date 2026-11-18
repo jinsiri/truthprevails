@@ -2,11 +2,12 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 const HEART_IMAGES = {
-  full: '/images/game/heart_full.webp',
-  half: '/images/game/heart_half.webp',
-  zero: '/images/game/heart_zero.webp',
+  full: `${IMAGE_ROOT}/images/game/heart_full.webp`,
+  half: `${IMAGE_ROOT}/images/game/heart_half.webp`,
+  zero: `${IMAGE_ROOT}/images/game/heart_zero.webp`,
 } as const;
 
 export default function Heart() {

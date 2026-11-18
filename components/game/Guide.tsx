@@ -2,6 +2,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { IconArrowBigUpLines, IconCaretDownFilled, IconCaretLeftFilled, IconCaretRightFilled, IconDoorEnter } from '@tabler/icons-react';
 import { touchButtonClass } from './TouchControls';
+import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 const keyClass = clsx(touchButtonClass, 'bg-gray-100 text-gray-950');
 
@@ -58,13 +59,13 @@ export default function Guide({ onClick, isMobile = false }: { onClick: () => vo
           <ul className={'flex items-end gap-x-10'}>
             <li>
               <figure className={'w-max-[40%]'}>
-                <Image src={`/images/game/wasd.webp`} alt='방향키' width={200} height={421} />
+                <Image src={`${IMAGE_ROOT}/images/game/wasd.webp`} alt='방향키' width={200} height={421} />
                 <figcaption className={'mt-3'}>WASD 키: 이동</figcaption>
               </figure>
             </li>
             <li>
               <figure className={'w-max-[40%]'}>
-                <Image src={`/images/game/spacebar.webp`} alt='점프' width={230} height={421} />
+                <Image src={`${IMAGE_ROOT}/images/game/spacebar.webp`} alt='점프' width={230} height={421} />
                 <figcaption className={'mt-3'}>스페이스바: 점프</figcaption>
               </figure>
             </li>

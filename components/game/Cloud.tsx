@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import clsx from 'clsx';
+import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 const CLOUDS = [
   'top-[15%] left-[6%] w-16 md:top-12 md:left-[20%] md:w-[90px]',
@@ -14,7 +15,15 @@ export default function Cloud() {
   return (
     <>
       {CLOUDS.map((className) => (
-        <Image key={className} className={clsx('absolute h-auto', className)} src='/images/game/cloud.webp' alt='' aria-hidden width={100} height={64} />
+        <Image
+          key={className}
+          className={clsx('absolute h-auto', className)}
+          src={`${IMAGE_ROOT}/images/game/cloud.webp`}
+          alt=''
+          aria-hidden
+          width={100}
+          height={64}
+        />
       ))}
     </>
   );
