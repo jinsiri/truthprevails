@@ -56,4 +56,4 @@ export const INTERACTION_POINTS: InteractionPoint[] = [
   },
 ];
 
-export const EXIT_HINT_POSITION = 79;
+export const EXIT_HINT_POSITION = 87;

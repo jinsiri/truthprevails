@@ -24,8 +24,8 @@ import BuildingButton from '@/components/game/BuildingButton';
 import PlayerCharacter from '@/components/game/PlayerCharacter';
 import { useJump } from '@/hooks/useJump';
 
-const EXIT_POSITION = 100;
-const EXIT_RETURN_POSITION = 90;
+const EXIT_POSITION = 93;
+const EXIT_RETURN_POSITION = 86;
 
 const CHARACTER_SPRITES = ['side_01.webp', 'side_02.webp', 'back.png', 'front_book.png'].map((file) => `${IMAGE_ROOT}/images/game/${file}`);
 
@@ -184,7 +184,8 @@ export default function GameMainClient() {
           isExitingRef.current = true;
           sessionStorage.setItem('lastPosition', JSON.stringify({ x: EXIT_RETURN_POSITION, y: 0 }));
           setDirection(null);
-          router.push('/game/contact');
+          setIsEntering(true);
+          setTimeout(() => router.push('/game/contact'), 1000);
           return;
         }
 
@@ -273,6 +274,9 @@ export default function GameMainClient() {
           {INTERACTION_POINTS.map((obj) => (
             <BuildingButton key={obj.id} building={obj} isActive={activeObject?.id === obj.id} onClick={() => router.push(obj.path)} />
           ))}
+          <div aria-hidden className='pointer-events-none absolute bottom-[80%] left-[95%] z-20 aspect-[280/323] w-[14%]'>
+            <Image src={`${IMAGE_ROOT}/images/game/info.webp`} alt='' fill sizes='14vw' />
+          </div>
           <div
             className={`absolute -bottom-[4%] z-30 h-30 w-full bg-contain bg-repeat-x`}
             style={{
