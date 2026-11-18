@@ -4,87 +4,81 @@ import Link from 'next/link';
 import ThemeToggleButton from '@/components/ThemeToggleButton';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
-import { useKeyboardList } from '@/hooks/useKeyboardList';
-import { useEffect, useRef } from 'react';
-import FadeInImage from '@/components/FadeInImage';
+import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import ThemedImage from '@/components/ThemedImage';
 import { ArrowRight } from 'lucide-react';
 
 import { MODES } from '@/features/site/modes';
+import { CONTACT_LINKS } from '@/features/portfolio/contact';
 
 export default function Home() {
   const router = useRouter();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { vIdx, handleKeyDown, setVIdx } = useKeyboardList({
-    vItems: MODES,
-    onSelectV: (mode) => router.push(mode.address),
-  });
+  const tabListRef = useRef<HTMLDivElement>(null);
+  const [vIdx, setVIdx] = useState(0);
 
   useEffect(() => {
-    containerRef.current?.focus();
+    tabListRef.current?.focus();
   }, []);
+
+  const handleTabKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].includes(event.key)) {
+      event.preventDefault();
+      const step = event.key === 'ArrowLeft' || event.key === 'ArrowUp' ? -1 : 1;
+      setVIdx((prev) => (prev + step + MODES.length) % MODES.length);
+    } else if (event.key === 'Enter') {
+      event.preventDefault();
+      router.push(MODES[vIdx].address);
+    }
+  };
 
   return (
     <main className={'main-home relative flex min-h-screen flex-col items-center justify-center px-4 pt-10 pb-10'}>
       <div className={'absolute inset-0 bg-black/45 backdrop-blur-sm'}></div>
       <div
         className={
-          'wide:max-w-5xl wide:grid-cols-[minmax(260px,0.85fr)_minmax(360px,1.15fr)] wide:gap-12 relative grid w-full max-w-[560px] grid-cols-1 items-center gap-8 rounded-3xl border border-white/20 bg-black/25 p-6 text-white shadow-2xl backdrop-blur-sm md:max-w-[680px] md:p-10 lg:max-w-[760px]'
+          'wide:max-w-5xl wide:grid-cols-[minmax(260px,0.85fr)_minmax(360px,1.15fr)] wide:gap-12 wide:items-start relative grid w-full max-w-[560px] grid-cols-1 items-center gap-8 rounded-3xl border border-white/20 bg-black/25 p-6 text-white shadow-2xl backdrop-blur-sm md:max-w-[680px] md:p-10 lg:max-w-[760px]'
         }
       >
-        <div className={'wide:text-left text-center'}>
+        <div className={'wide:flex wide:flex-col wide:self-stretch wide:text-left text-center'}>
           <p className={'mb-3 font-sans text-sm tracking-[0.28em] text-white/75 uppercase'}>PORTFOLIO / 2026</p>
           <h2 className={'mb-3 font-sans text-xl leading-tight break-keep md:text-2xl lg:text-3xl'}>
             WELCOME TO
             <br /> THE TRUTH WORLD
           </h2>
-          <p className={'wide:mb-8 border-t border-white/20 pt-3 font-sans text-lg text-white/85 md:text-xl'}>반갑습니다. 어디로 안내해드릴까요?</p>
-          <div
-            ref={containerRef}
-            onKeyDown={handleKeyDown}
-            tabIndex={0}
-            className={'mode-btns narrow:hidden wide:mx-0 mx-auto max-w-[500px] space-y-2 outline-none'}
-            aria-label='모드 선택'
-          >
-            {MODES.map((mode, index) => (
-              <button
-                type='button'
-                key={mode.address}
-                data-keyboard-v={index}
-                aria-pressed={vIdx === index}
-                onFocus={() => setVIdx(index)}
-                onMouseEnter={() => setVIdx(index)}
-                onClick={() => setVIdx(index)}
-                onKeyDown={(event) => {
-                  if (event.key !== 'Enter') return;
-                  event.preventDefault();
-                  router.push(mode.address);
-                }}
-                className={clsx(
-                  'group flex w-full cursor-pointer items-center gap-3 rounded-xl border border-white/25 bg-black/20 p-2 pr-3 text-left transition duration-300 hover:bg-white/20 md:gap-4 md:p-4',
-                  vIdx === index && 'border-white/80 bg-white/20 shadow-lg shadow-black/20',
-                )}
-              >
-                <span className={'relative h-10 w-14 shrink-0 overflow-hidden rounded-md border border-white/30 bg-black/20 md:h-14 md:w-20 md:rounded-lg'}>
-                  <FadeInImage src={mode.image} alt='' fill sizes='80px' className='object-cover transition duration-500' />
-                </span>
-                <span className='min-w-0 flex-1'>
-                  <span className='block text-base md:text-xl'>{mode.korNm}</span>
-                  <span className='block text-[10px] tracking-wider text-white/60 uppercase md:text-xs'>{mode.enNm}</span>
-                </span>
-                <span className={clsx('hidden text-xs transition-opacity md:inline', vIdx === index ? 'opacity-100' : 'opacity-0')}>Enter</span>
-              </button>
-            ))}
-          </div>
+          <p className={'border-t border-white/20 pt-3 font-sans text-lg text-white/85 md:text-xl'}>반갑습니다. 어디로 안내해드릴까요?</p>
+          <p className='wide:block mt-1 hidden text-sm leading-relaxed break-keep text-white/60'>
+            이력을 두 가지 방식으로 둘러볼 수 있어요.
+            <br />
+            오른쪽 탭에서 모드를 골라 미리 보고 입장해 보세요.
+          </p>
+          <nav aria-label='바로가기' className='wide:block mt-auto hidden border-t border-white/20 pt-4'>
+            <p className='mb-2 font-sans text-xs tracking-[0.28em] text-white/50 uppercase'>Quick Links</p>
+            <ul className='flex flex-wrap gap-2'>
+              {CONTACT_LINKS.map(({ title, address }) => (
+                <li key={address}>
+                  <a
+                    href={address}
+                    target={address.startsWith('mailto:') ? undefined : '_blank'}
+                    rel='noreferrer'
+                    className='inline-flex items-center gap-1 rounded-full border border-white/30 px-3 py-1 font-sans text-xs tracking-wider text-white/80 transition-colors hover:bg-white/15 hover:text-white'
+                  >
+                    {title}
+                    <span aria-hidden>↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
 
         <div className={'w-full'}>
-          <div role='tablist' aria-label='모드 선택' className='wide:hidden flex'>
+          <div ref={tabListRef} role='tablist' aria-label='모드 선택' tabIndex={0} onKeyDown={handleTabKeyDown} className='flex outline-none'>
             {MODES.map((mode, index) => (
               <button
                 type='button'
                 role='tab'
                 key={mode.address}
+                tabIndex={-1}
                 aria-selected={vIdx === index}
                 onClick={() => setVIdx(index)}
                 className={clsx(
@@ -97,11 +91,14 @@ export default function Home() {
                 {mode.korNm}
               </button>
             ))}
-            <span aria-hidden className='flex-1 border-b border-white/40' />
+            <span aria-hidden className='wide:flex hidden flex-1 items-end justify-end border-b border-white/40 pb-1.5 text-xs text-white/45'>
+              ← → 전환 · Enter 입장
+            </span>
+            <span aria-hidden className='wide:hidden flex-1 border-b border-white/40' />
           </div>
           <div
             aria-live='polite'
-            className={'narrow:rounded-t-none narrow:border-t-0 overflow-hidden rounded-2xl border border-white/40 bg-black/35 shadow-2xl backdrop-blur-sm'}
+            className={'overflow-hidden rounded-2xl rounded-t-none border border-t-0 border-white/40 bg-black/35 shadow-2xl backdrop-blur-sm'}
           >
             <div className='px-4 pt-4 md:px-5 md:pt-5'>
               <div className='overflow-hidden rounded-lg border border-white/15 shadow-xl shadow-black/50'>
