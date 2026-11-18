@@ -86,7 +86,7 @@ export default function GameCareer() {
           <div
             className={clsx(
               'group tablet:pointer-events-none tablet:-bottom-[21vh] tablet:w-[50%] tablet:max-w-none absolute -bottom-15 z-10 hidden aspect-[651/950] w-[30%] transition-all duration-1000 md:block',
-              activeView === 'career' ? 'narrow:right-0 right-10 max-w-[400px]' : 'narrow:right-0 -right-20',
+              activeView === 'career' ? 'narrow:right-0 right-10 max-w-[300px]' : 'narrow:right-0 -right-20',
               isCharacterHidden && 'opacity-0',
             )}
           >
@@ -95,10 +95,10 @@ export default function GameCareer() {
               lightSrc={`${IMAGE_ROOT}/images/game/company_jinsil_day.png`}
               darkSrc={`${IMAGE_ROOT}/images/game/company_jinsil_night.png`}
               fill
-              sizes='(min-width: 1334px) 400px, 30vw'
+              sizes='(min-width: 1000px) 300px, 30vw'
               alt={'발표하는 캐릭터'}
             />
-            <SpeechBubble placement='left' text={'이런 일을 했습니다!'} className='tablet:[zoom:1.6] top-[4%]! right-[72%]!' />
+            {activeView !== 'career' && <SpeechBubble placement='left' text={'이런 일을 했습니다!'} className='tablet:[zoom:1.6] top-[4%]! right-[72%]!' />}
           </div>
 
           {activeView !== 'career' && (
