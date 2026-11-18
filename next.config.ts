@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
     loader: 'custom',
     loaderFile: './image-loader.ts',
   },
+  experimental: {
+    agentUpgrade: 'security',
+  },
 };
 
 export default nextConfig;
