@@ -98,7 +98,7 @@ export default function GameCareer() {
               sizes='(min-width: 1334px) 400px, 30vw'
               alt={'발표하는 캐릭터'}
             />
-            <SpeechBubble placement='left' text={'이런 일을 했습니다!'} className='tablet:[zoom:1.6]' />
+            <SpeechBubble placement='left' text={'이런 일을 했습니다!'} className='tablet:[zoom:1.6] top-[4%]! right-[72%]!' />
           </div>
 
           {activeView !== 'career' && (
@@ -111,7 +111,7 @@ export default function GameCareer() {
                 sizes='192px'
                 alt={'발표하는 캐릭터'}
               />
-              <SpeechBubble placement='left' text={'이런 일을 했습니다!'} className='max-w-[120px]! [zoom:1.2]' />
+              <SpeechBubble placement='left' text={'이런 일을 했습니다!'} className='right-[78%]! max-w-[120px]! [zoom:1.2]' />
             </div>
           )}
 

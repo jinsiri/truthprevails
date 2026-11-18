@@ -21,6 +21,7 @@ export interface Project {
   link?: { href: string; label: string };
   isCurrentSite?: boolean;
   image?: string;
+  exhibitNote?: string;
 }
 export interface ContactLink {
   title: string;

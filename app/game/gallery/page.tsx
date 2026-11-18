@@ -1,14 +1,18 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { IconCaretDownFilled, IconCaretLeftFilled, IconCaretRightFilled, IconExternalLink, IconX } from '@tabler/icons-react';
 import GameDialog from '@/components/game/GameDialog';
+import SpeechBubble from '@/components/game/SpeechBubble';
 import { useKeyboardList } from '@/hooks/useKeyboardList';
 import { useUIStore } from '@/store/useUIStore';
 import { PROJECTS } from '@/features/portfolio/projects';
 import type { Project } from '@/features/portfolio/types';
+import { IMAGE_ROOT } from '@/constants/imageSrc';
+
+const LAMP_POSITIONS = [27.6, 50, 72.4];
 
 const PLACEHOLDER_COLORS = [
   ['#dff1fb', '#f4c542', '#c8553d', '#3d6b8f'],
@@ -85,6 +89,7 @@ function ProjectInfo({ project, index }: { project: Project; index: number }) {
 
 export default function GameGallery() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [hasBrowsed, setHasBrowsed] = useState(false);
   const { activeView, openView, closeView } = useUIStore();
   const { hIdx, setHIdx, handleKeyDown } = useKeyboardList({
     hItems: PROJECTS,
@@ -99,64 +104,110 @@ export default function GameGallery() {
 
   return (
     <main className='relative h-dvh w-full overflow-hidden bg-[#efe6d2] select-none dark:bg-[#2f2a3a]'>
-      <div
-        aria-hidden
-        className='absolute inset-0 opacity-40 dark:opacity-20'
-        style={{ backgroundImage: 'repeating-linear-gradient(90deg, transparent 0 46px, rgba(120,90,50,0.15) 46px 50px)' }}
-      />
-      <div aria-hidden className='absolute inset-x-0 bottom-[22%] h-[8%] border-y-4 border-[#6b4423] bg-[#c4a77d] dark:bg-[#5c4632]' />
-      <div
-        aria-hidden
-        className='absolute inset-x-0 bottom-0 h-[22%] bg-[#8b5e3c] dark:bg-[#4a3424]'
-        style={{ backgroundImage: 'repeating-linear-gradient(90deg, transparent 0 118px, rgba(0,0,0,0.18) 118px 122px)' }}
-      />
+      <div className='absolute top-1/2 left-1/2 aspect-[2752/1548] w-[max(100vw,calc(100dvh*2752/1548))] -translate-1/2'>
+        <Image
+          src={`${IMAGE_ROOT}/images/game/gallery_day.png`}
+          alt='갤러리 전시실'
+          priority
+          fill
+          sizes='100vw'
+          className='object-cover [image-rendering:pixelated] dark:opacity-0'
+        />
+        <Image
+          src={`${IMAGE_ROOT}/images/game/gallery_night_v2.png`}
+          alt=''
+          aria-hidden
+          priority
+          fill
+          sizes='100vw'
+          className='object-cover opacity-0 [image-rendering:pixelated] dark:opacity-100'
+        />
 
-      <div
-        ref={containerRef}
-        tabIndex={0}
-        onKeyDown={handleKeyDown}
-        aria-label='프로젝트 전시'
-        className='wide:flex absolute inset-x-0 top-[24%] hidden justify-center gap-[3vw] outline-none'
-      >
-        {PROJECTS.map((project, index) => (
-          <div key={project.title} className='relative flex w-[28vw] max-w-[400px] flex-col items-center'>
-            <span
-              aria-hidden
-              className={clsx(
-                'pointer-events-none absolute -top-[30%] left-1/2 h-[150%] w-[140%] -translate-x-1/2 bg-gradient-to-b from-yellow-100/70 to-transparent transition-opacity duration-300 [clip-path:polygon(40%_0,60%_0,100%_100%,0_100%)] dark:from-yellow-200/30',
-                hIdx === index ? 'opacity-100' : 'opacity-0',
-              )}
-            />
-            {hIdx === index && activeView !== 'gallery' && (
-              <IconCaretDownFilled
-                aria-hidden
-                className='absolute -top-12 h-10 w-10 animate-bounce text-yellow-300 [filter:drop-shadow(0_0_1px_#000)_drop-shadow(0_0_1px_#000)_drop-shadow(0_2px_0_#000)]'
-              />
-            )}
-            <button
-              type='button'
-              data-keyboard-h={index}
-              aria-label={`${project.title} 자세히 보기`}
-              onFocus={() => setHIdx(index)}
-              onMouseEnter={() => setHIdx(index)}
-              onClick={() => {
-                setHIdx(index);
-                openView('gallery');
-              }}
-              className='relative w-full cursor-pointer transition-transform duration-300 hover:-translate-y-1 focus:outline-none'
+        <div ref={containerRef} tabIndex={0} onKeyDown={handleKeyDown} aria-label='프로젝트 전시' className='wide:block absolute inset-0 hidden outline-none'>
+          {PROJECTS.map((project, index) => (
+            <div
+              key={project.title}
+              className='absolute top-[24%] flex w-[19%] -translate-x-1/2 flex-col items-center'
+              style={{ left: `${LAMP_POSITIONS[index % LAMP_POSITIONS.length]}%` }}
             >
-              <Frame project={project} index={index} />
-            </button>
-            <div className='relative mt-6 w-[80%] border-2 border-[#3e2723] bg-[#fffaf0] px-3 py-2 text-center shadow-[3px_3px_0_rgba(0,0,0,0.2)]'>
-              <p className='text-sm font-bold text-[#3e2723] lg:text-base'>{project.title}</p>
-              <p className='text-[11px] text-[#8d6e63]'>{hIdx === index ? 'Enter 또는 클릭' : project.date}</p>
+              {hIdx === index && activeView !== 'gallery' && (
+                <IconCaretDownFilled
+                  aria-hidden
+                  className='absolute -top-12 h-10 w-10 animate-bounce text-yellow-300 [filter:drop-shadow(0_0_1px_#000)_drop-shadow(0_0_1px_#000)_drop-shadow(0_2px_0_#000)]'
+                />
+              )}
+              <button
+                type='button'
+                data-keyboard-h={index}
+                aria-label={`${project.title} 자세히 보기`}
+                onFocus={() => {
+                  setHIdx(index);
+                  setHasBrowsed(true);
+                }}
+                onMouseEnter={() => {
+                  setHIdx(index);
+                  setHasBrowsed(true);
+                }}
+                onClick={() => {
+                  setHIdx(index);
+                  setHasBrowsed(true);
+                  openView('gallery');
+                }}
+                className='relative w-full cursor-pointer transition-transform duration-300 hover:-translate-y-1 focus:outline-none'
+              >
+                <Frame project={project} index={index} className={clsx(hIdx === index && 'ring-4 ring-yellow-300/80')} />
+              </button>
+              <button
+                type='button'
+                tabIndex={-1}
+                onMouseEnter={() => {
+                  setHIdx(index);
+                  setHasBrowsed(true);
+                }}
+                onClick={() => {
+                  setHIdx(index);
+                  setHasBrowsed(true);
+                  openView('gallery');
+                }}
+                className='relative mt-[6%] w-[80%] cursor-pointer border-2 border-[#3e2723] bg-[#fffaf0] px-3 py-1.5 text-center shadow-[3px_3px_0_rgba(0,0,0,0.2)] transition-transform hover:-translate-y-0.5'
+              >
+                <p className='text-sm font-bold text-[#3e2723] xl:text-base'>{project.title}</p>
+                <p className='text-[11px] text-[#8d6e63]'>{hIdx === index ? 'Enter 또는 클릭' : project.date}</p>
+              </button>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      <section aria-label='프로젝트 전시' className='wide:hidden absolute inset-0 overflow-y-auto px-6 pt-28 pb-32 md:px-[12vw] md:pt-36'>
-        <Frame project={PROJECTS[hIdx]} index={hIdx} className='w-full' />
+      <div className='wide:block pointer-events-none absolute right-[2%] -bottom-[7%] z-10 hidden aspect-[605/942] h-[54%]'>
+        <Image src={`${IMAGE_ROOT}/images/game/jinsil_standing.png`} alt='작품을 소개하는 캐릭터' fill sizes='17vw' />
+        <SpeechBubble
+          placement='left'
+          name='작가 진실'
+          text={hasBrowsed ? (PROJECTS[hIdx].exhibitNote ?? '') : '어서 오세요! 제 첫 개인전 「코드로 그린 세계」에 오신 걸 환영해요.'}
+          className='top-[18%]! right-full! w-[300px]! max-w-none! xl:w-[340px]!'
+        />
+      </div>
+
+      <section aria-label='프로젝트 전시' className='wide:hidden absolute inset-0 flex flex-col items-center justify-center px-6 pt-20 pb-28 md:px-[12vw]'>
+        <button
+          type='button'
+          aria-label={`${PROJECTS[hIdx].title} 자세히 보기`}
+          onClick={() => openView('gallery')}
+          className='w-full cursor-pointer transition-transform active:translate-y-0.5'
+        >
+          <Frame project={PROJECTS[hIdx]} index={hIdx} className='w-full' />
+        </button>
+        <button
+          type='button'
+          tabIndex={-1}
+          onClick={() => openView('gallery')}
+          className='mt-4 w-[80%] max-w-[320px] cursor-pointer border-2 border-[#3e2723] bg-[#fffaf0] px-3 py-2 text-center shadow-[3px_3px_0_rgba(0,0,0,0.2)] active:translate-y-0.5'
+        >
+          <p className='font-bold text-[#3e2723] md:text-lg'>{PROJECTS[hIdx].title}</p>
+          <p className='text-xs text-[#8d6e63]'>{PROJECTS[hIdx].date}</p>
+          <p className='mt-1 text-xs font-bold text-[#c8553d]'>눌러서 작가 노트 보기</p>
+        </button>
         <div className='mt-4 flex items-center justify-center gap-4'>
           <button
             type='button'
@@ -180,16 +231,14 @@ export default function GameGallery() {
             <IconCaretRightFilled />
           </button>
         </div>
-        <div className='mt-5 border-4 border-[#3e2723] bg-[#fffaf0] p-5 shadow-[6px_6px_0_rgba(0,0,0,0.2)]'>
-          <ProjectInfo project={PROJECTS[hIdx]} index={hIdx} />
-        </div>
       </section>
 
+      {activeView === 'gallery' && <div aria-hidden onClick={closeView} className='fixed inset-0 z-[65] bg-black/40 backdrop-blur-sm' />}
       {activeView === 'gallery' && (
         <GameDialog
           label={`${PROJECTS[hIdx].title} 작품 설명`}
           onClose={closeView}
-          className='wide:block absolute top-1/2 left-1/2 z-40 hidden w-[min(90vw,640px)] -translate-1/2 border-4 border-[#3e2723] bg-[#fffaf0] p-8 shadow-[8px_8px_0_rgba(0,0,0,0.25)]'
+          className='fixed top-1/2 left-1/2 z-[70] max-h-[80dvh] w-[min(90vw,640px)] -translate-1/2 overflow-y-auto border-4 border-[#3e2723] bg-[#fffaf0] p-6 shadow-[8px_8px_0_rgba(0,0,0,0.25)] md:p-8'
         >
           <button type='button' aria-label='닫기' onClick={closeView} className='absolute top-3 right-3 cursor-pointer text-[#5d4037] hover:text-[#3e2723]'>
             <IconX />

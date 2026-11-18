@@ -8,6 +8,7 @@ export const PROJECTS: Project[] = [
     stack: 'Next.js 16, React 19, TypeScript, Zustand, Framer Motion, Tailwind CSS 4',
     link: { href: 'https://github.com/jinsiri/truthprevails', label: 'GitHub' },
     isCurrentSite: true,
+    exhibitNote: '이 작품 앞에 서 계신 지금, 사실 작품 속에 계신 거예요. 이 전시장도 제가 직접 지었거든요!',
   },
   {
     date: '2026.01 ~ 2026.06',
@@ -15,6 +16,7 @@ export const PROJECTS: Project[] = [
     description: '조직도·부서원 일괄 이동과 회원 관리 기능을 담은 그룹웨어 (3인)',
     stack: 'Next.js, TypeScript, Zustand, Java, Spring Boot, PostgreSQL',
     link: { href: 'https://github.com/jinsiri/easy-c', label: 'GitHub' },
+    exhibitNote: '셋이 함께 완성한 협업작이에요. 부서원을 한 번에 옮기는 장면이 이 작품의 하이라이트랍니다.',
   },
   {
     date: '2026.07 ~ 진행 중',
@@ -22,5 +24,6 @@ export const PROJECTS: Project[] = [
     description: '가입 방식별 승인과 모임 권한을 관리하는 교환 독서 모임 서비스 (3인)',
     stack: 'Next.js, TypeScript, TanStack Query, Zustand, Supabase, Tailwind CSS',
     link: { href: 'https://seoro-seoro.vercel.app', label: '서비스 보기' },
+    exhibitNote: '아직 붓을 놓지 않은 신작이에요. 책을 바꿔 읽는 사람들을 위해 매일 덧칠하고 있어요.',
   },
 ];
