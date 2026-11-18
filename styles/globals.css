@@ -319,6 +319,19 @@ img {
       item-toast 0.25s steps(3),
       item-toast-out 0.8s ease-in 5.2s forwards;
   }
+  .animate-nudge-right {
+    animation: nudge-right 0.8s steps(4) infinite;
+  }
+}
+
+@keyframes nudge-right {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(40%);
+  }
 }
 
 @keyframes landing-dust {

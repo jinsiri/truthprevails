@@ -34,7 +34,18 @@ export interface InventoryItemData {
   useEffect?: string;
 }
 
-export type ViewType = 'about' | 'career' | 'careerDetail' | 'skills' | 'contact' | 'statWindow' | 'skillWindow' | 'questWindow' | 'inventoryWindow' | null;
+export type ViewType =
+  | 'about'
+  | 'career'
+  | 'careerDetail'
+  | 'skills'
+  | 'contact'
+  | 'gallery'
+  | 'statWindow'
+  | 'skillWindow'
+  | 'questWindow'
+  | 'inventoryWindow'
+  | null;
 
 export interface Quest {
   id: number;

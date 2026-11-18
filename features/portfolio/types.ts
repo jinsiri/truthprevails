@@ -20,6 +20,7 @@ export interface Project {
   stack: string;
   link?: { href: string; label: string };
   isCurrentSite?: boolean;
+  image?: string;
 }
 export interface ContactLink {
   title: string;

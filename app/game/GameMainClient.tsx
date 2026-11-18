@@ -14,7 +14,7 @@ import clsx from 'clsx';
 import LoadingSpinner from '@/components/game/LoadingSpinner';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
-import { keyToDirection, INTERACTION_POINTS, MOBILE_WORLD_WIDTH } from '@/features/game/world';
+import { keyToDirection, INTERACTION_POINTS, MOBILE_WORLD_WIDTH, EXIT_HINT_POSITION } from '@/features/game/world';
 import type { Collectible, Direction, InteractionPoint } from '@/features/game/types';
 import { COLLECTIBLES, COLLECTIBLE_QUEST_ID } from '@/features/game/collectibles';
 import useQuestStore from '@/store/useQuestStore';
@@ -303,6 +303,7 @@ export default function GameMainClient() {
             isEntering={isEntering}
             activeObject={activeObject}
             isMobile={isMobile}
+            showExitHint={position >= EXIT_HINT_POSITION}
           />
         </div>
       </section>
