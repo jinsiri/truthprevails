@@ -6,7 +6,6 @@ import { CSSProperties, useEffect, useRef, useState, useCallback } from 'react';
 import { IconTransfer } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import { useIsMobile } from '@/hooks/useIsMobile';
-import MessageBox from '@/components/game/MessageBox';
 import Cloud from '@/components/game/Cloud';
 import Guide from '@/components/game/Guide';
 import TouchControls from '@/components/game/TouchControls';
@@ -41,7 +40,6 @@ export default function GameMainClient() {
   const [isEntering, setIsEntering] = useState(false);
   const [frame, setFrame] = useState(0);
   const [guideState, setGuideState] = useState(false);
-  const [msgState, setMsgState] = useState(false);
   const [toastItem, setToastItem] = useState<Collectible | null>(null);
   const collected = useQuestStore((state) => state.collected);
   const collectItem = useQuestStore((state) => state.collectItem);
@@ -60,10 +58,6 @@ export default function GameMainClient() {
   const { isJumping, positionY, landing, jump } = useJump({ stateRef, collected, onCollect: handleCollect });
 
   useEffect(() => {
-    if (isMobile && sessionStorage.getItem('mobileNoticeShown') === null) setMsgState(true);
-  }, [isMobile]);
-
-  useEffect(() => {
     stateRef.current = { position, isEntering, activeObject };
   }, [position, isEntering, activeObject]);
 
@@ -72,14 +66,14 @@ export default function GameMainClient() {
     if (savedPos) setPosition(JSON.parse(savedPos).x);
 
     const savedGuide = sessionStorage.getItem('guideState');
-    setGuideState(savedGuide !== null ? JSON.parse(savedGuide) : !isMobile);
+    setGuideState(savedGuide !== null ? JSON.parse(savedGuide) : true);
 
     const handleContextMenu = (e: MouseEvent) => e.preventDefault();
     document.addEventListener('contextmenu', handleContextMenu);
 
     setTimeout(() => setIsReady(true), 0);
     return () => document.removeEventListener('contextmenu', handleContextMenu);
-  }, [isMobile]);
+  }, []);
 
   const handleInteraction = useCallback(() => {
     const { activeObject: currentActive, position: currentPos, isEntering: entering } = stateRef.current;
@@ -253,20 +247,6 @@ export default function GameMainClient() {
 
         {guideState && <Guide isMobile={isMobile} onClick={() => setGuideState(false)} />}
 
-        {msgState && (
-          <MessageBox
-            onClose={() => {
-              sessionStorage.setItem('mobileNoticeShown', 'true');
-              setMsgState(false);
-              setGuideState(true);
-            }}
-          >
-            선택하신 모드는 데스크톱에 최적화되어 있습니다.
-            <br />
-            모바일에선 일부 기능이 원활하지 않을 수 있으니 PC 접속을 권장합니다.
-          </MessageBox>
-        )}
-
         <div
           className='narrow:w-(--world) narrow:translate-x-(--camera) wide:h-50 @container absolute bottom-0 left-0 h-72 w-full border-t-4 border-gray-950 bg-[#b0a58c] dark:border-gray-100 dark:bg-[#46311e]'
           style={{ '--world': worldWidth, '--camera': cameraX } as CSSProperties}
@@ -314,7 +294,7 @@ export default function GameMainClient() {
 
       {toastItem && <ItemToast key={toastItem.id} item={toastItem} count={collected.length} total={COLLECTIBLES.length} onClose={() => setToastItem(null)} />}
 
-      {isMobile && !msgState && (
+      {isMobile && (
         <TouchControls
           onMove={handleTouchMove}
           onJump={() => {
