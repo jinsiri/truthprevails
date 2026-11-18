@@ -4,7 +4,7 @@ import { preconnect } from 'react-dom';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 import HistoryDepthTracker from '@/components/HistoryDepthTracker';
 
-const OG_IMAGE = { url: '/images/preview_game_day.png', width: 3024, height: 1644, alt: 'TRUTH WORLD 게임 모드 미리보기' };
+const OG_IMAGE = { url: `${IMAGE_ROOT}/images/game/preview_game_day_v2.png`, width: 3023, height: 1643, alt: 'TRUTH WORLD 게임 모드 미리보기' };
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://truthprevails.me'),

@@ -8,7 +8,7 @@ export const PROJECTS: Project[] = [
     stack: 'Next.js 16, React 19, TypeScript, Zustand, Framer Motion, Tailwind CSS 4',
     link: { href: 'https://github.com/jinsiri/truthprevails', label: 'GitHub' },
     isCurrentSite: true,
-    image: '/images/preview_game_day.png',
+    image: '/images/game/preview_game_day_v2.png',
     exhibitNote: '이 작품 앞에 서 계신 지금, 사실 작품 속에 계신 거예요. 이 전시장도 제가 직접 지었거든요!',
   },
   {

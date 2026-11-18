@@ -22,8 +22,8 @@ export const MODES: SiteMode[] = [
     detail: '탐험 · 퀘스트 · 스킬 · 연락 수첩',
     image: '/images/game/school.webp',
     previewImage: {
-      day: `${IMAGE_ROOT}/images/preview_game_day.png`,
-      night: `${IMAGE_ROOT}/images/preview_game_night.png`,
+      day: `${IMAGE_ROOT}/images/game/preview_game_day_v2.png`,
+      night: `${IMAGE_ROOT}/images/game/preview_game_night_v2.png`,
     },
   },
 ];
