@@ -1,5 +1,6 @@
 import SectionHeader from '@/components/classic/SectionHeader';
 import { PROJECTS } from '@/features/portfolio/projects';
+import FadeInImage from '@/components/FadeInImage';
 
 export default function ProjectsSection() {
   return (
@@ -9,7 +10,10 @@ export default function ProjectsSection() {
       <section className='pt-6'>
         <ol>
           {PROJECTS.map((project, index) => (
-            <li key={project.title} className='grid gap-2 border-t border-(--ink)/30 py-6 first:border-t-0 md:grid-cols-[200px_1fr] md:gap-6'>
+            <li
+              key={project.title}
+              className='grid gap-3 border-t border-(--ink)/30 py-6 first:border-t-0 md:grid-cols-[160px_1fr_240px] md:gap-6 lg:grid-cols-[200px_1fr_280px]'
+            >
               <div>
                 <span className='font-editorial text-2xl text-(--accent)'>{String(index + 1).padStart(2, '0')}</span>
                 <p className='mt-1 text-[13px] text-(--muted)'>{project.date}</p>
@@ -36,6 +40,17 @@ export default function ProjectsSection() {
                   </a>
                 )}
               </div>
+              {project.image && (
+                <div className='relative aspect-[16/10] overflow-hidden border border-(--ink)/30 bg-(--ink)/5 max-md:order-first max-md:mb-1 md:mt-1'>
+                  <FadeInImage
+                    src={project.image}
+                    alt={`${project.title} 화면`}
+                    fill
+                    sizes='(max-width: 767px) 100vw, 280px'
+                    className='object-cover object-top'
+                  />
+                </div>
+              )}
             </li>
           ))}
         </ol>
