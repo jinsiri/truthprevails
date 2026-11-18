@@ -239,8 +239,6 @@ img {
   --muted: #6b655b;
   --accent: #2f55d4;
   --highlight: #c9d5f7;
-  --font-serif-kr: 'Noto Serif KR';
-  --font-sans-kr: 'Noto Sans KR';
   background-color: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans-kr), sans-serif;
