@@ -4,9 +4,26 @@ import { preconnect } from 'react-dom';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 import HistoryDepthTracker from '@/components/HistoryDepthTracker';
 
+const OG_IMAGE = { url: '/images/preview_game_day.png', width: 3024, height: 1644, alt: 'TRUTH WORLD 게임 모드 미리보기' };
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://truthprevails.me'),
   title: 'TRUTH WORLD',
   description: '환영합니다!',
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: 'TRUTH WORLD',
+    title: 'TRUTH WORLD',
+    description: '환영합니다!',
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TRUTH WORLD',
+    description: '환영합니다!',
+    images: [OG_IMAGE.url],
+  },
   manifest: '/favicon/site.webmanifest',
   icons: {
     icon: [
