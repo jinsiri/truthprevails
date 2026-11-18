@@ -5,10 +5,7 @@
 
 <p>
   <a href="https://truthprevails.me">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://ik.imagekit.io/ry2wztqvv/truthprevails/images/game/preview_game_night_v2.png?tr=w-1600" />
-      <img src="https://ik.imagekit.io/ry2wztqvv/truthprevails/images/game/preview_game_day_v2.png?tr=w-1600" alt="게임 모드 메인 맵 화면" width="100%" />
-    </picture>
+    <img src="https://ik.imagekit.io/ry2wztqvv/truthprevails/images/game/intro.png?tr=w-1600" alt="TRUTH WORLD 인트로 화면" width="100%" />
   </a>
 </p>
 
@@ -37,8 +34,8 @@
 
 <p>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://ik.imagekit.io/ry2wztqvv/truthprevails/images/game/gallery_night_v2.png?tr=w-1200" />
-    <img src="https://ik.imagekit.io/ry2wztqvv/truthprevails/images/game/gallery_day.png?tr=w-1200" alt="갤러리 전시관 배경" width="80%" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://ik.imagekit.io/ry2wztqvv/truthprevails/images/game/preview_game_night_v2.png?tr=w-1600" />
+    <img src="https://ik.imagekit.io/ry2wztqvv/truthprevails/images/game/preview_game_day_v2.png?tr=w-1600" alt="게임 모드 메인 맵 화면" width="100%" />
   </picture>
 </p>
 
