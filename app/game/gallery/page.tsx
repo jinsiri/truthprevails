@@ -103,7 +103,7 @@ export default function GameGallery() {
   const move = (step: number) => setHIdx((prev) => (prev + step + PROJECTS.length) % PROJECTS.length);
 
   return (
-    <main className='relative h-dvh w-full overflow-hidden bg-[#efe6d2] select-none dark:bg-[#2f2a3a]'>
+    <main className='relative h-dvh w-full overflow-clip bg-[#efe6d2] select-none dark:bg-[#2f2a3a]'>
       <div className='absolute top-1/2 left-1/2 aspect-[2752/1548] w-[max(100vw,calc(100dvh*2752/1548))] -translate-1/2'>
         <Image
           src={`${IMAGE_ROOT}/images/game/gallery_day.png`}
@@ -232,6 +232,10 @@ export default function GameGallery() {
           </button>
         </div>
       </section>
+
+      <div className='wide:hidden pointer-events-none absolute -bottom-[130px] left-1/2 z-10 aspect-[1664/2590] w-[180px] -translate-x-1/2 [@media(max-height:620px)]:hidden'>
+        <Image src={`${IMAGE_ROOT}/images/game/jinsil_back.webp`} alt='' fill sizes='180px' />
+      </div>
 
       {activeView === 'gallery' && <div aria-hidden onClick={closeView} className='fixed inset-0 z-[65] bg-black/40 backdrop-blur-sm' />}
       {activeView === 'gallery' && (
