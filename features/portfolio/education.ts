@@ -10,6 +10,9 @@ export const EDUCATION: EducationEntry[] = [
     skillSet: ['공학 지식'],
     spotKey: 'cs',
     textClass: 'text-blue-300',
+    job: '개발자',
+    previousJob: '국문학도',
+    studyText: '+공학',
   },
   {
     date: '2012.03 - 2018.02',
@@ -20,5 +23,7 @@ export const EDUCATION: EducationEntry[] = [
     skillSet: ['커뮤니케이션 능력', '인문학적 사고'],
     spotKey: 'kl',
     textClass: 'text-yellow-300',
+    job: '국문학도',
+    studyText: '+인문학',
   },
 ];

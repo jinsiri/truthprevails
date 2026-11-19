@@ -1,21 +1,19 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 const IMAGES = [`${IMAGE_ROOT}/images/game/study_01.webp`, `${IMAGE_ROOT}/images/game/study_02.webp`, `${IMAGE_ROOT}/images/game/study_03.webp`];
 
-export default function CharacterAnimation({
-  skillSet,
-  textClass = 'text-yellow-300',
-  active = true,
-  onReady,
-}: {
-  skillSet: string[];
-  textClass?: string;
+interface CharacterAnimationProps {
   active?: boolean;
   onReady?: () => void;
-}) {
+  aside?: ReactNode;
+  floatingText?: string;
+  textClass?: string;
+}
+
+export default function CharacterAnimation({ active = true, onReady, aside, floatingText, textClass = 'text-yellow-300' }: CharacterAnimationProps) {
   const [index, setIndex] = useState(0);
   const [loadedImages, setLoadedImages] = useState<string[]>([]);
   const ready = loadedImages.length === IMAGES.length;
@@ -43,32 +41,25 @@ export default function CharacterAnimation({
       animate={{ opacity: playing ? 1 : 0 }}
       transition={{ duration: 1, ease: 'easeOut' }}
       aria-hidden={!playing}
-      className='group pointer-events-none absolute -bottom-15 left-1/2 z-10 -translate-x-1/2'
+      className='group pointer-events-none absolute -bottom-15 left-1/2 z-10 flex -translate-x-1/2 items-end'
     >
+      {aside}
       <div className='pointer-events-none relative h-[340px] w-[240px] md:h-[425px] md:w-[300px]'>
-        <div className='absolute -top-10 left-1/2 flex w-full -translate-x-1/2 flex-col items-center'>
-          {playing &&
-            skillSet.map((skill, i) => (
+        {playing && floatingText && (
+          <div className='absolute -top-10 left-1/2 flex w-full -translate-x-1/2 flex-col items-center max-md:hidden'>
+            {[0, 1].map((i) => (
               <motion.span
-                key={i}
+                key={`${floatingText}_${i}`}
                 initial={{ opacity: 0, y: 10 }}
-                animate={{
-                  opacity: [0, 1, 1, 0],
-                  y: [10 + i * 25, -10 + i * 25, -20 + i * 25],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: i * 0.2,
-                  times: [0, 0.1, 0.8, 1],
-                }}
+                animate={{ opacity: [0, 1, 1, 0], y: [10 + i * 25, -10 + i * 25, -20 + i * 25] }}
+                transition={{ duration: 2, repeat: Infinity, delay: i * 0.2, times: [0, 0.1, 0.8, 1] }}
                 className={`absolute text-lg font-bold whitespace-nowrap drop-shadow-[0_2px_0_rgba(0,0,0,1)] ${textClass}`}
               >
-                {`+10% ${skill}`}
+                {floatingText}
               </motion.span>
             ))}
-        </div>
-
+          </div>
+        )}
         {IMAGES.map((src, i) => (
           <Image
             key={src}

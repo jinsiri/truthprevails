@@ -11,22 +11,19 @@ import type { EducationEntry } from '@/features/portfolio/types';
 import clsx from 'clsx';
 import useQuestStore from '@/store/useQuestStore';
 import CharacterAnimation from '@/components/game/CharacterAnimation';
+import JobPanel from '@/components/game/JobPanel';
 import { IMAGE_ROOT } from '@/constants/imageSrc';
 
 export default function GameLearning() {
   const countRef = useRef(false);
   const containerRef = useRef<HTMLOListElement>(null);
-  const [hide, setHide] = useState(false);
+  const [selected, setSelected] = useState<EducationEntry | null>(null);
   const [characterReady, setCharacterReady] = useState(false);
   const handleCharacterReady = useCallback(() => setCharacterReady(true), []);
-  const [skillSet, setSkillSet] = useState(['지식']);
-  const [textClass, setTextClass] = useState('');
   const incrementProgress = useQuestStore((state) => state.incrementProgress);
-  const selectEducation = (mode: EducationEntry) => {
-    setHide(true);
-    setSkillSet(mode.skillSet);
-    setTextClass(mode.textClass);
-  };
+  const hide = selected !== null;
+  const inheritedSkills = selected?.previousJob ? EDUCATION.find((entry) => entry.job === selected.previousJob)?.skillSet : undefined;
+  const selectEducation = (mode: EducationEntry) => setSelected(mode);
   const { vIdx, handleKeyDown, setVIdx } = useKeyboardList({
     vItems: EDUCATION,
     onSelectV: selectEducation,
@@ -56,7 +53,18 @@ export default function GameLearning() {
       />
 
       <section className='relative z-10 min-h-dvh w-full p-8'>
-        <CharacterAnimation skillSet={skillSet} textClass={textClass} active={hide} onReady={handleCharacterReady} />
+        <CharacterAnimation
+          active={hide}
+          floatingText={selected?.studyText}
+          textClass={selected?.textClass}
+          onReady={handleCharacterReady}
+          aside={
+            selected &&
+            characterReady && (
+              <JobPanel key={selected.title} entry={selected} inheritedSkills={inheritedSkills} className='relative -mr-4 mb-64 shrink-0 max-md:hidden' />
+            )
+          }
+        />
         {!(hide && characterReady) && (
           <>
             <div className='group tablet:w-[400px] pointer-events-none absolute -bottom-15 left-0 z-10 hidden w-[220px] md:block lg:left-20 xl:left-30 xl:w-[300px]'>
@@ -70,7 +78,7 @@ export default function GameLearning() {
           </>
         )}
 
-        <div className={'tablet:max-w-[820px] absolute top-[26%] left-[50%] w-[90vw] max-w-[650px] -translate-x-1/2 text-white'}>
+        <div className={'tablet:max-w-[820px] absolute top-[26%] left-[50%] z-20 w-[90vw] max-w-[650px] -translate-x-1/2 text-white'}>
           <h2 className={'tablet:mb-8 tablet:text-4xl mb-5 flex items-center text-xl sm:text-2xl md:text-3xl'}>
             <Footprints className={'mr-4'} size={38} /> LEVEL UP: 교육 여정
           </h2>
@@ -108,6 +116,9 @@ export default function GameLearning() {
               </li>
             ))}
           </ol>
+          {selected && characterReady && (
+            <JobPanel key={selected.title} entry={selected} inheritedSkills={inheritedSkills} className='relative mx-auto mt-5 w-fit md:hidden' />
+          )}
         </div>
       </section>
     </main>

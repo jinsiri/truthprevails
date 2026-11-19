@@ -7,6 +7,9 @@ export interface EducationEntry {
   skillSet: string[];
   spotKey: string;
   textClass: string;
+  job: string;
+  previousJob?: string;
+  studyText: string;
 }
 
 export interface Experience {
